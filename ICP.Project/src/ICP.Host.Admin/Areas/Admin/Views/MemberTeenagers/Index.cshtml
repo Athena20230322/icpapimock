@@ -1,0 +1,105 @@
+﻿@model MemberTeenagersQuery
+@using ICP.Modules.Mvc.Admin.Models.MemberModels;
+@{
+    Model.CreateDateBegin = DateTime.Parse(DateTime.Today.ToString("yyyy-MM-01"));
+    Model.CreateDateEnd = DateTime.Today;
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/MemberTeenagers/Index/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" />
+            <input type="hidden" name="PageSize" value="5" />
+            <input type="hidden" name="PageNo" value="1" />
+            @Html.TextBoxFor(t => t.CreateDateBegin, "{0:yyyy-MM-dd}", new { id = "refreshCreateDateBegin" })
+            @Html.TextBoxFor(t => t.CreateDateEnd, "{0:yyyy-MM-dd}", new { id = "refreshCreateDateEnd" })
+            @Html.TextBoxFor(t => t.ICPMID, new { id = "refreshICPMID" })
+            @Html.TextBoxFor(t => t.CName, new { id = "refreshCName" })
+            @Html.TextBoxFor(t => t.IDNO, new { id = "refreshIDNO" })
+            @Html.Hidden("queryAuthStatus")
+        }
+    </div>
+    @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <input type="hidden" name="PageSize" value="5" />
+        <div class="scb-form sf-2column">
+
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">查詢日期<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.CreateDateBegin, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryCreateDateBegin" },
+                            { "class", "flatpickr flatpickr-input active" },
+                            { "placeholder", "起始日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-maxDate_input", "#queryCreateDateEnd" }
+                        })
+                    </label>
+
+                    <span class="sdb-txt">至</span>
+
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.CreateDateEnd, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryCreateDateEnd" },
+                            { "class", "flatpickr flatpickr-input active" },
+                            { "placeholder", "結束日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate_input", "#queryCreateDateBegin" },
+                            { "flatpickr-maxDate", DateTime.Today.ToString("yyyy-MM-dd") }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">電支帳號</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.ICPMID, new { id = "queryICPMID", placeholder = "請輸入電支帳號", maxlength = 16 })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">驗證狀態</dt>
+                <dd>
+                    <label class="def-select">
+                        <select id="queryAuthStatus" name="queryAuthStatus">
+                            <option value="0">全部</option>
+                            <option value="1">代理人確認中</option>
+                            <option value="2">等待審核中</option>
+                            <option value="3">代理人審核通過</option>
+                            <option value="4">代理人未審核通過</option>
+                            <option value="5">身分驗證未通過</option>
+                        </select>
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">個人姓名</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.CName, new { id = "queryCName", placeholder = "請輸入會員姓名", maxlength = 60 })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">身分證字號</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.IDNO, new { id = "queryIDNO", placeholder = "請輸入身分證字號", maxlength = 10 })
+                </dd>
+            </dl>
+        </div>
+
+        <div class="btn-box">
+            <a id="lnkQuery" href="#" class="btn" title="查詢">查詢</a>
+            <a id="lnkReset" href="#" class="btn btn-blue-border" title="清除條件">清除條件</a>
+        </div>
+    }
+</div>
+<div id="queryResult">
+</div>

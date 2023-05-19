@@ -1,0 +1,39 @@
+﻿
+@model ICP.Modules.Mvc.Admin.Models.ViewModels.MemberDeviceIdVM
+
+@{
+    Layout = null;
+
+}
+@Html.ValidationSummary()
+<div id="add-locking-popup" class="add-locking-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm("AddMemberDeviceIdResult", "MemberDeviceIdManage", FormMethod.Post, new { @enctype = "multipart/form-data" ,@onkeydown ="if(event.keyCode==13)return false;"}))
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">新增鎖定</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>裝置 ID<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.DeviceID, new { @placeholder = "請輸入裝置ID", maxlength = "50", @required = "required", @onkeyup = "wordsTotal();" })
+                            @Html.ValidationMessageFor(m => @m.DeviceID, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>備註<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            @Html.TextAreaFor(m => m.Memo, new { @class = "pp-textarea", @placeholder = "請輸入備註", @maxlength = "150", @required = "required", @onkeyup = "wordsTotal();" })
+                            @Html.ValidationMessageFor(m => @m.Memo, null, new { @class = "input-error-txt" }, "div")
+                            <div class="input-tip-txt itt-r itt-er" id="countMemo">0/150</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="" class="btn link-submit disabled" name="submit" title="確定">確定</a>
+            </div>
+        }
+    </div>
+</div>

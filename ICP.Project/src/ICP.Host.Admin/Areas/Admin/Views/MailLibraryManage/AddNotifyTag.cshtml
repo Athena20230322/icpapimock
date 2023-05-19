@@ -1,0 +1,47 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.MailLibrary
+@model NotifyTag
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts {
+    <script>
+        libs.alert.validationSummary();
+    </script>
+}
+<div class="add-group-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">新增標籤</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>標籤代碼</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.TagKey, new { @class = "pp-inp", placeholder = "請輸入2-50個字元" })
+                            @Html.ValidationMessageFor(t => t.TagKey, null, new { @class = "input-error-txt" }, "div")
+                            <div class="input-tip-txt">方便於清單頁查詢群組使用</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>標籤名稱</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.Name, new { @class = "pp-inp", placeholder = "請輸入1-10個字元" })
+                            @Html.ValidationMessageFor(t => t.Name, null, new { @class = "input-error-txt" }, "div")
+                            <div class="input-tip-txt">請輸入2-40個字元，可中英混合</div>
+                        </dd>
+                    </dl>
+                </div>
+
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="#" class="btn disabled link-submit" title="新增">新增</a>
+            </div>
+        }
+    </div>
+</div>

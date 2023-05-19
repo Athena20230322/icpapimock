@@ -1,0 +1,25 @@
+@import url(third_party/flatpickr.min.css);
+@import url(page.css);
+.scb-table.st-calendar-rec .scb-table-header li:nth-child(1), .scb-table.st-calendar-rec .scb-table-body col:nth-child(1) {
+  width: 10%; }
+
+.scb-table.st-calendar-rec .scb-table-header li:nth-child(2), .scb-table.st-calendar-rec .scb-table-body col:nth-child(2) {
+  width: 10%; }
+
+.scb-table.st-calendar-rec .scb-table-header li:nth-child(3), .scb-table.st-calendar-rec .scb-table-body col:nth-child(3) {
+  width: 23%; }
+
+.scb-table.st-calendar-rec .scb-table-header li:nth-child(4), .scb-table.st-calendar-rec .scb-table-body col:nth-child(4) {
+  width: 10%; }
+
+.scb-table.st-calendar-rec .scb-table-header li:nth-child(5), .scb-table.st-calendar-rec .scb-table-body col:nth-child(5) {
+  width: 10%; }
+
+.scb-table.st-calendar-rec .scb-table-header li:nth-child(6), .scb-table.st-calendar-rec .scb-table-body col:nth-child(6) {
+  width: 10%; }
+
+.scb-table.st-calendar-rec .scb-table-header li:nth-child(7), .scb-table.st-calendar-rec .scb-table-body col:nth-child(7) {
+  width: 10%; }
+
+.scb-table.st-calendar-rec .scb-table-header li:nth-child(8), .scb-table.st-calendar-rec .scb-table-body col:nth-child(8) {
+  width: 17%; }

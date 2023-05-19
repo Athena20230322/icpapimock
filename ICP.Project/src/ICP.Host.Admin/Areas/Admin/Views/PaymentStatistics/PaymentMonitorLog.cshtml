@@ -1,0 +1,163 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentStatistics.PaymentMonitor;
+@model QryPaymentMonitorLogReq
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+
+<!-- popup -->
+<!-- 歷程 -->
+<div id="ldrm-history-popup" class="ldrm-history-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        <div class="pp-content">
+            <h4 class="pp-title">歷程</h4>
+            <div class="pp-table pt-lhp-ac">
+                <div class="pp-table-header">
+                    <ul>
+                        <li><p class="sth-txt">@Html.DisplayNameFor(m => m.ICPMID)</p></li>
+                        <li><p class="sth-txt">@Html.DisplayNameFor(m => m.MerchantName)</p></li>
+                    </ul>
+                </div>
+                <div class="pp-table-body">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <tr>
+                            <td>@Model.ICPMID</td>
+                            <td>@Model.MerchantName</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            @using (Ajax.BeginForm("AddPaymentMonitorRemark", null))
+            {
+                <div class="pp-form">
+                    <dl>
+                        <dt>@Html.DisplayNameFor(m => m.Remark)<span class="inp-required">*</span></dt>
+                        <dd>
+                            @Html.TextAreaFor(m => m.Remark, new { @class = "pp-textarea", placeholder = "請輸入備註說明", maxlength = "300" })
+                            <div class="input-tip-txt itt-r itt-er"><label id="remarkLength">0</label>/300</div>
+                        </dd>
+                    </dl>
+                    <dl class="lhp-switch">
+                        <dt></dt>
+                        <dd class="sf-radio-box">
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(m => m.Status, 1, new { @id = "Status_1", @checked = true })
+                                <label for="Status_1" class="radio"><span class="lps-open">開啟</span> 觀察名單</label>
+                            </div>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(m => m.Status, 0, new { @id = "Status_2" })
+                                <label for="Status_2" class="radio"><span class="lps-close">關閉</span> 觀察名單</label>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="mp-btn-block2">
+                    @Html.HiddenFor(m => m.MID)
+                    @Html.HiddenFor(m => m.ICPMID)
+                    @Html.HiddenFor(m => m.MerchantName)
+                    <a id="addRemark" href="javascript:;" class="btn disabled link-submit" title="儲存">儲存</a>
+                </div>
+            }
+            <div class="pp-table @(Model.MonitorType==6 ? "pt-lhp-detail1" : "pt-lhp-detail2")">
+                <div class="pp-table-header">
+                    <ul>
+                        <li><p class="sth-txt">日期</p></li>
+                        <li><p class="sth-txt">備註人員</p></li>
+                        <li>
+                            <label class="def-select">
+                                @using (Ajax.BeginForm("ListPaymentMonitorLog", null))
+                                {
+                                    @Html.HiddenFor(m => m.MID)
+                                    @Html.HiddenFor(m => m.ICPMID)
+                                    @Html.HiddenFor(m => m.MerchantName)
+                                    @Html.DropDownListFor(m => m.MonitorType, Model.MonitorTypeList, new { onchange = "$(this.form).submit();" })
+                                }
+                            </label>
+                        </li>
+                        @if (Model.MonitorType == 6)
+                        {
+                            <li><p class='sth-txt'>備註內容</p></li>
+                        }
+                    </ul>
+                </div>
+                <div id="queryLogResult" class="pp-table-body">
+                    @if (Model.MonitorType == 6)
+                    {
+                        <table>
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                            @foreach (var item in Model.LogList)
+                            {
+                                <tr>
+                                    <td>@item.CreateDate.ToString("yyyy/MM/dd")<br>@item.CreateDate.ToString("HH:mm:ss")</td>
+                                    <td>@item.Operator</td>
+                                    <td>@if (item.Status == 0)
+                                    {<span>解除觀察</span>}
+                                    else
+                                    { <span class="lhp-red">列觀察中</span>}</td>
+                                    <td>@item.Remark</td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <table>
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                            @foreach (var item in Model.LogList)
+                            {
+                                <tr>
+                                    <td>@item.CreateDate.ToString("yyyy/MM/dd")<br>@item.CreateDate.ToString("HH:mm:ss")</td>
+                                    <td>@item.Operator</td>
+                                    <td>@item.Remark @(item.Status == 1 && item.MonitorType == 7 ? "已檢視相關交易，經依預警案件判斷原則(客戶資料、交易監控、行為監控)後，交易正常，故免申報" : "")</td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        libs.alert.validationSummary();
+
+        $("#Remark").val("");
+        $("#Remark").on("keyup", chkRemark);
+        $("#Remark").on("keydown", chkRemark);
+        $("#addRemark").on("click", function () {
+            if ($(this).is('.disabled')) return false;
+            if ($.trim($("#Remark").val()).length == 0) {
+                $("#Remark").val("");
+                alert("請輸入備註");
+                return false
+            }
+        });
+
+        function chkRemark() {
+            var len = $.trim($("#Remark").val()).length;
+            $("#remarkLength").text(len);
+            if (len == 0) {
+                $("#Remark").val("");
+                $("#addRemark").addClass("disabled");
+            }
+        }
+    </script>
+}

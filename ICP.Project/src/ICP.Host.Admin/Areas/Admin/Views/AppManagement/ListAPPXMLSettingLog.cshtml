@@ -1,0 +1,92 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model List<APPSettingLog>
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    string timeFormat = "yyyy/MM/dd<br/>HH:mm:ss";
+}
+@section header{
+<style type="text/css">
+    #tbSettings span[actionType="1"]:before { content: "新增"; }
+    #tbSettings span[actionType="2"]:before { content: "修改"; }
+    #tbSettings span[actionType="3"]:before { content: "發佈"; }
+
+    #logHeader li:nth-child(1), #tbSettingLogs col:nth-child(1) { width:12.5%; }
+    #logHeader li:nth-child(2), #tbSettingLogs col:nth-child(2) { width:12.5%; }
+    #logHeader li:nth-child(3), #tbSettingLogs col:nth-child(3) { width:12.5%; }
+    #logHeader li:nth-child(4), #tbSettingLogs col:nth-child(4) { width:12.5%; }
+    #logHeader li:nth-child(5), #tbSettingLogs col:nth-child(5) { width:12.5%; }
+    #logHeader li:nth-child(6), #tbSettingLogs col:nth-child(6) { width:12.5%; }
+    #logHeader li:nth-child(7), #tbSettingLogs col:nth-child(7) { width:12.5%; }
+    #logHeader li:nth-child(8), #tbSettingLogs col:nth-child(8) { width:12.5%; }
+</style>
+}
+@section scripts{
+<script src="~/Scripts/clipboard.min.js"></script>
+<script>
+    new Clipboard('#tbSettings a[data-clipboard-text]');
+</script>
+}
+<div class="sc-box scb-table st-control">
+    <div class="scb-table-header">
+        <ul id="logHeader">
+            <li><p class="sth-txt">正式XML</li>
+            <li><p class="sth-txt">測試XML</li>
+            <li><p class="sth-txt">上線時間</li>
+            <li><p class="sth-txt">更新說明</p></li>
+            <li><p class="sth-txt">修改人</p></li>
+            <li><p class="sth-txt">修改時間</p></li>
+            <li><p class="sth-txt">測試MID</p></li>
+            <li><p class="sth-txt">操作</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table id="tbSettingLogs">
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a class="btn" data-clipboard-text="@item.XMLData">複製</a>
+                </td>
+                <td>
+                    <a class="btn" data-clipboard-text="@item.TestXMLData">複製</a>
+                </td>
+                <td>
+                    @Html.Raw(item.ReleaseTime == null ? string.Empty : item.ReleaseTime.Value.ToString(timeFormat))
+                </td>
+                <td>
+                    @item.ReleaseNote
+                </td>
+                <td>
+                    @item.Modifier
+                </td>
+                <td>
+                    @Html.Raw(item.CreateDate.ToString(timeFormat))
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.TestMID))
+                    {
+                        <text>@Html.Raw(string.Join("<br />", item.TestMID.Split(',')))</text>
+                    }
+                </td>
+                <td>
+                    <span actionType="@item.ActionType"></span>
+                </td>
+            </tr>
+        }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@model P11AuthQueryVM
+@{
+    Layout = null;
+    if (Model == null)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml");
+        return;
+    }
+
+    Func<short, string> IsPass2String = isPass =>
+    {
+        switch (isPass)
+        {
+            case 1:
+                return "驗證成功";
+            default:
+                return "驗證失敗";
+        }
+    };
+}
+
+<div class="sb-multi">
+    <div class="sc-box scb-table st-verify-id-p11">
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">驗證狀態</p></li>
+                <li><p class="sth-txt">驗證結果代號</p></li>
+                <li><p class="sth-txt">驗證結果說明</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td>@IsPass2String(Model.IsPass)</td>
+                        <td>@Model.Answer</td>
+                        <td>@Model.Result</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

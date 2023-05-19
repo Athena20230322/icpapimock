@@ -1,0 +1,65 @@
+﻿@model ContentQueryModel
+@using ICP.Modules.Mvc.Admin.Models.MailLibrary;
+@{
+
+}
+@section header
+{
+<style type="text/css">
+    .sc-function {
+        width: 1176px;
+        margin: 20px auto;
+    }
+    .sc-function .btn-box {
+        text-align: left;
+    }
+    .scb-table .stb-btn-box .btn {
+        width: 90px;
+    }
+</style>
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/MailLibraryManage/Index/action.js"></script>
+}
+<div class="sc-box no-edge">
+
+    @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-search-box">
+            <h3 class="ssb-title">代碼</h3>
+            <div class="scb-search ssb-width2">
+                <span class="icon-ic-search ssr-icon"></span>
+                <input type="text" id="queryMailKey" name="MailKey" class="ssr-inp" placeholder="請輸入欲查詢代碼" />
+            </div>
+            <h3 class="ssb-title">描述</h3>
+            <div class="scb-search ssb-width2">
+                <span class="icon-ic-search ssr-icon"></span>
+                <input type="text" id="queryDescription" name="Description" class="ssr-inp" placeholder="請輸入欲查詢描述" />
+            </div>
+        </div>
+    }
+</div>
+<div class="sc-function">
+    <div class="btn-box">
+        <a class="btn" href="@Url.Action("AddMail", new { layout = 1 })" data-update-callback="query" title="新增 Mail 版型">
+            <span class="icon-ic-add bb-icon"></span>
+            新增 Mail 版型
+        </a>
+        <a class="btn" href="@Url.Action("AddMail")" data-update-callback="query" title="新增 Mail 郵件">
+            <span class="icon-ic-add bb-icon"></span>
+            新增 Mail 郵件
+        </a>
+        <a class="btn" href="@Url.Action("AddNotify", new { layout = 1 })" data-update-callback="query" title="新增訊息 版型">
+            <span class="icon-ic-add bb-icon"></span>
+            新增訊息 版型
+        </a>
+        <a class="btn" href="@Url.Action("AddNotify")" data-update-callback="query" title="新增訊息">
+            <span class="icon-ic-add bb-icon"></span>
+            新增訊息
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>

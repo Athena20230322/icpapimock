@@ -1,0 +1,115 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentCenter;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models;
+@model IPagedList<TradeStatisticsModel>
+@{
+    Layout = null;
+}
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("ExportTradeStatistics", ViewBag.QueryModel)" class="btn btn-blue-border bd-rdi" title="匯出 EXCEL 檔">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出 EXCEL 檔
+        </a>
+    </div>
+</div>
+
+<div class="sc-box scb-table st-control stb-oneline st-center-statistics">
+    <div class="scb-table-body stb-thbg">
+        <table>
+            <thead>
+                <tr class="stb-line-nob">
+                    <th class="stb-line-r"></th>
+                    <th colspan="6" class="stb-line-r">第一銀行</th>
+                    <th colspan="6">中國信託銀行</th>
+                </tr>
+                <tr class="stb-line-nob">
+                    <th class="stb-line-r"></th>
+
+                    <th colspan="2">虛擬帳號 / 儲值</th>
+                    <th colspan="2">連結扣款帳戶 / 儲值</th>
+                    <th colspan="2" class="stb-line-r">連結扣款帳戶 / 交易</th>
+
+                    <th colspan="2">虛擬帳號 / 儲值</th>
+                    <th colspan="2">連結扣款帳戶 / 儲值</th>
+                    <th colspan="2">連結扣款帳戶 / 交易</th>
+                </tr>
+                <tr>
+                    <th class="stb-line-r">日期</th>
+
+                    <th>筆數</th>
+                    <th>金額</th>
+                    <th>筆數</th>
+                    <th>金額</th>
+                    <th>筆數</th>
+                    <th class="stb-line-r">金額</th>
+
+                    <th>筆數</th>
+                    <th>金額</th>
+                    <th>筆數</th>
+                    <th>金額</th>
+                    <th>筆數</th>
+                    <th>金額</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="stb-line-r">@item.PaymentDate.ToShortDateString()</td>
+                        <td>@item.FirstATMTopupCount.ToString("N0")</td>
+                        <td>@item.FirstATMTopupAmount.ToString("N0")</td>
+                        <td>@item.FirstACLTopupCount.ToString("N0")</td>
+                        <td>@item.FirstACLTopupAmount.ToString("N0")</td>
+                        <td>@item.FirstACLTradeCount.ToString("N0")</td>
+                        <td class="stb-line-r">
+                            @if (item.FirstACLTradeAmount > 0)
+                            {
+                                <a href="@Url.Action("TradeStatisticsDetailQuery", new { BankCode = "007" , PaymentDate = item.PaymentDate, QueryType = 11 })" data-effect="mfp-zoom-in" data-update-callback="refresh" class="libs-dialog-form">@item.FirstACLTradeAmount.ToString("N0")</a>
+                            }
+                            else
+                            {
+                                @item.FirstACLTradeAmount.ToString("N0")
+                            }
+                        </td>
+                        <td>@item.CtbcATMTopupCount.ToString("N0")</td>
+                        <td>@item.CtbcATMTopupAmount.ToString("N0")</td>
+                        <td>@item.CtbcACLTopupCount.ToString("N0")</td>
+                        <td>@item.CtbcACLTopupAmount.ToString("N0")</td>
+                        <td>@item.CtbcACLTradeCount.ToString("N0")</td>
+                        <td class="stb-line-r">
+                            @if (item.FirstACLTradeAmount > 0)
+                            {
+                                <a href="@Url.Action("TradeStatisticsDetailQuery", new { BankCode = "822" , PaymentDate = item.PaymentDate, QueryType = 11 })" data-effect="mfp-zoom-in" data-update-callback="refresh" class="libs-dialog-form">@item.CtbcACLTradeAmount.ToString("N0")</a>
+                            }
+                            else
+                            {
+                                @item.FirstACLTradeAmount.ToString("N0")
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (ViewBag.IsLastPage ?? false)
+                {
+                    <tr class="stf-sum">
+                        <td class="stb-line-r">小計：共 @Model[0].TotalCount 筆</td>
+                        <td>@Model[0].FirstATMTopupTotalCount.ToString("N0")</td>
+                        <td>@Model[0].FirstATMTopupTotalAmount.ToString("N0")</td>
+                        <td>@Model[0].FirstACLTopupTotalCount.ToString("N0")</td>
+                        <td>@Model[0].FirstACLTopupTotalAmount.ToString("N0")</td>
+                        <td>@Model[0].FirstACLTradeTotalCount.ToString("N0")</td>
+                        <td>@Model[0].FirstACLTradeTotalAmount.ToString("N0")</td>
+                        <td>@Model[0].CtbcATMTopupTotalCount.ToString("N0")</td>
+                        <td>@Model[0].CtbcATMTopupTotalAmount.ToString("N0")</td>
+                        <td>@Model[0].CtbcACLTopupTotalCount.ToString("N0")</td>
+                        <td>@Model[0].CtbcACLTopupTotalAmount.ToString("N0")</td>
+                        <td>@Model[0].CtbcACLTradeTotalCount.ToString("N0")</td>
+                        <td>@Model[0].CtbcACLTradeTotalAmount.ToString("N0")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("TradeStatisticsQuery", Model, ViewBag.QueryModel)); }

@@ -1,0 +1,101 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentCenter;
+@model FeeStatisticsQueryModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/finance.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/Finance/FeeStatistics/action.js"></script>
+}
+    <div class="sc-box no-edge">
+        <div id="refreshForm" style="display:none;">
+            @using (Ajax.BeginForm("FeeStatisticsQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+            {
+                <input type="submit" />
+                <input type="hidden" name="PageSize" value="10" />
+                <input type="hidden" name="PageNo" value="1" />
+                @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}")
+                @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}")
+            }
+        </div>
+        @using (Ajax.BeginForm("FeeStatisticsQuery", null, new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "POST" }, new { @id = "QueryForm" }))
+        {
+            <input type="hidden" name="PageSize" value="10" />
+            <input type="hidden" name="PageNo" value="1" />
+            <div class="scb-form sf-2column">
+                <dl class="oneline-box">
+                    <dt>@Html.DisplayNameFor(m => m.StatisticsType)</dt>
+                    <dd>
+                        <div class="sf-radio-box">
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(m => m.StatisticsType, 1, new { @id = "StatisticsType_1", @checked = true })
+                                <label for="StatisticsType_1" class="radio">日期</label>
+                            </div>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(m => m.StatisticsType, 2, new { @id = "StatisticsType_2" })
+                                <label for="StatisticsType_2" class="radio">年月</label>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">@Html.DisplayNameFor(m => m.MerchantQueryType)</dt>
+                    <dd class="sf-2inp s2i-2">
+                        <label class="def-select s2i-item">
+                            @Html.DropDownListFor(m => m.MerchantQueryType, Model.MerchantQueryList, new { @id = "MerchantQueryType" })
+                        </label>
+                        @Html.TextBoxFor(m => m.MerchantQueryValue, new { @class = "s2i-item", @placeholder = "", @maxlength = "16", @id = "MerchantQueryValue" })
+                    </dd>
+                </dl>
+                <dl id="date">
+                    <dt class="oneline-inp">日期區間</dt>
+                    <dd class="sbf-date-box">
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new { @class = "flatpickr flatpickr-input active minD", @placeholder = "起始日期", @readonly = "readonly" })
+                        </label>
+                        <span class="sdb-txt">至</span>
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(m => m.EndDate, new { @class = "flatpickr flatpickr-input active maxD", @placeholder = "結束日期", @readonly = "readonly" })
+                        </label>
+                    </dd>
+                </dl>
+                <dl id="ym" style="display:none">
+                    <dt class="oneline-inp">年度月份</dt>
+                    <dd class="sbf-date-box2">
+                        <label class="def-select sd2-block">
+                            @Html.DropDownListFor(m => m.Year, Model.YearList)
+                        </label>
+                        <span class="sd2-txt">@Html.DisplayNameFor(m => m.Year)</span>
+                        <label class="def-select sd2-block">
+                            @Html.DropDownListFor(m => m.Month, Model.MonthList)
+                        </label>
+                        <span class="sd2-txt">@Html.DisplayNameFor(m => m.Month)</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">@Html.DisplayNameFor(m => m.TradeModeID)</dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(m => m.TradeModeID, Model.TradeModeList)
+                        </label>
+                    </dd>
+                </dl>
+
+            </div>
+
+            <div class="btn-box">
+                <a href="javascript:;" class="btn link-submit" title="查詢" id="btnQuery">查詢</a>
+                <a href="javascript:;" class="btn btn-blue-border clear-form" title="清除條件">清除條件</a>
+            </div>
+        }
+    </div>
+
+<div id="queryResult">
+</div>

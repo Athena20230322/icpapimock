@@ -1,0 +1,107 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@model QueryUnregisteredDataVM
+@{
+    var now = DateTime.Now;
+
+    Model.StartDate = new DateTime(now.Year, now.Month, 1);
+    Model.EndDate = DateTime.Today;
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/UnregisteredData/Index/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("Query", null, new AjaxOptions { UpdateTargetId = "queryResult" }, new { id = "QueryForm" }))
+        {
+            <input type="submit" />
+            <input type="hidden" name="PageSize" value="20" />
+            <input type="hidden" name="PageNo" value="1" />
+            @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}")
+            @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}")
+            @Html.TextBoxFor(t => t.CName)
+            @Html.TextBoxFor(t => t.CellPhone)
+            @Html.TextBoxFor(t => t.Source)
+        }
+    </div>
+    @using (Ajax.BeginForm("Query", null, new AjaxOptions { UpdateTargetId = "queryResult" }, new { @id = "QueryForm" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-list-box">
+            <ul class="content-list">
+                <li>搜尋條件中，查詢區間及刪除方式為必選，完成後點擊查詢按鈕，即可在搜尋欄位下方顯示符合的資料。</li>
+                <li>如輸入多個搜尋欄位，僅可搜尋到皆符合的資訊。</li>
+                <li>查詢時間區間，最大範圍以今天以前一個完整年度的資料為限。</li>
+            </ul>
+        </div>
+        <div class="scb-form sf-2column">
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">查詢時間<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryStartDate" },
+                            { "class", "flatpickr flatpickr-input active minD" },
+                            { "placeholder", "起始日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate", DateTime.Today.AddYears(-1).ToString("yyyy-01-01") },
+                            { "flatpickr-maxDate_input", "#queryEndDate" }
+                        })
+                    </label>
+                    <span class="sdb-txt">至</span>
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryEndDate" },
+                            { "class", "flatpickr flatpickr-input active maxD" },
+                            { "placeholder", "結束日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate_input", "#queryStartDate" },
+                            { "flatpickr-maxDate", DateTime.Today.ToString("yyyy-MM-dd") }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">姓名</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.CName)
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">手機號碼</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.CellPhone)
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">刪除方式<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        <select name="Source">
+                            <option value="1">人工刪除</option>
+                            <option value="0">系統刪除</option>
+                        </select>
+                    </label>
+                </dd>
+            </dl>
+        </div>
+        <div class="btn-box">
+            <a href="javascript:;" class="btn link-submit" title="查詢" id="lnkQuery">查詢</a>
+            <a href="javascript:;" class="btn btn-blue-border disabled clear-form" title="清除條件">清除條件</a>
+        </div>
+    }
+</div>
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="javascript:;" class="btn btn-blue-border bd-rdi" title="匯出 EXCEL 檔" id="btnExport" target="_blank">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出 EXCEL 檔
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>

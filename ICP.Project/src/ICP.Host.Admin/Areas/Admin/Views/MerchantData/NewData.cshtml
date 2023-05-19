@@ -1,0 +1,771 @@
+﻿@using ICP.Library.Models.MemberModels;
+@using ICP.Modules.Mvc.Admin.Models;
+@using ICP.Modules.Mvc.Admin.Models.MerchantModels;
+@model CustomerDataModel
+@{
+    List<BankTypeModel> listBankType = ViewBag.ListBankType;
+
+    List<NationalityModel> listNationality = ViewBag.ListNationality;
+
+    List<OccupationModel> listOccupation = ViewBag.ListOccupation;
+
+    List<ZipCodeModel> listZipArea = ViewBag.ListZipArea;
+
+    List<User> listSales = ViewBag.ListSales;
+
+    List<AuditStatusModel> listNextAuditStatus = ViewBag.ListNextAuditStatus;
+
+    Func<byte, byte, bool> IsAndValue = (value, andValue) => { return (value & andValue) == andValue; };
+
+    Func<bool, string, string> GetTrueStr = (value, trueStr) => { return value ? trueStr : string.Empty; };
+
+    Func<byte, string> Zero2Empty = (value) => { return value != 0 ? value.ToString() : string.Empty; };
+
+    long MID = 0;
+    byte? Template = null;
+    byte? ContractType = null;
+    byte? isDeposit = null;
+    byte CommoditiyType = 0;
+    byte GatewayItem = 0;
+    byte BankTypeID = 0;
+    string BankCode = string.Empty;
+    string BankBranchCode = string.Empty;
+    string CompanyZipCode = string.Empty;
+    string InvoiceZipCode = string.Empty;
+    bool? TransferSchedule = null;
+
+    if (Model != null)
+    {
+        MID = Model.basic.MID;
+        Template = Model.basic.Template;
+        ContractType = Model.basic.ContractType;
+        isDeposit = Model.basic.isDeposit;
+        CommoditiyType = Model.basic.CommoditiyType;
+        GatewayItem = Model.basic.GatewayItem;
+        BankTypeID = Model.detail.BankTypeID;
+        BankCode = Model.detail.BankCode;
+        BankBranchCode = Model.detail.BankBranchCode;
+        CompanyZipCode = Model.detail.CompanyZipCode;
+        InvoiceZipCode = Model.detail.InvoiceZipCode;
+        TransferSchedule = Model.detail.TransferSchedule;
+    }
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/business.css" rel="stylesheet" />
+    <style type="text/css">
+        .wdr-rule-content,
+        .atb-week,
+        .atb-mon,
+        #ScheduleType_4_Custom_Values,
+        form[CustomerType="2"] #fields_company,
+        form[PrincipalType="0"] #fields_principal_company,
+        form[PrincipalType="1"] #fields_principal,
+        .field_tw,
+        .field_oversea,
+        form[NationalityID] .field_tw {
+            display: none;
+        }
+        form[TransferSchedule="true"] .wdr-rule-content,
+        form[ScheduleType="2"] .atb-week,
+        form[ScheduleType="3"] .atb-week,
+        form[ScheduleType="4"] .atb-mon,
+        form[ScheduleValue="custom"] #ScheduleType_4_Custom_Values,
+        form[NationalityID="1206"] .field_tw,
+        form[NationalityID] .field_oversea {
+            display: block;
+        }
+        form[NationalityID="1206"] .field_oversea {
+            display: none;
+        }
+        #fields_principal,
+        #fields_principal_company {
+            padding-top: 20px;
+            margin-top: 0;
+            border-top: none;
+        }
+        #dlPrincipalType {
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #dbdbdb;
+        }
+    </style>
+}
+@section scripts{
+
+    <script src="~/Areas/Admin/Scripts/libs.domAjax.js"></script>
+    <script>
+    libs.domAjax.subSelectByMaster('@Html.IdFor(t => t.detail.BankTypeID)', '@Html.IdFor(t => t.detail.BankCode)', '@Url.Action("ListBankCode")/{0}', '@Zero2Empty(BankTypeID)', '@BankCode');
+    libs.domAjax.subSelectByMaster('@Html.IdFor(t => t.detail.BankCode)', '@Html.IdFor(t => t.detail.BankBranchCode)', '@Url.Action("ListBankBranchCode")/{0}', '@BankCode', '@BankBranchCode');
+    libs.domAjax.subSelectByMaster('CompanyZipArea', '@Html.IdFor(t => t.detail.CompanyZipCode)', '@Url.Action("ListZipCode")/{0}', '@ViewBag.CompanyZipArea', '@CompanyZipCode');
+    libs.domAjax.subSelectByMaster('InvoiceZipArea', '@Html.IdFor(t => t.detail.InvoiceZipCode)', '@Url.Action("ListZipCode")/{0}', '@ViewBag.InvoiceZipArea', '@InvoiceZipCode');
+    </script>
+    <script src="~/Areas/Admin/Scripts/MerchantData/NewData/action.js"></script>
+}
+@using (Html.BeginForm())
+{
+    <div class="sc-box scb-padding">
+
+        <h4 class="content-title ct-inside">申請項目</h4>
+
+        <div class="scb-form">
+            <dl>
+                <dt>合約範本<sup class="inp-required">*</sup></dt>
+                <dd class="sf-radio-box">
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(t => t.basic.Template, "3", new { id = "Template_3" })
+                        <label for="Template_3" class="radio">行動支付</label>
+                    </div>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(t => t.basic.Template, "2", new { id = "Template_2" })
+                        <label for="Template_2" class="radio">EC+ 行動支付</label>
+                    </div>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(t => t.basic.Template, "1", new { id = "Template_1" })
+                        <label for="Template_1" class="radio">EC 交易</label>
+                    </div>
+                    @Html.ValidationMessageFor(t => t.basic.Template, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt>合約類別<sup class="inp-required">*</sup></dt>
+                <dd class="sf-radio-box">
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(t => t.basic.ContractType, "1", new { id = "ContractType_1" })
+                        <label for="ContractType_1" class="radio">紙本</label>
+                    </div>
+                    @Html.ValidationMessageFor(t => t.basic.ContractType, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    商品類別<sup class="inp-required">*</sup><span class="sf-title-tip">(可複選)</span>
+                </dt>
+                <dd id="CommoditiyTypeChecks" class="sf-check-box">
+                    <div class="def-check">
+                        <input type="checkbox" value="1" id="CommoditiyType_1" @GetTrueStr(IsAndValue(CommoditiyType, 1), "checked=\"checked\"") />
+                        <label for="CommoditiyType_1" class="checkbox">實體商品</label>
+                    </div>
+                    <div class="def-check">
+                        <input type="checkbox" value="2" id="CommoditiyType_2" @GetTrueStr(IsAndValue(CommoditiyType, 2), "checked=\"checked\"") />
+                        <label for="CommoditiyType_2" class="checkbox">虛擬商品(點數/服務)</label>
+                    </div>
+                    <div class="def-check">
+                        <input type="checkbox" value="4" id="CommoditiyType_4" @GetTrueStr(IsAndValue(CommoditiyType, 4), "checked=\"checked\"") />
+                        <label for="CommoditiyType_4" class="checkbox">遞延商品(課程/SPA)</label>
+                    </div>
+                    <div class="def-check">
+                        <input type="checkbox" value="8" id="CommoditiyType_8" @GetTrueStr(IsAndValue(CommoditiyType, 8), "checked=\"checked\"") />
+                        <label for="CommoditiyType_8" class="checkbox">商品代收 </label>
+                    </div>
+                    <div class="def-check">
+                        <input type="checkbox" value="16" id="CommoditiyType_16" @GetTrueStr(IsAndValue(CommoditiyType, 16), "checked=\"checked\"") />
+                        <label for="CommoditiyType_16" class="checkbox">商品代售</label>
+                    </div>
+                    @Html.TextBoxFor(t => t.basic.CommoditiyType, new { @class = "hide" })
+                    @Html.ValidationMessageFor(t => t.basic.CommoditiyType, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    收款方式<sup class="inp-required">*</sup><span class="sf-title-tip">(可複選)</span>
+                </dt>
+                <dd id="GatewayItemChecks" class="sf-check-box">
+                    <div class="def-check">
+                        <input type="checkbox" value="1" id="GatewayItem_1" @GetTrueStr(IsAndValue(GatewayItem, 1), "checked=\"checked\"") />
+                        <label for="GatewayItem_1" class="checkbox">帳戶餘額</label>
+                    </div>
+                    <div class="def-check">
+                        <input type="checkbox" value="2" id="GatewayItem_2" @GetTrueStr(IsAndValue(GatewayItem, 2), "checked=\"checked\"") />
+                        <label for="GatewayItem_2" class="checkbox">連結帳戶</label>
+                    </div>
+                    @Html.TextBoxFor(t => t.basic.GatewayItem, new { @class = "hide" })
+                    @Html.ValidationMessageFor(t => t.basic.GatewayItem, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt>儲值代收<sup class="inp-required">*</sup></dt>
+                <dd class="sf-radio-box">
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(t => t.basic.isDeposit, "1", new { id = "isDeposit_1" })
+                        <label for="isDeposit_1" class="radio">是</label>
+                    </div>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(t => t.basic.isDeposit, "0", new { id = "isDeposit_0" })
+                        <label for="isDeposit_0" class="radio">否</label>
+                    </div>
+                    @Html.ValidationMessageFor(t => t.basic.isDeposit, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+
+    <div class="sc-box scb-padding">
+        <h4 class="content-title ct-inside">基本資料</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">登入帳號<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <div class="sf-account-box">
+                        @Html.TextBoxFor(t => t.basic.Account, new { @class = "sab-inp ignore", placeholder = "請輸入登入帳號" })
+                        <div class="btn-box">
+                            <a id="lnkCheckAccountRepeat" href="@Url.Action("CheckAccountRepeat", new { MID = MID })" check="#@Html.IdFor(t => t.basic.Account)" callback="cbAccountRepeat" class="btn" title="檢查帳號是否重複">檢查帳號是否重複</a>
+                        </div>
+                        <span id="statusAccountRepeat" class="sab-icon"></span>
+                    </div>
+                    @Html.ValidationMessageFor(t => t.basic.Account, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">商店名稱<sup class="inp-required">*</sup></dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.detail.WebSiteName, new { placeholder = "請輸入商店名稱" })
+                    @Html.ValidationMessageFor(t => t.detail.WebSiteName, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">商店網站網址<sup class="inp-required">*</sup></dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.detail.WebSiteURL, new { placeholder = "請輸入商店網站網址" })
+                    @Html.ValidationMessageFor(t => t.detail.WebSiteURL, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">商品交付天期<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.detail.DeliveryDayType, new Dictionary<string, string>()
+                        {
+                            { "1", "3天內" },
+                            { "2", "3～5天" },
+                            { "3", "5～10天" },
+                            { "4", "10天以上" }
+                        }.Select(t => new SelectListItem { Text = t.Value, Value = t.Key }))
+                    </label>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+
+    <div class="sc-box scb-padding">
+        <h4 class="content-title ct-inside">銀行帳戶</h4>
+
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">銀行帳戶戶名<sup class="inp-required">*</sup></dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.detail.BankAccountName, new { placeholder = "請輸入銀行帳戶戶名" })
+                    @Html.ValidationMessageFor(t => t.detail.BankAccountName, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">銀行代碼<sup class="inp-required">*</sup></dt>
+                <dd class="sf-three-block">
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.detail.BankTypeID, listBankType.Select(t => new SelectListItem { Text = t.BankTypeName, Value = t.BankTypeID.ToString() }), "請選擇銀行種類")
+                    </label>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.detail.BankCode, new SelectListItem[] { }, "請選擇銀行")
+                    </label>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.detail.BankBranchCode, new SelectListItem[] { }, "請選擇銀行分行")
+                    </label>
+                    @Html.ValidationMessageFor(t => t.detail.BankTypeID, null, new { @class = "input-error-txt" }, "div")
+                    @Html.ValidationMessageFor(t => t.detail.BankCode, null, new { @class = "input-error-txt" }, "div")
+                    @Html.ValidationMessageFor(t => t.detail.BankBranchCode, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">銀行帳號<sup class="inp-required">*</sup></dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.detail.BankAccount, new { placeholder = "請輸入銀行帳號" })
+                    @Html.ValidationMessageFor(t => t.detail.BankAccount, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+
+            <div class="sf-subbox">
+                <dl>
+                    <dt>提領規則<sup class="inp-required">*</sup></dt>
+                    <dd class="sf-radio-box wdr-rule-radio">
+                        <div class="def-radio">
+                            @Html.RadioButtonFor(t => t.detail.TransferSchedule, "true", new { id = "TransferSchedule_1" })
+                            <label for="TransferSchedule_1" class="radio">啟用</label>
+                        </div>
+                        <div class="def-radio">
+                            @Html.RadioButtonFor(t => t.detail.TransferSchedule, "false", new { id = "TransferSchedule_0" })
+                            <label for="TransferSchedule_0" class="radio">不啟用</label>
+                        </div>
+                        @Html.ValidationMessageFor(t => t.detail.TransferSchedule, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+
+                <div class="wdr-rule-content">
+                    <dl>
+                        <dt></dt>
+                        <dd class="sf-radio-box account-time-radio">
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.detail.ScheduleType, "1", new { id = "ScheduleType_1" })
+                                <label for="ScheduleType_1" class="radio">每日結算</label>
+                            </div>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.detail.ScheduleType, "2", new { id = "ScheduleType_2" })
+                                <label for="ScheduleType_2" class="radio">每週結算</label>
+                            </div>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.detail.ScheduleType, "4", new { id = "ScheduleType_4" })
+                                <label for="ScheduleType_4" class="radio">每月結算</label>
+                            </div>
+                            @Html.ValidationMessageFor(t => t.detail.ScheduleType, null, new { @class = "input-error-txt" }, "div")
+                            @Html.HiddenFor(t => t.detail.ScheduleValue)
+                        </dd>
+                    </dl>
+                    <dl class="at-box atb-week">
+                        <dt></dt>
+                        <dd class="sf-two-block">
+                            <label class="def-select">
+                                <select id="ScheduleType_2_Values">
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                    <option value="6">星期六</option>
+                                    <option value="7">星期日</option>
+                                </select>
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl class="at-box atb-mon">
+                        <dt></dt>
+                        <dd class="sf-two-block">
+                            <label class="def-select">
+                                <select id="ScheduleType_4_Values">
+                                    <option value="1">第一天</option>
+                                    <option value="5">5號</option>
+                                    <option value="10">10號</option>
+                                    <option value="15">15號</option>
+                                    <option value="20">10號</option>
+                                    <option value="25">25號</option>
+                                    <option value="0">最後一天</option>
+                                    <option value="custom">自訂</option>
+                                </select>
+                            </label>
+                            <label class="def-select">
+                                <select id="ScheduleType_4_Custom_Values">
+                                    @for (int i = 1; i < 31; i++)
+                                    {
+                                        <option value="@i">@(i)號</option>
+                                    }
+                                </select>
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl class="account-tip">
+                        <dt></dt>
+                        <dd>
+                            <ul class="input-tip-list">
+                                <li>提領的金額轉入銀行帳戶需2-3天，如遇例假日與國定假日則順延。</li>
+                                <li>如需設定自動提領，建議您提早設定。如：需於每月1日入帳至公司帳戶， 則需結算日需設定於上月月底。</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>提領金額</dt>
+                        <dd>
+                            <div class="sf-radio-box wdr-mounts-radio">
+                                <div class="def-radio">
+                                    @Html.RadioButtonFor(t => t.detail.AMTransferType, "1", new { id = "AMTransferType_1" })
+                                    <label for="AMTransferType_1" class="radio">固定金額</label>
+                                </div>
+                                <div class="def-radio">
+                                    @Html.RadioButtonFor(t => t.detail.AMTransferType, "2", new { id = "AMTransferType_2" })
+                                    <label for="AMTransferType_2" class="radio">保留帳戶金額</label>
+                                </div>
+                            </div>
+                            @Html.TextBoxFor(t => t.detail.TransferAmount, new { type = "tel", @class = "sf-margin", placeholder = "請輸入提領金額" })
+                            @Html.ValidationMessageFor(t => t.detail.TransferAmount, null, new { @class = "input-error-txt" }, "div")
+                            <div class="input-tip-box itb-wdr iw-1">
+                                <h4 class="itb-title">固定金額說明：</h4>
+                                <ul class="input-tip-list itl-disc">
+                                    <li>結算週期：每週結算 - 星期二</li>
+                                    <li>目前帳戶金額：35,000</li>
+                                    <li>設定帳戶每次轉出保留：10,000</li>
+                                    <li>實際轉出金額：10,000(固定轉出金額) + 15(轉出手續費) = 10,015</li>
+                                    <li>帳戶金額剩餘：24,985</li>
+                                    <li>提醒您，如帳戶餘額低於退款金額，將無法退款。</li>
+                                </ul>
+                            </div>
+
+                            <div class="input-tip-box itb-wdr iw-2">
+                                <h4 class="itb-title">保留帳戶金額說明：</h4>
+                                <ul class="input-tip-list itl-disc">
+                                    <li>結算週期：每週結算 - 星期二</li>
+                                    <li>目前帳戶金額：35,000</li>
+                                    <li>設定帳戶每次轉出保留：10,000</li>
+                                    <li>實際轉出金額：35,000 (原有金額) - 10,000 (帳戶保留金額) - 15 (轉出手續費) = 24,985</li>
+                                    <li>提醒您，如帳戶餘額低於退款金額，將無法退款。</li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="sc-box scb-padding">
+
+        <h4 class="content-title ct-inside">申請身分</h4>
+
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">選擇商戶身分<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.basic.CustomerType, new Dictionary<string, string>()
+                        {
+                            { "1", "公司戶" },
+                            { "2", "個人戶" }
+                        }.Select(t => new SelectListItem { Text = t.Value, Value = t.Key }), new { @class = "id-type-select" })
+                    </label>
+                </dd>
+            </dl>
+            <div id="fields_company" class="id-type idt-business">
+                <dl>
+                    <dt class="oneline-inp">公司登記名稱<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.CompanyName, new { placeholder = "請輸入公司登記名稱" })
+                        @Html.ValidationMessageFor(t => t.detail.CompanyName, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">公司類別<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(t => t.detail.CompanyType, new Dictionary<string, string>()
+                            {
+                                { "1", "政府機關" },
+                                { "2", "法人" },
+                                { "3", "行號" },
+                                { "4", "其他團體" }
+                            }.Select(t => new SelectListItem { Text = t.Value, Value = t.Key }), "請選擇")
+                        </label>
+                        @Html.ValidationMessageFor(t => t.detail.CompanyType, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">公司統一證號<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.UnifiedBusinessNo, new { placeholder = "請輸入公司統一編號" })
+                        @Html.ValidationMessageFor(t => t.detail.UnifiedBusinessNo, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">公司設立日期<sup class="inp-required">*</sup></dt>
+                    <dd class="sbf-date-box">
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(t => t.detail.IncorporationDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                                { "class", "flatpickr flatpickr-input active normalD" },
+                                { "placeholder", "設立日期" },
+                                { "readonly", "readonly" },
+                                { "flatpickr-maxDate", DateTime.Today.ToString("yyyy/MM/dd") }
+                            })
+                        </label>
+                        @Html.ValidationMessageFor(t => t.detail.IncorporationDate, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">公司資本額<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.CapitalAmount, new { placeholder = "請輸入公司資本額" })
+                        @Html.ValidationMessageFor(t => t.detail.CapitalAmount, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl id="dlPrincipalType">
+                    <dt class="oneline-inp">負責人身分<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(t => t.detail.PrincipalType, new Dictionary<string, string>()
+                            {
+                                { "0", "自然人" },
+                                { "1", "法人" }
+                            }.Select(t => new SelectListItem { Text = t.Value, Value = t.Key }), new { @class = "id-ceo-select" })
+                        </label>
+                    </dd>
+                </dl>
+            </div>
+
+            <div id="fields_principal" class="id-type idc-box idc-natural">
+                <dl>
+                    <dt class="oneline-inp">負責人國籍<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(t => t.detail.NationalityID, listNationality.Select(t => new SelectListItem { Text = t.NationalityName, Value = t.NationalityID.ToString() }), "請選擇國籍", new { @class = "id-ceo-select" })
+                        </label>
+                        @Html.ValidationMessageFor(t => t.detail.NationalityID, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl class="field_tw">
+                    <dt class="oneline-inp">負責人身分證字號<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.IDNO, new { placeholder = "請輸入身分證字號" })
+                        @Html.ValidationMessageFor(t => t.detail.IDNO, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl class="field_oversea">
+                    <dt class="oneline-inp">負責人居留證號碼(擇一)</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.UniformID, new { placeholder = "請輸入居留證號碼" })
+                        @Html.ValidationMessageFor(t => t.detail.UniformID, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl class="field_oversea">
+                    <dt class="oneline-inp">負責人護照號碼(擇一)</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.OverSeasIDNO, new { placeholder = "請輸入護照號碼" })
+                        @Html.ValidationMessageFor(t => t.detail.OverSeasIDNO, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">負責人姓名<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.CName, new { placeholder = "請輸入負責人姓名" })
+                        @Html.ValidationMessageFor(t => t.detail.CName, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">負責人護照英文姓名<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.CName_EN, new { placeholder = "請輸入負責人護照英文姓名" })
+                        @Html.ValidationMessageFor(t => t.detail.CName_EN, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">負責人生日<sup class="inp-required">*</sup></dt>
+                    <dd class="sbf-date-box">
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(t => t.detail.PrincipalBirthday, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                                { "class", "flatpickr flatpickr-input active normalD" },
+                                { "placeholder", "負責人生日" },
+                                { "readonly", "readonly" },
+                                { "flatpickr-maxDate", DateTime.Today.ToString("yyyy/MM/dd") }
+                            })
+                        </label>
+                        @Html.ValidationMessageFor(t => t.detail.PrincipalBirthday, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">負責人職業<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(t => t.detail.OccupationID, listOccupation.Select(t => new SelectListItem { Text = t.Occupation, Value = t.OccupationID.ToString() }), "請選擇職業")
+                        </label>
+                        @Html.ValidationMessageFor(t => t.detail.OccupationID, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+            </div>
+
+            <div id="fields_principal_company" class="id-type idc-box idc-legal">
+                <dl>
+                    <dt class="oneline-inp">負責人公司名稱<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.PrincipalCompanyName, new { placeholder = "請輸入負責人公司名稱" })
+                        @Html.ValidationMessageFor(t => t.detail.PrincipalCompanyName, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">負責人公司統一編號</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.PrincipalUnifiedBusinessNo, new { placeholder = "請輸入負責人公司統一編號" })
+                        @Html.ValidationMessageFor(t => t.detail.PrincipalUnifiedBusinessNo, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="sc-box scb-padding">
+        <h4 class="content-title  ct-inside">聯絡資料</h4>
+
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">個人/公司聯絡電話</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.detail.CompanyTel, new { type = "tel", placeholder = "請輸入公司聯絡電話，例如：02-22223333" })
+                    @Html.ValidationMessageFor(t => t.detail.CompanyTel, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">個人/公司傳真</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.detail.CompanyFax, new { type = "tel", placeholder = "請輸入公司傳真電話，例如：02-22223333" })
+                    @Html.ValidationMessageFor(t => t.detail.CompanyFax, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">公司登記地址<sup class="inp-required">*</sup></dt>
+                <dd class="sf-addr-block">
+                    <label class="def-select">
+                        <select id="CompanyZipArea">
+                            <option value="">縣市</option>
+                            @foreach (var item in listZipArea)
+                            {
+                                <option value="@item.AreaID">@item.AreaName</option>
+                            }
+                        </select>
+                    </label>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.detail.CompanyZipCode, new SelectListItem[] { }, "區")
+                    </label>
+                    @Html.TextBoxFor(t => t.detail.Address, new { @class = "sab-txt", placeholder = "請輸入地址" })
+                    @Html.ValidationMessageFor(t => t.detail.Address, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">接收發票地址<sup class="inp-required">*</sup></dt>
+                <dd class="sf-addr-block">
+                    <label class="def-select">
+                        <select id="InvoiceZipArea">
+                            <option value="">縣市</option>
+                            @foreach (var item in listZipArea)
+                            {
+                                <option value="@item.AreaID">@item.AreaName</option>
+                            }
+                        </select>
+                    </label>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.detail.InvoiceZipCode, new SelectListItem[] { }, "區")
+                    </label>
+                    @Html.TextBoxFor(t => t.detail.InvoiceAddress, new { @class = "sab-txt", placeholder = "請輸入地址" })
+                    @Html.ValidationMessageFor(t => t.detail.InvoiceAddress, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+
+            <div class="sf-subbox">
+                <dl>
+                    <dt class="oneline-inp">財務聯絡人姓名<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.ContactPerson, new { placeholder = "請輸入姓名" })
+                        @Html.ValidationMessageFor(t => t.detail.ContactPerson, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">財務聯絡人護照英文姓名<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.ContactPerson_EN, new { placeholder = "請輸入護照英文姓名" })
+                        @Html.ValidationMessageFor(t => t.detail.ContactPerson_EN, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">財務聯絡人電話<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.ContactPhone, new { type = "tel", placeholder = "請輸入電話，例如：02-22223333" })
+                        @Html.ValidationMessageFor(t => t.detail.ContactPhone, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">財務聯絡人手機<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.ContactCellPhone, new { type = "tel", placeholder = "請輸入手機" })
+                        @Html.ValidationMessageFor(t => t.detail.ContactCellPhone, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">財務聯絡人E-mail<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.ContactEmail, new { type = "email", placeholder = "請輸入E-mail" })
+                        <div class="input-tip-txt">（如需設定多組信箱，中間請以分號區隔。例如：hello@ecpay.com.tw ; happy@ecpay.com.tw）</div>
+                        @Html.ValidationMessageFor(t => t.detail.ContactEmail, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">接收發票E-mail<sup class="inp-required">*</sup></dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.EinvoiceEmail, new { type = "email", placeholder = "請輸入E-mail" })
+                        @Html.ValidationMessageFor(t => t.detail.EinvoiceEmail, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="sf-subbox">
+                <dl>
+                    <dt class="oneline-inp">業務聯絡人姓名</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.SalesContactPerson, new { placeholder = "請輸入姓名" })
+                        @Html.ValidationMessageFor(t => t.detail.SalesContactPerson, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">業務聯絡人電話</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.SalesContactPhone, new { type = "tel", placeholder = "請輸入電話" })
+                        @Html.ValidationMessageFor(t => t.detail.SalesContactPhone, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">業務聯絡人手機</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.SalesContactCellPhone, new { type = "tel", placeholder = "請輸入手機" })
+                        @Html.ValidationMessageFor(t => t.detail.SalesContactCellPhone, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">業務聯絡人E-mail</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.detail.SalesContactEmail, new { type = "email", placeholder = "請輸入E-mail" })
+                        <div class="input-tip-txt">（如需設定多組信箱，中間請以分號區隔。例如：hello@ecpay.com.tw ; happy@ecpay.com.tw）</div>
+                        @Html.ValidationMessageFor(t => t.detail.SalesContactEmail, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+            </div>
+
+            <dl>
+                <dt>進件備註<span class="sf-title-tip">(非必填)</span></dt>
+                <dd>
+                    @Html.TextAreaFor(t => t.basic.Remark, new { @class = "txa-mini", placeholder = "請輸入欲說明之內容" })
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+
+    <div class="sc-box scb-padding">
+        <h4 class="content-title  ct-inside">審核</h4>
+
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">負責業務<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.basic.SalesUserID, listSales.Select(t => new SelectListItem { Text = t.CName, Value = t.UserID.ToString() }), "請選擇業務")
+                    </label>
+                    @Html.ValidationMessageFor(t => t.basic.SalesUserID, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">審核狀態<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.basic.AuditStatus, listNextAuditStatus.Select(t => new SelectListItem { Text = t.AuditStatusName, Value = t.AuditStatusID.ToString() }), "請選擇審核狀態")
+                        @Html.ValidationMessageFor(t => t.basic.AuditStatus, null, new { @class = "input-error-txt" }, "div")
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>審核備註<sup class="inp-required">*</sup></dt>
+                <dd>
+                    @Html.TextAreaFor(t => t.basic.AuditNote, new { @class = "txa-mini", placeholder = "請輸入審核之說明" })
+                    @Html.ValidationMessageFor(t => t.basic.AuditNote, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="scb-bottom-btn sbb-center">
+        <a href="#" class="btn link-submit disabled" title="儲存送出">儲存送出</a>
+    </div>
+}

@@ -1,0 +1,118 @@
+﻿@model QryBonusReq
+@using ICP.Modules.Mvc.Admin.Models.ViewModels.Bonus;
+@{
+    Model.StartDate = DateTime.Today;
+    Model.EndDate = DateTime.Today;
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/finance.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/Bonus/Query/action.js"></script>
+}
+<div class="site-content">
+    <div class="sc-box no-edge">
+
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            @Html.Hidden("PageSize", "10")
+            @Html.HiddenFor(m => m.BuyerICPMID)
+            @Html.HiddenFor(m => m.BuyerCName)
+            @Html.HiddenFor(m => m.TradeNo)
+            @Html.HiddenFor(m => m.MerchantTradeNo)
+            @Html.HiddenFor(m => m.SellerICPMID)
+            @Html.HiddenFor(m => m.SellerCName)
+
+            <div class="scb-form sf-2column">
+                <dl>
+                    <dt>
+                        <label class="def-select">
+                            @Html.DropDownListFor(m => m.DateType, new List<SelectListItem>()
+                            {
+                                new SelectListItem(){ Value = "0", Text = "訂單日期" },
+                                new SelectListItem(){ Value = "1", Text = "付款日期" },
+                                new SelectListItem(){ Value = "2", Text = "退款日期" }
+                            })
+                        </label>
+                    </dt>
+
+
+                    <dd class="sbf-date-box">
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                                { "class", "flatpickr flatpickr-input active minD" },
+                                { "placeholder", "起始日期" },
+                                { "readonly", "readonly" },
+                                { "flatpickr-maxDate_input", "#EndDate" }
+                            })
+                        </label>
+
+                        <span class="sdb-txt">至</span>
+
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                                { "class", "flatpickr flatpickr-input active maxD" },
+                                { "placeholder", "結束日期" },
+                                { "readonly", "readonly" },
+                                { "flatpickr-minDate_input", "#StartDate" }
+                            })
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">付款方</dt>
+                    <dd class="sf-2inp s2i-2">
+                        <label class="def-select s2i-item">
+                            <select id="BuyerType">
+                                <option value="1">電支帳號</option>
+                                <option value="2">名稱</option>
+                            </select>
+                        </label>
+                        <input type="text" class="s2i-item" id="BuyerContent" placeholder="" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">訂單類別</dt>
+                    <dd class="sf-2inp">
+                        <label class="def-select s2i-item">
+                            <select id="TradeNoType">
+                                <option value="1">icashpay 訂單編號</option>
+                                <option value="2">特店訂單編號</option>
+                            </select>
+                        </label>
+                        <input type="text" class="s2i-item" id="TradeNoContent" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">收款方</dt>
+                    <dd class="sf-2inp s2i-2">
+                        <label class="def-select s2i-item">
+                            <select id="SellerType">
+                                <option value="1">電支帳號</option>
+                                <option value="2">名稱</option>
+                            </select>
+                        </label>
+                        <input type="text" class="s2i-item" id="SellerContent" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">紅利類型</dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(m => m.PointType, new List<SelectListItem>()
+                            {
+                                new SelectListItem(){ Value = "0", Text = "全部" },
+                                new SelectListItem(){Value = "1", Text = "OPENPOINT" }
+                            })
+                        </label>
+                    </dd>
+                </dl>
+            </div>
+            <div class="btn-box">
+                <a href="javascript:checkFields()" class="btn" title="查詢">查詢</a>
+                <a href="javascript:resetFields()" class="btn btn-blue-border" title="清除條件">清除條件</a>
+            </div>
+        }
+    </div>
+    <div id="queryResult"></div>
+</div>

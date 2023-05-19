@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://iuo.interfaces.application.eivb.pic.com/" name="ISellerJobReceiverService" targetNamespace="http://iuo.interfaces.application.eivb.pic.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://iuo.interfaces.application.eivb.pic.com/" elementFormDefault="unqualified" targetNamespace="http://iuo.interfaces.application.eivb.pic.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="SIUO007Allowance" type="tns:SIUO007Allowance" />
+      <xs:element name="SIUO007AllowanceResponse" type="tns:SIUO007AllowanceResponse" />
+      <xs:element name="SIUO007CancelAllowance" type="tns:SIUO007CancelAllowance" />
+      <xs:element name="SIUO007CancelAllowanceResponse" type="tns:SIUO007CancelAllowanceResponse" />
+      <xs:element name="SIUO007CancelInvoice" type="tns:SIUO007CancelInvoice" />
+      <xs:element name="SIUO007CancelInvoiceResponse" type="tns:SIUO007CancelInvoiceResponse" />
+      <xs:element name="SIUO007OpenInvoice" type="tns:SIUO007OpenInvoice" />
+      <xs:element name="SIUO007OpenInvoiceResponse" type="tns:SIUO007OpenInvoiceResponse" />
+      <xs:element name="SIUO007VoidInvoice" type="tns:SIUO007VoidInvoice" />
+      <xs:element name="SIUO007VoidInvoiceResponse" type="tns:SIUO007VoidInvoiceResponse" />
+      <xs:element name="SIUO008" type="tns:SIUO008" />
+      <xs:element name="SIUO008Response" type="tns:SIUO008Response" />
+      <xs:element name="SIUO009" type="tns:SIUO009" />
+      <xs:element name="SIUO009Response" type="tns:SIUO009Response" />
+      <xs:element name="SIUO010" type="tns:SIUO010" />
+      <xs:element name="SIUO010Response" type="tns:SIUO010Response" />
+      <xs:element name="SIUO152PurchaseAllowance" type="tns:SIUO152PurchaseAllowance" />
+      <xs:element name="SIUO152PurchaseAllowanceResponse" type="tns:SIUO152PurchaseAllowanceResponse" />
+      <xs:element name="SIUO152PurchaseCancelAllowance" type="tns:SIUO152PurchaseCancelAllowance" />
+      <xs:element name="SIUO152PurchaseCancelAllowanceResponse" type="tns:SIUO152PurchaseCancelAllowanceResponse" />
+      <xs:element name="SIUO152PurchaseCancelInvoice" type="tns:SIUO152PurchaseCancelInvoice" />
+      <xs:element name="SIUO152PurchaseCancelInvoiceResponse" type="tns:SIUO152PurchaseCancelInvoiceResponse" />
+      <xs:element name="SIUO152PurchaseOpenInvoice" type="tns:SIUO152PurchaseOpenInvoice" />
+      <xs:element name="SIUO152PurchaseOpenInvoiceResponse" type="tns:SIUO152PurchaseOpenInvoiceResponse" />
+      <xs:element name="SIUO152PurchaseRejectInvoice" type="tns:SIUO152PurchaseRejectInvoice" />
+      <xs:element name="SIUO152PurchaseRejectInvoiceResponse" type="tns:SIUO152PurchaseRejectInvoiceResponse" />
+      <xs:element name="Test" type="tns:Test" />
+      <xs:element name="TestResponse" type="tns:TestResponse" />
+      <xs:complexType name="SIUO010">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="InvoiceInfo" type="tns:iuo010OrdersHeadVO" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="wsUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="unifiedNo" type="xs:string" />
+          <xs:element minOccurs="0" name="usrAcc" type="xs:string" />
+          <xs:element minOccurs="0" name="usrMima" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iuo010OrdersHeadVO">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseXmlTemplate">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="InvoiceDateFrom" type="xs:string" />
+              <xs:element minOccurs="0" name="InvoiceDateTo" type="xs:string" />
+              <xs:element minOccurs="0" name="BuyerType" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseXmlTemplate">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="xmlns" type="xs:string" />
+          <xs:element minOccurs="0" name="xsi" type="xs:string" />
+          <xs:element minOccurs="0" name="schema" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO010Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:siuo010ResultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="siuo010ResultWebVo">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:resultWebVo">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="invoices" type="tns:sIuo010ReturnList" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="resultWebVo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorInfos" type="tns:errorInfoVoList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sIuo010ReturnList">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="invoice" nillable="true" type="tns:sIuo010ReturnVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sIuo010ReturnVo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="unifiedNo" type="xs:string" />
+          <xs:element minOccurs="0" name="categoryNo" type="xs:string" />
+          <xs:element minOccurs="0" name="orderNo" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceDate" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceNo" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="errorInfoVoList">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ErrorInfo" type="tns:errorInfoVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="errorInfoVo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Identifier" type="xs:string" />
+          <xs:element minOccurs="0" name="OrderNo" type="xs:string" />
+          <xs:element minOccurs="0" name="OrderDate" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceDate" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="InvType" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorMsg" type="xs:string" />
+          <xs:element minOccurs="0" name="SellerIdentifier" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerIdentifier" type="xs:string" />
+          <xs:element minOccurs="0" name="FileName" type="xs:string" />
+          <xs:element minOccurs="0" name="TransDate" type="xs:string" />
+          <xs:element minOccurs="0" name="TransTime" type="xs:string" />
+          <xs:element minOccurs="0" name="FunctionId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO007CancelAllowance">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="CancelAllowance" type="tns:B0501CancelAllowance" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="B0501CancelAllowance">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseXmlTemplate">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="CategoryNo" type="xs:string" />
+              <xs:element minOccurs="0" name="AllowanceNumber" type="xs:string" />
+              <xs:element minOccurs="0" name="AllowanceDate" type="xs:string" />
+              <xs:element minOccurs="0" name="SellerId" type="xs:string" />
+              <xs:element minOccurs="0" name="BuyerId" type="xs:string" />
+              <xs:element minOccurs="0" name="CancelDate" type="xs:string" />
+              <xs:element minOccurs="0" name="CancelTime" type="xs:string" />
+              <xs:element minOccurs="0" name="CancelReason" type="xs:string" />
+              <xs:element minOccurs="0" name="Remark" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="SIUO007CancelAllowanceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseRejectInvoice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PurchaseRejectInvoice" type="tns:A0301RejectInvoice" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="A0301RejectInvoice">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseXmlTemplate">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="RejectInvoiceNumber" type="xs:string" />
+              <xs:element minOccurs="0" name="InvoiceDate" type="xs:string" />
+              <xs:element minOccurs="0" name="BuyerId" type="xs:string" />
+              <xs:element minOccurs="0" name="SellerId" type="xs:string" />
+              <xs:element minOccurs="0" name="RejectDate" type="xs:string" />
+              <xs:element minOccurs="0" name="RejectTime" type="xs:string" />
+              <xs:element minOccurs="0" name="RejectReason" type="xs:string" />
+              <xs:element minOccurs="0" name="Remark" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseRejectInvoiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseCancelInvoice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PurchaseCancelInvoice" type="tns:A0501CancelInvoice" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="A0501CancelInvoice">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseXmlTemplate">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="CategoryNo" type="xs:string" />
+              <xs:element minOccurs="0" name="CancelInvoiceNumber" type="xs:string" />
+              <xs:element minOccurs="0" name="InvoiceDate" type="xs:string" />
+              <xs:element minOccurs="0" name="BuyerId" type="xs:string" />
+              <xs:element minOccurs="0" name="SellerId" type="xs:string" />
+              <xs:element minOccurs="0" name="CancelDate" type="xs:string" />
+              <xs:element minOccurs="0" name="CancelTime" type="xs:string" />
+              <xs:element minOccurs="0" name="CancelReason" type="xs:string" />
+              <xs:element minOccurs="0" name="ReturnTaxDocumentNumber" type="xs:string" />
+              <xs:element minOccurs="0" name="Remark" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseCancelInvoiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseOpenInvoice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PurchaseInvoice" type="tns:A0401AndC0401OpenInvoiceXmlTemplate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="A0401AndC0401OpenInvoiceXmlTemplate">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseXmlTemplate">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Main" type="tns:OpenInvoiceMain" />
+              <xs:element minOccurs="0" name="Details" type="tns:InvoiceDetails" />
+              <xs:element minOccurs="0" name="Amount" type="tns:InvoiceAmount" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="OpenInvoiceMain">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:invoiceMain">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="BondedAreaConfirm" type="xs:string" />
+              <xs:element minOccurs="0" name="CarrierType" type="xs:string" />
+              <xs:element minOccurs="0" name="CarrierId1" type="xs:string" />
+              <xs:element minOccurs="0" name="CarrierId2" type="xs:string" />
+              <xs:element minOccurs="0" name="PrintMark" type="xs:string" />
+              <xs:element minOccurs="0" name="NPOBAN" type="xs:string" />
+              <xs:element minOccurs="0" name="RandomNumber" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="invoiceMain">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CategoryNo" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceDate" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceTime" type="xs:string" />
+          <xs:element minOccurs="0" name="Identifier" type="xs:string" />
+          <xs:element minOccurs="0" name="Seller" type="tns:Seller" />
+          <xs:element minOccurs="0" name="Buyer" type="tns:Seller" />
+          <xs:element minOccurs="0" name="CheckNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerRemark" type="xs:string" />
+          <xs:element minOccurs="0" name="MainRemark" type="xs:string" />
+          <xs:element minOccurs="0" name="CustomsClearanceMark" type="xs:string" />
+          <xs:element minOccurs="0" name="Category" type="xs:string" />
+          <xs:element minOccurs="0" name="RelateNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceType" type="xs:string" />
+          <xs:element minOccurs="0" name="GroupMark" type="xs:string" />
+          <xs:element minOccurs="0" name="DonateMark" type="xs:string" />
+          <xs:element minOccurs="0" name="IssuerId" type="xs:string" />
+          <xs:element minOccurs="0" name="DocType" type="xs:string" />
+          <xs:element minOccurs="0" name="Attachment" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Seller">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Identifier" type="xs:string" />
+          <xs:element minOccurs="0" name="Name" type="xs:string" />
+          <xs:element minOccurs="0" name="Address" type="xs:string" />
+          <xs:element minOccurs="0" name="PersonInCharge" type="xs:string" />
+          <xs:element minOccurs="0" name="TelephoneNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="FacsimileNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="EmailAddress" type="xs:string" />
+          <xs:element minOccurs="0" name="CustomerNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="RoleRemark" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InvoiceDetails">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:detailsTypeBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductItem" nillable="true" type="tns:ProductItem" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="detailsTypeBase" abstract="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="productItemList" nillable="true" type="xs:anyType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ProductItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" name="Quantity" type="xs:string" />
+          <xs:element minOccurs="0" name="Unit" type="xs:string" />
+          <xs:element minOccurs="0" name="UnitPrice" type="xs:string" />
+          <xs:element minOccurs="0" name="Amount" type="xs:string" />
+          <xs:element minOccurs="0" name="SequenceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="Remark" type="xs:string" />
+          <xs:element minOccurs="0" name="RelateNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxType" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InvoiceAmount">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SalesAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="FreeTaxSalesAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="ZeroTaxSalesAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxType" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxRate" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="TotalAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="DiscountAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="OriginalCurrencyAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="ExchangeRate" type="xs:string" />
+          <xs:element minOccurs="0" name="Currency" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseOpenInvoiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO007OpenInvoice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Invoice" type="tns:A0401AndC0401OpenInvoiceXmlTemplate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO007OpenInvoiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseCancelAllowance">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PurchaseCancelAllowance" type="tns:B0501CancelAllowance" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseCancelAllowanceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO007VoidInvoice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="VoidInvoice" type="tns:c0701InvoiceVoidXmlTemplate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="c0701InvoiceVoidXmlTemplate">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseXmlTemplate">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="CategoryNo" type="xs:string" />
+              <xs:element minOccurs="0" name="VoidInvoiceNumber" type="xs:string" />
+              <xs:element minOccurs="0" name="InvoiceDate" type="xs:string" />
+              <xs:element minOccurs="0" name="BuyerId" type="xs:string" />
+              <xs:element minOccurs="0" name="SellerId" type="xs:string" />
+              <xs:element minOccurs="0" name="VoidDate" type="xs:string" />
+              <xs:element minOccurs="0" name="VoidTime" type="xs:string" />
+              <xs:element minOccurs="0" name="VoidReason" type="xs:string" />
+              <xs:element minOccurs="0" name="Remark" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="SIUO007VoidInvoiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO007Allowance">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Allowance" type="tns:B0401AllowanceTemplate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="B0401AllowanceTemplate">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseXmlTemplate">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Main" type="tns:AllowanceMain" />
+              <xs:element minOccurs="0" name="Details" type="tns:AllowanceDetails" />
+              <xs:element minOccurs="0" name="Amount" type="tns:AllowanceAmount" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AllowanceMain">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CategoryNo" type="xs:string" />
+          <xs:element minOccurs="0" name="AllowanceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="AllowanceDate" type="xs:string" />
+          <xs:element minOccurs="0" name="Seller" type="tns:Seller" />
+          <xs:element minOccurs="0" name="Buyer" type="tns:Seller" />
+          <xs:element minOccurs="0" name="AllowanceType" type="xs:string" />
+          <xs:element minOccurs="0" name="Attachment" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AllowanceDetails">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:detailsTypeBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductItem" nillable="true" type="tns:AllowanceProductItem" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AllowanceProductItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="OriginalInvoiceDate" type="xs:string" />
+          <xs:element minOccurs="0" name="OriginalInvoiceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="OriginalSequenceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="OriginalDescription" type="xs:string" />
+          <xs:element minOccurs="0" name="Quantity" type="xs:string" />
+          <xs:element minOccurs="0" name="Unit" type="xs:string" />
+          <xs:element minOccurs="0" name="UnitPrice" type="xs:string" />
+          <xs:element minOccurs="0" name="Amount" type="xs:string" />
+          <xs:element minOccurs="0" name="Tax" type="xs:string" />
+          <xs:element minOccurs="0" name="AllowanceSequenceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxType" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AllowanceAmount">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TaxAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="TotalAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO007AllowanceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseAllowance">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PurchaseAllowance" type="tns:B0401AllowanceTemplate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO152PurchaseAllowanceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Test">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="orderInfo" type="tns:iuo008OrdersHeadVO" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iuo008OrdersHeadVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="INV" nillable="true" type="tns:iuo008OrdersVO" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iuo008OrdersVO">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseXmlTemplate">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="M" type="tns:iuo008MainVO" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="D" type="tns:iuo008DetailVO" />
+              <xs:element minOccurs="0" name="C_IDENTIFIER" type="xs:string" />
+            </xs:sequence>
+            <xs:attribute name="type" type="xs:string" />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="iuo008MainVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TransactionNo" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionDate" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceDate" type="xs:string" />
+          <xs:element minOccurs="0" name="CategoryNo" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerIdentifier" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerName" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerAddress" type="xs:string" />
+          <xs:element minOccurs="0" name="SellerIdentifier" type="xs:string" />
+          <xs:element minOccurs="0" name="SellerName" type="xs:string" />
+          <xs:element minOccurs="0" name="MainRemark" type="xs:string" />
+          <xs:element minOccurs="0" name="SalesAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="FreeTaxSalesAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="ZeroTaxSalesAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxRate" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxType" type="xs:string" />
+          <xs:element minOccurs="0" name="TotalAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceType" type="xs:string" />
+          <xs:element minOccurs="0" name="GroupNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerDonateMark" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerCarrierType" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerCarrierid1" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerCarrierid2" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerCustomerNo" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerNpoban" type="xs:string" />
+          <xs:element minOccurs="0" name="BuyerEmail" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iuo008DetailVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TransactionNo" type="xs:string" />
+          <xs:element minOccurs="0" name="SellerIdentifier" type="xs:string" />
+          <xs:element minOccurs="0" name="ProductNo" type="xs:string" />
+          <xs:element minOccurs="0" name="ProductName" type="xs:string" />
+          <xs:element minOccurs="0" name="Quantity" type="xs:string" />
+          <xs:element minOccurs="0" name="UnitPrice" type="xs:string" />
+          <xs:element minOccurs="0" name="Unit" type="xs:string" />
+          <xs:element minOccurs="0" name="Amount" type="xs:string" />
+          <xs:element minOccurs="0" name="SequenceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxType" type="xs:string" />
+          <xs:element minOccurs="0" name="Remark" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TestResponse">
+        <xs:sequence>
+          <xs:element name="_return">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="entry">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" name="key" type="xs:anyType" />
+                      <xs:element minOccurs="0" name="value" type="xs:anyType" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO007CancelInvoice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="CancelInvoice" type="tns:A0501CancelInvoice" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO007CancelInvoiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO008">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" name="orderInfo" type="tns:iuo008OrdersHeadVO" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO008Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO009">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="wsUser" type="tns:wsUser" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ReturnOrder" type="tns:siuo009ReturnOrder" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="siuo009ReturnOrder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="InvoiceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceDate" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionNo" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionDate" type="xs:string" />
+          <xs:element minOccurs="0" name="CancelDate" type="xs:string" />
+          <xs:element minOccurs="0" name="CancelTime" type="xs:string" />
+          <xs:element minOccurs="0" name="SellerIdentifier" type="xs:string" />
+          <xs:element minOccurs="0" name="ReturnAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="Type" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SIUO009Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:resultWebVo" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="Test">
+    <wsdl:part name="parameters" element="ns1:Test" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007OpenInvoiceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO007OpenInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007VoidInvoice">
+    <wsdl:part name="parameters" element="ns1:SIUO007VoidInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007CancelInvoiceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO007CancelInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007VoidInvoiceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO007VoidInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007CancelAllowance">
+    <wsdl:part name="parameters" element="ns1:SIUO007CancelAllowance" />
+  </wsdl:message>
+  <wsdl:message name="SIUO010Response">
+    <wsdl:part name="parameters" element="ns1:SIUO010Response" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseOpenInvoice">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseOpenInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseCancelInvoiceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseCancelInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseCancelInvoice">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseCancelInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007CancelInvoice">
+    <wsdl:part name="parameters" element="ns1:SIUO007CancelInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseOpenInvoiceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseOpenInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestResponse">
+    <wsdl:part name="parameters" element="ns1:TestResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseAllowanceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseAllowanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO009Response">
+    <wsdl:part name="parameters" element="ns1:SIUO009Response" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseCancelAllowance">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseCancelAllowance" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseAllowance">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseAllowance" />
+  </wsdl:message>
+  <wsdl:message name="SIUO008Response">
+    <wsdl:part name="parameters" element="ns1:SIUO008Response" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007AllowanceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO007AllowanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO009">
+    <wsdl:part name="parameters" element="ns1:SIUO009" />
+  </wsdl:message>
+  <wsdl:message name="SIUO008">
+    <wsdl:part name="parameters" element="ns1:SIUO008" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007CancelAllowanceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO007CancelAllowanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseCancelAllowanceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseCancelAllowanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseRejectInvoice">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseRejectInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007OpenInvoice">
+    <wsdl:part name="parameters" element="ns1:SIUO007OpenInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SIUO007Allowance">
+    <wsdl:part name="parameters" element="ns1:SIUO007Allowance" />
+  </wsdl:message>
+  <wsdl:message name="SIUO010">
+    <wsdl:part name="parameters" element="ns1:SIUO010" />
+  </wsdl:message>
+  <wsdl:message name="SIUO152PurchaseRejectInvoiceResponse">
+    <wsdl:part name="parameters" element="ns1:SIUO152PurchaseRejectInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ISellerJobReceiverService">
+    <wsdl:operation name="SIUO010">
+      <wsdl:input name="SIUO010" message="ns1:SIUO010" />
+      <wsdl:output name="SIUO010Response" message="ns1:SIUO010Response" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007CancelAllowance">
+      <wsdl:input name="SIUO007CancelAllowance" message="ns1:SIUO007CancelAllowance" />
+      <wsdl:output name="SIUO007CancelAllowanceResponse" message="ns1:SIUO007CancelAllowanceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseRejectInvoice">
+      <wsdl:input name="SIUO152PurchaseRejectInvoice" message="ns1:SIUO152PurchaseRejectInvoice" />
+      <wsdl:output name="SIUO152PurchaseRejectInvoiceResponse" message="ns1:SIUO152PurchaseRejectInvoiceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseCancelInvoice">
+      <wsdl:input name="SIUO152PurchaseCancelInvoice" message="ns1:SIUO152PurchaseCancelInvoice" />
+      <wsdl:output name="SIUO152PurchaseCancelInvoiceResponse" message="ns1:SIUO152PurchaseCancelInvoiceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseOpenInvoice">
+      <wsdl:input name="SIUO152PurchaseOpenInvoice" message="ns1:SIUO152PurchaseOpenInvoice" />
+      <wsdl:output name="SIUO152PurchaseOpenInvoiceResponse" message="ns1:SIUO152PurchaseOpenInvoiceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007OpenInvoice">
+      <wsdl:input name="SIUO007OpenInvoice" message="ns1:SIUO007OpenInvoice" />
+      <wsdl:output name="SIUO007OpenInvoiceResponse" message="ns1:SIUO007OpenInvoiceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseCancelAllowance">
+      <wsdl:input name="SIUO152PurchaseCancelAllowance" message="ns1:SIUO152PurchaseCancelAllowance" />
+      <wsdl:output name="SIUO152PurchaseCancelAllowanceResponse" message="ns1:SIUO152PurchaseCancelAllowanceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007VoidInvoice">
+      <wsdl:input name="SIUO007VoidInvoice" message="ns1:SIUO007VoidInvoice" />
+      <wsdl:output name="SIUO007VoidInvoiceResponse" message="ns1:SIUO007VoidInvoiceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007Allowance">
+      <wsdl:input name="SIUO007Allowance" message="ns1:SIUO007Allowance" />
+      <wsdl:output name="SIUO007AllowanceResponse" message="ns1:SIUO007AllowanceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseAllowance">
+      <wsdl:input name="SIUO152PurchaseAllowance" message="ns1:SIUO152PurchaseAllowance" />
+      <wsdl:output name="SIUO152PurchaseAllowanceResponse" message="ns1:SIUO152PurchaseAllowanceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:input name="Test" message="ns1:Test" />
+      <wsdl:output name="TestResponse" message="ns1:TestResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007CancelInvoice">
+      <wsdl:input name="SIUO007CancelInvoice" message="ns1:SIUO007CancelInvoice" />
+      <wsdl:output name="SIUO007CancelInvoiceResponse" message="ns1:SIUO007CancelInvoiceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO008">
+      <wsdl:input name="SIUO008" message="ns1:SIUO008" />
+      <wsdl:output name="SIUO008Response" message="ns1:SIUO008Response" />
+    </wsdl:operation>
+    <wsdl:operation name="SIUO009">
+      <wsdl:input name="SIUO009" message="ns1:SIUO009" />
+      <wsdl:output name="SIUO009Response" message="ns1:SIUO009Response" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,149 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.MerchantModels;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model  IPagedList<CustomerDataQueryResult>
+@{
+    Layout = null;
+
+    List<AuditStatusModel> listAuditStatus = ViewBag.ListAuditStatus;
+
+    string timeFormat = "yyyy/MM/dd<br>HH:mm:ss";
+
+    var statesDict = new Dictionary<int, string>
+{
+{ 0, "停用" },
+{ 1, "啟用" },
+{ 2, "可登入看帳號" },
+{ 3, "刪除" }
+};
+
+    var auditStatusDict = listAuditStatus.ToDictionary(t => Convert.ToInt32(t.AuditStatusID), t => t.AuditStatusName);
+
+    Func<string, string> empty2Dash = str =>
+    {
+        return !string.IsNullOrWhiteSpace(str) ? str : "-";
+    };
+
+    Func<CustomerDataQueryResult, string> getName = (item) =>
+    {
+        if (!string.IsNullOrEmpty(item.CompanyName))
+        {
+            return item.CompanyName;
+        }
+        else
+        {
+            return item.CName;
+        }
+    };
+
+    Func<CustomerDataQueryResult, string> getIdn = (item) =>
+    {
+        if (!string.IsNullOrEmpty(item.IDNO))
+        {
+            return item.IDNO;
+        }
+        else
+        {
+            return item.UniformID;
+        }
+    };
+
+    Func<DateTime?, string, string, string> emptyDT2Str = (dt, format, replace) =>
+    {
+        return dt != null ? dt.Value.ToString(format) : replace;
+    };
+
+    Func<int, Dictionary<int, string>, string> getDictName = (key, dict) =>
+    {
+        if (dict.ContainsKey(key))
+        {
+            return dict[key];
+        }
+        else
+        {
+            return string.Empty;
+        }
+    };
+}
+@{
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+
+<div class="sc-box scb-table st-control st-bsns-finished">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">建檔時間</p></li>
+            <li><p class="sth-txt">商戶名稱/個人姓名</p></li>
+            <li><p class="sth-txt">統一編號</p></li>
+            <li><p class="sth-txt">身分證號/居留證號</p></li>
+            <li><p class="sth-txt">網站網址</p></li>
+            <li><p class="sth-txt">負責業務</p></li>
+            <li><p class="sth-txt">檢附文件</p></li>
+            <li><p class="sth-txt">費率</p></li>
+            <li><p class="sth-txt">金流維護狀態</p></li>
+            <li><p class="sth-txt">備註</p></li>
+            <li><p class="sth-txt">修改日期</p></li>
+            <li><p class="sth-txt">審核狀態</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.Raw(emptyDT2Str(item.CreateDate, timeFormat, string.Empty))
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Finished", new { id = item.CustomerID })">@getName(item)</a>
+                    </td>
+                    <td>@item.UnifiedBusinessNo</td>
+                    <td>@getIdn(item)</td>
+                    <td>
+                        <a href="@item.WebSiteURL">@item.WebSiteName</a>
+                    </td>
+                    <td>@item.SalesUserName</td>
+                    <td>
+                        <a href="@Url.Action("Document", new { id = item.CustomerID })">查看</a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ChargeFee", new { id = item.CustomerID })">設定</a>
+                    </td>
+                    <td>
+                        <p>@getDictName(item.States, statesDict)</p>
+                        <a href="@Url.Action("Payment", new { id = item.MID })">設定</a>
+                    </td>
+                    <td>-</td>
+                    <td>
+                        @Html.Raw(emptyDT2Str(item.ModifyDate, timeFormat, string.Empty))
+                    </td>
+                    <td>
+                        <p class="@(item.AuditStatus == 5 ? "st-verified" : string.Empty)">@getDictName(item.AuditStatus, auditStatusDict)</p>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("EditTempFinished", new { id = item.CustomerID })" class="btn" title="異動處理">異動處理</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

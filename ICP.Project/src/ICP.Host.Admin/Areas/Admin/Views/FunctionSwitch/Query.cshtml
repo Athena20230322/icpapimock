@@ -1,0 +1,62 @@
+﻿@using ICP.Modules.Mvc.Admin.Models
+@model List<FunctionCatagory>
+@{
+    Layout = null;
+}
+<div class="sc-box scb-table st-control st-system-control">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">群組名稱</p></li>
+            <li><p class="sth-txt">開關狀態</p></li>
+            <li><p class="sth-txt">預設開關時間</p></li>
+            <li><p class="sth-txt">最後修改人</p></li>
+            <li><p class="sth-txt">最後修改時間</p></li>
+            <li><p class="sth-txt">修改歷程</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.FunctionName
+                    </td>
+                    <td>
+                        <div class="switch-box @(item.Status == 0 ? "swb-disabled" : "")">
+                            <p class="swb-txt st-close">關</p>
+                            <a href="@Url.Action("UpdateFunctionSwitch", new { FunctionID = item.FunctionID, Status = item.Status == 0 ? 1 : 0 })" data-effect="mfp-zoom-in" class="swb-control-box">
+                                <div class="swb-control"></div>
+                            </a>
+                            <p class="swb-txt st-open">開</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("FunctionSwitchRev", new { FunctionID = item.FunctionID, FunctionName = item.FunctionName })" data-effect="mfp-zoom-in" class="libs-dialog-form btn bd-rdi" title="設定開關時間">設定開關時間</a>
+                        </div>
+                    </td>
+                    <td>
+                        @item.Modifier
+                    </td>
+                    <td>
+                        @(item.ModifyDate == null ? "-" : item.ModifyDate.Value.ToString("yyyy-MM-dd HH:mm"))
+                    </td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("QueryFunctionCategoryLog", new { FunctionID = item.FunctionID, FunctionName = item.FunctionName })" data-effect="mfp-zoom-in" class="libs-dialog-form btn bd-rdi" title="查看歷程">查看歷程</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

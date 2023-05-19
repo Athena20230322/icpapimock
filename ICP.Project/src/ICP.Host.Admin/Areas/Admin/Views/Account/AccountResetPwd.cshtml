@@ -1,0 +1,35 @@
+﻿@model ICP.Modules.Mvc.Admin.Models.AccountResetPwdModel
+@section header{
+    <link href="~/Areas/Admin/Content/css/login.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/Account/AccountResetPwd/action.js"></script>
+}
+@Html.ValidationSummary(false)
+<div class="sc-box scb-mini login-box">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h3 class="login-title">設定密碼</h3>
+        <div class="login-form">
+            <dl>
+                <dt>新密碼</dt>
+                <dd>
+                    @Html.PasswordFor(t => t.Pwd, new { placeholder = "請輸入6-20碼英數混合新密碼" })
+                    @Html.ValidationMessageFor(t => t.Pwd, "請輸入6-20碼英數混合新密碼", new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt>再次輸入新密碼</dt>
+                <dd>
+                    @Html.PasswordFor(t => t.ConfirmPwd, new { placeholder = "請再次輸入您的新密碼" })
+                    @Html.ValidationMessageFor(t => t.ConfirmPwd, "請再次輸入6-20碼英數混合新密碼", new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+        </div>
+
+        <div class="btn-box">
+            <a id="lnkSubmit" href="#" class="btn link-submit" title="送出">送出</a>
+        </div>
+    }
+</div>

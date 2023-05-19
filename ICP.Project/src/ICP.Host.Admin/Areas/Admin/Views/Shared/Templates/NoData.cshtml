@@ -1,0 +1,21 @@
+﻿@model object
+@{
+    if (Model != null)
+    {
+<div class="sc-nocontent scn-nosearch">
+    <div class="scn-box">
+        <div class="scn-icon"></div>
+        <div class="scn-txt">找不到相關的內容</div>
+    </div>
+</div>
+    }
+    else
+    {
+<div class="sc-nocontent scn-nonews">
+    <div class="scn-box on-touch">
+        <div class="scn-icon"></div>
+        <div class="scn-txt">目前沒有內容</div>
+    </div>
+</div>
+    }
+}

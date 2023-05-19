@@ -1,0 +1,274 @@
+﻿@using ICP.Library.Models.MemberModels
+@model MemberDataModel
+<link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/css/page.css" rel="stylesheet" />
+@{    
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    var bankAccountList = ViewBag.bankAccountList;
+
+    var authFinancial = ViewBag.bankAuthFinancial;
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerManager/Edit/action.js"></script>
+}
+<div class="site-content">
+    <div class="sc-box scb-table stb-horizontal st-rec-detail">
+        <input type="hidden" id="id" value="@ViewBag.id">
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                <tr>
+                    <th>電支帳號</th>
+                    <td>
+                        <div class="stb-content">
+                            @(Model.basic.ICPMID)
+                        </div>
+                    </td>
+                    <th>登入帳號</th>
+                    <td>@(Model.basic.Account)</td>
+                </tr>
+                <tr>
+                    <th>姓名</th>
+                    <td>
+                        <div class="stb-content">
+                            @( (string.IsNullOrEmpty(Model.basic.CName)) ? "-" : Model.basic.CName)
+                            <div class="btn-box stb-btn-box">
+                                @if (Model.detail.NationalityID == 1206)
+                                {
+                                    <a href="@Url.Action("Index","MemberIDNO", new { IDNO = Model.detail.IDNO })" class="btn" title="修改">修改</a>
+                                }
+
+                            </div>
+                        </div>
+                    </td>
+                    <th>生日</th>
+                    <td>@(string.Format("{0:yyyy/MM/dd}", Model.detail.Birthday) )</td>
+                </tr>
+                <tr>
+                    <th>手機號碼</th>
+                    <td>
+                        <div class="stb-content">
+                            @(Model.detail.CellPhone)<br>
+                            <span class="red">OTP 當日發送次數：@ViewBag.OTPCount</span>
+
+                            <div class="btn-box stb-btn-box sbb-multi">
+                                <a href="@Url.Action("UnlockSMS", new { id = Model.basic.MID })" data-update-callback="Reload" class="libs-dialog-form btn" title="解鎖">解鎖</a>
+                                <a href="@Url.Action("EditCellPhone", new { id = Model.basic.MID })" data-update-callback="Reload" data-update-msg="修改成功" class="libs-dialog-form btn" title="修改">修改</a>
+                            </div>
+
+                        </div>
+                    </td>
+                    <th>手機簡訊驗證成功時間</th>
+                    <td>@ViewBag.CellPhoneAuthOKDate</td>
+                </tr>
+                <tr>
+                    <th>E-mail</th>
+                    <td>@( string.IsNullOrEmpty(Model.detail.Email) ? "-" : Model.detail.Email)</td>
+                    <th>P33驗證成功時間</th>
+                    <td>@( (string.IsNullOrEmpty(Model.detail.UniformID)) ? "-" : ViewBag.IDNOP33VerifyDT)</td>
+                </tr>
+
+                <tr>
+                    <th>身分證字號</th>
+                    <td>@( (string.IsNullOrEmpty(Model.detail.IDNO)) ? "-" : Model.detail.IDNO)</td>
+                    <th>居留證號</th>
+                    <td>@( (string.IsNullOrEmpty(Model.detail.UniformID)) ? "-" : Model.detail.UniformID)</td>
+                </tr>
+                <tr>
+                    <th>帳戶餘額</th>
+                    <td>@string.Format("{0:N0}", ViewBag.AvailableOutCash)</td>
+                    <th>儲值帳戶</th>
+                    <td>@string.Format("{0:N0}", ViewBag.TopUpCash)</td>
+                </tr>
+                <tr>
+                    <th>目前凍結金額</th>
+                    <td>
+                        <div class="stb-content">
+                            @string.Format("{0:N0}", ViewBag.FreezeCash)
+
+                            <div class="btn-box stb-btn-box">
+                                <a href="@Url.Action("ListFreezeCoins", new { id = Model.basic.MID })" class="btn" title="修改">修改</a>
+                            </div>
+                        </div>
+                    </td>
+                    <th>使用者類別</th>
+                    <td>
+                        <div class="stb-content">
+                            @ViewBag.LevelIDName
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+
+    <h4 class="sc-subtitle">身分證換補發驗證 (P11)</h4>
+    <div class="sc-box scb-table st-id-verify siv-modify">
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">發證日期</p></li>
+                <li><p class="sth-txt">發證地點</p></li>
+                <li><p class="sth-txt">領補換類別</p></li>
+                <li><p class="sth-txt">驗證狀態</p></li>
+                <li><p class="sth-txt">驗證成功時間</p></li>
+                <li><p class="sth-txt">客服驗證</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                @if (ViewBag.P11Data != null)
+                {
+                    <tr>
+                        <td>@ViewBag.IssueDate</td>
+                        <td>@ViewBag.P11Data.IssueLocationName</td>
+                        <td>@( (ViewBag.P11Data.ObtainType == 1) ? "初發" : (ViewBag.P11Data.ObtainType == 2) ? "補發" : "換發" )</td>
+                        <td><span class="st-verified">@( (ViewBag.P11Data.AuthStatus == 0) ? "待驗證" : (ViewBag.P11Data.AuthStatus == 1) ? "驗證通過" : "驗證不通過" )</span></td>
+
+                        <td>@string.Format("{0:yyyy/MM/dd HH:mm:ss}", ViewBag.P11Data.ModifyDate) </td>
+                        <td>
+                            <div class="btn-box stb-btn-box sbb-size">
+                                <a href="@Url.Action("Index","MemberIDNO", new { IDNO = Model.detail.IDNO })" class="btn" title="前往身分驗證">前往身分驗證</a>
+                            </div>
+                        </td>
+                    </tr>
+                }                
+
+            </table>
+        </div>
+    </div>
+
+
+    <h4 class="sc-subtitle">金融工具驗證 (銀行帳戶)</h4>
+    <div class="sc-box scb-table st-financial-verify sfv-modify">
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">銀行帳號</p></li>
+                <li><p class="sth-txt">新增帳戶時間</p></li>
+                <li><p class="sth-txt">驗證狀態</p></li>
+                <li><p class="sth-txt">客服驗證</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                @if (authFinancial != null)
+                {
+
+                    <tr>
+                        <td>@authFinancial.BankName<br>@authFinancial.BankAccount</td>
+                        <td>@string.Format("{0:yyyy/MM/dd HH:mm:ss}", authFinancial.CreateDate)</td>
+                        <td>驗證通過</td>
+                        <td>
+                            <div class="btn-box stb-btn-box sbb-size">
+                                <a href="@Url.Action("Index","MemberBank", new { ICPMID = Model.basic.ICPMID })" class="btn" title="前往銀行帳戶驗證">前往銀行帳戶驗證</a>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            </table>
+        </div>
+    </div>
+
+
+    <h4 class="sc-subtitle">提領銀行帳戶</h4>
+    <div class="sc-box scb-table st-bank-account">
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">銀行帳號</p></li>
+                <li><p class="sth-txt">新增帳戶時間</p></li>
+                <li><p class="sth-txt">是否預設</p></li>
+                <li><p class="sth-txt">驗證狀態</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                @if (bankAccountList != null)
+                {
+                    foreach (var item in bankAccountList)
+                    {
+                        if (item.Category == 0)
+                        {
+                            <tr>
+                                <td>@item.BankName<br>@item.BankAccount</td>
+                                <td>@string.Format("{0:yyyy/MM/dd HH:mm:ss}", item.CreateDate)</td>
+                                <td>@( (item.isDefault == 1) ? "是" : "否" )</td>
+                                <td>@( (item.AccountStatus == 0) ? "待驗證" : (item.AccountStatus == 1) ? "<span class='st-verified'>驗證通過</span>" : "驗證不通過" )</td>
+                            </tr>
+                        }
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+
+    <h4 class="sc-subtitle">連結帳戶綁定</h4>
+    <div class="sc-box scb-table st-bind-account">
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">銀行帳號</p></li>
+                <li><p class="sth-txt">新增帳戶時間</p></li>
+                <li><p class="sth-txt">是否預設</p></li>
+                <li><p class="sth-txt">綁定狀態</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                @if (bankAccountList != null)
+                {
+                    foreach (var item in bankAccountList)
+                    {
+                        if (item.Category == 1)
+                        {
+                            <tr>
+                                <td>@item.BankName<br>@item.BankAccount</td>
+                                <td>@string.Format("{0:yyyy/MM/dd HH:mm:ss}", item.CreateDate)</td>
+                                <td>@( (item.isDefault == 1) ? "是" : "否" )</td>
+                                <td>@( (item.AccountStatus == 0) ? "待驗證" : (item.AccountStatus == 1) ? "驗證成功" : "驗證不通過" )</td>
+                            </tr>
+                        }
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+
+
+</div>

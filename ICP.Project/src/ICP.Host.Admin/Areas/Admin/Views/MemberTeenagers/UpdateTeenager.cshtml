@@ -1,0 +1,359 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Library.Models.MemberModels;
+@model UpdateTeenagerViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    long MID = ViewBag.MID;
+
+    int iMaxBirthYear = DateTime.Today.Year - 1911 - 14;
+
+    // 取得發證縣市
+    var IssueLocations = (List<MemberAuthIssueLocation>)ViewBag.IssueLocations;
+
+    #region 未成年
+    // 未成年 身份證資料
+    var AuthIDNOFiles = new Dictionary<int, string>()
+    {
+        { 1, Model.AuthIDNO.FilePath1 },
+        { 2, Model.AuthIDNO.FilePath2 }
+    };
+    #endregion
+
+    var legalDetails = Model.LegalDetails.Select(LegalDetail =>
+    {
+        var files = new[] {
+            new { UploadType = 3, filePath = LegalDetail.IDNOFile1 },
+            new { UploadType = 4, filePath = LegalDetail.IDNOFile2 },
+            new { UploadType = 5, filePath = LegalDetail.FilePath1 },
+            new { UploadType = 6, filePath = LegalDetail.FilePath2 },
+            new { UploadType = 7, filePath = LegalDetail.FilePath3 },
+            new { UploadType = 8, filePath = LegalDetail.FilePath4 },
+            new { UploadType = 9, filePath = LegalDetail.FilePath5 },
+            new { UploadType =10, filePath = LegalDetail.FilePath6 }
+        };
+
+        #region 法定代理人
+        // 法定代理人 身份證資料
+        var LegalAuthIDNOFiles = files.Where(t => new int[] { 3, 4 }.Contains(t.UploadType)).ToList();
+
+        // 法定代理人 戶籍謄本資料
+        var LegalAccountFiles = files.Where(t => new int[] { 5, 6, 7, 8, 9, 10 }.Contains(t.UploadType)).ToList();
+
+        // 法定代理人 戶籍謄本資料(已上傳)
+        int iFile1 = 0;
+        var LegalAccountFiles_Uploaded = LegalAccountFiles
+        .Where(t => !string.IsNullOrWhiteSpace(t.filePath))
+        .Select(t =>
+        {
+            string fileName = "檔案";
+            iFile1++;
+            switch (iFile1)
+            {
+                case 1: fileName += "一"; break;
+                case 2: fileName += "二"; break;
+                case 3: fileName += "三"; break;
+                case 4: fileName += "四"; break;
+                case 5: fileName += "五"; break;
+                case 6: fileName += "六"; break;
+            }
+            return new
+            {
+                t.filePath,
+                t.UploadType,
+                fileName
+            };
+        }).ToList();
+        #endregion
+
+        return new
+        {
+            LegalDetail,
+            files,
+            LegalAuthIDNOFiles,
+            LegalAccountFiles,
+            LegalAccountFiles_Uploaded
+        };
+    });
+}
+@section header{
+<style type="text/css">
+    .dff-btn{
+        cursor:pointer;
+    }
+</style>
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/MemberTeenagers/UpdateTeenager/action.js"></script>
+}
+<div class="agentdata-modify-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">代理人審核資料修改</h4>
+
+                <div class="pp-form">
+                    <div class="ppf-subcontent">
+                        <h4 class="pfs-title">未成年申請人</h4>
+
+                        <div class="pfs-box psb-nopd psb-id">
+                            <div class="mp-tip red">注意：若修改以下資料即會同步修改該會員的身分資料</div>
+
+                            <dl>
+                                <dt>身分證件資料</dt>
+                                <dd>
+                                    <div id="divAuthIDNOFiles" class="amp-id-photo">
+                                        <div class="aip-box">
+                                            <div class="aip-txt">正面</div>
+                                            <div class="aip-img">
+                                                <img src="@Model.AuthIDNO.FilePath1" alt="身分證">
+                                            </div>
+                                            <div class="mp-btn-block2 mb2-min">
+                                                <a href="@Model.AuthIDNO.FilePath1" class="btn btn-blue-border" title="放大" target="_blank">放大</a>
+                                                <a href="javascript:;" class="btn" title="修改" file="#fileUpload1">修改</a>
+                                            </div>
+                                        </div>
+                                        <div class="aip-box">
+                                            <div class="aip-txt">反面</div>
+                                            <div class="aip-img">
+                                                <img src="@Model.AuthIDNO.FilePath2" alt="身分證">
+                                            </div>
+                                            <div class="mp-btn-block2 mb2-min">
+                                                <a href="@Model.AuthIDNO.FilePath2" class="btn btn-blue-border" title="放大" target="_blank">放大</a>
+                                                <a href="javascript:;" class="btn" title="修改" file="#fileUpload2">修改</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+
+                        <div class="pfs-box">
+                            <dl>
+                                <dt>姓名</dt>
+                                <dd>
+                                    @Html.TextBoxFor(t => t.CName, new { @class = "pp-inp", placeholder = "請輸入姓名" })
+                                    @Html.ValidationMessageFor(t => t.CName, null, new { @class = "input-error-txt" }, "div")
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>身分證字號</dt>
+                                <dd>
+                                    @Html.TextBoxFor(t => t.AuthIDNO.IDNO, new { @class = "pp-inp", placeholder = "請輸入身分證字號" })
+                                    @Html.ValidationMessageFor(t => t.AuthIDNO.IDNO, null, new { @class = "input-error-txt" }, "div")
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>領補換類別</dt>
+                                <dd>
+                                    <label class="def-select">
+                                        @Html.DropDownListFor(t => t.AuthIDNO.ObtainType, new SelectListItem[]
+                                        {
+                                            new SelectListItem { Text = "初發", Value = "1" },
+                                            new SelectListItem { Text = "補發", Value = "2" },
+                                            new SelectListItem { Text = "換發", Value = "3" }
+                                        })
+                                    </label>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>領補換日期</dt>
+                                <dd class="pf-date-box2">
+                                    <label class="def-select pd2-block">
+                                        <select data-change-for="@Html.IdFor(t => t.AuthIDNO.IssueDate)">
+                                            @{
+                                                //資料起始日期： 94年12月21日
+                                                int iYear = 94 + 1911, iYearEnd = DateTime.Today.Year;
+                                                for (int i = iYear; i <= iYearEnd; i++)
+                                                {
+                                                    <option value="@i">@(i - 1911)</option>
+                                                }
+                                            }
+                                        </select>
+                                    </label>
+                                    <span class="pd2-txt">年</span>
+                                    <label class="def-select pd2-block">
+                                        <select data-change-for="@Html.IdFor(t => t.AuthIDNO.IssueDate)">
+                                            @for (int i = 1; i <= 12; i++)
+                                            {
+                                                <option value="@i">@i.ToString("00")</option>
+                                            }
+                                        </select>
+                                    </label>
+                                    <span class="pd2-txt">月</span>
+                                    <label class="def-select pd2-block">
+                                        <select data-change-for="@Html.IdFor(t => t.AuthIDNO.IssueDate)">
+                                            @for (int i = 1; i <= 31; i++)
+                                            {
+                                                <option value="@i">@i.ToString("00")</option>
+                                            }
+                                        </select>
+                                    </label>
+                                    <span class="pd2-txt">日</span>
+                                    @Html.TextBoxFor(t => t.AuthIDNO.IssueDate, "{0:yyyy-MM-dd}", new { @class = "hide2" })
+                                    @Html.ValidationMessageFor(t => t.AuthIDNO.IssueDate, null, new { @class = "input-error-txt" }, "div")
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>領補換地點</dt>
+                                <dd>
+                                    <label class="def-select">
+                                        @Html.DropDownListFor(t => t.AuthIDNO.IssueLocationID, IssueLocations.Select(t => new SelectListItem { Text = t.IssueLocationName, Value = t.IssueLocationID.ToString() }))
+                                    </label>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>出生日期</dt>
+                                <dd class="pf-date-box2">
+                                    <label class="def-select pd2-block">
+                                        <select data-change-for="@Html.IdFor(t => t.AuthIDNO.Birthday)">
+                                            @for (int i = iMaxBirthYear; i > 0; i--)
+                                            {
+                                                <option value="@(i + 1911)">@(i)</option>
+                                            }
+                                        </select>
+                                    </label>
+                                    <span class="pd2-txt">年</span>
+                                    <label class="def-select pd2-block">
+                                        <select data-change-for="@Html.IdFor(t => t.AuthIDNO.Birthday)">
+                                            @for (int i = 1; i <= 31; i++)
+                                            {
+                                                <option value="@i">@i.ToString("00")</option>
+                                            }
+                                        </select>
+                                    </label>
+                                    <span class="pd2-txt">月</span>
+                                    <label class="def-select pd2-block">
+                                        <select data-change-for="@Html.IdFor(t => t.AuthIDNO.Birthday)">
+                                            @for (int i = 1; i <= 31; i++)
+                                            {
+                                                <option value="@i">@i.ToString("00")</option>
+                                            }
+                                        </select>
+                                    </label>
+                                    <span class="pd2-txt">日</span>
+                                    @Html.TextBoxFor(t => t.AuthIDNO.Birthday, "{0:yyyy-MM-dd}", new { @class = "hide2" })
+                                    @Html.ValidationMessageFor(t => t.AuthIDNO.Birthday, null, new { @class = "input-error-txt" }, "div")
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>是否免印相片</dt>
+                                <dd>
+                                    <label class="def-select">
+                                        @Html.DropDownListFor(t => t.AuthIDNO.IsPicture, new SelectListItem[]
+                                        {
+                                            new SelectListItem { Value = "1", Text = "列印" },
+                                            new SelectListItem { Value = "0", Text = "免印" }
+                                        })
+                                    </label>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="ppf-subcontent">
+                        <h4 class="pfs-title">法定代理人(父母)</h4>
+
+@foreach (var detail in legalDetails)
+{
+<div id="legalDetail_@detail.LegalDetail.MID" class="legalDetail">
+                        <div class="pfs-box psb-nopd psb-id">
+                            <div class="mp-tip red">注意：若法定代理人為會員時，即使於此處修改上傳資料，亦不會異動原法定代理人之會員資料，只會留存於此未成年註冊審核功能中。</div>
+
+                            <dl>
+                                <dt>身分證件資料</dt>
+                                <dd>
+                                    <div class="amp-id-photo divLegalAuthIDNOFiles">
+                                        <div class="aip-box">
+                                            <div class="aip-txt">正面</div>
+                                            <div class="aip-img">
+                                                <img src="@detail.LegalDetail.IDNOFile1" alt="身分證">
+                                            </div>
+                                            <div class="mp-btn-block2 mb2-min">
+                                                <a href="@detail.LegalDetail.IDNOFile1" class="btn btn-blue-border" title="放大" target="_blank">放大</a>
+                                                <a href="javascript:;" class="btn" title="修改" file="#fileUpload3_@detail.LegalDetail.MID" >修改</a>
+                                            </div>
+                                        </div>
+                                        <div class="aip-box">
+                                            <div class="aip-txt">反面</div>
+                                            <div class="aip-img">
+                                                <img src="@detail.LegalDetail.IDNOFile2" alt="身分證">
+                                            </div>
+                                            <div class="mp-btn-block2 mb2-min">
+                                                <a href="@detail.LegalDetail.IDNOFile2" class="btn btn-blue-border" title="放大" target="_blank">放大</a>
+                                                <a href="javascript:;" class="btn" title="修改" file="#fileUpload4_@detail.LegalDetail.MID">修改</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+
+                        <div class="pfs-box psb-file">
+                            <dl>
+                                <dt>戶籍謄本資料</dt>
+                                <dd>
+                                    <ul class="psb-file-list ulLegalFiles">
+                                        @foreach (var item in detail.LegalAccountFiles_Uploaded)
+                                        {
+                                            <li>
+                                                <a href="@item.filePath" class="pfl-link" target="_blank">@item.fileName</a><div class="def-file pfl-btn">
+                                                    <input type="button" file="#fileUpload@(item.UploadType)_@detail.LegalDetail.MID" class="dff-input">
+                                                    <div class="btn dff-btn">修改</div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+
+                                    <div class="mp-btn-block2">
+                                        <div class="def-file">
+                                            <input type="button" class="dff-input btnAddFile" MID="@detail.LegalDetail.MID" />
+                                            <div class="btn btn-blue-border dff-btn">新增資料</div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+</div>
+<br />
+}
+                    </div>
+
+                    <dl>
+                        <dt>備註</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.Note, new { @class="pp-textarea", placeholder="請輸入備註說明" })
+                            <div class="input-tip-txt itt-r itt-er"><span>0</span>/200</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a id="lnkSave" href="javascript:;" class="btn" title="儲存">儲存</a>
+                <a href="javascript:;" class="btn btn-gray popup-close" title="取消">取消</a>
+            </div>
+        }
+        <div id="uploadForms" style="display:none;">
+            @foreach (var item in AuthIDNOFiles)
+            {
+                <form action="@Url.Action("UpdateTeenagerFile", new { id = MID, LegalMID = 0, UploadType = item.Key })" method="post" enctype="multipart/form-data" target="_blank">
+                    <input name="file" type="file" UploadedType="@item.Key" id="fileUpload@(item.Key)" />
+                </form>
+            }
+            @foreach (var detail in legalDetails)
+            {
+                foreach (var item in detail.files)
+                {
+                    <form action="@Url.Action("UpdateTeenagerFile", new { id = MID, LegalMID = detail.LegalDetail.MID, item.UploadType })" method="post" enctype="multipart/form-data" target="_blank">
+                        <input name="file" type="file" UploadedType="@item.UploadType" id="fileUpload@(item.UploadType)_@detail.LegalDetail.MID" detail="#legalDetail_@detail.LegalDetail.MID" />
+                    </form>
+                }
+            }
+        </div>
+    </div>
+</div>

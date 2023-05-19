@@ -1,0 +1,94 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<FreezeCoinsModel>
+@{
+    Layout = null;
+}
+
+<div class="sc-box scb-table st-control st-freez-rec">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">姓名</p></li>
+            <li><p class="sth-txt">金額</p></li>
+            <li><p class="sth-txt">凍結原因</p></li>
+            <li><p class="sth-txt">目前狀態</p></li>
+            <li><p class="sth-txt">變更狀態</p></li>
+            <li><p class="sth-txt">建立時間</p></li>
+            <li><p class="sth-txt">操作人</p></li>
+            <li><p class="sth-txt">歷程</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CName</td>
+                        <td>@string.Format("{0:N0}", item.FreezeCash)</td>
+                        <td>@item.Remark</td>
+                        <td>
+                            @{
+                                string strStatus = "";
+                                if (item.Status == 3)
+                                {
+                                    strStatus = "已解除";
+                                }
+                                else if (item.Status == 1)
+                                {
+                                    strStatus = "暫時凍結";
+                                }
+                                else if (item.Status == 2)
+                                {
+                                    strStatus = "已返還";
+                                }
+                            }
+                            @Html.Raw(strStatus)
+
+                        </td>
+                        <td>
+                            <div class="btn-box stb-btn-box">
+                                @if (item.Status == 1)
+                                {
+                                    <a href="@Url.Action(("ReleaseFreezeCoins"), new { id = item.MID, FreezeID = item.FreezeID })" data-update-callback="refresh" class="libs-dialog-form btn" title="解除">解除</a>
+                                    <a href="@Url.Action(("ReturnFreezeCoins"), new { id = item.MID, FreezeID = item.FreezeID })" data-update-callback="refresh" class="libs-dialog-form btn btn-gray" title="返還">返還</a>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            @string.Format("{0:yyyy/MM/dd}", item.CreateDate)<br />
+                            @string.Format("{0:HH:mm:ss}", item.CreateDate)
+                        </td>
+                        <td>@item.Creator</td>
+                        <td>
+                            <div class="btn-box stb-btn-box">
+                                <a href="@Url.Action("ListFreezeCoinsLog", new { id = item.MID, FreezeID = item.FreezeID })" class="libs-dialog-form btn" title="明細">明細</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            }
+
+        </table>
+    </div>
+</div>
+
+
+   
+
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("ListFreezeCoinsResult", Model, ViewBag.QueryModel)); }
+
+
+

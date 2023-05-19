@@ -1,0 +1,30 @@
+﻿function query() {
+    $('#btnQuery').click();
+}
+
+(function () {
+    $('#queryUserGroupName').change(query);
+
+    $('#queryResult').on('click', 'a.del-group', function () {
+        var a = this;
+        var content = '確定要刪除此群組嗎? 刪除後<br/>群組使用者將一併移除該群組。';
+        var isHtml = true;
+        var confirmCallback = function () {
+            $.ajax({
+                url: a.href,
+                type: "POST",
+                success: function (result) {
+                    if (result.RtnCode != 1) {
+                        alert(result.RtnMsg);
+                        return false;
+                    }
+                    query();
+                }
+            });
+        };
+        libs.alert.confirm(content, confirmCallback, isHtml);
+        return false;
+    });
+
+    query();
+})();

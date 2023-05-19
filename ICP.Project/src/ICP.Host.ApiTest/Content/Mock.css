@@ -1,0 +1,165 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+label,
+#ulApiList span.categoryname {
+    cursor: pointer;
+}
+
+#divLeft, #divCenter, #divRight {
+    position: absolute;
+    height: 100%;
+    padding: 0px 5px;
+}
+
+#divLeft {
+    width: 24%;
+    left: 0;
+    overflow-y: scroll;
+}
+#divCenter {
+    left: 25%;
+    width: 50%;
+}
+#divRight {
+    left: 75%;
+    width: 24%;
+    overflow-y: scroll;
+}
+
+#ulApiList {
+    padding: 0;
+}
+#ulApiList > li.category.hideList > ul
+{
+    display:none;
+}
+
+#ulApiList ul,
+#ulApiList li {
+    margin:0;
+    list-style-type:none;
+}
+
+#ulApiList ul {
+    padding: 0px 10px;
+}
+
+#ulApiList li {
+    cursor: default;
+}
+
+#ulApiList li.category {
+    padding:0;
+}
+
+#ulApiList span.categoryname {
+    display: block;
+    font-weight: bold;
+}
+
+#ulApiList li.api {
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#ulApiList li.api:hover,
+#ulApiList li.api.actived
+{
+    background-color: gray;
+    color: #fff;
+}
+
+#ulApiList li.api span.name {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#ulApiList li.api span.url {
+    font-size: 12px;
+}
+
+span.time {
+    font-size: 12px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+#txtJSON, #req_url, #txtResult {
+    width: 99%;
+}
+
+#txtJSON, #txtResult {
+    width: 99%;
+    font-size: 12px;
+    tab-size: 4;
+    resize: vertical;
+    margin: 0;
+}
+
+#txtJSON {
+    height: 200px;
+}
+
+#labErr {
+    color: Red;
+    float: left;
+}
+
+#btnQuery {
+    width: 200px;
+}
+
+#txtResult {
+    height: 325px;
+}
+
+#ulApiSpec li {
+    margin-top: 5px;
+}
+
+#ulApiSpec,
+#ulApiSpec ul{
+    list-style: none;
+}
+
+#ulApiSpec span.field {
+    font-weight: bold;
+}
+
+span.type {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+#ulApiSpec span.spec {
+    display: block;
+    font-size: 12px;
+}
+#divLogin[login="0"] span,
+#divLogin[login="0"] button,
+#divLogin[login="1"] input {
+    display: none;
+}
+
+#divLogin input[type="text"],
+#divLogin input[type="password"] {
+    width: 100px;
+}
+
+#labAccount, #labMID, #btnLogout {
+    margin-left: 10px;
+}
+
+#labMID:before {
+    content: '(';
+}
+
+#labMID:after {
+    content: ')';
+}

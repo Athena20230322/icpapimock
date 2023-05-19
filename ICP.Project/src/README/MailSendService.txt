@@ -1,0 +1,87 @@
+﻿//Using
+using ICP.Library.Services.MailLibrary;
+
+//注入
+MailSendService _mailSendService=null;
+
+//依照建置環境不同 請更換以下資訊並執行SP
+
+/*****SMTPIP*****/
+EXEC ICP_Member.dbo.ausp_Member_Admin_System_UpdateConfigKeyValue_U
+	@Key			= 'SMTP:IP',
+	@Value			= '111.111.111.111',
+	@IsEncrypt		= 0
+
+/******寄送錯誤信地址*****/
+
+EXEC ICP_Member.dbo.ausp_Member_Admin_System_UpdateConfigKeyValue_U
+	@Key			= 'SMTP:ErrMailAddress',
+	@Value			= 'sys-error@allpay.com.tw',
+	@IsEncrypt		= 0
+
+/******錯誤信發信者*****/
+
+EXEC ICP_Member.dbo.ausp_Member_Admin_System_UpdateConfigKeyValue_U
+	@Key			= 'SMTP:ErrorMailFrom',
+	@Value			= 'sys-error@allpay.com.tw',
+	@IsEncrypt		= 0
+
+/******錯誤信發信者*****/
+
+EXEC ICP_Member.dbo.ausp_Member_Admin_System_UpdateConfigKeyValue_U
+	@Key			= 'SMTP:ErrorMailFrom',
+	@Value			= 'sys-error@allpay.com.tw',
+	@IsEncrypt		= 0
+
+//使用方法
+------------------------------------------
+/// <summary>
+/// 寄普通信(由本身發送站台 或是 使用ICP.Host.Middleware.Mail代為發送)
+/// </summary>
+/// <param name="MailFrom">寄件者</param>
+/// <param name="MailTo">收信者</param>
+/// <param name="Subject">主旨</param>
+/// <param name="Body">內文</param>
+/// <param name="Source">發送來源 0: 預設 1: Admin  2: Member  3: Payment 4: PaymentCenter 5: MiddleWare (可為空)</param>
+/// <param name="MailKey">內容管理訊息中心_代碼 {Host}_{事件描述} (可為空)</param>
+/// <param name="Args">內容管理訊息中心_參數 (string)  (可為空)</param>
+/// <param name="Scc">副本 (可為空)</param>
+/// <param name="Sbcc">密件副本 (可為空)</param>
+
+//Middleware 站台位置 : /api/Mail.asmx
+
+// 內容管理訊息中心_代碼 {Host}_{事件描述}
+string mailKey = "admin_user_create";
+
+// 內容管理訊息中心_參數 (string)
+var args = new {
+	token = "123abc456def"
+};
+
+_mailSendService.SendMail(
+        string MailFrom, 
+        List<string> MailTo,
+        string Subject,
+        string Body,
+        //底下可不傳
+        int Source = 0, 
+        string MailKey = null, 
+        string Args = null, 
+        List<string> Scc = null,
+        List<string> Sbcc = null);
+
+----------------------------------------------------
+/// <summary>
+/// 寄錯誤信
+/// </summary>
+/// <param name="Subject">主旨</param>
+/// <param name="Body">內文</param>
+/// <param name="Source">發送來源 0: 預設 1: Admin  2: Member  3: Payment 4: PaymentCenter 5: MiddleWare (可為空)</param>
+
+_mailSendService.SendErrorMail(
+        string Subject,
+        string Body,
+        //底下可不傳
+        int Source = 0);
+
+

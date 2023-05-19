@@ -1,0 +1,98 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@model AddFunctionSwitchRevVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    string FunctionName = ViewBag.FunctionName;
+    string RevStr = Model.FunctionCategoryStatusRev.RevID == 0 ? "新增維護預約" : "修改維護預約";
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/FunctionSwitch/AddFunctionSwitchRev/action.js"></script>
+}
+<div id="time-booking-popup" class="time-booking-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(t => t.FunctionCategoryStatusRev.RevID)
+            @Html.HiddenFor(t => t.FunctionCategoryStatusRev.FunctionID)
+            <div class="pp-content">
+                <h4 class="pp-title">[@FunctionName] - @RevStr</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>開啟時間</dt>
+                        <dd class="pf-date-box">
+                            <label class="pdb-item pdb-date">
+                                @Html.TextBoxFor(t => t.SwitchStartDate, new Dictionary<string, object> {
+                                    { "id", "queryStartDate" },
+                                    { "class", "flatpickr flatpickr-input" },
+                                    { "placeholder", "開啟日期" },
+                                    { "readonly", "readonly" },
+                                    { "flatpickr-minDate", DateTime.Today.ToString("yyyy-MM-dd") },
+                                    { "flatpickr-maxDate_input", "queryEndDate" }
+                                })
+                            </label>
+                            <label class="pdb-item pdb-time">
+                                @Html.TextBoxFor(t => t.SwitchStartTime, new Dictionary<string, object> {
+                                    { "id", "queryStartTime" },
+                                    { "class", "flatpickr flatpickr-input time" },
+                                    { "placeholder", "開啟日期" },
+                                    { "readonly", "readonly" }
+                                })
+                            </label>
+                            <div class="input-error-txt">@Html.ValidationMessageFor(t => t.SwitchStartDate)</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>關閉時間</dt>
+                        <dd class="pf-date-box">
+                            <label class="pdb-item pdb-date">
+                                @Html.TextBoxFor(t => t.SwitchEndDate, new Dictionary<string, object> {
+                                    { "id", "queryEndDate" },
+                                    { "class", "flatpickr flatpickr-input active" },
+                                    { "placeholder", "關閉日期" },
+                                    { "readonly", "readonly" },
+                                    { "flatpickr-minDate", DateTime.Today.ToString("yyyy-MM-dd") },
+                                    { "flatpickr-minDate_input", "queryStartDate" }
+                                })
+                            </label>
+                            <label class="pdb-item pdb-time">
+                                @Html.TextBoxFor(t => t.SwitchEndTime, new Dictionary<string, object> {
+                                    { "id", "queryEndTime" },
+                                    { "class", "flatpickr flatpickr-input active time" },
+                                    { "placeholder", "關閉日期" },
+                                    { "readonly", "readonly" }
+                                })
+                            </label>
+                            <div class="input-error-txt">@Html.ValidationMessageFor(t => t.SwitchEndDate)</div>
+                        </dd>
+                    </dl>
+                    <dl class="pf-radio-box">
+                        <dt>功能狀態</dt>
+                        <dd>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.FunctionCategoryStatusRev.FunctionStatus, 1, new { id = "FunctionStatus_1" })
+                                <label for="FunctionStatus_1" class="radio">開啟</label>
+                            </div>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.FunctionCategoryStatusRev.FunctionStatus, 0, new { id = "FunctionStatus_0" })
+                                <label for="FunctionStatus_0" class="radio">關閉</label>
+                            </div>
+                            <div class="input-error-txt">@Html.ValidationMessageFor(t => t.FunctionCategoryStatusRev.FunctionStatus)</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                <a href="#" class="btn" id="lnkSave" title="新增">新增</a>
+            </div>
+        }
+    </div>
+</div>

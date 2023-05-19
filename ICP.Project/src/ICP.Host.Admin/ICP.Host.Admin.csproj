@@ -1,0 +1,999 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9D048196-D2B9-4E62-86A5-01A458FF3246}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICP.Host.Admin</RootNamespace>
+    <AssemblyName>ICP.Host.Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MvcBuildViews>true</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.11\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.Web.4.7.1\lib\net35\NLog.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList, Version=7.6.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.7.6.0\lib\net461\X.PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList.Mvc, Version=7.6.0.0, Culture=neutral, PublicKeyToken=c6e0b5b21f916f4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.Mvc.7.6.0\lib\net461\X.PagedList.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\account.css" />
+    <Content Include="Areas\Admin\Content\css\ad.css" />
+    <Content Include="Areas\Admin\Content\css\business.css" />
+    <Content Include="Areas\Admin\Content\css\calendar.css" />
+    <Content Include="Areas\Admin\Content\css\finance.css" />
+    <Content Include="Areas\Admin\Content\css\laundering.css" />
+    <Content Include="Areas\Admin\Content\css\member.css" />
+    <Content Include="Areas\Admin\Content\css\reward.css" />
+    <Content Include="Areas\Admin\Content\css\system.css" />
+    <Content Include="Areas\Admin\Content\images\frame\ic-order-empty.svg" />
+    <Content Include="Areas\Admin\Content\images\frame\ic-search-empty.svg" />
+    <Content Include="Areas\Admin\Content\images\frame\roc-id-2005-specimen-back%402x.png" />
+    <Content Include="Areas\Admin\Content\images\frame\roc-id-2005-specimen-front%402x.png" />
+    <Content Include="Areas\Admin\CSS\Frame\Index\action.css" />
+    <Content Include="Areas\Admin\CSS\Frame\Menu\action.css" />
+    <Content Include="Areas\Admin\CSS\Shared\_Layout.css" />
+    <Content Include="Areas\Admin\CSS\Shared\_LayoutForAnonymous.css" />
+    <Content Include="Areas\Admin\CSS\Shared\_Shared.css" />
+    <Content Include="Areas\Admin\Scripts\Account\AccountResetPwd\action.js" />
+    <Content Include="Areas\Admin\Scripts\FunctionSwitch\AddFunctionSwitchRev\action.js" />
+    <Content Include="Areas\Admin\Scripts\FunctionSwitch\FunctionSwitchRev\action.js" />
+    <Content Include="Areas\Admin\Scripts\FunctionSwitch\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\Announcement\Category\action.js" />
+    <Content Include="Areas\Admin\Scripts\Announcement\Modify\action.js" />
+    <Content Include="Areas\Admin\Scripts\Announcement\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\Calendar\Edit\action.js" />
+    <Content Include="Areas\Admin\Scripts\Calendar\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\Banner\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\Banner\Modify\action.js" />
+    <Content Include="Areas\Admin\Scripts\Bonus\Query\action.js" />
+    <Content Include="Areas\Admin\Scripts\clipboard.min.js" />
+    <Content Include="Areas\Admin\Scripts\Calendar\Add\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomServiceRecord\Update\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomServiceRecord\Add\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\ListMemberNotifyMessage\action.js" />
+    <Content Include="Areas\Admin\Scripts\Finance\FeeStatistics\action.js" />
+    <Content Include="Areas\Admin\Scripts\Finance\MerchantTradeDetail\action.js" />
+    <Content Include="Areas\Admin\Scripts\Finance\TradeDetail\action.js" />
+    <Content Include="Areas\Admin\Scripts\Finance\DailyRevenueStatistics\action.js" />
+    <Content Include="Areas\Admin\Scripts\Finance\TradeStatistics\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\RegistIPBlackAdd\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\TakeCashLimitAdd\action.js" />
+    <Content Include="Areas\Admin\Scripts\FunctionSwitch\AddFunctionSwitchRev\action.js" />
+    <Content Include="Areas\Admin\Scripts\FunctionSwitch\FunctionSwitchRev\action.js" />
+    <Content Include="Areas\Admin\Scripts\FunctionSwitch\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\ListFreezeCoins\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\AddFreezeCoins\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\AddOverSeaMemberData\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\Edit\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\ListOverSeaUserResult\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\ListOverSeaUser\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\Query\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\UploadOverSeaFile\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\AddBlackOTP\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\AddIDNOBlackList\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\AddIPBlackList\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\IDNOBlackIndex\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\OTPBlackAdd\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\RegistIPBlackIndex\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\IPBlackIndex\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\IPBlackQuery\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\OTPBlackIndex\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\OTPBlackUpdate\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\TakeCashLimitIndex\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\UpdateIDNOBlackList\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\UpdateIPBlackList\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerSecurityManage\UpdateTakeCashLimit\action.js" />
+    <Content Include="Areas\Admin\Scripts\Frame\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomerManager\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\CustomServiceRecord\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\IPRecord\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\libs.domAjax.js" />
+    <Content Include="Areas\Admin\Scripts\MerchantData\NewData\action.js" />
+    <Content Include="Areas\Admin\Scripts\MerchantData\UnFinished\action.js" />
+    <Content Include="Areas\Admin\Scripts\PaymentStatistics\PaymentMonitor\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberIdentityVerificationCount\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\PaymentStatistics\ListTimingMonitor\action.js" />
+    <Content Include="Areas\Admin\Scripts\PaymentStatistics\TimingMonitor\action.js" />
+    <Content Include="Areas\Admin\Scripts\MailLibraryManage\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberBankAccount\EditBankAccount\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberIDNO\EditCName\action.js" />
+    <Content Include="Areas\Admin\Scripts\PaymentStatistics\IncomeMonitor\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberDeviceIdManage\action.js" />
+    <Content Include="Areas\Admin\Scripts\PersonalAuth\P33Auth\action.js" />
+    <Content Include="Areas\Admin\Scripts\PersonalAuth\P11Auth\action.js" />
+    <Content Include="Areas\Admin\Scripts\PersonalAuth\P33AuthHistory\action.js" />
+    <Content Include="Areas\Admin\Scripts\PersonalAuth\P11AuthHistory\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberIDNO\EditAuthIDNO\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberTeenagers\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberTeenagers\UpdateTeenager\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberTeenagers\ViewTeenager\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberBankAccount\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\MemberIDNO\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\SuspenseMain\AddSuspenseMain\action.js" />
+    <Content Include="Areas\Admin\Scripts\SuspenseMain\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\SuspenseMain\SuspenseDetail\action.js" />
+    <Content Include="Areas\Admin\Scripts\UnregisteredData\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\PaymentStatistics\WithdrawMonitor\action.js" />
+    <Content Include="Areas\Admin\Scripts\TopUpReport\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\RefundReport\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\SystemLog\SystemErrorLog\action.js" />
+    <Content Include="Areas\Admin\Scripts\UserGroupRelation\Add\action.js" />
+    <Content Include="Areas\Admin\Scripts\UserGroupRelation\BatchAdd\action.js" />
+    <Content Include="Areas\Admin\Scripts\UserGroupRelation\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\UserGroup\Add\action.js" />
+    <Content Include="Areas\Admin\Scripts\UserGroup\Edit\action.js" />
+    <Content Include="Areas\Admin\Scripts\UserGroup\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\User\Add\action.js" />
+    <Content Include="Areas\Admin\Scripts\User\Edit\action.js" />
+    <Content Include="Areas\Admin\Scripts\User\Index\action.js" />
+    <Content Include="Areas\Admin\Scripts\Account\ChangePwd\action.js" />
+    <Content Include="Areas\Admin\Scripts\Account\ForgetPwd\action.js" />
+    <Content Include="Areas\Admin\Scripts\Account\Login\action.js" />
+    <Content Include="Areas\Admin\Scripts\Account\ResetPwd\action.js" />
+    <Content Include="Areas\Admin\Scripts\actions_loaded.js" />
+    <Content Include="Areas\Admin\Scripts\Frame\Menu\action.js" />
+    <Content Include="Areas\Admin\Scripts\Permissions\Edit\action.js" />
+    <Content Include="Areas\Admin\Scripts\Permissions\GroupUser\action.js" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Areas\Admin\Content\css\fonts.css" />
+    <Content Include="Areas\Admin\Content\css\frame.css" />
+    <Content Include="Areas\Admin\Content\css\layout_color\color_test_evr.css" />
+    <Content Include="Areas\Admin\Content\css\loading.css" />
+    <Content Include="Areas\Admin\Content\css\login.css" />
+    <Content Include="Areas\Admin\Content\css\nav\_left_nav.css" />
+    <Content Include="Areas\Admin\Content\css\news.css" />
+    <Content Include="Areas\Admin\Content\css\page.css" />
+    <Content Include="Areas\Admin\Content\css\permissions.css" />
+    <Content Include="Areas\Admin\Content\css\third_party\flatpickr.min.css" />
+    <Content Include="Areas\Admin\Content\css\third_party\magnific-popup.css" />
+    <Content Include="Areas\Admin\Content\css\_mg_popup.css" />
+    <Content Include="Areas\Admin\Content\fonts\icomoon.svg" />
+    <Content Include="Areas\Admin\Content\images\frame\logo_icashpay.png" />
+    <Content Include="Areas\Admin\Content\images\frame\placeholder.png" />
+    <Content Include="Areas\Admin\Content\images\frame\placeholder_2.png" />
+    <Content Include="Areas\Admin\Content\images\frame\qrcode.png" />
+    <Content Include="Areas\Admin\Content\images\frame\verification.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\Admin\Scripts\actions.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Content\fonts\icomoon.eot" />
+    <Content Include="Areas\Admin\Content\fonts\icomoon.ttf" />
+    <Content Include="Areas\Admin\Content\fonts\icomoon.woff" />
+    <Content Include="Areas\Admin\Views\Shared\Templates\Header.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ForgetPwd.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ResetPwd.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ChangePwd.cshtml" />
+    <Content Include="Areas\Admin\Views\Frame\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Frame\Menu.cshtml" />
+    <Content Include="Areas\Admin\Views\Frame\Content.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Templates\Pager.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroup\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroup\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroup\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroup\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutForAjax.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroupRelation\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroupRelation\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroupRelation\QueryUsers.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroupRelation\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroupRelation\BatchAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\Permissions\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Permissions\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Templates\Popups.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\AddMail.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\EditMail.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\AddNotify.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\EditNotify.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\TestMail.cshtml" />
+    <Content Include="Scripts\ckeditor\CHANGES.md" />
+    <Content Include="Scripts\ckeditor\LICENSE.md" />
+    <Content Include="Scripts\ckeditor\package.json" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\CHANGELOG.md" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\css\wordcount.css" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\wordcount\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Scripts\ckeditor\README.md" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\readme.md" />
+    <Content Include="Scripts\ckeditor\yarn.lock" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\AddMailTag.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\AddNotifyTag.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\ListMailTag.cshtml" />
+    <Content Include="Areas\Admin\Views\MailLibraryManage\ListNotifyTag.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListAuthCNameLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListAuthCellPhoneLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\UnlockSMS.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListMemberUpgradeListLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\EditCellPhone.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListMemberNotifyMessage.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\MemberNotifyMessageDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListFreezeCoins.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListFreezeCoinsLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\AddFreezeCoins.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ReturnFreezeCoins.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ReleaseFreezeCoins.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListFreezeCoinsResult.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListMemberNotifyMessageResult.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListOverSeaUser.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\ListOverSeaUserResult.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\AddOverSeaMemberData.cshtml" />
+    <Content Include="Areas\Admin\Scripts\libs.check.js" />
+    <Content Include="Areas\Admin\Views\Shared\Templates\NoData.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\UploadOverSeaFile.cshtml" />
+    <Content Include="App_Data\appSettings.Release.config" />
+    <Content Include="Areas\Admin\Views\MemberIDNO\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberIDNO\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberBank\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberBank\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberIDNO\EditCName.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberIDNO\EditAuthIDNO.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberIDNO\AuthIDNO.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberBank\EditBankAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberBank\AuthBankAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\FunctionSwitchRev.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\AddFunctionSwitchRev.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\QueryFunctionCategoryLog.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\AppFunctionSwitchRev.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\AddAppFunctionSwitchRev.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\QueryAppFunctionSwitchLog.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\AddAnnounce.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\EditAnnounce.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\Category.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\CategoryQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\AddCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\EditCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcement\AuthAnnounce.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\HolidayWorkingDaySetting.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\TimingMonitor.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IPBlackIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IPBlackQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IPBlackUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IPBlackListLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IPBlackAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IDNOBlackQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IDNOBlackIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IDNOBlackAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IDNOBlackListLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\IDNOBlackUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\OTPBlackIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\OTPBlackQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\OTPBlackListLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\OTPBlackUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\OTPBlackAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\AppManagement\ListAPPSetting.cshtml" />
+    <Content Include="Areas\Admin\Views\AppManagement\UpdateAPPSetting.cshtml" />
+    <Content Include="Areas\Admin\Views\AppManagement\AddAPPSetting.cshtml" />
+    <Content Include="Areas\Admin\Views\AppManagement\QueryAPPSetting.cshtml" />
+    <Content Include="Areas\Admin\Views\AppManagement\ListAPPXMLSettingLog.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\AddBanner.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\EditBanner.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\WithdrawMonitor.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\ListWithdraw.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalAuth\P11Auth.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalAuth\P11AuthQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalAuth\P33Auth.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalAuth\P33AuthQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalAuth\P11AuthHistory.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalAuth\P11AuthHistoryQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalAuth\P33AuthHistory.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalAuth\P33AuthHistoryQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\ListWithdrawLog.cshtml" />
+    <Content Include="App_Data\connectionStrings.Beta.config" />
+    <Content Include="App_Data\appSettings.Beta.config" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\ListTimingMonitorResult.cshtml" />
+    <Content Include="App_Data\appSettings.Release.config" />
+    <Content Include="App_Data\connectionStrings.Release.config" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\IncomeMonitor.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\ListIncomeMonitor.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\ListTimingMonitorLog.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\IncomeMonitorLog.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\TradeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\ListTradeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\MerchantTradeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\ListMerchantTradeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\TopUpReport\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TopUpReport\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\Bonus\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Bonus\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\DailyRevenueStatistics.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\DailyRevenueStatisticsQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\TradeStatistics.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\TradeStatisticsDetailQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\TradeStatisticsQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\AuthBanner.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\TradeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\ListTradeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\IncomeMonitor.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\IncomeMonitorLog.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\ListIncomeMonitor.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\ListTimingMonitorLog.cshtml" />
+    <Content Include="Areas\Admin\Views\RefundReport\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\RefundReport\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemLog\SystemErrorLog.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemLog\SystemErrorLogResult.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemLog\SystemErrorLogDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\AccountResetPwd.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\PaymentMonitor.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\ListPaymentMonitor.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentStatistics\PaymentMonitorLog.cshtml" />
+    <Content Include="Areas\Admin\Views\UnregisteredData\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UnregisteredData\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\UnregisteredData\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\MerchantData\UnFinished.cshtml" />
+    <Content Include="Areas\Admin\Views\MerchantData\QueryUnFinished.cshtml" />
+    <Content Include="Areas\Admin\Views\MerchantData\QueryFinished.cshtml" />
+    <Content Include="Areas\Admin\Views\MerchantData\NewData.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\FeeStatistics.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\FeeStatisticsQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\Finance\FeeStatisticsDetailQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberIdentityVerificationCount\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberIdentityVerificationCount\Query.cshtml" />
+    <None Include="packages.config" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\TakeCashLimitUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\TakeCashLimitAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\TakeCashLimitIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\TakeCashLimitListLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\TakeCashLimitQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\RegistIPBlackIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\RegistIPBlackListLog.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\RegistIPBlackQuery.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerSecurityManage\RegistIPBlackAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\AddMemberDeviceId.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\EditMemberDeviceId.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\QueryMemberDeviceIdLog.cshtml" />
+    <Content Include="Areas\Admin\Views\IPRecord\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\IPRecord\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomServiceRecord\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomServiceRecord\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomServiceRecord\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomServiceRecord\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\SuspenseMain\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SuspenseMain\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\SuspenseMain\AddSuspenseMain.cshtml" />
+    <Content Include="Areas\Admin\Views\SuspenseMain\SuspenseDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\AddMemberDeviceId.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\EditMemberDeviceId.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberDeviceIdManage\QueryMemberDeviceIdLog.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\FunctionSwitchRev.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\AddFunctionSwitchRev.cshtml" />
+    <Content Include="Areas\Admin\Views\FunctionSwitch\QueryFunctionCategoryLog.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\AppFunctionSwitchRev.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\AddAppFunctionSwitchRev.cshtml" />
+    <Content Include="Areas\Admin\Views\AppFunctionSwitch\QueryAppFunctionSwitchLog.cshtml" />
+    <Content Include="Scripts\ckeditor\adapters\jquery.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\ckeditor\config.js" />
+    <Content Include="Scripts\ckeditor\contents.css" />
+    <Content Include="Scripts\ckeditor\lang\af.js" />
+    <Content Include="Scripts\ckeditor\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\lang\az.js" />
+    <Content Include="Scripts\ckeditor\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\lang\bn.js" />
+    <Content Include="Scripts\ckeditor\lang\bs.js" />
+    <Content Include="Scripts\ckeditor\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\lang\da.js" />
+    <Content Include="Scripts\ckeditor\lang\de-ch.js" />
+    <Content Include="Scripts\ckeditor\lang\de.js" />
+    <Content Include="Scripts\ckeditor\lang\el.js" />
+    <Content Include="Scripts\ckeditor\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\lang\en-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\lang\en.js" />
+    <Content Include="Scripts\ckeditor\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\lang\es-mx.js" />
+    <Content Include="Scripts\ckeditor\lang\es.js" />
+    <Content Include="Scripts\ckeditor\lang\et.js" />
+    <Content Include="Scripts\ckeditor\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\lang\fo.js" />
+    <Content Include="Scripts\ckeditor\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\lang\he.js" />
+    <Content Include="Scripts\ckeditor\lang\hi.js" />
+    <Content Include="Scripts\ckeditor\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\lang\id.js" />
+    <Content Include="Scripts\ckeditor\lang\is.js" />
+    <Content Include="Scripts\ckeditor\lang\it.js" />
+    <Content Include="Scripts\ckeditor\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\lang\ka.js" />
+    <Content Include="Scripts\ckeditor\lang\km.js" />
+    <Content Include="Scripts\ckeditor\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\lang\ku.js" />
+    <Content Include="Scripts\ckeditor\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\lang\mn.js" />
+    <Content Include="Scripts\ckeditor\lang\ms.js" />
+    <Content Include="Scripts\ckeditor\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\lang\no.js" />
+    <Content Include="Scripts\ckeditor\lang\oc.js" />
+    <Content Include="Scripts\ckeditor\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\lang\si.js" />
+    <Content Include="Scripts\ckeditor\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\lang\sq.js" />
+    <Content Include="Scripts\ckeditor\lang\sr-latn.js" />
+    <Content Include="Scripts\ckeditor\lang\sr.js" />
+    <Content Include="Scripts\ckeditor\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\lang\th.js" />
+    <Content Include="Scripts\ckeditor\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\lang\tt.js" />
+    <Content Include="Scripts\ckeditor\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\af.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\az.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\de-ch.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\es-mx.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fo.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\oc.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\tt.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Scripts\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.css" />
+    <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Scripts\ckeditor\plugins\copyformatting\cursors\cursor-disabled.svg" />
+    <Content Include="Scripts\ckeditor\plugins\copyformatting\cursors\cursor.svg" />
+    <Content Include="Scripts\ckeditor\plugins\copyformatting\styles\copyformatting.css" />
+    <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Scripts\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Scripts\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Scripts\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Scripts\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Scripts\ckeditor\plugins\icons.png" />
+    <Content Include="Scripts\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Scripts\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="Scripts\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="Scripts\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Scripts\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Scripts\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Scripts\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Scripts\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\preview\preview.html" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\dialog.css" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\skins\moono-lisa\scayt.css" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angel_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angry_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\broken_heart.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\confused_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\cry_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\devil_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\envelope.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\heart.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\kiss.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\lightbulb.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\omg_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\regular_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\sad_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\shades_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\teeth_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_down.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_up.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tongue_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\wink_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\az.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\de-ch.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en-ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\es-mx.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\oc.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Scripts\ckeditor\plugins\tableselection\styles\tableselection.css" />
+    <Content Include="Scripts\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Scripts\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\dialogs\templates.css" />
+    <Content Include="Scripts\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="Scripts\ckeditor\plugins\widget\images\handle.png" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\skins\moono-lisa\wsc.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\dialog_ie.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\dialog_ie8.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\dialog_iequirks.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor_gecko.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor_ie.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor_ie8.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor_iequirks.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\icons_hidpi.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\arrow.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\close.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\hidpi\close.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\hidpi\lock-open.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\hidpi\lock.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\hidpi\refresh.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\lock-open.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\lock.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\refresh.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\spinner.gif" />
+    <Content Include="Scripts\ckeditor\styles.js" />
+    <Content Include="Scripts\clipboard.min.js" />
+    <Content Include="Areas\Admin\Views\MemberTeenagers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberTeenagers\Query.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberTeenagers\ViewTeenager.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberTeenagers\UpdateTeenager.cshtml" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
+    <Content Include="Scripts\jquery.form.min.js.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Areas\Admin\Scripts\libs.dialog.js" />
+    <Content Include="Areas\Admin\Scripts\flatpickr-zh.js" />
+    <Content Include="Areas\Admin\Scripts\flatpickr.js" />
+    <Content Include="Scripts\jquery.magnific-popup.min.js" />
+    <Content Include="Areas\Admin\Scripts\jquery.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\LoggerConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\appSettings.config" />
+    <Content Include="App_Data\connectionStrings.config" />
+    <Content Include="App_Data\nlog.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutForAnonymous.cshtml" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Scripts\libs.alert.js" />
+    <Content Include="Areas\Admin\Scripts\libs.loading.js" />
+    <None Include="Web.Beta.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICP.Infrastructure.Core.Web\ICP.Infrastructure.Core.Web.csproj">
+      <Project>{BC6A1804-4574-414B-B677-19148E4D2034}</Project>
+      <Name>ICP.Infrastructure.Core.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Infrastructure.Core\ICP.Infrastructure.Core.csproj">
+      <Project>{724872BC-C923-434D-AB6A-CA502BE46DC8}</Project>
+      <Name>ICP.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Modules.Mvc.Admin\ICP.Modules.Mvc.Admin.csproj">
+      <Project>{4d21865c-0686-4510-b609-5c374bc36faa}</Project>
+      <Name>ICP.Modules.Mvc.Admin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\CSS\Permissions\" />
+    <Folder Include="Areas\Admin\CSS\UserGroupRelation\" />
+    <Folder Include="Areas\Admin\CSS\UserGroup\" />
+    <Folder Include="Areas\Admin\Scripts\Laundering\TimingMonitor\" />
+    <Folder Include="Scripts\ckeditor\samples\assets\inlineall\" />
+    <Folder Include="Scripts\ckeditor\samples\assets\outputxhtml\" />
+    <Folder Include="Scripts\ckeditor\samples\assets\uilanguages\" />
+    <Folder Include="Scripts\ckeditor\samples\plugins\dialog\assets\" />
+    <Folder Include="Scripts\ckeditor\samples\plugins\enterkey\" />
+    <Folder Include="Scripts\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\" />
+    <Folder Include="Scripts\ckeditor\samples\plugins\magicline\" />
+    <Folder Include="Scripts\ckeditor\samples\plugins\toolbar\" />
+    <Folder Include="Scripts\ckeditor\samples\plugins\wysiwygarea\" />
+    <Folder Include="Scripts\ckeditor\skins\kama\images\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Beta|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5971</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3310/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

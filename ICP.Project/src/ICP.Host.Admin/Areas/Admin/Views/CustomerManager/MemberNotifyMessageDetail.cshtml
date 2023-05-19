@@ -1,0 +1,20 @@
+﻿@using ICP.Library.Models.MemberModels
+@using ICP.Infrastructure.Core.Models
+@model DataResult<MemberNotifyMessageDetail>
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+<div id="message-detail-popup" class="message-detail-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <div class="pp-content">
+            <h4 class="pp-title">@Model.RtnData.Subject</h4>
+
+            <div class="pp-msg-list">
+                @Html.Raw(Model.RtnData.Body)
+            </div>      
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager
+@model List<FreezeCoinsModel>
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+<div id="freezfunds-detail-popup" class="freezfunds-detail-popup edit-ac-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+
+        <div class="pp-content">
+            <h4 class="pp-title">凍結款明細記錄</h4>
+
+            <div class="pp-table pt-balance-history">
+                <div class="pp-table-header">
+                    <ul>
+                        <li><p class="pth-txt">建立時間</p></li>
+                        <li><p class="pth-txt">金額</p></li>
+                        <li><p class="pth-txt">原因備註</p></li>
+                        <li><p class="pth-txt">狀態</p></li>
+                        <li><p class="pth-txt">操作人</p></li>
+                    </ul>
+                </div>
+                <div class="pp-table-body">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <tbody>
+                            @if (Model.Count > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @string.Format("{0:yyyy/MM/dd}", item.CreateDate)<br />
+                                            @string.Format("{0:HH:mm:ss}", item.CreateDate)
+                                        </td>
+                                        <td>@string.Format("{0:N0}", item.FreezeCash)</td>
+                                        <td>@item.Remark</td>
+                                        <td>
+                                            @{
+                                                string strStatus = "";
+                                                if (item.Status == 3)
+                                                {
+                                                    strStatus = "已解除　　";
+                                                }
+                                                else if (item.Status == 1)
+                                                {
+                                                    strStatus = "暫時凍結　";
+                                                }
+                                                else if (item.Status == 2)
+                                                {
+                                                    strStatus = "已返還　　";
+                                                }
+                                            }
+                                            @Html.Raw(strStatus)
+                                        </td>
+                                        <td>@item.Creator</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

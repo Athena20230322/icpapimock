@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="/images/fb_share.jpg?1553167233979">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="msapplication-TileImage" content="favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="~/Areas/Payment/Content/css/screen.css" rel="stylesheet" />
+    <link href="~/Areas/Payment/Content/css/style.css" rel="stylesheet" />
+    <script src="~/Areas/Payment/Scripts/libs/html5shiv.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <header></header>
+        <section>
+            @RenderBody()
+        </section>
+        <footer></footer>
+        <button type="button" id="BackTop" class="toTop-arrow"></button>
+        <script>
+            $(function () {
+                $('#BackTop').click(function () {
+                    $('html,body').animate({ scrollTop: 0 }, 333);
+                });
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 300) {
+                        $('#BackTop').fadeIn(222);
+                    } else {
+                        $('#BackTop').stop().fadeOut(222);
+                    }
+                }).scroll();
+            });
+        </script>
+        <script src="~/Areas/Payment/Scripts/libs/jquery.min.js"></script>
+        <script src="~/Areas/Payment/Scripts/libs/device.min.js"></script>
+        <script src="~/Areas/Payment/Scripts/action.min.js"></script>
+        @RenderSection("scripts", required: false)
+        @RenderSection("header", required: false)
+    </div>    
+</body>
+</html>

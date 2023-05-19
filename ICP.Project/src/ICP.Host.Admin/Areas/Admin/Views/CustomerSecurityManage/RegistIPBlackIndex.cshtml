@@ -1,0 +1,57 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerSecurityManage
+@model RegistIPBlackQryModel
+
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerSecurityManage/RegistIPBlackIndex/action.js"></script>
+}
+
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("RegistIPBlackQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" id="btnQuery" value="query" style="display:none;" />
+            <input type="hidden" name="PageSize" value="5" />
+            <input type="hidden" name="PageNo" value="1" />
+            @Html.TextBoxFor(t => t.IP, new { id = "refreshIP" })
+        }
+    </div>
+    @using (Ajax.BeginForm("RegistIPBlackQuery", null, new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "POST" }, new { @id = "QueryForm" }))
+    {
+        <form>
+            <div class="scb-search-box">
+                <h3 class="ssb-title">IP位址查詢</h3>
+                <div class="scb-search">
+                    @Html.TextBoxFor(t => t.IP, new { id = "queryIP", @class = "ssr-inp sri-2", placeholder = "請輸入完整IP" })
+
+                </div>
+
+                <div class="btn-box">
+                    <a href="javascript:;" id="lnkQuery" class="btn link-submit" title="查詢">查詢</a>
+                </div>
+            </div>
+        </form>
+    }
+</div>
+
+<div class="sc-function">
+    <div class="btn-box">
+        
+        <a href="javascript:;" class="btn btn-blue-border bd-rdi" id="ExportCSV" title="匯出EXCEL">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出EXCEL
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>

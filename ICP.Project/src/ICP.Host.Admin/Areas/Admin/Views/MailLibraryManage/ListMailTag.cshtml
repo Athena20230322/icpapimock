@@ -1,0 +1,9 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.MailLibrary
+@model List<MailTag>
+@foreach (MailTag item in Model)
+{
+    <a class="btn" TagID="@item.TagID" data-clipboard-text="{{@item.TagKey}}">
+        <span class="bb-icon"></span>
+        @item.Name
+    </a>
+}

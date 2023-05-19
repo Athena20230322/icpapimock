@@ -1,0 +1,66 @@
+﻿@using ICP.Modules.Mvc.Admin.Enums
+@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@model List<MemberDeviceIdVM>
+@{
+    Layout = null;
+}
+
+<div id="locking-history-popup" class="locking-history-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <div class="pp-content">
+            <h4 class="pp-title">歷程</h4>
+
+            <div class="pp-table pt-locking-history">
+                <div class="pp-table-header">
+                    <ul>
+                        <li>
+                            <p class="pth-txt">裝置 ID</p>
+                        </li>
+                        <li>
+                            <p class="pth-txt">備註</p>
+                        </li>
+                        <li>
+                            <p class="pth-txt">鎖定狀態</p>
+                        </li>
+                        <li>
+                            <p class="pth-txt">最後修改時間</p>
+                        </li>
+                        <li>
+                            <p class="pth-txt">修改人</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pp-table-body">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.DeviceID</td>
+                                <td>@item.Memo</td>
+                                @if (item.Status == (int) MemberDeviceIdStatusType.UnLock)
+                                {
+                                    <td>已解鎖</td>
+                                }
+                                @if (item.Status == (int) MemberDeviceIdStatusType.Lock)
+                                {
+                                    <td>鎖定中</td>
+                                }
+                                @Html.Raw(item.CreateDate == DateTime.MinValue ? "<td>-</td>" : "<td>" + item.CreateDate.ToString("yyyy/MM/dd") + "<br /> " + item.CreateDate.ToString("HH:mm:ss") + "</td>")
+
+                                <td>@item.CreateUser</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

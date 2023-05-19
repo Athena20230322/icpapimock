@@ -1,0 +1,93 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels.CustomerServiceRecord;
+@model AddCustomServiceRecordVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+    IEnumerable<SelectListItem> TypeSettingOptions = (IEnumerable<SelectListItem>)ViewBag.TypeSettingOptions;
+    IEnumerable<SelectListItem> GateWaySettingOptions = (IEnumerable<SelectListItem>)ViewBag.GateWaySettingOptions;
+    IEnumerable<SelectListItem> StatusOptions = (IEnumerable<SelectListItem>)ViewBag.StatusOptions;
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomServiceRecord/Add/action.js"></script>
+}
+<div id="add-rec-popup" class="add-rec-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm("AddResult", "CustomServiceRecord"))
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">新增客服記錄</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>問題類別<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(m => m.Type, TypeSettingOptions, "請選擇", new { @id = "addType"})
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>進線管道<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(m => m.GateWay, GateWaySettingOptions, "請選擇", new { @id = "addGateWay"})
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>案件進度<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(m => m.Status, StatusOptions, "請選擇", new { @id = "addStatus"})
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>回報者姓名<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.Cname, new { @placeholder = "請輸入回報者姓名", @id = "addCName" })
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>手機號碼</dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.CellPhone, new { @placeholder = "請輸入回報者手機號碼", @id = "addCellPhone" })
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>電支帳號</dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.ICPMID, new { @placeholder = "請輸入使用者電支帳號", @id = "addICPMID" })
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>E-mail</dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.Email, new { @placeholder = "請輸入電子郵件信箱", @id = "addEmail" })
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>訂單編號</dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.TradeNo, new { @placeholder = "請輸入訂單編號", @id = "addTradeNo" })
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>記錄內容<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            @Html.TextAreaFor(m => m.Note, new { @class = "pp-textarea", placeholder = "請輸入案件備註內容", maxLength = 1000, style = "margin-top: 0px; margin-bottom: 0px; height: 141px;", @id = "addNote" })
+                            <div class="input-tip-txt itt-r" id="input-tip-txt">0/1000</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a id="addCustomServiceRecord" href="#" class="btn disabled link-submit" title="新增">新增</a>
+            </div>
+        }
+    </div>
+    <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+</div>

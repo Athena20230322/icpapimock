@@ -1,0 +1,93 @@
+﻿@using Castle.Core.Internal
+@using ICP.Modules.Mvc.Admin.Enums
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<ICP.Modules.Mvc.Admin.Models.MemberModels.MemberDeviceIdModel>
+@{
+    Layout = null;
+}
+@{
+    Func<int, string> StausString = Status =>
+    {
+        switch (Status)
+        {
+            case 0:
+                return "已解鎖";
+            default:
+                return "鎖定中";
+        }
+    };
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+
+<div class="sc-box scb-table st-control st-device-id">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">裝置ID</p></li>
+            <li><p class="sth-txt">建立時間</p></li>
+            <li><p class="sth-txt">備註</p></li>
+            <li><p class="sth-txt">鎖定狀態</p></li>
+            <li><p class="sth-txt">解鎖時間</p></li>
+            <li><p class="sth-txt">解鎖備註</p></li>
+            <li><p class="sth-txt">解鎖人</p></li>
+            <li><p class="sth-txt">操作</p></li>
+            <li><p class="sth-txt">歷程</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DeviceID</td>
+                    <td>
+                        @item.CreateDate.ToString("yyyy/MM/dd")<br />@item.CreateDate.ToString("HH:mm:ss")
+                    </td>
+                    <td>@(item.LockMemo.IsNullOrEmpty()?"-":item.LockMemo)</td>
+                    <td>@StausString(item.Status)</td>
+                    <td>
+                        @Html.Raw(item.UnLockDate== DateTime.MinValue ? "-":item.UnLockDate.ToString("yyyy/MM/dd")+"<br /> "+ item.UnLockDate.ToString("HH:mm:ss"))
+                    </td>
+                    <td>@(item.UnLockMemo.IsNullOrEmpty()?"-":item.UnLockMemo)</td>
+                    <td>@(item.UnLockUser.IsNullOrEmpty()?"-":item.UnLockUser)</td>
+                    <td>
+                        @if (item.Status == (int)MemberDeviceIdStatusType.UnLock)
+                        {
+                            <div class="btn-box stb-btn-box">
+                                <a href="@Url.Action("EditMemberDeviceId",new {Status=item.Status,DeviceID=item.DeviceID})" data-update-callback="query" data-effect="mfp-zoom-in" class="btn libs-dialog-form" title="鎖定">鎖定</a>
+                            </div>
+                        }
+                        @if(item.Status==(int)MemberDeviceIdStatusType.Lock)
+                        {
+                           <div class="btn-box stb-btn-box">
+                               <a href="@Url.Action("EditMemberDeviceId",new {item.Status,DeviceID=item.DeviceID})"  data-update-callback="query" data-effect="mfp-zoom-in" class="btn btn-blue-border libs-dialog-form" title="解鎖">解鎖</a>
+                               </div> 
+                        }
+                        
+                    </td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("QueryMemberDeviceIdLog",new {DeviceID=item.DeviceID})" data-update-callback="query" data-effect="mfp-zoom-in" class="btn libs-dialog-form" title="歷程">歷程</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

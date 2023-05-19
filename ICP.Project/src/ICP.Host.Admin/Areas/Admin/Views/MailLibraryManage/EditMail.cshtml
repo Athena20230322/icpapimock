@@ -1,0 +1,184 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.MailLibrary
+@model MailContentModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header{
+    <style type="text/css">
+        .edit-ac-popup {
+            width: 1176px;
+        }
+
+        #Tags .btn {
+            margin-bottom: 2px;
+        }
+        #Tags {
+            margin-top: 10px;
+        }
+    </style>
+}
+@section scripts
+{
+    @*<script src="~/Areas/Admin/Scripts/MailLibraryManage/EditMail/action.js"></script>*@
+    <script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/clipboard.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        (function () {
+            libs.alert.validationSummary();
+            var config = {
+                height: 400,
+                width: 923,
+                enterMode: CKEDITOR.ENTER_BR,
+                allowedContent: true, //允許所有內容
+                //extraAllowedContent: extraAllowedContent //額外允許自訂內容
+                fullPage: '@((bool)ViewBag.layout)' == 'True'
+            };
+
+            $('#Body')
+            .ckeditor(config)
+            .editor.on('change', function () {
+                $(this.element.$).trigger('change');
+            });
+        })();
+    </script>
+    @if (ViewBag.NotifyID != 0)
+    {
+        <script type="text/javascript">
+            (function () {
+                $('#MailKey').attr('readonly', 'readonly');
+
+                $('#lnkDelTag').click(function () {
+                    var cls = 'del';
+                    var $t = $(this);
+                    if ($t.is('.' + cls)) {
+                        $('#Tags a span').removeClass('icon-minus');
+                        $t.children('span.text').text('刪除標籤');
+                        $t.children('span:first').removeClass('icon-cancel').addClass('icon-ic_del-news_svg');
+                    }
+                    else {
+                        $('#Tags a span').addClass('icon-minus');
+                        $t.children('span.text').text('取消刪除');
+                        $t.children('span:first').removeClass('icon-ic_del-news_svg').addClass('icon-cancel');
+                    }
+                    $t.toggleClass(cls);
+                });
+
+                $('#Tags').on('click', 'a', function () {
+                    var $t = $(this);
+                    var isDel = $t.children('span').is('.icon-minus');
+                    if (!isDel) {
+                        return;
+                    }
+
+                    var TagID = $t.attr('TagID');
+                    $.ajax({
+                        url: '@Url.Action("DeleteMailTag")/' + TagID,
+                        method: 'POST',
+                        success: function (result) {
+                            if (result.RtnCode != 1) {
+                                libs.alert.popup(result.RtnMsg);
+                                return;
+                            }
+                            $t.remove();
+                        }
+                    });
+
+                    return false;
+                });
+
+                new Clipboard('#Tags a');
+            })();
+
+            function queryTag() {
+                $.ajax({
+                    url: '@Url.Action("ListMailTag", new { id = Model.MailID })',
+                    success: function (html) {
+                        $('#Tags').html(html);
+                    }
+                });
+            }
+
+            function refreshTag(result) {
+                if (result.RtnCode != 1) {
+                    libs.alert.popup(result.RtnMsg);
+                    return;
+                }
+
+                queryTag();
+            }
+        </script>
+    }
+}
+<div class="edit-ac-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">編輯</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.MailKey)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.MailKey, new { @class = "pp-inp", placeholder = "請輸入50字元代碼" })
+                            @Html.ValidationMessageFor(model => model.MailKey, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.LayoutKey)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.LayoutKey, new { @class = "pp-inp", placeholder = "請輸入版型代碼" })
+                            @Html.ValidationMessageFor(t => t.LayoutKey, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.Description)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.Description, new { @class = "pp-inp", placeholder = "請輸入描述" })
+                            @Html.ValidationMessageFor(t => t.Description, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.Title)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.Title, new { @class = "pp-inp", placeholder = "請輸入標題" })
+                            @Html.ValidationMessageFor(t => t.Title, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>標籤</dt>
+                        <dd>
+                            <a class="btn libs-dialog-form" href="@Url.Action("AddMailTag", new { id = Model.MailID })" data-update-callback="refreshTag" title="新增標籤">
+                                <span class="icon-plus bb-icon"></span>
+                                新增標籤
+                            </a>
+                            <a id="lnkDelTag" class="btn" data-update-callback="refreshTag">
+                                <span class="icon-ic_del-news_svg bb-icon"></span>
+                                <span class="text">刪除標籤</span>
+                            </a>
+                            <div id="Tags">
+                                @{Html.RenderAction("ListMailTag", new { id = Model.MailID }); }
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.Body)</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.Body, new { @class = "pp-inp", placeholder = "請輸入內容" })
+                            @Html.ValidationMessageFor(t => t.Body, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="#" class="btn disabled link-submit" title="儲存">儲存</a>
+                <a class="btn libs-dialog-form" href="@Url.Action("TestMail", new { id = Model.MailID })" title="測試">測試</a>
+            </div>
+        }
+    </div>
+</div>

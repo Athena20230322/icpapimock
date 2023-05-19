@@ -1,0 +1,100 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models
+@model IPagedList<TopUpReportQueryResult>
+@{
+    Layout = null;
+
+    if (Model.Count == 0)
+    {
+        //Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        <script>alert("查無資料");</script>
+        //return;
+    }
+}
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("ExportTopUpReport", @ViewBag.QueryModel)" class="btn btn-blue-border bd-rdi" title="匯出Excel">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出Excel
+        </a>
+    </div>
+</div>
+
+<div class="st-scroll-tip">
+    <span class="sst-txt">往右滾動看更多</span>
+</div>
+
+<div class="sc-box scb-table st-control stb-oneline st-refill-report">
+    <div class="scb-table-body stb-thbg">
+        <table>
+            <thead>
+                <tr>
+                    <th>訂單日期</th>
+                    <th>收款日期</th>
+                    <th>傳輸日期</th>
+                    <th>繳費期限(銀行轉帳)</th>
+                    <th>電支帳號</th>
+                    <th>icash 訂單編號</th>
+                    <th>儲值金額</th>
+                    <th>實收金額</th>
+                    <th>儲值方式</th>
+                    <th>款項來源(銀行/超商)</th>
+                    <th>銀行連結帳號/虛擬帳號</th>
+                    <th>超商店號</th>
+                    <th>銀行代碼</th>
+                    <th>銀行轉帳轉出帳號</th>
+                    <th>交易服務費( %數 / $筆)</th>
+                    <th>交易服務費金額</th>
+                    <th>應收款項(淨額)</th>
+                    <th>撥款狀態</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CreateDate.ToString("yyyy/MM/dd")<br>@item.CreateDate.ToString("HH:mm:ss")</td>
+                        <td>@item.PaymentDate.ToString("yyyy/MM/dd")<br>@item.PaymentDate.ToString("HH:mm:ss")</td>
+                        <td>@(item.TransmittalDate.HasValue ? item.TransmittalDate.Value.ToString("yyyy/MM/dd") : "-")</td>
+                        <td>@(item.ExpireDate.HasValue ? item.ExpireDate.Value.ToString("yyyy/MM/dd") : "-")</td>
+                        <td>@item.ICPMID</td>
+                        <td>@item.TradeNo</td>
+                        <td>@item.TopUpAmount.ToString("N2")</td>
+                        <td>@item.RealReceiveAmount.ToString("N2")</td>
+                        <td>@item.TopUpTypeMeaning</td>
+                        <td>@item.TopUpTypeSource</td>
+                        <td>@item.Account</td>
+                        <td>@item.StoreID</td>
+                        <td>@item.BankCode</td>
+                        <td>@item.BankAccNo</td>
+                        <td>@item.TradeServiceRate.ToString("N2")</td>
+                        <td>@item.TradeServiceAmount.ToString("N2")</td>
+                        <td>@item.NetAmount.ToString("N2")</td>
+                        <td>@item.TopUpStatusMeaning</td>
+                    </tr>
+
+                    if (item.RowNum == item.TotalCount)
+                    {
+                        <tr class="stf-sum">
+                            <td colspan="6">小計：共 @Model.TotalItemCount.ToString("N0") 筆</td>
+                            <td>@item.TopUpAmountSum.ToString("N2")</td>
+                            <td>@item.RealReceiveAmountSum.ToString("N2")</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>@item.TradeServiceAmountSum.ToString("N2")</td>
+                            <td>@item.NetAmountSum.ToString("N2")</td>
+                            <td>-</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

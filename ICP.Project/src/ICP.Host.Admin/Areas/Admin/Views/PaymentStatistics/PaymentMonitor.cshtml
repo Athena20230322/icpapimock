@@ -1,0 +1,110 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentStatistics.PaymentMonitor;
+@model QryPaymentMonitorReq
+@section header{
+    <link href="~/Areas/Admin/Content/css/laundering.css" rel="stylesheet" />
+}
+
+<div class="sc-box no-edge">
+    @using (Ajax.BeginForm("ListPaymentMonitor", null, new AjaxOptions { UpdateTargetId = "queryResult" }, new { id = "queryForm" }))
+    {
+        <div class="scb-form sf-2column">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.Date)</dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date sdb-single">
+                        @Html.TextBoxFor(m => m.Date, new { @class = "flatpickr flatpickr-input active normalD", placeholder = "查詢日期", @readonly = "readonly" })
+                    </label>
+                </dd>
+            </dl>
+            <dl class="lad-check">
+                <dd class="sf-check-box lc-width">
+                    <div class="def-check">
+                        @Html.CheckBoxFor(m => m.IncomeStaus, new { id = "IncomeStaus" })
+                        <label for="IncomeStaus" class="checkbox">@Html.DisplayNameFor(m => m.IncomeStaus)</label>
+                    </div>
+                    <div class="def-check">
+                        @Html.CheckBoxFor(m => m.PaymentStatus, new { id = "PaymentStatus" })
+                        <label for="PaymentStatus" class="checkbox">@Html.DisplayNameFor(m => m.PaymentStatus)</label>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.ICPMID)</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.ICPMID, new { placeholder = "請輸入電支帳號", maxlength = 16 })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.TradeTypeList)</dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(m => m.TradeType, Model.TradeTypeList)
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.MerchantName)</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.MerchantName, new { placeholder = "請輸入商戶名稱", maxlength = 50 })
+                </dd>
+            </dl>
+            <dl class="lad-check">
+                <dt>@Html.DisplayNameFor(m => m.MerchantTypeChkBox)</dt>
+                <dd class="sf-check-box">
+                    <div class="def-check">
+                        @Html.CheckBoxFor(m => m.MerchantTypeChkBox.Personal, new { @checked = true, id = "Personal" })
+                        <label for="Personal" class="checkbox">@Html.DisplayNameFor(m => m.MerchantTypeChkBox.Personal)</label>
+                    </div>
+                    <div class="def-check">
+                        @Html.CheckBoxFor(m => m.MerchantTypeChkBox.LegalPerson, new { @checked = true, id = "LegalPerson" })
+                        <label for="LegalPerson" class="checkbox">@Html.DisplayNameFor(m => m.MerchantTypeChkBox.LegalPerson)</label>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.SortTypeList)</dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(m => m.SortType, Model.SortTypeList)
+                    </label>
+                    <div class="sf-radio-box lad-radio">
+                        <div class="def-radio">
+                            @Html.RadioButtonFor(m => m.SortKind, 1, new { @id = "SortKind_1", @checked = true })
+                            <label for="SortKind_1" class="radio">@Html.DisplayNameFor(m => m.SortKindRdo.Amount)</label>
+                        </div>
+                        <div class="def-radio">
+                            @Html.RadioButtonFor(m => m.SortKind, 2, new { @id = "SortKind_2" })
+                            <label for="SortKind_2" class="radio">@Html.DisplayNameFor(m => m.SortKindRdo.Count)</label>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.Amount)</dt>
+                <dd>
+                    <div class="sf-inptxt">
+                        @Html.TextBoxFor(m => m.Amount, new { @class = "sip-inp", maxlength = 10 })
+                        <span class="sip-txt">元以上</span>
+                    </div>
+                    <div class="sf-inptxt">
+                        @Html.TextBoxFor(m => m.Count, new { @class = "sip-inp", maxlength = 10 })
+                        <span class="sip-txt">筆以上</span>
+                    </div>
+                </dd>
+            </dl>
+            @Html.HiddenFor(m => m.PageNo)
+
+        </div>
+        <div class="btn-box">
+            <a id="lnkQuery" href="javascript:;" class="btn" title="查詢">查詢</a>
+            <a id="lnkReset" href="javascript:;" class="btn btn-blue-border" title="清除條件">清除條件</a>
+        </div>
+    }
+</div>
+
+<div id="queryResult">
+</div>
+
+@section scripts {
+    <script src="~/Areas/Admin/Scripts/PaymentStatistics/PaymentMonitor/action.js"></script>
+}

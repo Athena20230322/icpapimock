@@ -1,0 +1,117 @@
+﻿@using ICP.Modules.Mvc.Admin.Models;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models.MerchantModels;
+@model CustomerDataQueryModel
+@{
+    List<AuditStatusModel> listAuditStatus = ViewBag.ListAuditStatus;
+    List<User> listSales = ViewBag.ListSales;
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/business.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/MerchantData/UnFinished/action.js"></script>
+}
+<div class="sc-box no-edge">
+    @using (Ajax.BeginForm("QueryUnFinished", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        @Html.HiddenFor(t => t.PageNo, new { id = "queryPageNo" })
+        <input type="submit" id="btnQuery" value="query" class="hide" />
+        <div class="scb-form sf-2column">
+
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">建檔時間<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.CreateBegin, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryCreateBegin" },
+                            { "class", "flatpickr flatpickr-input active" },
+                            { "placeholder", "起始日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate", DateTime.Today.AddYears(-1).ToString("yyyy-01-01") },
+                            { "flatpickr-maxDate_input", "#queryCreateEnd" }
+                        })
+                    </label>
+
+                    <span class="sdb-txt">至</span>
+
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.CreateEnd, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryCreateEnd" },
+                            { "class", "flatpickr flatpickr-input active" },
+                            { "placeholder", "結束日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate_input", "#queryCreateBegin" },
+                            { "flatpickr-maxDate", DateTime.Today.ToString("yyyy-MM-dd") }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">審核狀態</dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.AuditStatus, listAuditStatus.Select(t => new SelectListItem { Text = t.AuditStatusName, Value = t.AuditStatusID.ToString() }), "選擇審核狀態")
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <label class="def-select">
+                        <select id="queryNameType">
+                            <option value="0">商戶名稱</option>
+                            <option value="1">個人姓名</option>
+                        </select>
+                    </label>
+                </dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.CompanyName, new { placeholder = "請輸入商戶名稱" })
+                    @Html.TextBoxFor(t => t.CName, new { placeholder = "請輸入個人姓名", @class = "hide" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">統一編號</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.UnifiedBusinessNo, new { placeholder = "請輸入統一編號" })
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <label class="def-select">
+                        <select id="queryIdnType">
+                            <option value="0">身分證字號</option>
+                            <option value="1">居留證號</option>
+                        </select>
+                    </label>
+                </dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.IDNO, new { placeholder = "請輸入身分證字號" })
+                    @Html.TextBoxFor(t => t.UniformID, new { placeholder = "請輸入居留證號", @class = "hide" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">負責業務</dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.SalesUserID, listSales.Select(t => new SelectListItem { Text = t.CName, Value = t.UserID.ToString() }), "請選擇業務")
+                    </label>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="btn-box">
+            <a id="lnkQuery" href="#" class="btn" title="查詢">查詢</a>
+            <a id="lnkReset" href="#" class="btn btn-blue-border" title="清除條件">清除條件</a>
+        </div>
+    }
+</div>
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("NewData")" class="btn bd-rdi" title="新增商戶" target="_blank">
+            <span class="icon-ic-add bb-icon"></span>
+            新增商戶
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>

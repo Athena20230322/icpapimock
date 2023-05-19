@@ -1,0 +1,117 @@
+﻿@{
+    Layout = "~/Areas/Payment/Views/Shared/_AccountRecordLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+        window.setTimeout(function () { $('#ListTradeSubmit').trigger('click'); }, 100);
+    })
+
+    function FormSubmit(type) {
+        if (type == 2 && $('input[name="DateType"]:checked').val() == "3") {
+            return false;
+        }
+        else {
+            $('#ListTradeSubmit').trigger('click');
+        }
+    }
+
+    function SearchingKeyWords() {
+        if ($('#SearchBar').val() != $('#KeyWords').val()) {
+            $('#KeyWords').val($('#SearchBar').val());
+            FormSubmit(4);
+        }
+    }
+</script>
+
+<div id="wrapper">
+    <header></header>
+    <section>
+        <div id="account_record_type"><a id="select_type" href="javascript:void(0);" onclick="ar_type_flag();"><span>明細類別</span></a></div>
+        <div id="account_record_search">
+            <input id="SearchBar" type="text" class="search_icon" placeholder="查詢近六個月紀錄" onblur="SearchingKeyWords();"><a href="javascript:void(0);" onclick="ar_date_flag();"></a>
+        </div>
+        <div id="queryResult">
+        </div>
+    </section>
+    @using (Ajax.BeginForm("AccountRecordDetail", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" id="ListTradeSubmit" style="display: none" />
+        @Html.Hidden("KeyWords", "")
+        <div class="popup" id="ar_type">
+            <div class="popupcontent">
+                <div class="state_btns">
+                    <div class="flex">
+                        <div class="col"><a href="javascript:void(0);" onclick="ar_type_flag();">取消</a></div>
+                        <div class="col"><a href="javascript:void(0);" onclick="ar_type_flag(1); FormSubmit(1);">完成</a></div>
+                    </div>
+                </div>
+                <div class="select_btns">
+                    <input type="radio" name="AccRecordType" id="ar_type_1" value="0" checked="checked">
+                    <label for="ar_type_1">所有</label>
+                    <input type="radio" name="AccRecordType" id="ar_type_2" value="1">
+                    <label for="ar_type_2">支付</label>
+                    <input type="radio" name="AccRecordType" id="ar_type_3" value="2">
+                    <label for="ar_type_3">退款</label>
+                    <input type="radio" name="AccRecordType" id="ar_type_4" value="3">
+                    <label for="ar_type_4">儲值</label>
+                    <input type="radio" name="AccRecordType" id="ar_type_5" value="4">
+                    <label for="ar_type_5">轉出</label>
+                    <input type="radio" name="AccRecordType" id="ar_type_6" value="5">
+                    <label for="ar_type_6">轉入</label>
+                    <input type="radio" name="AccRecordType" id="ar_type_7" value="6">
+                    <label for="ar_type_7">提款</label>
+                </div>
+            </div>
+        </div>
+        <div class="popup" id="ar_date">
+            <div class="popupcontent">
+                <div class="state_btns">
+                    <div class="flex">
+                        <div class="col"><a href="javascript:void(0);" onclick="ar_date_flag();">取消</a></div>
+                        <div class="col"><a href="javascript:void(0);" onclick="ar_date_flag(1); FormSubmit(2);">完成</a></div>
+                    </div>
+                </div>
+                <div class="select_btns">
+                    <input type="radio" name="DateType" id="ar_date_1" value="0">
+                    <label for="ar_date_1">今日</label>
+                    <input type="radio" name="DateType" id="ar_date_2" value="1">
+                    <label for="ar_date_2">本週</label>
+                    <input type="radio" name="DateType" id="ar_date_3" value="2">
+                    <label for="ar_date_3">本月</label>
+                    <input type="radio" name="DateType" id="ar_date_4" value="3" checked="checked">
+                    <label for="ar_date_4">自定日期</label>
+                </div>
+            </div>
+        </div>
+        <div id="ar_time">
+            <div class="popup" id="ar_timepicker">
+                <div class="popupcontent">
+                    <p>自訂日期</p>
+                    <!-- 日期容器 -->
+                    <div class="flex demo">
+                        <div class="col"><input type="date" id="StartDate" class="doubledate" placeholder="YYYY/MM/DD"></div>
+                        <div style="display: block; margin-top: 25px; ">至</div>
+                        <div class="col"><input type="date" id="EndDate" class="doubledate" placeholder="YYYY/MM/DD"></div>
+                    </div>
+                    <div class="row">
+                        <div class="flex">
+                            <div class="col"><a href="javascript:void(0);" onclick="ar_time_flag();">取消</a></div>
+                            <div class="col"><a href="javascript:void(0);" onclick="ar_time_flag(1); FormSubmit(3);">完成</a></div>
+                        </div>
+                    </div>
+                    <div class="select_btns"></div>
+                </div>
+            </div>
+            <div class="popup" id="ar_time_notic">
+                <div class="popupcontent"><span>提醒您：</span><br><span class="green">自定日期起始日不可晚於結束日</span></div>
+            </div>
+        </div>
+        <div id="mask"></div>
+    }
+</div>
+<script type="text/javascript">
+if ('@ViewBag.errMsg' != "") {
+    alert('@ViewBag.errMsg');
+}
+</script>

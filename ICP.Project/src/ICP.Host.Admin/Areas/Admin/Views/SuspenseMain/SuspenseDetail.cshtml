@@ -1,0 +1,98 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@model UpdateSuspenseMainVM
+@{ 
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    Model.SuspenseID = ViewBag.SuspenseID;
+    Model.AuthStatus = ViewBag.AuthStatus;
+    List<SuspenseMainLogVM> SuspenseMainLogs = ViewBag.SuspenseLogs;
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/SuspenseMain/SuspenseDetail/action.js"></script>
+}
+<div id="blacklist-history-popup" class="blacklist-history-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm("UpdateSuspenseMain", "SuspenseMain"))
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">明細</h4>
+                <div class="pp-table pt-bkl-trading-detail">
+                    <div class="pp-table-header">
+                        <ul>
+                            <li><p class="sth-txt">建立時間</p></li>
+                            <li><p class="sth-txt">內部備註</p></li>
+                            <li><p class="sth-txt">帳號狀態</p></li>
+                            <li><p class="sth-txt">原因</p></li>
+                            <li><p class="sth-txt">建立者</p></li>
+                            <li><p class="sth-txt">最後修改時間</p></li>
+                            <li><p class="sth-txt">修改人</p></li>
+                        </ul>
+                    </div>
+                    <div class="pp-table-body">
+                        <table>
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                            @foreach (var item in SuspenseMainLogs)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.CreateDate.ToString("yyyy-MM-dd")<br />@item.CreateDate.ToString("HH:mm:ss")
+                                    </td>
+                                    <td>
+                                        @item.Note
+                                    </td>
+                                    <td>
+                                        @item.SuspenseDesc
+                                    </td>
+                                    <td>
+                                        @item.ReasonDesc
+                                    </td>
+                                    <td>
+                                        @item.CreateUser
+                                    </td>
+                                    <td>
+                                        @item.ModifyDate.ToString("yyyy-MM-dd")<br />@item.ModifyDate.ToString("HH:mm:ss")
+                                    </td>
+                                    <td>
+                                        @item.Modifier
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="pp-form">
+                    <dl>
+                        <dt>新增停權記錄說明</dt>
+                        <dd>
+                            @Html.TextAreaFor(m => m.Note, new { @class = "pp-textarea", @placeholder = "請填寫內部備註說明", @maxlength = "150" })
+                            <div class="input-tip-txt itt-r itt-er"><span>0</span>/150</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                @Html.HiddenFor(m => m.SuspenseID)
+                @Html.HiddenFor(m => m.AuthStatus)
+                <a href="javascript:;" class="btn link-authstatus" title="確認" AuthStatus="0">確認</a>
+                @if (Model.AuthStatus == 0)
+                {
+                    <a href="javascript:;" class="btn link-authstatus" title="放行" AuthStatus="1">放行</a>
+                    <a href="javascript:;" class="btn link-authstatus" title="退件" AuthStatus="2">退件</a>
+                }
+                <input type="submit" id="btnSubmit" style="display: none" />
+            </div>
+        }
+    </div>
+</div>

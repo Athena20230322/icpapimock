@@ -1,0 +1,100 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@model QuerySuspenseMainVM
+@{
+    var now = DateTime.Now;
+
+    Model.StartDate = new DateTime(now.Year, now.Month, 1);
+    Model.EndDate = DateTime.Today;
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/SuspenseMain/Index/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" />
+            <input type="hidden" name="PageSize" value="20" />
+            <input type="hidden" name="PageNo" value="1" />
+            @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}")
+            @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}")
+            @Html.TextBoxFor(t => t.CellPhone)
+            @Html.TextBoxFor(t => t.Email)
+            @Html.TextBoxFor(t => t.IDNO)
+            @Html.Hidden("Status")
+        }
+    </div>
+    @using (Ajax.BeginForm("Query", null, new AjaxOptions { UpdateTargetId = "queryResult" }, new { id = "QueryForm" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-form sf-2column">
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">停權時間<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryStartDate" },
+                            { "class", "flatpickr flatpickr-input active minD" },
+                            { "placeholder", "起始日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate", DateTime.Today.AddYears(-1).ToString("yyyy-01-01") },
+                            { "flatpickr-maxDate_input", "#queryEndDate" }
+                        })
+                    </label>
+                    <span class="sdb-txt">至</span>
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryEndDate" },
+                            { "class", "flatpickr flatpickr-input active maxD" },
+                            { "placeholder", "結束日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate_input", "#queryStartDate" },
+                            { "flatpickr-maxDate", DateTime.Today.ToString("yyyy-MM-dd") }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">手機號碼</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.CellPhone, new { @placeholder = "請輸入手機號碼" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">E-mail</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "請輸入E-mail" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">身分證字號</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.IDNO, new { @placeholder = "請輸入身分證字號" })
+                </dd>
+            </dl>
+        </div>
+        <div class="btn-box">
+            <a href="javascript:;" class="btn link-submit" title="查詢" id="lnkQuery">查詢</a>
+            <a href="javascript:;" class="btn btn-blue-border clear-form" title="清除條件">清除條件</a>
+        </div>
+    }
+</div>
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("AddSuspenseMain")" data-effect="mfp-zoom-in" class="libs-dialog-form btn bd-rdi" title="新增鎖定">
+            <span class="icon-ic-add bb-icon"></span>
+            新增
+        </a>
+        <a href="javascript:;" class="btn btn-blue-border bd-rdi" title="匯出" id="btnExport" target="_blank">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出Excel
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>

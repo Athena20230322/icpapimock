@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logging>
+    <system>
+        <name>encrypt</name>
+        <ip>127.0.0.1</ip>
+        <hostname>localhost</hostname>
+    </system>
+    <!--
+        level: off, fatal, error, warn, info, debug, trace 
+     -->
+    <logger name="senderEncprytion" level="info">
+        <handler name="senderEncprytionFile"/>
+        <handler name="Console"/>
+    </logger>
+    <logger name="CommonLoggerForEncrypt" level="debug">
+        <handler name="FileEncrypt"/>
+        <handler name="Console"/>
+    </logger>
+    <logger name="CommonLoggerForDecrypt" level="debug">
+        <handler name="FileDecrypt"/>
+        <handler name="Console"/>
+    </logger>  
+     <handler name="senderEncprytionFile" class="com.tradevan.commons.logging.handler.FileHandler">
+        <property name="filename" value="logs/encprytion.log"/>
+        <property name="pattern" value="[${time}][${level}][${program}][${cmd}] ${code} - ${msg}"/>
+        <property name="rolling" value="true"/>
+        <property name="max-size" value="2048"/>
+        <property name="max-backup-index" value="5"/>
+        <property name="time-format" value="yyyy/MM/dd HH:mm:ss"/>
+     </handler>
+      <handler name="Console" class="com.tradevan.commons.logging.handler.ConsoleHandler">
+        <property name="pattern" value="[${time}][${level}][${program}][${cmd}] ${code} - ${msg}"/>
+        <property name="time-format" value="yyyy/MM/dd HH:mm:ss"/>
+     </handler>
+     <handler name="FileDecrypt" class="com.tradevan.commons.logging.handler.FileHandler">
+        <property name="filename" value="logs/decryptUI.log"/>
+        <property name="pattern" value="${time} [${level}] : ${msg}"/>
+        <property name="rolling" value="true"/>
+        <property name="max-size" value="2048"/>
+        <property name="max-backup-index" value="5"/>
+     </handler>
+     <handler name="FileEncrypt" class="com.tradevan.commons.logging.handler.FileHandler">
+        <property name="filename" value="logs/encryptUI.log"/>
+        <property name="pattern" value="${time} [${level}] : ${msg}"/>
+        <property name="rolling" value="true"/>
+        <property name="max-size" value="2048"/>
+        <property name="max-backup-index" value="5"/>
+     </handler>
+</logging>

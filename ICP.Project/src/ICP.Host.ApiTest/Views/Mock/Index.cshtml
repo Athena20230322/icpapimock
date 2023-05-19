@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock</title>
+    <link rel="shortcut icon" href="#" />
+    <link href="/Content/Mock.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="divLeft">
+        <ul id="ulApiList"></ul>
+    </div>
+    <div id="divCenter">
+        <h3 id="h3Request" style="margin-top:0px;">
+            Request
+            <span class="time"></span>
+        </h3>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input id="req_host" type="hidden" />
+            <input id="req_Json" type="hidden" />
+            <div>
+                <div id="divLogin" login="0">
+                    <select id="req_env">
+                        <option value="beta">BETA</option>
+                        <option value="stage">STAGE</option>
+                    </select>
+                    <span id="labAccount"></span>
+                    <span id="labMID"></span>
+                    <input id="txtUserCode" type="text" placeholder="輸入帳號" />
+                    <input id="txtUserPwd" type="password" placeholder="輸入密碼" />
+                    <input id="btnLogin" type="button" value="登入" />
+                    <button id="btnLogout">登出</button>
+                </div>
+                
+                <input id="req_url" type="text" style=" width:67%;" placeholder="API URL" />
+                <input id="btnQuery" type="button" value="Query" />
+            </div>
+            <div style="margin-top:5px;">
+                <textarea id="txtJSON"></textarea>
+            </div>
+            <div style="margin-top:5px;">
+                <label>上傳欄位(逗點分隔)：</label>
+                <input id="fileCols" type="text" name="fileCols" />
+                <label for="files">上傳檔案：</label>
+                <input id="files" type="file" name="files" multiple />
+            </div>
+            <div>
+                <span id="labErr"></span>
+            </div>
+        </form>
+        <h3 id="h3Response">
+            Response
+            <span class="time"></span>
+        </h3>
+        <div style="margin-top:5px;">
+            <textarea id="txtResult"></textarea>
+        </div>
+    </div>
+    <div id="divRight">
+        <ul id="ulApiSpec"></ul>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="/Scripts/mock.js"></script>
+</body>
+</html>

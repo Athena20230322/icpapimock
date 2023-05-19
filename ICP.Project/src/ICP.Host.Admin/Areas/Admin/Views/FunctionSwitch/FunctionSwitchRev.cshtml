@@ -1,0 +1,141 @@
+﻿@using ICP.Modules.Mvc.Admin.Models
+@model List<FunctionCategoryStatusRev>
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    int FunctionID = ViewBag.FunctionID;
+
+    string FunctionName = ViewBag.FunctionName;
+
+    Func<DateTime, DateTime, byte> getRevStatus = (startDate, endDate) =>
+    {
+        var now = DateTime.Now;
+        if (now < startDate)
+        {
+            return 0;
+        }
+        else if (now >= startDate && now < endDate)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    };
+
+    Func<byte, string> getFunctionStatusStr = (functionStatus) =>
+    {
+        if (functionStatus == 0)
+        {
+            return "關";
+        }
+        else
+        {
+            return "開";
+        }
+    };
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/FunctionSwitch/FunctionSwitchRev/action.js"></script>
+}
+<div id="time-setting-popup" class="time-setting-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <div class="pp-content">
+            <h4 class="pp-title">[@FunctionName] - 設定開關時間</h4>
+            <div class="pp-list-box">
+                <ul class="pp-list">
+                    <li>啟用為「尚未開啟及進行中」時，可修改日期及時間或刪除該筆資料。</li>
+                    <li>啟用為「已結束」時，不可修改及刪除。</li>
+                </ul>
+            </div>
+            <div class="pp-function">
+                <div class="btn-box">
+                    <a href="@Url.Action("AddFunctionSwitchRev", new { RevID = 0, FunctionID = FunctionID, FunctionName = FunctionName })" data-effect="mfp-zoom-in" class="libs-dialog-form btn bd-rdi" title="新增預約" target="_blank">
+                        <span class="icon-ic-add bb-icon"></span>
+                        新增預約
+                    </a>
+                </div>
+            </div>
+            <div class="pp-table pt-booking-rec">
+                <div class="pp-table-header">
+                    <ul>
+                        <li><p class="pth-txt">開啟時間</p></li>
+                        <li><p class="pth-txt">關閉時間</p></li>
+                        <li><p class="pth-txt">啟用狀態</p></li>
+                        <li><p class="pth-txt">開關狀態</p></li>
+                        <li><p class="pth-txt">修改人</p></li>
+                        <li><p class="pth-txt">修改時間</p></li>
+                        <li><p class="pth-txt">編輯</p></li>
+                    </ul>
+                </div>
+                <div class="pp-table-body">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        @foreach (var item in Model)
+                        {
+                            var revStatus = getRevStatus(item.StartDate, item.EndDate);
+
+                            <tr class="@(revStatus == 2 ? "ptb-disabled" : "")">
+                                <td>
+                                    @item.StartDate.ToString("yyyy-MM-dd HH:mm")
+                                </td>
+                                <td>
+                                    @item.EndDate.ToString("yyyy-MM-dd HH:mm")
+                                </td>
+                                <td>
+                                    @if (revStatus == 0)
+	                                {
+		                                @:尚未開始
+	                                }
+                                    else if (revStatus == 1)
+                                    {
+                                        @:進行中
+                                    }
+                                    else
+                                    {
+                                        @:已結束
+                                    }
+                                </td>
+                                <td>
+                                    @getFunctionStatusStr(item.FunctionStatus)
+                                </td>
+                                <td>
+                                    @item.Modifier
+                                </td>
+                                <td>
+                                    @(item.ModifyDate == null ? "-" : item.ModifyDate.Value.ToString("yyyy-MM-dd HH:mm"))
+                                </td>
+                                <td>
+                                    <div class="pt-btn-box">
+                                        @if (revStatus == 2)
+                                        {
+                                            @:-
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("AddFunctionSwitchRev", new { RevID = item.RevID, FunctionID = FunctionID, FunctionName = FunctionName })" class="libs-dialog-form btn bd-rdi" title="修改">修改</a>
+                                            <a href="@Url.Action("DeleteFunctionSwitchRev", new { RevID = item.RevID })" class="btn btn-gray bd-rdi btn-delete" title="刪除">刪除</a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

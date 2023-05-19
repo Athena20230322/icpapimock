@@ -1,0 +1,171 @@
+﻿@model ICP.Modules.Mvc.Payment.Models.QueryTrade.TopUpTradeInfo
+
+@{
+    Layout = "~/Areas/Payment/Views/Shared/_QueryTradeLayout.cshtml";
+}
+@if (Model != null)
+{
+    <div id="wrapper">
+        <header></header>
+        <section id="record_detial_box">
+            <ul class="toggle_box" id="record_detial">
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>執行時間</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.CreateDate)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                @if (Model.TradeStatus == 1)
+                {
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>儲值時間</span></div>
+                            <div class="col">
+                                <span>
+                                    @Html.DisplayFor(model => model.PaymentDate)
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                }
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>類別</span></div>
+                        <div class="col"><span>儲值</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>狀態</span></div>
+                        <div class="col green">
+                            <span>
+                                @if (Model.TradeStatus == 0)
+                                {
+                                    @Html.Raw("未完成")
+
+                                    if (!Model.IsExpired)
+                                    {
+                                        <input type="button" value="取消" name="取消" class="btn_blue ee" id="cancelBtn" />
+                                    }
+                                }
+                                else if (Model.TradeStatus == 1)
+                                {
+                                    @Html.Raw("儲值成功")
+                                }
+                                else if (Model.TradeStatus == 4)
+                                {
+                                    @Html.Raw("儲值取消")
+                                }
+                                else
+                                {
+                                    @Html.Raw("儲值失敗")
+                                }
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>儲值方式</span></div>
+                        <div class="col"><span>虛擬帳號儲值</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>儲值金額</span></div>
+                        <div class="col green">
+                            <span>
+                                @Html.DisplayFor(model => model.Amount)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>編號</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.TradeNo)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="sep">
+                <p class="br green">儲值資訊</p>
+            </div>
+            <ul class="toggle_box" id="record_detial">
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>轉入銀行</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.BankName) 
+                                @Html.DisplayFor(model => model.BankCode)
+                                @Html.HiddenFor(model => model.BankCode)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>轉入帳號</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.VirtualAccount)
+                                @Html.HiddenFor(model => model.VirtualAccount)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>轉帳截止日期</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.ExpireDate)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+}
+
+<script type="text/javascript">
+    if ('@ViewBag.errMsg' != "") {
+        alert('@ViewBag.errMsg');
+    }
+
+    // 取消儲值
+    $("#cancelBtn").click(function () {
+        $.ajax({
+            type: "post",
+            url: "/QueryTrade/CancelTopUp",
+            dataType: "json",
+            data: {
+                BankCode: $('#BankCode').val(),
+                VirtualAccount: $('#VirtualAccount').val()
+            },
+            success: function (msg) {
+                var rtnCode = msg.RtnCode;
+                var rtnMsg = msg.RtnMsg;
+                if (rtnCode == 1) {
+                    alert('取消成功');
+                    location.reload();
+                }
+                else {
+                    alert(rtnMsg);
+                }
+            },
+            error: function () {
+                alert('取消失敗');
+            }
+        });
+    });
+</script>

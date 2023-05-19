@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://impl.webservice.iuo.interfaces.application.eivb.pic.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://iuo.interfaces.application.eivb.pic.com/" name="SellerJobReceiverServiceImplService" targetNamespace="http://impl.webservice.iuo.interfaces.application.eivb.pic.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://iuo.interfaces.application.eivb.pic.com/" location="http://61.57.231.23/b2beivcp/ws/SellerJobReceiverWebService?wsdl=ISellerJobReceiverService.wsdl" />
+  <wsdl:types />
+  <wsdl:binding name="SellerJobReceiverServiceImplServiceSoapBinding" type="ns1:ISellerJobReceiverService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SIUO010">
+      <soap:operation soapAction="SIUO010" style="document" />
+      <wsdl:input name="SIUO010">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO010Response">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007CancelAllowance">
+      <soap:operation soapAction="SIUO007CancelAllowance" style="document" />
+      <wsdl:input name="SIUO007CancelAllowance">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO007CancelAllowanceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseRejectInvoice">
+      <soap:operation soapAction="SIUO152PurchaseRejectInvoice" style="document" />
+      <wsdl:input name="SIUO152PurchaseRejectInvoice">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO152PurchaseRejectInvoiceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseCancelInvoice">
+      <soap:operation soapAction="SIUO152PurchaseCancelInvoice" style="document" />
+      <wsdl:input name="SIUO152PurchaseCancelInvoice">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO152PurchaseCancelInvoiceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007OpenInvoice">
+      <soap:operation soapAction="SIUO007OpenInvoice" style="document" />
+      <wsdl:input name="SIUO007OpenInvoice">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO007OpenInvoiceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseOpenInvoice">
+      <soap:operation soapAction="SIUO152PurchaseOpenInvoice" style="document" />
+      <wsdl:input name="SIUO152PurchaseOpenInvoice">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO152PurchaseOpenInvoiceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseCancelAllowance">
+      <soap:operation soapAction="SIUO152PurchaseCancelAllowance" style="document" />
+      <wsdl:input name="SIUO152PurchaseCancelAllowance">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO152PurchaseCancelAllowanceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007VoidInvoice">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="SIUO007VoidInvoice">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO007VoidInvoiceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007Allowance">
+      <soap:operation soapAction="SIUO007Allowance" style="document" />
+      <wsdl:input name="SIUO007Allowance">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO007AllowanceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO152PurchaseAllowance">
+      <soap:operation soapAction="SIUO152PurchaseAllowance" style="document" />
+      <wsdl:input name="SIUO152PurchaseAllowance">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO152PurchaseAllowanceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="Test">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="TestResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO007CancelInvoice">
+      <soap:operation soapAction="SIUO007CancelInvoice" style="document" />
+      <wsdl:input name="SIUO007CancelInvoice">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO007CancelInvoiceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO008">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="SIUO008">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO008Response">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SIUO009">
+      <soap:operation soapAction="SIUO009" style="document" />
+      <wsdl:input name="SIUO009">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SIUO009Response">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SellerJobReceiverServiceImplService">
+    <wsdl:port name="SellerJobReceiverServiceImplPort" binding="tns:SellerJobReceiverServiceImplServiceSoapBinding">
+      <soap:address location="http://61.57.231.23/b2beivcp/ws/SellerJobReceiverWebService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

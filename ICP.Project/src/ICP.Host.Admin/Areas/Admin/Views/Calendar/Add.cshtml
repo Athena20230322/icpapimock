@@ -1,0 +1,58 @@
+﻿@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts {
+    <script src="~/Areas/Admin/Scripts/Calendar/Add/action.js?t=@(DateTime.Now.ToString("yyyMMddHHmmss"))"></script>
+    <script>
+        libs.alert.validationSummary();
+        flatpickr_init($('#AddDayDate')[0]);
+    </script>
+}
+<div class="add-holiday-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm("Add", "Calendar", FormMethod.Post, new { id = "cal_add_form" }))
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">新增假日或補班</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>日期選擇</dt>
+                        <dd class="pf-date-box">
+                            <label class="pdb-item pdb-date">
+                                <input class="flatpickr flatpickr-input active minD" type="text" name="DayDate" id="AddDayDate" placeholder="請選擇假日或補班日期" value="@(DateTime.Today.ToString("yyyy-MM-dd")) readonly="readonly">
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl class="pf-radio-box">
+                        <dt>休假或補班</dt>
+                        <dd>
+                            <div class="def-radio">
+                                <input type="radio" value="1" id="day_holiday" name="DayType" onclick="checkFields()" />
+                                <label for="day_holiday" class="radio">休假</label>
+                            </div>
+                            <div class="def-radio">
+                                <input type="radio" value="2" id="day_makeup" name="DayType" onclick="checkFields()" />
+                                <label for="day_makeup" class="radio">補班</label>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>原因</dt>
+                        <dd>
+                            <textarea class="pp-textarea" name="DayDescription" id="DayDescription" placeholder="請填寫5-100字內的休假或補班原因" maxlength="100" onchange="checkFields()" onkeyup="countWords()"></textarea>
+                            <div class="input-tip-txt itt-r"><span id="add_desc_length">0</span>/100</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                @*<a href="#" class="btn link-submit disabled" title="送出">送出</a>*@
+                <a href="javascript:formSubmit()" class="btn disabled" title="送出" id="add_submit">送出</a>
+            </div>
+        }
+    </div>
+</div>

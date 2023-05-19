@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "ChinaTrustOtpAuth";
+    Layout = "~/Areas/Member/Views/Shared/_ACLinkChinaTrustLayout.cshtml";
+}
+
+@using (Html.BeginForm("ChinaTrustACLinkBind", "ACLink", FormMethod.Post))
+{
+    <div id="wrapper">
+        <header></header>
+        <section id="bank01">
+            <div class="bank_white">
+                <div class="orange_underline">
+                    <div class="bank_tt1 txtblock_orange orange">系統已發送OTP密碼至您留存於中國信託銀行的手機號碼</div>
+                </div>
+                <div class="bank_tt1 br">
+                    確認簡訊內容之網頁識別碼是否為：&nbsp;&nbsp;
+                    <span class="br orange">@ViewBag.AuthId</span><br>
+                    輸入您接收到的OTP密碼(七碼)：
+                    <div class="field" align="center" style="margin:10px auto;">
+                        <input type="text" name="Otp" placeholder="" class="gredient_input" value="1234567" />
+                    </div>
+                    <div class="time_up">
+                        簡訊OTP密碼有效時間尚餘
+                        <span id="time_m" class="time"> </span>:
+                        <span id="time_s" class="time"> </span>
+                    </div>
+                </div>
+            </div>
+            <div class="text br note_content">
+                提醒您:<br>
+                為維護您的交易安全，申請方便付連結帳戶服務時，
+                OTP密碼輸入錯誤次數將與網路銀行非約定性交
+                易等OTP驗證錯誤次數合併累計。
+            </div>
+            <div class="btn_bottom">
+                <a href="#" class="btn_txt" id="btnSubmit">確&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;認</a>
+            </div>
+        </section>
+        <footer></footer>
+    </div>
+
+    <input type="hidden" name="MID" value="@ViewBag.mid" />
+    <input type="hidden" name="IDNO" value="@ViewBag.idno" />
+    <input type="hidden" name="Birth" value="@ViewBag.Birth" />
+    <input type="hidden" name="BankAccount" value="@ViewBag.BankAccount" />
+    <input type="hidden" name="AgreeTime" value="@ViewBag.agreeTime" />
+    <input type="hidden" name="AuthId" value="@ViewBag.AuthId" />
+}
+<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/device.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/action.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#btnSubmit').click(function () {
+            $('form').submit();
+        });
+
+        show_time();
+    })
+
+    // 計算倒數時間
+    function show_time() {
+        var dt = new Date();
+        var time_start = dt.getTime();//設定開始時間
+        var time_end = dt.setSeconds(600); //設定結束時間(等於系統當前時間)
+        //計算時間差
+        var time_distance = time_end - time_start;
+        if (time_distance > 0) {
+
+            var int_minute = Math.floor(time_distance / 60000)
+            time_distance -= int_minute * 60000;
+
+            var int_second = Math.floor(time_distance / 1000)
+
+            // 個位數前面補0
+            if (int_minute < 10) {
+                int_minute = "0" + int_minute;
+            }
+            if (int_second < 10) {
+                int_second = "0" + int_second;
+            }
+
+            // 顯示時間
+            $("#time_m").html(int_minute);
+            $("#time_s").html(int_second);
+
+            setTimeout("show_time()", 1000);
+
+        } else {
+            $("#time_m").html('00');
+            $("#time_s").html('00');
+        }
+    }
+</script>

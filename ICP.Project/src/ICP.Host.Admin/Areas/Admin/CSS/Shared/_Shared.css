@@ -1,0 +1,31 @@
+﻿.hide,
+.field-validation-valid,
+.validation-summary-errors,
+#popups {
+    display: none;
+}
+.hide2 {
+    height: 0 !important;
+    width: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+}
+@media (max-width: 1513px) {
+    .scb-table .scb-table-header.sth-fixed {
+        left: 36px!important;
+    }
+}
+.scb-table .scb-table-header.sth-fixed {
+    left: calc(50% - 588px)!important;
+}
+.scb-bottom-btn.sbb-fixed {
+    left: calc(50% - 588px)!important;
+}
+.scb-table .scb-table-header.sth-fixed {
+    top: 0px !important;
+}
+.sc-pagenum-box {
+    margin-bottom: 40px;
+}

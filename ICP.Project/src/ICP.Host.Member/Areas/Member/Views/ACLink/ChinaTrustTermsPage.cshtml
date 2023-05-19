@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "ChinaTrustTermsPage";
+    Layout = "~/Areas/Member/Views/Shared/_ACLinkChinaTrustLayout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/magic-check.css")" rel="stylesheet" type="text/css" />
+@using (Html.BeginForm("ChinaTrustACLinkApplyInfo", "ACLink", FormMethod.Post))
+{
+    <div id="step1">
+        <section id="bank01">
+            <div class="bank_white">
+                <div class="bank_tt1 br">請設定您的銀行帳號資訊</div>
+                <div class="item">
+                    <div>
+                        <div class=""><span class="text_it">銀行名稱</span></div>
+                        <div class=""><span class="text_contxtA ">中國信託銀行</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text br note_content">
+
+                <ol>
+                    <div class="note_h1">注意事項:</div>
+                    <li>需具備中國信託網路銀行OTP轉帳功能</li>
+                    <li>限連結台幣活期存款帳戶(支存戶不適用)</li>
+                    <li>
+                        中國信託方便付服務交易限額:每筆5萬元/每日10萬元/每月20萬元
+                    </li>
+                </ol>
+            </div>
+            <div class="btn_bottom">
+                <a href="" class="btn_txt" id="nextStep">下&nbsp;&nbsp;一&nbsp;&nbsp;步</a>
+            </div>
+        </section>
+    </div>
+
+    <div id="step2" style="display:none">
+        <section id="bank02">
+            <h1 class="br">電子支付連結存款帳戶約定條款</h1>
+            <div class="text">
+                <div class="theDiv">
+                    茲同意未成年人向 貴公司申請註冊成為icashpay使用者，並同意其逕行辦理該帳戶有關之支付、轉帳等相關業務，如有因使用該帳戶所孳生之債務及義務，與該使用者（即未成年人）負連帶賠償責任，絕無異議。
+                    其他約定條款：
+                    一、 立同意書人辦理上述事項，均確認已由 貴公司依立同意書人能充分瞭解之方式說明同意書暨約定事項重要內容及揭露相關風險，並同意遵守 貴公司「使用者契約」之約定內容及依 貴公司規定程序辦理。
+                    二、 立同意書人瞭解滿七歲以上未滿二十歲之未成年人自行辦理業務，應由法定代理人雙方共同約定簽署同意書；未滿七歲之未成年人不得自行辦理，應由 法定代理人雙方共同代理之。
+                    三、 立同意書人同意  貴公司得向財團法人金融聯合徵信中心查詢立同意書人之國民身分證領補換資料、通報案件紀錄及補充註記資訊。
+                    四、 立同意書人就本業務或本約定條款若有任何疑問，可至網站 （www.icashpay.com.tw）點選『聯絡我們』將反應意見留言；
+                    或撥打24小時客服專線：0800-233-888，手機請撥(02)2657-6388。
+                </div>
+                <div>
+                    <input class="magic-checkbox" type="checkbox" name="chkAgree" id="1" value="option">
+                    <label for="1">
+                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="1"><span class="checkbox_text">本人已詳閱並同意將上述特別約定條款之約定</span></label>
+                </div>
+            </div>
+
+            <div class="btn_bottom">
+                <a href="#" class="btn_txt" id="btnSubmit">確&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;認</a>
+            </div>
+        </section>
+    </div>
+}
+<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/device.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/action.min.js")" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+    $(function () {
+        $('#nextStep').click(function () {
+            $('#step2').show();
+            $('#step1').hide();
+            return false;
+        });
+
+        $('#btnSubmit').click(function () {
+            if ($('input[name ="chkAgree"]').prop("checked")) {
+                $('form').submit();
+            }
+            else {
+                alert('您尚未同意服務條款');
+                return false;
+            }
+        });
+    })
+</script>

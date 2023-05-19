@@ -1,0 +1,78 @@
+@import url(third_party/flatpickr.min.css);
+@import url(page.css);
+.scb-table.st-activity-manage .scb-table-header li:nth-child(1), .scb-table.st-activity-manage .scb-table-body col:nth-child(1) {
+  width: 12%; }
+
+.scb-table.st-activity-manage .scb-table-header li:nth-child(2), .scb-table.st-activity-manage .scb-table-body col:nth-child(2) {
+  width: 9%; }
+
+.scb-table.st-activity-manage .scb-table-header li:nth-child(3), .scb-table.st-activity-manage .scb-table-body col:nth-child(3) {
+  width: 9%; }
+
+.scb-table.st-activity-manage .scb-table-header li:nth-child(4), .scb-table.st-activity-manage .scb-table-body col:nth-child(4) {
+  width: 8%; }
+
+.scb-table.st-activity-manage .scb-table-header li:nth-child(5), .scb-table.st-activity-manage .scb-table-body col:nth-child(5) {
+  width: 9%; }
+
+.scb-table.st-activity-manage .scb-table-header li:nth-child(6), .scb-table.st-activity-manage .scb-table-body col:nth-child(6) {
+  width: 8%; }
+
+.scb-table.st-activity-manage .scb-table-header li:nth-child(7), .scb-table.st-activity-manage .scb-table-body col:nth-child(7) {
+  width: 9%; }
+
+.scb-table.st-activity-manage .scb-table-header li:nth-child(8), .scb-table.st-activity-manage .scb-table-body col:nth-child(8) {
+  width: 8%; }
+
+.scb-table.st-activity-manage .scb-table-header li:nth-child(9), .scb-table.st-activity-manage .scb-table-body col:nth-child(9) {
+  width: 28%; }
+
+.scb-table.st-financial-code .scb-table-header li:nth-child(1), .scb-table.st-financial-code .scb-table-body col:nth-child(1) {
+  width: 18%; }
+
+.scb-table.st-financial-code .scb-table-header li:nth-child(2), .scb-table.st-financial-code .scb-table-body col:nth-child(2) {
+  width: 36%; }
+
+.scb-table.st-financial-code .scb-table-header li:nth-child(3), .scb-table.st-financial-code .scb-table-body col:nth-child(3) {
+  width: 23%; }
+
+.scb-table.st-financial-code .scb-table-header li:nth-child(4), .scb-table.st-financial-code .scb-table-body col:nth-child(4) {
+  width: 23%; }
+
+.scb-table.st-not-qualified .scb-table-header li:nth-child(1), .scb-table.st-not-qualified .scb-table-body col:nth-child(1) {
+  width: 40%; }
+
+.scb-table.st-not-qualified .scb-table-header li:nth-child(2), .scb-table.st-not-qualified .scb-table-body col:nth-child(2) {
+  width: 22%; }
+
+.scb-table.st-not-qualified .scb-table-header li:nth-child(3), .scb-table.st-not-qualified .scb-table-body col:nth-child(3) {
+  width: 22%; }
+
+.scb-table.st-not-qualified .scb-table-header li:nth-child(4), .scb-table.st-not-qualified .scb-table-body col:nth-child(4) {
+  width: 16%; }
+
+.ama-dsele-box dd {
+  position: relative; }
+
+.ama-dsele-box.adb-act .def-select:before, .ama-dsele-box.adb-act .def-select:after {
+  display: none; }
+
+.ama-dsele-box.adb-act .def-select select {
+  height: 143px;
+  padding-right: 10px; }
+
+.ama-dsele-box.adb-act .adb-btn {
+  color: #26b7bc; }
+
+.ama-dsele-box .def-select {
+  width: 336px; }
+
+.ama-dsele-box .adb-btn {
+  display: inline-block;
+  position: absolute;
+  top: 9px;
+  left: 350px;
+  z-index: 5;
+  font-size: 24px;
+  color: #cacaca;
+  cursor: pointer; }

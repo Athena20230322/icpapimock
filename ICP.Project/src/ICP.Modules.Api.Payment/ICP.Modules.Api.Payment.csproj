@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C70DEED9-A918-4DE8-B7B2-09023F036E88}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICP.Modules.Api.Payment</RootNamespace>
+    <AssemblyName>ICP.Modules.Api.Payment</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Beta|AnyCPU'">
+    <OutputPath>bin\Beta\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Extras.DynamicProxy, Version=4.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Extras.DynamicProxy.4.5.0\lib\net45\Autofac.Extras.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\PaymentApiAreaRegistration.cs" />
+    <Compile Include="App_Start\PaymentApiModule.cs" />
+    <Compile Include="App_Start\Profiles\PaymentChargeProfile.cs" />
+    <Compile Include="App_Start\Profiles\PaymentProfile.cs" />
+    <Compile Include="App_Start\Profiles\TopUpProfile.cs" />
+    <Compile Include="Commands\AccountLinkCommand.cs" />
+    <Compile Include="Commands\CashierCommand.cs" />
+    <Compile Include="Commands\ChargeCommand.cs" />
+    <Compile Include="Commands\PaymentCommand.cs" />
+    <Compile Include="Commands\PosCommand.cs" />
+    <Compile Include="Commands\ReceiveAtmServerReturnCommand.cs" />
+    <Compile Include="Commands\RefundCommand.cs" />
+    <Compile Include="Commands\TopUpPaymentCommand.cs" />
+    <Compile Include="Controllers\AccountLinkController.cs" />
+    <Compile Include="Controllers\CashierController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ReceiveAtmServerReturnController.cs" />
+    <Compile Include="Controllers\PosController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TopUpPaymentController.cs" />
+    <Compile Include="Controllers\TransferController.cs" />
+    <Compile Include="Factory\TradeModeFactory.cs" />
+    <Compile Include="Factory\PaymentFactory.cs" />
+    <Compile Include="Interface\ICheckMacValueResult.cs" />
+    <Compile Include="Interface\IPaymentType.cs" />
+    <Compile Include="Interface\ITradeModeFactory.cs" />
+    <Compile Include="Interface\IPaymentFactory.cs" />
+    <Compile Include="Interface\ITradeMode.cs" />
+    <Compile Include="Models\AccountLimitInfo\AccountLimitInfoDbReq.cs" />
+    <Compile Include="Models\AccountLimitInfo\AccountLimitInfoRes.cs" />
+    <Compile Include="Models\AccountLimitInfo\AccountLimitInfoDbRes.cs" />
+    <Compile Include="Models\ACLink\ACLinkInfoDbRes.cs" />
+    <Compile Include="Models\ACLink\ACLinkModel.cs" />
+    <Compile Include="Models\ACLink\ACLinkTopUpModel.cs" />
+    <Compile Include="Models\ACLink\ACLinkTopUpReq.cs" />
+    <Compile Include="Models\Cashier\AddTradeDBReq.cs" />
+    <Compile Include="Models\Cashier\PaymentCenterEncDataModel.cs" />
+    <Compile Include="Models\Cashier\UpdateTradeDBReq.cs" />
+    <Compile Include="Models\Cashier\UpdateTradeDBRes.cs" />
+    <Compile Include="Models\ChargeBack\CancelSendToPaymentCenterReq.cs" />
+    <Compile Include="Models\CreateBarcode\TradeBarcodeRes.cs" />
+    <Compile Include="Models\CreateBarcode\TradeBarcodeReq.cs" />
+    <Compile Include="Models\GetOnlineOrderInfo\MerchantDataModel.cs" />
+    <Compile Include="Models\MemberCoinsModel.cs" />
+    <Compile Include="Models\NotifyBankModel.cs" />
+    <Compile Include="Models\PaymentCenterServerReturn.cs" />
+    <Compile Include="Models\AccountLinkDbRes.cs" />
+    <Compile Include="Models\Cashier\AddTradeDbRes.cs" />
+    <Compile Include="Models\Cashier\AppDataModel.cs" />
+    <Compile Include="Models\Cashier\QueryTradeReq.cs" />
+    <Compile Include="Models\Cashier\PaymentCenterReq.cs" />
+    <Compile Include="Models\Cashier\PaymentCenterRes.cs" />
+    <Compile Include="Models\Cashier\ItemModel.cs" />
+    <Compile Include="Models\Cashier\CashierReq.cs" />
+    <Compile Include="Models\ChargeBack\UpdateChargeBackDbRes.cs" />
+    <Compile Include="Models\ChargeBack\ChargeBackRes.cs" />
+    <Compile Include="Models\ChargeBack\ChargeBackReq.cs" />
+    <Compile Include="Models\ChargeOnline\EncDataModel.cs" />
+    <Compile Include="Models\ChargeOnline\PaymentTempTradeDbRes.cs" />
+    <Compile Include="Models\ChargeOnline\ChargeOnlineReq.cs" />
+    <Compile Include="Models\GetMemberPaymentInfo\AccountLinkRes.cs" />
+    <Compile Include="Models\GetMemberPaymentInfo\AddTempTradeDbRes.cs" />
+    <Compile Include="Models\GetMemberPaymentInfo\GetMemberPaymentInfoReq.cs" />
+    <Compile Include="Models\GetMemberPaymentInfo\GetMemberPaymentInfoRes.cs" />
+    <Compile Include="Models\GetMemberPaymentInfo\AddTempTradeDbReq.cs" />
+    <Compile Include="Models\GetOnlineOrderInfo\GetOnlineOrderInfoRes.cs" />
+    <Compile Include="Models\GetOnlineOrderInfo\GetOnlineOrderInfoReq.cs" />
+    <Compile Include="Models\iCashAccountModel.cs" />
+    <Compile Include="Models\ICPPaymentRes.cs" />
+    <Compile Include="Models\PaymentTradeDbRes.cs" />
+    <Compile Include="Models\EnumType.cs" />
+    <Compile Include="Models\ChargeOnline\ChargeOnlineRes.cs" />
+    <Compile Include="Models\Cashier\CashierRes.cs" />
+    <Compile Include="Models\Pos\CancelReq.cs" />
+    <Compile Include="Models\Pos\CancelRes.cs" />
+    <Compile Include="Models\Pos\BasePosReq.cs" />
+    <Compile Include="Models\Pos\QueryMemberInfoReq.cs" />
+    <Compile Include="Models\Pos\QueryMemberInfoRes.cs" />
+    <Compile Include="Models\Pos\TopUpRefundReq.cs" />
+    <Compile Include="Models\Pos\TopUpCancelReq.cs" />
+    <Compile Include="Models\Pos\TopUpRefundRes.cs" />
+    <Compile Include="Models\Pos\TopUpReq.cs" />
+    <Compile Include="Models\Pos\TopUpRes.cs" />
+    <Compile Include="Models\Pos\RefundRes.cs" />
+    <Compile Include="Models\Pos\RefundReq.cs" />
+    <Compile Include="Models\Pos\CheckOutRes.cs" />
+    <Compile Include="Models\Pos\CheckOutReq.cs" />
+    <Compile Include="Models\Pos\BarcodeInfoDbRes.cs" />
+    <Compile Include="Models\QueryOnlinecharge\QueryOnlinechargeRes.cs" />
+    <Compile Include="Models\QueryOnlinecharge\QueryOnlinechargeReq.cs" />
+    <Compile Include="Models\ChargeBack\AddChargeBackDbRes.cs" />
+    <Compile Include="Models\RefundOnlinetransaction\RefundOnlinetransactionRes.cs" />
+    <Compile Include="Models\RefundOnlinetransaction\RefundOnlinetransactionReq.cs" />
+    <Compile Include="Models\ChargeBack\ChargeBackSendToPaymentCenterRes.cs" />
+    <Compile Include="Models\ChargeBack\ChargeBackSendToPaymentCenterReq.cs" />
+    <Compile Include="Models\Test\CashierTestRequest.cs" />
+    <Compile Include="Models\TopUp\AddUserCoinsDbReq.cs" />
+    <Compile Include="Models\TopUp\AutoTopUpConditionReq.cs" />
+    <Compile Include="Models\TopUp\AutoTopUpModel.cs" />
+    <Compile Include="Models\TopUp\AutoTopUpReq.cs" />
+    <Compile Include="Models\TopUp\AutoTopUpSwitchReq.cs" />
+    <Compile Include="Models\TopUp\GetTopUpDataReq.cs" />
+    <Compile Include="Models\TopUp\QryMemberInfoReq.cs" />
+    <Compile Include="Models\TopUp\TopUpBarcodeReq.cs" />
+    <Compile Include="Models\TopUp\TopUpByATMReq.cs" />
+    <Compile Include="Models\TopUp\TopUpTradeInfoModel.cs" />
+    <Compile Include="Models\TopUp\TradeResultModel.cs" />
+    <Compile Include="Models\TopUpATMReq.cs" />
+    <Compile Include="Models\TopUpATMRes.cs" />
+    <Compile Include="Models\TradeInfoAtm.cs" />
+    <Compile Include="Models\Transfer\GetTransferTokenRes.cs" />
+    <Compile Include="Models\Transfer\GetTransferTokenReq.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ACLinkRepository.cs" />
+    <Compile Include="Repositories\PosRepository.cs" />
+    <Compile Include="Repositories\AtmRepository.cs" />
+    <Compile Include="Repositories\MemberInfoRepository.cs" />
+    <Compile Include="Repositories\MemberPaymentInfoRepository.cs" />
+    <Compile Include="Repositories\PaymentTradeRepository.cs" />
+    <Compile Include="Repositories\RefundRepository.cs" />
+    <Compile Include="Repositories\TopUpRepository.cs" />
+    <Compile Include="Services\AccountLinkService.cs" />
+    <Compile Include="Services\AtmService.cs" />
+    <Compile Include="Services\ChargeOnlineService.cs" />
+    <Compile Include="Services\CommonService.cs" />
+    <Compile Include="Services\GetMemberPaymentInfoService.cs" />
+    <Compile Include="Services\GetOnlineOrderInfoService.cs" />
+    <Compile Include="Services\PaymentService.cs" />
+    <Compile Include="Services\PaymentType\ATMService.cs" />
+    <Compile Include="Services\PaymentType\INVOICEService.cs" />
+    <Compile Include="Services\PaymentType\TRANSFER_ICASHService.cs" />
+    <Compile Include="Services\PaymentType\WITHDRAWAL_ICASHService.cs" />
+    <Compile Include="Services\PaymentType\ADJUST_ICASHService.cs" />
+    <Compile Include="Services\PaymentType\ALLOCATE_ICASHService.cs" />
+    <Compile Include="Services\PaymentType\CASHService.cs" />
+    <Compile Include="Services\PaymentType\TRANSACTION_ICASHService.cs" />
+    <Compile Include="Services\PaymentType\ACCOUNTLINKService.cs" />
+    <Compile Include="Services\PaymentProvider.cs" />
+    <Compile Include="Services\Pos\PosService.cs" />
+    <Compile Include="Services\RefundService.cs" />
+    <Compile Include="Services\PaymentType\BasePaymentType.cs" />
+    <Compile Include="Services\TopUpPaymentService.cs" />
+    <Compile Include="Services\TradeMode\BaseTradeMode.cs" />
+    <Compile Include="Services\TradeMode\TransferService.cs" />
+    <Compile Include="Services\TradeMode\WithdrawalService.cs" />
+    <Compile Include="Services\TradeMode\TopupService.cs" />
+    <Compile Include="Services\TradeMode\TransactionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ICP.Infrastructure.Abstractions\ICP.Infrastructure.Abstractions.csproj">
+      <Project>{49FA2325-427A-4684-9FCA-E23964F02211}</Project>
+      <Name>ICP.Infrastructure.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Infrastructure.Abstractions\ICP.Infrastructure.Abstractions.csproj">
+      <Project>{49fa2325-427a-4684-9fca-e23964f02211}</Project>
+      <Name>ICP.Infrastructure.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Infrastructure.Core.Web\ICP.Infrastructure.Core.Web.csproj">
+      <Project>{BC6A1804-4574-414B-B677-19148E4D2034}</Project>
+      <Name>ICP.Infrastructure.Core.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Infrastructure.Core\ICP.Infrastructure.Core.csproj">
+      <Project>{724872BC-C923-434D-AB6A-CA502BE46DC8}</Project>
+      <Name>ICP.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Commands\ICP.Library.Commands.csproj">
+      <Project>{0CF75D58-AD58-4A2A-902A-42F9502065DF}</Project>
+      <Name>ICP.Library.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Models\ICP.Library.Models.csproj">
+      <Project>{8F95E4BF-E15B-45EB-937B-D711E44DDF04}</Project>
+      <Name>ICP.Library.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Repositories\ICP.Library.Repositories.csproj">
+      <Project>{6D3F65C6-6F56-46BA-92C0-E584259692B1}</Project>
+      <Name>ICP.Library.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Services\ICP.Library.Services.csproj">
+      <Project>{C0CCC96A-C41F-4E87-BC82-15B3876B6DD0}</Project>
+      <Name>ICP.Library.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Modules.Api.Authorization\ICP.Modules.Api.Authorization.csproj">
+      <Project>{061BCAF2-7C62-48CF-B119-530DD511AF73}</Project>
+      <Name>ICP.Modules.Api.Authorization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

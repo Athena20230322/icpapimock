@@ -1,0 +1,48 @@
+﻿@model ICP.Modules.Mvc.Admin.Models.AccountLoginModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutForAnonymous.cshtml";
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/login.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/Account/Login/action.js"></script>
+}
+@Html.ValidationSummary(false)
+<div class="site-body sb-noleftnav">
+    <div class="site-content-wrapper">
+
+        <div class="site-content">
+
+            <div class="sc-box scb-mini login-box">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <h3 class="login-title">登入</h3>
+                    <div class="login-form">
+                        <dl>
+                            <dt>帳號</dt>
+                            <dd>
+                                @Html.TextBoxFor(t => t.Account, new { placeholder = "請輸入您的帳號" })
+                                @Html.ValidationMessageFor(t => t.Account, "請輸入正確的帳號進行登入", new { @class = "input-error-txt" }, "div")
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>密碼</dt>
+                            <dd>
+                                @Html.PasswordFor(t => t.Pwd, new { placeholder = "請輸入您的密碼" })
+                                @Html.ValidationMessageFor(t => t.Pwd, "請輸入正確的密碼進行登入", new { @class = "input-error-txt" }, "div")
+                                <a href="@Url.Action("ForgetPwd")" class="inp-forgot-pw">忘記密碼</a>
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="btn-box">
+                        <a href="#" class="btn link-submit" title="登入">登入</a>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

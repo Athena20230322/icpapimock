@@ -1,0 +1,98 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models.MailLibrary;
+@model IPagedList<ContentQueryResult>
+@{
+    Layout = null;
+    string timeFormat = "yyyy/MM/dd HH:mm:ss";
+}
+<div class="sc-box scb-table st-control st-2">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">代碼</p></li>
+            <li><p class="sth-txt">版型</li>
+            <li><p class="sth-txt">描述</p></li>
+            <li><p class="sth-txt">建立時間</p></li>
+            <li><p class="sth-txt">修改時間</p></li>
+            <li><p class="sth-txt">修改者</p></li>
+            <li><p class="sth-txt">編輯</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.MailKey
+                    </td>
+                    <td>
+                        @if (item.LayoutID > 0)
+                        {
+                            <a href="@Url.Action("EditMail", new { id = item.LayoutID })">@item.LayoutKey</a>
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+                        <br />
+                        @if (item.NotifyLayoutID > 0)
+                        {
+                            <a href="@Url.Action("EditNotify", new { id = item.NotifyLayoutID })">@item.NotifyLayoutKey</a>
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.CreateDate
+                    </td>
+                    <td>
+                        @(item.ModifyDate == null ? "-" : item.ModifyDate.Value.ToString(timeFormat))
+                        <br />
+                        @(item.NotifyModifyDate == null ? "-" : item.NotifyModifyDate.Value.ToString(timeFormat))
+                    </td>
+                    <td>
+                        @(string.IsNullOrEmpty(item.Modifier) ? "-" : item.Modifier)
+                        <br />
+                        @(string.IsNullOrEmpty(item.NotifyModifier) ? "-" : item.NotifyModifier)
+                    </td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            @if (item.MailID > 0)
+                            {
+                                <a href="@Url.Action("EditMail", new { id = item.MailID })" class="btn" target="_blank" title="編輯 Mail">編輯Mail</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("AddMail", new { item.NotifyID, layout = (item.NotifyLayoutID == 0 ? 1 : 0) })" class="btn" target="_blank" title="新增 Mail">新增Mail</a>
+                            }
+                            <br />
+                            @if (item.NotifyID > 0)
+                            {
+                                <a href="@Url.Action("EditNotify", new { id = item.NotifyID })" class="btn" target="_blank" title="編輯訊息">編輯訊息</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("AddNotify", new { item.MailID, layout = (item.LayoutID == 0 ? 1 : 0) })" class="btn" target="_blank" title="新增訊息">新增訊息</a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

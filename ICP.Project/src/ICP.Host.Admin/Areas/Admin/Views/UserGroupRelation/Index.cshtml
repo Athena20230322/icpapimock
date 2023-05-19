@@ -1,0 +1,33 @@
+﻿@model UserGroupQuery
+@using ICP.Modules.Mvc.Admin.Models;
+@{ 
+    
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/UserGroupRelation/Index/action.js"></script>
+}
+<div class="site-content">
+    <div class="sc-box no-edge">
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult", OnComplete = "queryComplete" }))
+        {
+            <input type="submit" id="btnQuery" value="query" style="display:none;" />
+            <div class="scb-list-box">
+                <ul class="content-list">
+                    <li>於群組名稱管理設定好群組後，於此新增刪除該群組的人員</li>
+                </ul>
+            </div>
+            <div class="scb-search-box">
+                <div class="scb-search ssb-width2">
+                    <span class="icon-ic-search ssr-icon"></span>
+                    @Html.TextBoxFor(t => t.UserGroupName, new { id = "queryUserGroupName", @class = "ssr-inp", placeholder = "輸入欲查詢群組名稱關鍵字搜尋" })
+                </div>
+            </div>
+        }
+    </div>
+    <div class="sb-multi">
+        <div id="queryResult">
+        </div>
+        <div id="queryResult2">
+        </div>
+    </div>
+</div>

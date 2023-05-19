@@ -1,0 +1,29 @@
+// 存取多個結果集
+ICP.Project\src\ICP.Library.Repositories\MemberRepositories\MemberInfoRepository.cs
+
+public MemberDataModel GetMemberData(long MID)
+{
+    var db = _dbConnectionPool.Create(DatabaseName.ICP_Member);
+
+    string sql = "EXEC ausp_Member_MemberInfo_GetMember_S";
+
+    var args = new
+    {
+        MID
+    };
+
+    sql += db.GenerateParameter(args);
+
+    var types = new Type[]
+    {
+        typeof(MemberBasicModel),
+        typeof(MemberDetailModel)
+    };
+
+    var results = db.QueryMultiple(types, sql, args);
+
+    var result = new MemberDataModel();
+    result.basic = results[0].Cast<MemberBasicModel>().FirstOrDefault();
+    result.detail = results[1].Cast<MemberDetailModel>().FirstOrDefault();
+    return result;
+}

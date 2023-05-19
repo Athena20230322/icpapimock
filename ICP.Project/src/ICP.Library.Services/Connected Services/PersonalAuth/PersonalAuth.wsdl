@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="P33Auth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:P33Auth" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="P33Auth">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="IDNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Source" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="RealIP" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProxyIP" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="P33AuthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="P33AuthResult" type="tns:P33AuthResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="P33AuthResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsPass" type="s:short" />
+              <s:element minOccurs="1" maxOccurs="1" name="DataCount" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="DataList" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsSuccess" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="RtnCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="P11Auth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:P11Auth" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="P11Auth">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="IDNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IssueDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IssueType" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BirthDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PicFree" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="IssueLoc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Source" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RealIP" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProxyIP" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="P11AuthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="P11AuthResult" type="tns:P11AuthResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="P11AuthResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsPass" type="s:short" />
+              <s:element minOccurs="0" maxOccurs="1" name="Answer" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="P33AuthSoapIn">
+    <wsdl:part name="parameters" element="tns:P33Auth" />
+  </wsdl:message>
+  <wsdl:message name="P33AuthSoapOut">
+    <wsdl:part name="parameters" element="tns:P33AuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="P11AuthSoapIn">
+    <wsdl:part name="parameters" element="tns:P11Auth" />
+  </wsdl:message>
+  <wsdl:message name="P11AuthSoapOut">
+    <wsdl:part name="parameters" element="tns:P11AuthResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PersonalAuthSoap">
+    <wsdl:operation name="P33Auth">
+      <wsdl:input message="tns:P33AuthSoapIn" />
+      <wsdl:output message="tns:P33AuthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="P11Auth">
+      <wsdl:input message="tns:P11AuthSoapIn" />
+      <wsdl:output message="tns:P11AuthSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PersonalAuthSoap" type="tns:PersonalAuthSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="P33Auth">
+      <soap:operation soapAction="http://tempuri.org/P33Auth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="P11Auth">
+      <soap:operation soapAction="http://tempuri.org/P11Auth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PersonalAuthSoap12" type="tns:PersonalAuthSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="P33Auth">
+      <soap12:operation soapAction="http://tempuri.org/P33Auth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="P11Auth">
+      <soap12:operation soapAction="http://tempuri.org/P11Auth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PersonalAuth">
+    <wsdl:port name="PersonalAuthSoap" binding="tns:PersonalAuthSoap">
+      <soap:address location="http://localhost:3321/Api/PersonalAuth.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PersonalAuthSoap12" binding="tns:PersonalAuthSoap12">
+      <soap12:address location="http://localhost:3321/Api/PersonalAuth.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

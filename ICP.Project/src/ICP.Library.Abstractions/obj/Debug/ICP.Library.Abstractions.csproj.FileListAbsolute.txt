@@ -1,0 +1,5 @@
+D:\ICP\ICP.Project\src\ICP.Library.Abstractions\bin\Debug\ICP.Library.Abstractions.dll
+D:\ICP\ICP.Project\src\ICP.Library.Abstractions\bin\Debug\ICP.Library.Abstractions.pdb
+D:\ICP\ICP.Project\src\ICP.Library.Abstractions\obj\Debug\ICP.Library.Abstractions.csproj.CoreCompileInputs.cache
+D:\ICP\ICP.Project\src\ICP.Library.Abstractions\obj\Debug\ICP.Library.Abstractions.dll
+D:\ICP\ICP.Project\src\ICP.Library.Abstractions\obj\Debug\ICP.Library.Abstractions.pdb

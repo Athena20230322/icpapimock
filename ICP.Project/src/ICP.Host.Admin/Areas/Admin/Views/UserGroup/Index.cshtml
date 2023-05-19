@@ -1,0 +1,36 @@
+﻿@using ICP.Modules.Mvc.Admin.Models;
+@model UserGroupQuery
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/UserGroup/Index/action.js"></script>
+}
+<div class="site-content">
+    <div class="sc-box no-edge">
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <div class="scb-list-box">
+                <ul class="content-list">
+                    <li>如選單沒有要分類的群組，請先點選「新增群組」</li>
+                </ul>
+            </div>
+            <input type="submit" id="btnQuery" value="query" style="display:none;" />
+            <div class="scb-search-box">
+                <div class="scb-search">
+                    <span class="icon-ic-search ssr-icon"></span>
+                    @Html.TextBoxFor(t => t.UserGroupName, new { id = "queryUserGroupName", @class = "ssr-inp", placeholder = "輸入欲查詢群組名稱關鍵字搜尋" })
+                </div>
+            </div>
+        }
+    </div>
+    <div class="sc-function">
+        <div class="btn-box">
+            <a class="libs-dialog-form btn" href="@Url.Action("Add")" data-update-callback="query" title="新增群組">
+                <span class="icon-ic-add bb-icon"></span>
+                新增群組
+            </a>
+        </div>
+    </div>
+
+    <div id="queryResult">
+    </div>
+</div>

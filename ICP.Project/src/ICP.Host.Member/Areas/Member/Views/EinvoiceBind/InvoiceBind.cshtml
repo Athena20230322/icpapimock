@@ -1,0 +1,40 @@
+﻿@model ICP.Library.Models.EinvoiceLibrary.InvoiceBindReturn
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")" type="text/javascript"></script>   
+    <script type="text/javascript">
+        $(function () {
+            $("#bindForm").submit();
+        });    
+    </script>
+</head>
+<body>
+    <div>
+        @{
+
+            if (Model.RtnCode == 1)
+            {
+                <form id="bindForm" name="bindForm" method="post" action="@Model.postUrl">
+                    <input name="card_ban" type="hidden" value="@Model.card_ban" />
+                    <input name="card_no1" type="hidden" value="@Model.card_no1" />
+                    <input name="card_no2" type="hidden" value="@Model.card_no2" />
+                    <input name="card_type" type="hidden" value="@Model.card_type" />
+                    <input name="back_url" type="hidden" value="@Model.back_url" />
+                    <input name="token" type="hidden" value="@Model.token" />
+                </form>
+            }
+            else
+            {
+                <script type="text/javascript">
+                   alert("發生錯誤!@Model.RtnMsg");
+                   window.close();
+                   window.opener.document.getElementById("btnBind").style.display="none";
+                </script>
+
+            }
+        }
+    </div>
+</body>
+</html>

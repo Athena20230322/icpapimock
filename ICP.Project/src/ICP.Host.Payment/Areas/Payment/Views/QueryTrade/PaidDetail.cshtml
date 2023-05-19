@@ -1,0 +1,141 @@
+﻿@model List<ICP.Modules.Mvc.Payment.Models.QueryTrade.PaidTradeInfo>
+
+@{
+    Layout = "~/Areas/Payment/Views/Shared/_QueryTradeLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    if (Model.Count > 0)
+    {
+        string TradeMode = "支付";
+        string TradeStatus = "交易成功";
+        string PaymentType = "";
+        string PaidAccount = "";
+
+        switch(Model[0].TradeStatus)
+        {
+            case 0:
+            case 4:
+                TradeStatus = "交易失敗";
+                break;
+            case 2:
+            case 3:
+                TradeMode = "退款";
+                break;
+        }
+
+        switch (Model[0].PaymentTypeID)
+        {
+            case 1:
+                PaymentType = "帳戶餘額";
+                PaidAccount = Model[0].IcashAccount;
+                break;
+            case 2:
+                PaymentType = "連結銀行帳戶";
+                PaidAccount = Model[0].BankName;
+                if (!string.IsNullOrWhiteSpace(Model[0].BankAccount))
+                {
+                    if(Model[0].BankAccount.Length >= 5)
+                    {
+                        PaidAccount += " " + Model[0].BankAccount.Substring(Model[0].BankAccount.Length - 5);
+                    }
+                }
+                break;
+        }
+
+
+        <div id="wrapper">
+            <header></header>
+            <section id="record_detial_box">
+                <ul class="toggle_box" id="record_detial">
+                    <p class="title green br">@Html.DisplayFor(model => model[0].MerchantName)</p>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>時間</span></div>
+                            <div class="col"><span>@Html.DisplayFor(model => model[0].CreateDate)</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>類別</span></div>
+                            <div class="col"><span>@(TradeMode)</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>狀態</span></div>
+                            <div class="col green"><span>@(TradeStatus)</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>付款方式</span></div>
+                            <div class="col"><span>@(PaymentType)</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>付款帳號</span></div>
+                            <div class="col"><span>@(PaidAccount)</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>訂單金額</span></div>
+                            <div class="col green"><span>@Html.DisplayFor(model => model[0].TotalAmount)</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>點數折扣</span></div>
+                            <div class="col red"><span>@(Convert.ToInt32(Model[0].BonusAmt).ToString("N0"))</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>支付金額</span></div>
+                            <div class="col green"><span>@Html.DisplayFor(model => model[0].Amount)</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>編號</span></div>
+                            <div class="col"><span>@Html.DisplayFor(model => model[0].TradeNo)</span></div>
+                        </div>
+                    </li>
+                </ul>
+
+                @if (Model[0].RefundAmt > 0)
+                {
+                    <div class="sep">
+                        <p class="br green">退款資訊</p>
+                    </div>
+                    <ul class="style2 toggle_box" id="record_detial">
+                        <li>
+                            <div class="flex">
+                                <div class="col gray"><span>退款時間</span></div>
+                                <div class="col gray"><span>退款金額</span></div>
+                            </div>
+                        </li>
+                        <li>
+                            @foreach (var item in Model)
+                            {
+                                <div class="flex">
+                                    <div class="col normal"><span>@(item.RefundDate.ToString("yyyy/MM/dd HH:mm"))</span></div>
+                                    <div class="col green"><span>NT$@(item.RefundAmt.ToString("N0"))</span></div>
+                                </div>
+                            }
+                        </li>
+                    </ul>
+                }
+            </section>
+        </div>
+    }
+}
+
+<script type="text/javascript">
+    if ('@ViewBag.errMsg' != "") {
+        alert('@ViewBag.errMsg');
+    }
+</script>

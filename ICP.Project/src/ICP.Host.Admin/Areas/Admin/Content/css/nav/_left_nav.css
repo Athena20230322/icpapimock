@@ -1,0 +1,133 @@
+.left-nav-container {
+  zoom: 1; }
+
+.left-nav-container:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden; }
+
+/* -- left_nav --*/
+.left-nav-container {
+  float: left;
+  width: 260px;
+  height: auto;
+  margin-left: 0px;
+  background: #26b7bc;
+  position: relative;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s; }
+  .left-nav-container .lnc-nav-box {
+    width: 100%;
+    position: relative; }
+  .left-nav-container .lnb-list-box {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1;
+    position: relative; }
+    .left-nav-container .lnb-list-box .lnb-title {
+      height: 24px;
+      line-height: 24px;
+      font-size: 12px;
+      color: #FFF;
+      background: #02969b;
+      padding: 0 20px; }
+    .left-nav-container .lnb-list-box .lnb-list .lnb-subtitle {
+      width: 100%;
+      height: 48px;
+      line-height: 48px;
+      display: block;
+      position: relative;
+      font-size: 14px;
+      color: #FFF;
+      padding: 0 20px;
+      background: #26b7bc;
+      -webkit-transition: 0.3s;
+      -moz-transition: 0.3s;
+      -ms-transition: 0.3s;
+      -o-transition: 0.3s;
+      transition: 0.3s; }
+      .left-nav-container .lnb-list-box .lnb-list .lnb-subtitle.on-touch {
+        background: #22a4a8; }
+      .left-nav-container .lnb-list-box .lnb-list .lnb-subtitle:after {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border: 1px solid white;
+        border-left: none;
+        border-bottom: none;
+        display: block;
+        position: absolute;
+        top: calc(50% - 4px);
+        right: 20px;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -ms-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s;
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg); }
+    .left-nav-container .lnb-list-box .lnb-list > li.lnl-active .lnb-subtitle {
+      background: #22a4a8; }
+      .left-nav-container .lnb-list-box .lnb-list > li.lnl-active .lnb-subtitle:after {
+        top: calc(50% - 6px);
+        -moz-transform: rotate(135deg);
+        -ms-transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg); }
+    .left-nav-container .lnb-list-box .lnb-list-sec {
+      display: none;
+      width: 100%;
+      font-size: 14px;
+      background: #a5edf0; }
+      .left-nav-container .lnb-list-box .lnb-list-sec > li > a {
+        width: 100%;
+        height: 44px;
+        line-height: 44px;
+        color: #07878b;
+        display: block;
+        position: relative;
+        padding: 0px 20px 0 40px;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -ms-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s; }
+        .left-nav-container .lnb-list-box .lnb-list-sec > li > a:before {
+          content: '';
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 6px 0 6px 6px;
+          border-color: transparent transparent transparent #04585a;
+          display: block;
+          position: absolute;
+          top: calc(50% - 6px);
+          left: 20px;
+          opacity: 0;
+          -webkit-transition: 0.3s;
+          -moz-transition: 0.3s;
+          -ms-transition: 0.3s;
+          -o-transition: 0.3s;
+          transition: 0.3s; }
+        .left-nav-container .lnb-list-box .lnb-list-sec > li > a.on-touch {
+          color: #04585a;
+          background: #99e3e6; }
+          .left-nav-container .lnb-list-box .lnb-list-sec > li > a.on-touch:before {
+            opacity: 1;
+            left: 25px; }
+      .left-nav-container .lnb-list-box .lnb-list-sec > li.lls-active > a {
+        color: #04585a;
+        background: #99e3e6; }
+        .left-nav-container .lnb-list-box .lnb-list-sec > li.lls-active > a:before {
+          opacity: 1;
+          left: 25px; }
+
+/*left_nav end -------------------------------------------------- */

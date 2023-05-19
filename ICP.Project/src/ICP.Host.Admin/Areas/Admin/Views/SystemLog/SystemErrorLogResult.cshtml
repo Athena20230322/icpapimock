@@ -1,0 +1,96 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.SystemLog.SystemError;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<QrySystemErrorRes>
+@{
+    Layout = null;
+
+}
+@section scripts{
+
+}
+
+@if (Model.Count == 0)
+{
+    Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+    return;
+}
+else
+{
+    <div class="sc-box scb-attach">
+        <div class="scb-function">
+            <div class="sbf-txt">查詢成功共取得 @Model[0].TotalCount.ToString("N0") 筆資料</div>
+        </div>
+    </div>
+
+    <div class="sc-box scb-table st-control st-log-abnormal">
+        <div class="scb-table-body stb-thbg">
+            <div class="scb-table-header">
+                <ul>
+                    <li><p class="sth-txt">站台</p></li>
+                    <li><p class="sth-txt">程式路徑</p></li>
+                    <li><p class="sth-txt">錯誤類型</p></li>
+                    <li><p class="sth-txt">伺服器名稱</p></li>
+                    <li><p class="sth-txt">明細</p></li>
+                    <li><p class="sth-txt">建立時間</p></li>
+                </ul>
+            </div>
+            <div class="scb-table-body">
+                <table>
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    @foreach (var item in Model)
+                    {
+                        string siteName = "";
+
+                        switch (item.SiteType)
+                        {
+                            case 1:
+                                siteName = "會員系統";
+                                break;
+                            case 2:
+                                siteName = "交易系統";
+                                break;
+                            case 3:
+                                siteName = "金流系統";
+                                break;
+                            case 4:
+                                siteName = "後臺系統";
+                                break;
+                            case 5:
+                                siteName = "系統排程";
+                                break;
+                        }
+
+                        string errorName = "程式錯誤";
+
+                        if(item.ErrorType == 1)
+                        {
+                            errorName = "DB 錯誤";
+                        }
+
+                    <tr>
+                        <td>@siteName</td>
+                        <td>@item.RequestUrl</td>
+                        <td>@errorName</td>
+                        <td>@item.MachineName</td>
+                        <td>
+                            <div class="btn-box stb-btn-box">
+                                <a href="@Url.Action("SystemErrorLogDetail", new { LogId = item.LogId, SiteType = item.SiteType })" data-effect="mfp-zoom-in" class="libs-dialog-form btn" title="明細" data-update-callback="query">明細</a>                                
+                            </div>
+                        </td>
+                        <td>@item.CreateDT.ToString("yyyy/MM/dd HH:mm:ss")</td>
+                    </tr>
+                    }
+                </table>
+            </div>
+        </div>
+     </div>
+    { Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("SystemErrorLogResult", Model, ViewBag.QueryModel)); }
+}
+

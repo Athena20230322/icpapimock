@@ -1,0 +1,169 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models;
+@model IPagedList<ListOverSeaUserResultModel>
+@{
+    Layout = null;
+}
+
+@{
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+<div class="sc-box scb-table st-control st-foreign-upgrade">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">建立日期</p></li>
+            <li><p class="sth-txt sth-twoline">手機<br>號碼</p></li>
+            <li><p class="sth-txt sth-twoline">個人<br>姓名</p></li>
+            <li><p class="sth-txt">國籍</p></li>
+            <li><p class="sth-txt">地址</p></li>
+            <li><p class="sth-txt sth-twoline">OP<br>mid</p></li>
+            <li><p class="sth-txt sth-twoline">電子<br>郵件</p></li>
+            <li><p class="sth-txt sth-twoline">居留證<br>字號</p></li>
+            <li><p class="sth-txt sth-twoline">證號<br>核發日期</p></li>
+            <li><p class="sth-txt">居留期限</p></li>
+            <li><p class="sth-txt sth-twoline">背面<br>流水號</p></li>
+            <li>
+                <div class="sth-txt sth-twoline2">
+                    身分驗證
+                    <div class="st-function-group">
+                        <div class="def-check">
+                            <input type="checkbox" id="si_all" name="sfu_id_all">
+                            <label for="si_all" class="checkbox"></label>
+                        </div>
+                        <div class="btn-box stb-btn-box">
+                            <a href="#" class="btn" title="已確認">已確認</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><p class="sth-txt sth-twoline">銀行<br>代號</p></li>
+            <li><p class="sth-txt sth-twoline">分行<br>名稱</p></li>
+            <li><p class="sth-txt sth-twoline">銀行<br>帳號</p></li>
+            <li><p class="sth-txt">照片</p></li>
+            <li><p class="sth-txt sth-twoline">最後<br>修改人</p></li>
+            <li><p class="sth-txt sth-twoline">最後<br>修改日期</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        <input type="hidden" name="MID" value="@item.MID.ToString()">
+                        @string.Format("{0:yyyy/MM/dd}", item.CreateDate)<br />
+                        @string.Format("{0:HH:mm:ss}", item.CreateDate)
+                    </td>
+                    <td>@item.CellPhone</td>
+                    <td>@item.CName</td>
+                    <td>@item.NationalityName</td>
+                    <td>@item.Address</td>
+                    <td>@item.OPMID</td>
+                    <td>@item.Email</td>
+                    <td>@item.UniformID</td>
+                    <td>@item.UniformIssueDateYYYMMDD</td>
+                    <td>@item.UniformExpireDateYYYMMDD</td>
+                    <td>@item.UniformNumber</td>
+                    <td>
+                        @if (item.AuthStatus == 0)
+                        {
+                            if (item.BlockStatus == 0)
+                            {
+                                <div class="st-function-group">
+                                    <div class="def-check">
+                                        <input type="checkbox" id="si_@(item.MID)" name="sfu_@(item.MID)">
+                                        <label for="si_@(item.MID)" class="checkbox"></label>
+                                    </div>
+                                    <div class="btn-box stb-btn-box">
+                                        <a href="javascript:;" class="btn" title="已確認" >已確認</a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="st-verify-fail">P33驗證失敗</p>
+                            }
+
+                        }
+                        else
+                        {
+                            <p class="st-verified">驗證通過</p>
+                        }
+
+                        @*<div class="btn-box stb-btn-box">
+                                <a href="@Url.Action("Detail", new { id = item.MID })" class="btn" title="查看" target="_blank">查看</a>
+                            </div>*@
+                    </td>
+                    <td>@item.BankCode</td>
+                    <td>@item.BankName</td>
+                    <td>@item.BankAccount</td>
+                    <td>
+                        @if (item.AuthStatus != 1)
+                        {
+                            if (item.IDNO_FilePath1 == null)
+                            {
+                                @:正面<br />
+                            }
+                            else
+                            {
+                                <a href="@item.IDNO_FilePath1" target="_blank" title="正面">正面</a><br />
+                            }
+                            if (item.IDNO_FilePath2 == null)
+                            {
+                                @:反面<br />
+                            }
+                            else
+                            {
+                                <a href="@item.IDNO_FilePath2" target="_blank" title="反面">反面</a><br />
+                            }
+                        }
+
+                        @if (item.AccountStatus != 1)
+                        {
+                            if (item.Bank_FilePath1 == null)
+                            {
+                                @:存摺封面<br />
+                            }
+                            else
+                            {
+                                <a href="@item.Bank_FilePath1" target="_blank" title="存摺封面">存摺封面</a>
+                            }
+                        }
+
+                    </td>
+                    <td>@item.Modifier</td>
+                    <td>
+                        @string.Format("{0:yyyy/MM/dd}", item.ModifyDate)<br />
+                        @string.Format("{0:HH:mm:ss}", item.ModifyDate)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("ListOverSeaUserResult", Model, ViewBag.QueryModel)); }
+

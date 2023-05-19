@@ -1,0 +1,96 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerSecurityManage
+@model List<OTPBlackListLogModel>
+@{    
+    if (Request.IsAjaxRequest())
+    {       
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+
+<div id="blacklist-history-popup" class="blacklist-history-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <div class="pp-content">
+            <h4 class="pp-title">歷程</h4>
+
+            <div class="pp-function">
+                <div class="btn-box">                    
+                    <a href="@Url.Action("OTPBlackLogExportCSV", new { CellPhone = @ViewBag.CellPhone })" class="btn btn-blue-border bd-rdi" title="匯出EXCEL">
+                        <span class="icon-ic-exprot bb-icon"></span>
+                        匯出EXCEL
+                    </a>
+                </div>
+            </div>
+            <div class="pp-table pt-bkl-otp-history">
+                <div class="pp-table-header">
+                    <ul>
+                        <li><p class="sth-txt">序號</p></li>
+                        <li><p class="sth-txt">手機號碼</p></li>
+                        <li><p class="sth-txt">身分證字號</p></li>
+                        <li><p class="sth-txt">E-mail</p></li>
+                        <li><p class="sth-txt">建立時間</p></li>
+                        <li><p class="sth-txt">建立人員</p></li>
+                        <li><p class="sth-txt">解除時間</p></li>
+                        <li><p class="sth-txt">解除人員</p></li>
+                        <li><p class="sth-txt">鎖定原因</p></li>
+                        <li><p class="sth-txt">解鎖原因</p></li>
+                        <li><p class="sth-txt">黑名單狀態</p></li>
+                    </ul>
+                </div>
+                <div class="pp-table-body">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.RowNo</td>
+                            <td>@item.CellPhone</td>
+                            <td>@item.IDNO</td>
+                            <td>@item.Email</td>
+                            <td>
+                                @if (item.LockDate != null)
+                                {
+                                    <span>@item.LockDate.ToString("yyyy/MM/dd")<br />@item.LockDate.ToString("HH:mm:ss")</span>
+                                }
+                            </td>
+                            <td>@item.LockUser</td>
+                            <td>
+                                @if (item.Status == 0 && item.UnLockDate != null)
+                                {
+                                    <span>@string.Format("{0:yyyy/MM/dd}", item.UnLockDate)<br />@string.Format("{0:HH:mm:ss}", item.UnLockDate)</span>
+                                }
+                                else
+                                {
+                                    @:-
+                                }
+                            </td>
+                            <td>@( (item.Status == 0) ? item.UnLockUser : "-" )</td>
+                            <td>@( (item.Status == 0) ? "-" : item.LockMemo )</td>
+                            <td>@( (item.Status == 1) ? "-" : item.UnLockMemo )</td>
+                            <td>@( (item.Status == 0) ? "已解除" : "封鎖" )</td>
+                        </tr>
+
+                        }                        
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

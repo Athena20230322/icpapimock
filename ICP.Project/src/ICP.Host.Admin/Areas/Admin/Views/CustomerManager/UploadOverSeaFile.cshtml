@@ -1,0 +1,84 @@
+﻿@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+
+
+<div id="upload-licensephoto-popup" class="upload-licensephoto-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+
+        <div class="pp-content">
+            <div class="pp-form">
+                <h4 class="pp-title">批次證件照片上傳</h4>
+
+                <div class="pp-list-box">
+                    <p class="plb-txt">※照片檔案命名規則：</p>
+                    <ul class="pp-list">
+                        <li>正面檔名為居留證字號_1，例如：AA12345678_1</li>
+                        <li>背面檔名為居留證字號_2，例如：AA12345678_2</li>
+                        <li>存摺封面檔名為居留證字號_3，例如：AA12345678_3</li>
+                    </ul>
+                </div>
+
+
+                <div class="pp-function">
+                    <div class="btn-box">
+                        <div class="def-file">
+                            <div id="fileSelect" class="btn dff-btn bd-rdi">
+                                <span class="icon-ic-add bb-icon"></span>
+                                新增檔案
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="position:relative;">
+                    <form class="ufb-list" action="@Url.Action("UploadOverSeaFile")" id="formUpload" method="post" enctype="multipart/form-data" target="_blank"
+                          style="position:absolute; z-index:1; left:0; top:0; width:100%; height:100%; background-color:transparent; border:none; padding:0;">
+                        <input name="file" type="file" multiple style="display:none;" />
+                        <ul></ul>
+                        <input type="submit" id="btnSubmit" value="submit" style="display:none;" />
+                    </form>
+                    <div class="ulp-file-box"
+                         style="z-index:0;">
+                        <div class="ufb-empty">
+                            <span class="icon-shape ue-ic"></span>
+                            <p class="ue-txt">將檔案拖放到這裡或使用「新增」按鈕</p>
+                        </div>
+
+                        <div class="hide">
+                            <ul id="template-container">
+                                <li>
+                                    <div class="ufl-holder">
+                                    </div>
+                                    <div class="ufl-close">
+                                        <span class="icon-ic_fail_svg ufl-ic"></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a id="lnkSave" href="javascript:;" class="btn" title="上傳">上傳</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/dropzone/dropzone.js"></script>
+    <script src="~/Areas/Admin/Scripts/CustomerManager/UploadOverSeaFile/action.js"></script>
+}
+
+
+
+
+
+

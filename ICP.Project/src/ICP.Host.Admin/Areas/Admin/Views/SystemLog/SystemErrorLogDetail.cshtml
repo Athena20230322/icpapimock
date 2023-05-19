@@ -1,0 +1,87 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.SystemLog.SystemError;
+@model SystemErrorDetailRes
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    string siteName = "";
+
+    switch (Model.SiteType)
+    {
+        case 1:
+            siteName = "會員系統";
+            break;
+        case 2:
+            siteName = "交易系統";
+            break;
+        case 3:
+            siteName = "金流系統";
+            break;
+        case 4:
+            siteName = "後臺系統";
+            break;
+        case 5:
+            siteName = "系統排程";
+            break;
+    }
+
+    string errorName = "程式錯誤";
+
+    if (Model.ErrorType == 1)
+    {
+        errorName = "DB 錯誤";
+    }
+}
+<div id="sla-detail-popup" class="sla-detail-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <form>
+            <div class="pp-content">
+                <h4 class="pp-title">明細內容</h4>
+                <div class="pp-table ptb-horizontal pt-sl-detail">
+                    <div class="pp-table-body">
+                        <table>
+                            <colgroup>
+                                <col>
+                                <col>
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th>站台</th>
+                                    <td>@siteName</td>
+                                </tr>
+                                <tr>
+                                    <th>伺服器名稱</th>
+                                    <td>@Model.MachineName</td>
+                                </tr>
+                                <tr>
+                                    <th>程式路徑</th>
+                                    <td>@Model.RequestUrl</td>
+                                </tr>
+                                <tr>
+                                    <th>錯誤類型</th>
+                                    <td>@errorName</td>
+                                </tr>
+                                <tr>
+                                    <th>請求內容</th>
+                                    <td>@Model.RequestContent</td>
+                                </tr>
+                                <tr>
+                                    <th>錯誤內容</th>
+                                    <td>
+                                        @(!string.IsNullOrWhiteSpace(Model.Exception) ? Model.Exception : Model.Message)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>建立時間</th>
+                                    <td>@Model.CreateDT.ToString("yyyy/MM/dd HH:mm:ss")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

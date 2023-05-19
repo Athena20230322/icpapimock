@@ -1,0 +1,124 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model QueryMemberVM
+<link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+@section scripts
+{    
+    <script src="~/Areas/Admin/Scripts/CustomerManager/Index/action.js"></script>
+}
+
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" id="btnQuery" value="query" />
+            <input type="hidden" name="PageSize" value="2" id="refreshPageSize" />
+            <input type="hidden" name="PageNo" value="1" id="refreshPageNo" />
+            @Html.TextBoxFor(t => t.CellPhone, new { id = "refreshCellPhone" })
+            @Html.TextBoxFor(t => t.Account, new { id = "refreshAccount" })
+            @Html.TextBoxFor(t => t.IDNO, new { id = "refreshIDNO" })
+            @Html.TextBoxFor(t => t.ICPMID, new { id = "refreshICPMID" })
+            @Html.TextBoxFor(t => t.UnifiedBusinessNo, new { id = "refreshUnifiedBusinessNo" })
+            @Html.TextBoxFor(t => t.CompanyName, new { id = "refreshCompanyName" })
+            @Html.TextBoxFor(t => t.UniformID, new { id = "refreshUniformID" })
+            @Html.TextBoxFor(t => t.WebSiteName, new { id = "refreshWebSiteName" })
+            @Html.TextBoxFor(t => t.CName, new { id = "refreshCName" })
+            @Html.TextBoxFor(t => t.Email, new { id = "refreshEmail" })
+
+        }
+    </div>
+<div class="sc-box no-edge">
+    @Html.ValidationSummary()
+    @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "POST" }))
+    {
+        <form>
+            <div class="scb-list-box">
+                <ul class="content-list">
+                    <li>請輸入任一搜尋欄位，並點擊查詢按鈕，即可在搜尋欄位下方顯示該筆符合的使用者資料。</li>
+                    <li>如輸入多個搜尋欄位，僅可搜尋到皆符合資料的使用者資訊。</li>
+                </ul>
+            </div>
+
+            <div class="scb-form sf-2column">
+
+                <dl>
+                    <dt class="oneline-inp">會員姓名</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.CName, new { id = "queryCName", @class = "pp-inp", placeholder = "請輸入會員姓名" })
+                        @Html.ValidationMessageFor(t => t.CName, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">手機號碼</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.CellPhone, new { id = "queryCellPhone", @class = "pp-inp", placeholder = "請輸入使用者手機號碼", @maxlength = 10 })
+                        @Html.ValidationMessageFor(t => t.CellPhone, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">電支帳號</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.ICPMID, new { id = "queryICPMID", @class = "pp-inp", placeholder = "請輸入使用者電支帳號", @maxlength = 16 })
+                        @Html.ValidationMessageFor(t => t.ICPMID, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">登入帳號</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.Account, new { id = "queryAccount", @class = "pp-inp", placeholder = "請輸入使用者登入帳號" })
+                        @Html.ValidationMessageFor(t => t.Account, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">E-mail</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.Email, new { id = "queryEmail", @class = "pp-inp", placeholder = "請輸入使用者E-mail" })
+                        @Html.ValidationMessageFor(t => t.Email, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">身分證字號</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.IDNO, new { id = "queryIDNO", @class = "pp-inp", placeholder = "請輸入身分證字號", @maxlength = 10 })
+                        @Html.ValidationMessageFor(t => t.IDNO, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">居留證字號</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.UniformID, new { id = "queryUniformID", @class = "pp-inp", placeholder = "請輸入居留證字號", @maxlength = 10 })
+                        @Html.ValidationMessageFor(t => t.UniformID, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">統一編號</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.UnifiedBusinessNo, new { id = "queryUnifiedBusinessNo", @class = "pp-inp", placeholder = "請輸入統一編號", @maxlength = 8 })
+                        @Html.ValidationMessageFor(t => t.UnifiedBusinessNo, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">公司名稱</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.CompanyName, new { id = "queryCompanyName", @class = "pp-inp", placeholder = "請輸入公司名稱" })
+                        @Html.ValidationMessageFor(t => t.CompanyName, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">商店名稱</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.WebSiteName, new { id = "queryWebSiteName", @class = "pp-inp", placeholder = "請輸入商店名稱" })
+                        @Html.ValidationMessageFor(t => t.WebSiteName, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+
+            </div>
+
+            <div class="btn-box">
+                <a id="lnkQuery" href="#" class="btn" title="查詢">查詢</a>
+                <a id="lnkReset" href="#" class="btn btn-blue-border clear-form disabled" title="清除條件">清除條件</a>
+            </div>
+        </form>
+    }
+</div>
+
+<div id="queryResult">
+</div>

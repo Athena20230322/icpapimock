@@ -1,0 +1,67 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.Announcement;
+@model ModifyCategoryVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@if (TempData["RtnMsg"] != null)
+{
+    <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["RtnMsg"]));
+        alert(message);
+    </script>
+}
+
+<div id="add-newstype-popup" class="add-newstype-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" name="@Html.NameFor(t => t.Visible)" value="1" />
+            <div class="pp-content">
+                <h4 class="pp-title">新增類別</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>@Html.DisplayNameFor(m => m.CategoryName)</dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.CategoryName, new { @class = "pp-inp", placeholder = "請輸入類別名稱", @maxlength = "20" })
+                            <div class="input-tip-txt">請輸入 2-10 個字元，可中英數混合</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.DisplayNameFor(m => m.Status)</dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "啟用", Value = "1" },
+                                    new SelectListItem { Text = "關閉",  Value = "0" },
+                                }, "請選擇訊息公告類別")
+                            </label>
+                            <div class="input-tip-txt">欲使用訊息公告類別狀態請選擇「啟用」</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                <a href="#" class="btn disabled link-submit2" title="新增">新增</a>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        libs.alert.validationSummary();
+
+        $('#CategoryName').on('keyup', function () {
+            inputValid.call(this);
+        });
+
+        $('#Status').on('change', function () {
+            inputValid.call(this);
+        });
+    </script>
+}

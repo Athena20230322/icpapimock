@@ -1,0 +1,43 @@
+﻿@{
+    string queryAction = "QueryAPPSetting";
+}
+@section header
+{
+<style type="text/css">
+    .sc-function {
+        width: 1176px;
+        margin: 20px auto;
+    }
+    .sc-function .btn-box {
+        text-align: left;
+    }
+    .scb-table .stb-btn-box .btn {
+        width: 90px;
+    }
+</style>
+}
+@section scripts
+{
+<script>
+    //更新內容
+    function query() {
+        $.ajax({
+            url: '@Url.Action(queryAction)',
+            success: function (result) {
+                $('#queryResult').html(result);
+            }
+        });
+    }
+</script>
+}
+<div class="sc-function">
+    <div class="btn-box">
+        <a class="libs-dialog-form btn" href="@Url.Action("AddAPPSetting")" data-update-callback="query" title="新增 XML">
+            <span class="icon-ic-add bb-icon"></span>
+            新增 XML
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+    @{ Html.RenderAction(queryAction); }
+</div>

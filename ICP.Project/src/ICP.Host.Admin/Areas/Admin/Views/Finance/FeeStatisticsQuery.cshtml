@@ -1,0 +1,102 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentCenter;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models;
+@model IPagedList<FeeStatisticsModel>
+@{
+    Layout = null;
+}
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("ExportFeeStatistics", ViewBag.QueryModel)" class="btn btn-blue-border bd-rdi" title="匯出 EXCEL">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出 EXCEL
+        </a>
+    </div>
+</div>
+<div class="st-scroll-tip">
+    <span class="sst-txt">往右滾動看更多</span>
+</div>
+
+<div class="sc-box scb-table st-control stb-oneline st-fee-statistics">
+    <div class="scb-table-body stb-thbg">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        @if (ViewBag.QueryModel.StatisticsType == 1)
+                        {
+                        @:撥款日期
+                        }
+                        else
+                        {
+                        @:撥款月份
+                        }
+                    </th>
+                    <th>電支帳號</th>
+                    <th>特店名稱</th>
+                    <th>統一編號</th>
+                    <th>金流方式</th>
+                    <th>交易/儲值筆數</th>
+                    <th>交易/儲值金額</th>
+                    <th>退款金額</th>
+                    <th>交易手續費 (%數 / $筆)</th>
+                    <th>交易手續費金額</th>
+                    <th>撥款淨額</th>
+                    <th>應收淨額</th>
+                    <th>儲值佣金費率</th>
+                    <th>儲值佣金</th>
+                    <th>明細</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (ViewBag.QueryModel.StatisticsType == 1)
+                            {
+                                @item.AllocateDate.ToShortDateString()
+                            }
+                            else
+                            {
+                                @item.AllocateDate.ToString("yyyy/MM")
+                            }
+                        </td>
+                        <td>@item.MerchantID</td>
+                        <td>@item.MerchantName</td>
+                        <td>@item.UnifiedBusinessNo</td>
+                        <td>@item.TradeModeName</td>
+                        <td>@item.Count.ToString("N0")</td>
+                        <td>@item.Amount.ToString("N0")</td>
+                        <td>@item.RefundAmount.ToString("N0")</td>
+                        <td>@item.FeeRate</td>
+                        <td>@item.Fee.ToString("N0")</td>
+                        <td>@item.AllocateAmount.ToString("N0")</td>
+                        <td>@item.ReceivableAmount.ToString("N0")</td>
+                        <td>@item.TopupBrokerageRate</td>
+                        <td>@item.TopupBrokerageAmount</td>
+                        <td><a href="@Url.Action("FeeStatisticsDetailQuery", new { StatisticsType = @ViewBag.QueryModel.StatisticsType, AllocateDate = @item.AllocateDate, MerchantID = @item.MerchantID, TradeModeID = @item.TradeModeID })" data-effect="mfp-zoom-in" data-update-callback="refresh" class="libs-dialog-form">詳細資料</a></td>
+                    </tr>
+                }
+                @if (ViewBag.IsLastPage ?? false)
+                {
+                    <tr class="stf-sum">
+                        <td colspan="5">小計：共 @Model[0].TotalCount.ToString("N0") 筆</td>
+                        <td>@Model[0].TotalTradeCount.ToString("N0")</td>
+                        <td>@Model[0].TotalTradeAmount.ToString("N0")</td>
+                        <td>@Model[0].TotalRefundAmount.ToString("N0")</td>
+                        <td>-</td>
+                        <td>@Model[0].TotalChargeFee.ToString("N0")</td>
+                        <td>@Model[0].TotalAllocateAmount.ToString("N0")</td>
+                        <td>@Model[0].TotalReceivableAmount.ToString("N0")</td>
+                        <td>-</td>
+                        <td>@Model[0].TotalTopupBrokerageAmount.ToString("N0")</td>
+                        <td>-</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("FeeStatisticsQuery", Model, ViewBag.QueryModel)); }

@@ -1,0 +1,61 @@
+﻿@using ICP.Modules.Mvc.Admin.Models
+@model HolidayWorkingDayModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts {
+    <script src="~/Areas/Admin/Scripts/Calendar/Edit/action.js?t=@(DateTime.Now.ToString("yyyMMddHHmmss"))"></script>
+    <script>
+        libs.alert.validationSummary();
+        flatpickr_init($('#UpdDayDate')[0]);
+    </script>
+}
+<div class="edit-holiday-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm("Edit", "Calendar", FormMethod.Post, new { id = "cal_upd_form" }))
+        {
+            @Html.Hidden("DayID", Model.DayID)
+            <div class="pp-content">
+                <h4 class="pp-title">編輯假日或補班</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>日期選擇</dt>
+                        <dd class="pf-date-box">
+                            <label class="pdb-item pdb-date">
+                                <input class="flatpickr flatpickr-input active minD" type="text" name="DayDate" id="UpdDayDate" value="@Model.DayDate.ToString("yyyy-MM-dd")" placeholder="請選擇假日或補班日期" readonly="readonly">
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl class="pf-radio-box">
+                        <dt>休假或補班</dt>
+                        <dd>
+                            <div class="def-radio">
+                                <input type="radio" value="1" id="day_holiday" name="DayType" @(Model.DayType == 1 ? "checked" : "") onclick="checkFields()" />
+                                <label for="day_holiday" class="radio">休假</label>
+                            </div>
+                            <div class="def-radio">
+                                <input type="radio" value="2" id="day_makeup" name="DayType" @(Model.DayType == 2 ? "checked" : "") onclick="checkFields()" />
+                                <label for="day_makeup" class="radio">補班</label>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>原因</dt>
+                        <dd>
+                            <textarea class="pp-textarea" name="DayDescription" id="DayDescription" placeholder="請填寫5-100字內的休假或補班原因" maxlength="100" onclick="checkFields()" onkeyup="countWords()">@Model.DayDescription</textarea>
+                            <div class="input-tip-txt itt-r"><span id="upd_desc_length">0</span>/100</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                @*<a href="#" class="btn disabled link-submit" title="送出">送出</a>*@
+                <a href="javascript:formSubmit()" class="btn disabled" title="送出" id="upd_submit">送出</a>
+            </div>
+        }
+    </div>
+</div>

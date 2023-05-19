@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="https://webservices.jcic.org.tw/EPaymentWebServices" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="EPaymentWebServices" targetNamespace="https://webservices.jcic.org.tw/EPaymentWebServices" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema targetNamespace="https://webservices.jcic.org.tw/EPaymentWebServices" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="ParamInP11Bean" type="tns:ParamInP11Bean" />
+      <xs:element name="RtnOutLoginBean" type="tns:RtnOutLoginBean" />
+      <xs:element name="RtnOutP11Bean" type="tns:RtnOutP11Bean" />
+      <xs:element name="RtnOutP33Bean" type="tns:RtnOutP33Bean" />
+      <xs:element name="RtnOutPF01Bean" type="tns:RtnOutPF01Bean" />
+      <xs:element name="VAI002Bean" type="tns:VAI002Bean" />
+      <xs:element name="VAM021Bean" type="tns:VAM021Bean" />
+      <xs:element name="VAM033Bean" type="tns:VAM033Bean" />
+      <xs:element name="VAM109Bean" type="tns:VAM109Bean" />
+      <xs:element name="VAS011Bean" type="tns:VAS011Bean" />
+      <xs:complexType name="RtnOutPF01Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RtnOutLoginBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" type="xs:string" />
+          <xs:element minOccurs="0" name="sessionId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RtnOutP33Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="vam021" nillable="true" type="tns:VAM021Bean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="vam109" nillable="true" type="tns:VAM109Bean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="vam033" nillable="true" type="tns:VAM033Bean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VAM021Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="oldIdn" type="xs:string" />
+          <xs:element minOccurs="0" name="newIdn" type="xs:string" />
+          <xs:element minOccurs="0" name="opDate" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VAM109Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dataDate" type="xs:string" />
+          <xs:element minOccurs="0" name="maincode" type="xs:string" />
+          <xs:element minOccurs="0" name="mainnote" type="xs:string" />
+          <xs:element minOccurs="0" name="note" type="xs:string" />
+          <xs:element minOccurs="0" name="filler" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VAM033Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="type" type="xs:string" />
+          <xs:element minOccurs="0" name="criPlace" type="xs:string" />
+          <xs:element minOccurs="0" name="criDate" type="xs:string" />
+          <xs:element minOccurs="0" name="docDate" type="xs:string" />
+          <xs:element minOccurs="0" name="cname" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceNo" type="xs:string" />
+          <xs:element minOccurs="0" name="remark" type="xs:string" />
+          <xs:element minOccurs="0" name="docName" type="xs:string" />
+          <xs:element minOccurs="0" name="relCode" type="xs:string" />
+          <xs:element minOccurs="0" name="relReason" type="xs:string" />
+          <xs:element minOccurs="0" name="relDate" type="xs:string" />
+          <xs:element minOccurs="0" name="filler" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamInP11Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idn" type="xs:string" />
+          <xs:element minOccurs="0" name="issueDate" type="xs:string" />
+          <xs:element minOccurs="0" name="issueType" type="xs:string" />
+          <xs:element minOccurs="0" name="birthDate" type="xs:string" />
+          <xs:element minOccurs="0" name="picFree" type="xs:string" />
+          <xs:element minOccurs="0" name="issueLoc" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RtnOutP11Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="vam021" nillable="true" type="tns:VAM021Bean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="vai002" nillable="true" type="tns:VAI002Bean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="vas011" nillable="true" type="tns:VAS011Bean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VAI002Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dataDate" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VAS011Bean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idn" type="xs:string" />
+          <xs:element minOccurs="0" name="issueDate" type="xs:string" />
+          <xs:element minOccurs="0" name="issueType" type="xs:string" />
+          <xs:element minOccurs="0" name="birthDate" type="xs:string" />
+          <xs:element minOccurs="0" name="picFree" type="xs:string" />
+          <xs:element minOccurs="0" name="issueLoc" type="xs:string" />
+          <xs:element minOccurs="0" name="answer" type="xs:string" />
+          <xs:element minOccurs="0" name="result" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="Login">
+    <part name="userId" type="xsd:string" />
+    <part name="password" type="xsd:string" />
+  </message>
+  <message name="LoginResponse">
+    <part name="return" type="tns:RtnOutLoginBean" />
+  </message>
+  <message name="LoginJson">
+    <part name="userId" type="xsd:string" />
+    <part name="password" type="xsd:string" />
+  </message>
+  <message name="LoginJsonResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="P11Query">
+    <part name="sessionId" type="xsd:string" />
+    <part name="paramInP11Bean" type="tns:ParamInP11Bean" />
+  </message>
+  <message name="P11QueryResponse">
+    <part name="return" type="tns:RtnOutP11Bean" />
+  </message>
+  <message name="P11QueryJson">
+    <part name="sessionId" type="xsd:string" />
+    <part name="paramInP11Bean" type="tns:ParamInP11Bean" />
+  </message>
+  <message name="P11QueryJsonResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="P33Query">
+    <part name="sessionId" type="xsd:string" />
+    <part name="idn" type="xsd:string" />
+  </message>
+  <message name="P33QueryResponse">
+    <part name="return" type="tns:RtnOutP33Bean" />
+  </message>
+  <message name="P33QueryJson">
+    <part name="sessionId" type="xsd:string" />
+    <part name="idn" type="xsd:string" />
+  </message>
+  <message name="P33QueryJsonResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="PF01Upload">
+    <part name="sessionId" type="xsd:string" />
+    <part name="main_code" type="xsd:string" />
+    <part name="content" type="xsd:string" />
+  </message>
+  <message name="PF01UploadResponse">
+    <part name="return" type="tns:RtnOutPF01Bean" />
+  </message>
+  <message name="PF01UploadJson">
+    <part name="sessionId" type="xsd:string" />
+    <part name="main_code" type="xsd:string" />
+    <part name="content" type="xsd:string" />
+  </message>
+  <message name="PF01UploadJsonResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <portType name="EPaymentImpl">
+    <operation name="Login" parameterOrder="userId password">
+      <input wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/LoginRequest" message="tns:Login" />
+      <output wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/LoginResponse" message="tns:LoginResponse" />
+    </operation>
+    <operation name="LoginJson" parameterOrder="userId password">
+      <input wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/LoginJsonRequest" message="tns:LoginJson" />
+      <output wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/LoginJsonResponse" message="tns:LoginJsonResponse" />
+    </operation>
+    <operation name="P11Query" parameterOrder="sessionId paramInP11Bean">
+      <input wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/P11QueryRequest" message="tns:P11Query" />
+      <output wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/P11QueryResponse" message="tns:P11QueryResponse" />
+    </operation>
+    <operation name="P11QueryJson" parameterOrder="sessionId paramInP11Bean">
+      <input wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/P11QueryJsonRequest" message="tns:P11QueryJson" />
+      <output wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/P11QueryJsonResponse" message="tns:P11QueryJsonResponse" />
+    </operation>
+    <operation name="P33Query" parameterOrder="sessionId idn">
+      <input wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/P33QueryRequest" message="tns:P33Query" />
+      <output wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/P33QueryResponse" message="tns:P33QueryResponse" />
+    </operation>
+    <operation name="P33QueryJson" parameterOrder="sessionId idn">
+      <input wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/P33QueryJsonRequest" message="tns:P33QueryJson" />
+      <output wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/P33QueryJsonResponse" message="tns:P33QueryJsonResponse" />
+    </operation>
+    <operation name="PF01Upload" parameterOrder="sessionId main_code content">
+      <input wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/PF01UploadRequest" message="tns:PF01Upload" />
+      <output wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/PF01UploadResponse" message="tns:PF01UploadResponse" />
+    </operation>
+    <operation name="PF01UploadJson" parameterOrder="sessionId main_code content">
+      <input wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/PF01UploadJsonRequest" message="tns:PF01UploadJson" />
+      <output wsam:Action="https://webservices.jcic.org.tw/EPaymentWebServices/EPaymentImpl/PF01UploadJsonResponse" message="tns:PF01UploadJsonResponse" />
+    </operation>
+  </portType>
+  <binding name="EPaymentWebServicesSOAPBinding" type="tns:EPaymentImpl">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="Login">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </output>
+    </operation>
+    <operation name="LoginJson">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </output>
+    </operation>
+    <operation name="P11Query">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </output>
+    </operation>
+    <operation name="P11QueryJson">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </output>
+    </operation>
+    <operation name="P33Query">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </output>
+    </operation>
+    <operation name="P33QueryJson">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </output>
+    </operation>
+    <operation name="PF01Upload">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </output>
+    </operation>
+    <operation name="PF01UploadJson">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="https://webservices.jcic.org.tw/EPaymentWebServices" />
+      </output>
+    </operation>
+  </binding>
+  <service name="EPaymentWebServices">
+    <port name="EPaymentWebServicesSOAP" binding="tns:EPaymentWebServicesSOAPBinding">
+      <soap:address location="https://172.31.201.205:9168/JCIC_EPWS/EPaymentWebServices" />
+    </port>
+  </service>
+</definitions>

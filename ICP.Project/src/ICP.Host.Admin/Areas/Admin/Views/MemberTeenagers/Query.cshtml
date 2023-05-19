@@ -1,0 +1,144 @@
+﻿@model  IPagedList<MemberTeenagersQueryResult>
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@{
+    Layout = null;
+
+    Func<string, string> empty2Dash = str =>
+    {
+        return !string.IsNullOrWhiteSpace(str) ? str : "-";
+    };
+
+    Func<DateTime?, string, string, string> emptyDT2Str = (dt, format, replace) =>
+    {
+        return dt != null ? dt.Value.ToString(format) : replace;
+    };
+}
+@{ 
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+<div class="sc-box scb-table st-control st-nonage-review">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">送驗日期</p></li>
+            <li><p class="sth-txt">電支帳號</p></li>
+            <li><p class="sth-txt">個人姓名</p></li>
+            <li><p class="sth-txt">驗證截止日</p></li>
+            <li><p class="sth-txt">代理人資料驗證</li>
+            <li><p class="sth-txt">驗證狀態</p></li>
+            <li><p class="sth-txt">最後修改人</p></li>
+            <li><p class="sth-txt">審核/身分驗證</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CreateDate.ToString("yyyy/MM/dd")<br>@item.CreateDate.ToString("HH:mm:ss")
+                    </td>
+                    <td>
+                        @item.ICPMID
+                    </td>
+                    <td>
+                        @item.CName
+                    </td>
+                    <td>
+                        @item.ExpireDate.ToString("yyyy/MM/dd")
+                    </td>
+                    <td>
+                        @if (item.LPAgree != 1)
+                        {
+                            <text>待同意</text>
+                        }
+                        else
+                        {
+                        <div class="btn-box stb-btn-box on-touch">
+                            <a href="@Url.Action("ViewTeenager", new { id = item.MID })" class="libs-dialog-form btn btn-blue-border" title="瀏覽">瀏覽</a>
+                            @if (item.IDNOStatus != 1)
+                            {
+                            <a href="@Url.Action("UpdateTeenager", new { id = item.MID })" class="libs-dialog-form btn" title="修改">修改</a>
+                            }
+                        </div>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Stage == 0 && item.LPAgree == 0)
+                        {
+                            <p class="st-unverified">
+                                代理人確認中
+                            </p>
+                        }
+                        else if (item.Stage == 2 && item.LPAuth == 0)
+                        {
+                            <p class="st-verifying">
+                                等待審核中
+                            </p>
+                        }
+                        else if (item.Stage == 3 && item.IDNOStatus == 0)
+                        {
+                            <p class="st-verified">
+                                代理人審核通過
+                            </p>
+                        }
+                        else if (item.Stage == 2 && item.LPAuth == 2)
+                        {
+                            <p class="st-verify-fail">
+                                代理人未審核通過
+                            </p>
+                        }
+                        else if (item.Stage == 3 && item.IDNOStatus == 2)
+                        {
+                            <p class="st-verify-fail">
+                                身分驗證未通過
+                            </p>
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+                    </td>
+                    <td>
+                        @empty2Dash(item.Modifier)<br />
+                        @emptyDT2Str(item.ModifyDate, "yyyy/MM/dd HH:mm", string.Empty)
+                    </td>
+                    <td>
+                        @if (item.LPAgree == 0 || item.IDNOStatus == 1)
+                        {
+                            <text>-</text>
+                        }
+                        else
+                        {
+                            <div class="btn-box stb-btn-box sbb-width">
+                                @if (item.LPAuth != 1)
+                                {
+                                    <a href="@Url.Action("UpdateTeenagersLPAuthStatus", new { id = item.MID, Status = 2 })" class="btn btn-verify-fail btn-LPAuth-fail" title="代理人審核不通過">代理人審核不通過</a>
+                                    <a href="@Url.Action("UpdateTeenagersLPAuthStatus", new { id = item.MID, Status = 1 })" class="btn btn-verified btn-LPAuth-success" title="代理人審核通過">代理人審核通過</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("UpdateTeenagersIDNOStatus", new { id = item.MID })" class="btn btn-verifying btn-IDN-verify" title="身分驗證">身分驗證</a>
+                                }
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

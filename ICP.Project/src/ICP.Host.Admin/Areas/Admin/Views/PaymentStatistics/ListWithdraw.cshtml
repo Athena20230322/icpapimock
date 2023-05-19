@@ -1,0 +1,222 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models.PaymentStatistics;
+@model IPagedList<ListWithdrawDbRes>
+@{
+    Layout = null;
+}
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="#" class="btn btn-blue-border bd-rdi bb-min" title="匯出 EXCEL 檔">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出
+        </a>
+    </div>
+</div>
+
+<div class="st-scroll-tip">
+    <span class="sst-txt">往右滾動看更多</span>
+</div>
+
+<div class="sc-box scb-attach">
+    <div class="scb-function">
+        <div class="sbf-txt">選擇日期：<p id="SelectDate">@ViewBag.SelectDate</p></div>
+        <div class="btn-box">
+            <a href="javascript:SetInspectData();" class="btn" title="勾選送出">勾選送出</a>
+            <a href="javascript:InspectDataSelectAll();" class="btn" title="全部勾選" id="selectAll">全部勾選</a>
+        </div>
+    </div>
+</div>
+
+<div class="sc-box scb-table st-control stb-oneline st-dailywd-monitor">
+    <div class="scb-table-body stb-thbg">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>電支帳號</th>
+                    <th>交易觀察名單</th>
+                    <th>商戶/個人名稱</th>
+                    <th>商店名稱</th>
+                    <th>註冊時間</th>
+                    <th>負責業務</th>
+                    <th>MCC Code</th>
+                    <th>商品類別</th>
+                    <th>提領日期/設定</th>
+                    <th>選擇日期</th>
+                    <th>選擇日前1天</th>
+                    <th>選擇日前2天</th>
+                    <th>選擇日前3天</th>
+                    <th>選擇日前4天</th>
+                    <th>選擇日前5天</th>
+                    <th>選擇日前6天</th>
+                    <th>30天累計提領金額與筆數</th>
+                    <th>備註</th>
+                    <th>記錄</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>123456</td>
+                    <td>-</td>
+                    <td>測試</td>
+                    <td>測試</td>
+                    <td>2018/05/22<br>09:32:24</td>
+                    <td>測試</td>
+                    <td>5999:測試</td>
+                    <td>實體</td>
+                    <td>2018/01/24<br>手動</td>
+                    <td>233,771<br>63</td>
+                    <td>453,255</td>
+                    <td>112,706</td>
+                    <td>121,715</td>
+                    <td>121,750</td>
+                    <td>1,289,198</td>
+                    <td>0</td>
+                    <td>11,113,151<br>30</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="#" class="btn" title="帳務明細">帳務明細</a>
+                            <a href="@Url.Action("ListWithdrawLog", new { id = 123456, icpMid = 1234566, merchantName = "測試" })" data-effect="mfp-zoom-in" class="libs-dialog-form btn btn-blue-border" title="歷程" data-update-callback="query">歷程</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="st-function-group">
+                            <div class="def-check">
+                                <input type="checkbox" id="sdc_123456" name="sdm_check" value="123456" class="checkInspect">
+                                <label for="sdc_123456" class="checkbox"></label>
+                            </div>
+                        </div>
+                        已檢視
+                    </td>
+                </tr>
+                <tr>
+                    <td>112233</td>
+                    <td>-</td>
+                    <td>測試</td>
+                    <td>測試</td>
+                    <td>2018/05/22<br>09:32:24</td>
+                    <td>測試</td>
+                    <td>5999:測試</td>
+                    <td>實體</td>
+                    <td>2018/01/24<br>手動</td>
+                    <td>233,771<br>63</td>
+                    <td>453,255</td>
+                    <td>112,706</td>
+                    <td>121,715</td>
+                    <td>121,750</td>
+                    <td>1,289,198</td>
+                    <td>0</td>
+                    <td>11,113,151<br>30</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="#" class="btn" title="帳務明細">帳務明細</a>
+                            <a href="@Url.Action("ListWithdrawLog", new { id = 112233, icpMid = 1122333, merchantName = "測試" })" data-effect="mfp-zoom-in" class="libs-dialog-form btn btn-blue-border" title="歷程" data-update-callback="query">歷程</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="st-function-group">
+                            <div class="def-check">
+                                <input type="checkbox" id="sdc_112233" name="sdm_check" value="112233" class="checkInspect">
+                                <label for="sdc_112233" class="checkbox"></label>
+                            </div>
+                        </div>
+                        已檢視
+                    </td>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    string bgcolorclass = item.MonitorStatus == 1 ? "class='stb-highlight'" : "";
+                    <tr @bgcolorclass>
+                        <td>@item.MID</td>
+                        <td>
+                            @if (item.MonitorStatus == 1)
+                            {
+                                <div class="dot dot-red"></div>
+                            }
+                            else
+                            {
+                                @:-
+                            }
+                        </td>
+                        <td>@item.CName</td>
+                        <td>@item.MerchantName</td>
+                        <td>@item.RegisterDate.ToString("yyyy/MM/dd")<br>@item.RegisterDate.ToString("HH/mm/ss")</td>
+                        <td>@item.SalesContactPerson</td>
+                        <td>@item.MCCCode</td>
+                        <td>@item.CommoditiyTypeName</td>
+                        <td>
+                            @item.LastWithdrawDay.ToString("yyyy/MM/dd")<br>
+                            @if (@item.TransferType == 1)
+                            {
+                                @:手動
+                            }
+                            else
+                            {
+                                foreach (var schedule in item.ListBankTransferSchedule)
+                                {
+                                    @schedule.ScheduleTypeName <br />
+                                }
+                            }
+                        </td>
+                        <td>@item.SelectDayAmount.ToString("N0")<br>@item.SelectDayCount.ToString("N0")</td>
+                        <td>@item.Day1.ToString("N0")</td>
+                        <td>@item.Day2.ToString("N0")</td>
+                        <td>@item.Day3.ToString("N0")</td>
+                        <td>@item.Day4.ToString("N0")</td>
+                        <td>@item.Day5.ToString("N0")</td>
+                        <td>@item.Day6.ToString("N0")</td>
+                        <td>@item.WithdrawDay30Amount.ToString("N0")<br>@item.WithdrawDay30Count.ToString("N0")</td>
+                        <td>
+                            <div class="btn-box stb-btn-box">
+                                @*<a href="../PaymentDetail/Index?MID=@item.MID&StartDate=@Convert.ToDateTime(ViewBag.StartDate).AddDays(-30).ToString("yyyy-MM-dd")&EndDate=@ViewBag.StartDate" target="_blank">帳務明細</a>*@
+                                <a href="#" class="btn" title="帳務明細">帳務明細</a>
+                                <a href="@Url.Action("ListWithdrawLog", new { id = item.MID, icpMid = item.ICPMID, merchantName = item.MerchantName })" data-effect="mfp-zoom-in" class="libs-dialog-form btn btn-blue-border" title="歷程" data-update-callback="query">歷程</a>
+                            </div>
+                        </td>
+                        <td>
+                            @if (item.InspectStatus == 1)
+                            {
+                                @item.InspectDate.ToString("yyyy/MM/dd")
+                            }
+                            else
+                            {
+                                <div class="st-function-group">
+                                    <div class="def-check">
+                                        <input type="checkbox" id="sdc_@item.MID" name="sdm_check" value="@item.MID" class="checkInspect">
+                                        <label for="sdc_@item.MID" class="checkbox"></label>
+                                    </div>
+                                </div>
+                                @:已檢視
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@{Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel));}
+

@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8F95E4BF-E15B-45EB-937B-D711E44DDF04}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICP.Library.Models</RootNamespace>
+    <AssemblyName>ICP.Library.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Beta|AnyCPU'">
+    <OutputPath>bin\Beta\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountLinkApi\ACLinkSettingModel.cs" />
+    <Compile Include="AccountLinkApi\ACLinkDecryptModel.cs" />
+    <Compile Include="AccountLinkApi\Enums\BankType.cs" />
+    <Compile Include="AccountLinkApi\HSMSettingModel.cs" />
+    <Compile Include="AdminModels\AppFunctionSwitch.cs" />
+    <Compile Include="AppRssLibrary\AppRssContent.cs" />
+    <Compile Include="AppRssLibrary\Enums\AppRssEnum.cs" />
+    <Compile Include="AuthorizationApi\AuthorizationApiKeyContext.cs" />
+    <Compile Include="AuthorizationApi\AuthorizationApiEncryptResult.cs" />
+    <Compile Include="AuthorizationApi\AuthorizationApiResultContext.cs" />
+    <Compile Include="AuthorizationApi\BaseAuthorizationApiRequest.cs" />
+    <Compile Include="AuthorizationApi\BaseAuthorizationApiResult.cs" />
+    <Compile Include="AuthorizationApi\BaseOPAuthorizationApiRequest.cs" />
+    <Compile Include="AuthorizationApi\UserDataType.cs" />
+    <Compile Include="AuthorizationMvc\UserDataType.cs" />
+    <Compile Include="EinvoiceLibrary\BaseDataModel.cs" />
+    <Compile Include="EinvoiceLibrary\CarrierInvDetailModel.cs" />
+    <Compile Include="EinvoiceLibrary\CarrierVerifyCodeLogModel.cs" />
+    <Compile Include="EinvoiceLibrary\Consts\EinvoiceType.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\BankAccountDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\BankAccountResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\BaseDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\BaseResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\CarrierBarcodeDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\CarrierBarcodeResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\CarrierInvDetailDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\CarrierInvDetailResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\CarrierInvTitleDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\CarrierInvTitleResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\CarrierUnderTypeDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\CarrierUnderTypeResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\ChangeCarrierPwdDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\ChangeCarrierPwdResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\ForgotCarrierPwdDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\ForgotCarrierPwdResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\InvDetailDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\InvDetailResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\InvTitleDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\InvTitleResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\RegisterCarrierDTO.cs" />
+    <Compile Include="EinvoiceLibrary\DTO\RegisterCarrierResultDTO.cs" />
+    <Compile Include="EinvoiceLibrary\EinvoiceBatchNoModel.cs" />
+    <Compile Include="EinvoiceLibrary\EinvoiceByCarrierDetailModel.cs" />
+    <Compile Include="EinvoiceLibrary\EinvoiceByCarrierModel.cs" />
+    <Compile Include="EinvoiceLibrary\EinvoiceCarrierDetailModel.cs" />
+    <Compile Include="EinvoiceLibrary\EinvoiceCarrierTitleModel.cs" />
+    <Compile Include="EinvoiceLibrary\EinvoiceSetting.cs" />
+    <Compile Include="EinvoiceLibrary\CellPhoneCarrierDetail.cs" />
+    <Compile Include="EinvoiceLibrary\Enum\BatchInvoiceType.cs" />
+    <Compile Include="EinvoiceLibrary\Enum\BatchStatus.cs" />
+    <Compile Include="EinvoiceLibrary\Enum\EinvoiceStatusType.cs" />
+    <Compile Include="EinvoiceLibrary\Enum\EinvoiceVerifyStatus.cs" />
+    <Compile Include="EinvoiceLibrary\GetEInvoiceCarrierInfoResult.cs" />
+    <Compile Include="EinvoiceLibrary\InvDetailItemModel.cs" />
+    <Compile Include="EinvoiceLibrary\InvoiceBindLogModel.cs" />
+    <Compile Include="EinvoiceLibrary\InvoiceBindReturn.cs" />
+    <Compile Include="EinvoiceLibrary\QueryEinvoiceDetailResult.cs" />
+    <Compile Include="EinvoiceLibrary\QueryEinvoiceListResult.cs" />
+    <Compile Include="EinvoiceLibrary\QueryInvDetailModel.cs" />
+    <Compile Include="Enums\TransType.cs" />
+    <Compile Include="MailLibrary\DTO\MailSendDTO.cs" />
+    <Compile Include="MailLibrary\Enums\MailSendType.cs" />
+    <Compile Include="MailLibrary\MailContent.cs" />
+    <Compile Include="MailLibrary\MailSendContent.cs" />
+    <Compile Include="MailLibrary\NotifyContent.cs" />
+    <Compile Include="ManageBank\FirstBank\B2B001.cs" />
+    <Compile Include="ManageBank\FirstBank\B2B002.cs" />
+    <Compile Include="ManageBank\FirstBank\B2B002Result.cs" />
+    <Compile Include="ManageBank\FirstBank\B2BResult.cs" />
+    <Compile Include="ManageBank\FirstBank\BankTransferSettingModel.cs" />
+    <Compile Include="ManageBank\FirstBank\BillInfoModel.cs" />
+    <Compile Include="ManageBank\FirstBank\NoticeModel.cs" />
+    <Compile Include="ManageBank\FirstBank\PayeeInfoModel.cs" />
+    <Compile Include="ManageBank\FirstBank\StatusModel.cs" />
+    <Compile Include="ManageBank\FirstBank\XML.cs" />
+    <Compile Include="ManageBank\FirstBank\TxRequest.cs" />
+    <Compile Include="ManageBank\FirstBank\TxHeaderModel.cs" />
+    <Compile Include="ManageBank\FirstBank\TxResult.cs" />
+    <Compile Include="MemberApi\Certificate\ClientAesCertDTO.cs" />
+    <Compile Include="MemberApi\Certificate\ClientRsaCertDTO.cs" />
+    <Compile Include="MemberModels\AuthIDNO.cs" />
+    <Compile Include="MemberModels\AuthFinancialResult.cs" />
+    <Compile Include="MemberModels\BankCodeModel.cs" />
+    <Compile Include="MemberModels\BankDetail.cs" />
+    <Compile Include="MemberModels\BankTypeModel.cs" />
+    <Compile Include="MemberModels\CountryTownIDModel.cs" />
+    <Compile Include="MemberModels\MemberAuthFinancial.cs" />
+    <Compile Include="MemberModels\MemberAuthIssueLocation.cs" />
+    <Compile Include="MemberModels\MemberBankAccount.cs" />
+    <Compile Include="MemberModels\AddTempRegisterDataModel.cs" />
+    <Compile Include="MemberModels\BankBranchCodeModel.cs" />
+    <Compile Include="MemberModels\CheckIdnoRepeatModel.cs" />
+    <Compile Include="MemberModels\MemberBankDetail.cs" />
+    <Compile Include="MemberModels\MemberLawBasicModel.cs" />
+    <Compile Include="MemberModels\GetMemberLevelResult.cs" />
+    <Compile Include="MemberModels\MemberAgreeResult.cs" />
+    <Compile Include="MemberModels\BindOPAccountModel.cs" />
+    <Compile Include="MemberModels\MemberAppToken.cs" />
+    <Compile Include="MemberModels\MemberBankInfo.cs" />
+    <Compile Include="MemberModels\MemberBasicModel.cs" />
+    <Compile Include="MemberModels\MemberDataModel.cs" />
+    <Compile Include="MemberModels\MemberDeleteModel.cs" />
+    <Compile Include="MemberModels\MemberDetailModel.cs" />
+    <Compile Include="MemberModels\MemberPreferenceModel.cs" />
+    <Compile Include="MemberModels\MemberNotifyMessage.cs" />
+    <Compile Include="MemberModels\MemberNotifyMessageDetail.cs" />
+    <Compile Include="MemberModels\MemberNotifyMessageResult.cs" />
+    <Compile Include="MemberModels\MemberNotifyMessageUnread.cs" />
+    <Compile Include="MemberModels\MemberTeenager.cs" />
+    <Compile Include="MemberModels\MemberTeenagersLegalDetail.cs" />
+    <Compile Include="MemberModels\NationalityModel.cs" />
+    <Compile Include="MemberModels\OccupationModel.cs" />
+    <Compile Include="MemberModels\P11Auth.cs" />
+    <Compile Include="MemberModels\P11AuthResult.cs" />
+    <Compile Include="MemberModels\P33Auth.cs" />
+    <Compile Include="MemberModels\P33AuthResult.cs" />
+    <Compile Include="MemberModels\SMSAuth.cs" />
+    <Compile Include="MemberModels\SMSAuthResult.cs" />
+    <Compile Include="MemberModels\SMSAuthVerify.cs" />
+    <Compile Include="MemberModels\SMSAuthVerifyResult.cs" />
+    <Compile Include="MemberModels\WithdrawBalanceResult.cs" />
+    <Compile Include="MemberModels\ZipCodeModel.cs" />
+    <Compile Include="MerchantModels\MerchantCertificateModel.cs" />
+    <Compile Include="MerchantModels\MechantDataModel.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\AccessTokenRequest.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\AccessTokenResult.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\BaseClientApiRequest.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\BaseClientApiResult.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\MerchantSetting.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\OpenWalletRequest.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\QueryMemberInfoResult.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\QueryMemberMIDRequest.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\QueryMemberMIDResult.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\QueryMobileBarCodeResult.cs" />
+    <Compile Include="OpenWalletApi\ClientApi\RefreshAccessTokenRequest.cs" />
+    <Compile Include="OpenWalletApi\CustomReceiveApi\NoticeMobileBarcodeRequest.cs" />
+    <Compile Include="OpenWalletApi\CustomSendApi\BindicashAccountRequest.cs" />
+    <Compile Include="OpenWalletApi\CustomSendApi\CloseOPAccountRequest.cs" />
+    <Compile Include="OpenWalletApi\CustomSendApi\BaseCustomSendApiRequest.cs" />
+    <Compile Include="OpenWalletApi\CustomSendApi\BaseCustomSendApiResult.cs" />
+    <Compile Include="OpenWalletApi\CustomSendApi\UnBindicashAccountRequest.cs" />
+    <Compile Include="OpenWalletApi\Enums\CustomApiMethodType.cs" />
+    <Compile Include="OpenWalletApi\Enums\WebUIApiMethodType.cs" />
+    <Compile Include="OpenWalletApi\CustomReceiveApi\NoticeMemberDeleteRequest.cs" />
+    <Compile Include="OpenWalletApi\CustomReceiveApi\BaseCustomReceiveApiRequest.cs" />
+    <Compile Include="OpenWalletApi\CustomReceiveApi\BaseCustomReceiveApiResult.cs" />
+    <Compile Include="MemberModels\UpdateBankAccountStatusModel.cs" />
+    <Compile Include="MemberModels\UserCoinsBalance.cs" />
+    <Compile Include="PaymentCenterApi\Enums\PaymentSubType_ATM.cs" />
+    <Compile Include="Payment\AddBarcodeDBReq.cs" />
+    <Compile Include="Payment\AddBarcodeDBRes.cs" />
+    <Compile Include="Payment\GetTradeInfoDbRes.cs" />
+    <Compile Include="Payment\GetTradeInfoDbReq.cs" />
+    <Compile Include="Payment\TradeTypeModel.cs" />
+    <Compile Include="MemberModels\WithdrawBalance.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\AgreeRegisterWebUIRequest.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\BaseAuthWebUIApiRequest.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\BaseWebUIApiRequest.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\BaseWebUIApiResult.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\GetUserDataWebUIRequest.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\GetUserDataWebUIResult.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\LoginWebUIRequest.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\LoginWebUIResult.cs" />
+    <Compile Include="OpenWalletApi\WebUIApi\MemberOPWebToken.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemModels\ConfigKeyValue.cs" />
+    <Compile Include="TopUp\CheckTopUpLimitModel.cs" />
+    <Compile Include="TopUp\GetTopUpBarcodeReq.cs" />
+    <Compile Include="TopUp\OverLimitDbReq.cs" />
+    <Compile Include="TopUp\TopUpLimitModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICP.Infrastructure.Core\ICP.Infrastructure.Core.csproj">
+      <Project>{724872BC-C923-434D-AB6A-CA502BE46DC8}</Project>
+      <Name>ICP.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Abstractions\ICP.Library.Abstractions.csproj">
+      <Project>{0e024538-6d08-4836-aeba-d78be5631571}</Project>
+      <Name>ICP.Library.Abstractions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

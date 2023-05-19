@@ -1,0 +1,134 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels.Bonus;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<QryBonusRes>
+@{
+    Layout = null;
+
+    QryBonusReq qryBonusReq = null;
+
+    if (ViewBag.QueryModel != null)
+    {
+        qryBonusReq = (QryBonusReq)ViewBag.QueryModel;
+    }
+}
+@section scripts{
+
+}
+
+@if (Model.Count == 0)
+{
+    Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+    return;
+}
+else
+{
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="#" class="btn btn-blue-border bd-rdi" title="匯出Excel" onclick="window.location='@Url.Action("ExportExcel", "Bonus", new {
+                                                                                                                                            StartDate = qryBonusReq.StartDate,
+                                                                                                                                            EndDate = qryBonusReq.EndDate,
+                                                                                                                                            BuyerICPMID = qryBonusReq.BuyerICPMID,
+                                                                                                                                            BuyerCName = qryBonusReq.BuyerCName,
+                                                                                                                                            SellerICPMID = qryBonusReq.SellerICPMID,
+                                                                                                                                            SellerCName = qryBonusReq.SellerCName,
+                                                                                                                                            TradeNo = qryBonusReq.TradeNo,
+                                                                                                                                            MerchantTradeNo = qryBonusReq.MerchantTradeNo,
+                                                                                                                                            PointType = qryBonusReq.PointType,
+                                                                                                                                            PageNo = 1,
+                                                                                                                                            PageSize = 65536
+                                                                                                                                        })'"
+        >
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出 Excel
+        </a>
+    </div>
+</div>
+
+<div class="st-scroll-tip">
+    <span class="sst-txt">往右滾動看更多</span>
+</div>
+
+<div class="sc-box scb-table st-control stb-oneline st-saccount-daily">
+    <div class="scb-table-body stb-thbg">
+        <table>
+            <thead>
+                <tr>
+                    <th>紅利類型</th>
+                    <th>訂單日期</th>
+                    <th>付款日期</th>
+                    <th>退款日期</th>
+                    <th>icashpay 訂單編號</th>
+                    <th>特店訂單編號</th>
+                    <th>收款方電支帳號</th>
+                    <th>收款方名稱</th>
+                    <th>付款方電支帳號</th>
+                    <th>付款方名稱</th>
+                    <th>交易金額</th>
+                    <th>折抵點數</th>
+                    <th>點數折抵金額</th>
+                    <th>實付/退金額</th>
+                    <th>付款方式</th>
+                    <th>退款狀態</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    string paymentTypeName = "-";
+
+                    if (item.PaymentTypeID == 1)
+                    {
+                        paymentTypeName = "愛金帳戶";
+                    }
+                    else if (item.PaymentTypeID == 2)
+                    {
+                        paymentTypeName = "連結扣款帳戶";
+                    }
+                    <tr>
+                        <td>@(item.PointType == 1 ? "OPENPOINT" : "")</td>
+                        <td>@item.CreateDate.ToString("yyyy/MM/dd HH:mm:ss")</td>
+                        <td>@item.PaymentDate.ToString("yyyy/MM/dd HH:mm:ss")</td>
+                        <td>@(item.RefundDate.HasValue ? item.RefundDate.Value.ToString("yyyy/MM/dd HH:mm:ss") : "-")</td>
+                        <td>@item.TradeNo</td>
+                        <td>@item.MerchantTradeNo</td>
+                        <td>@item.SellerICPMID</td>
+                        <td>@item.SellerCName</td>
+                        <td>@item.BuyerICPMID</td>
+                        <td>@item.BuyerCName</td>
+                        <td>@Convert.ToInt32(item.Amount).ToString("N0")</td>
+                        <td><span style="color:@(item.DebitPoint < 0 ? "red" : "")">@Convert.ToInt32(item.DebitPoint).ToString("N0")</span></td>                        
+                        <td><span style="color:@(item.BonusAmt < 0 ? "red" : "")">@Convert.ToInt32(item.BonusAmt).ToString("N0")</span></td>
+                        <td><span style="color:@(item.RefundAmount < 0 ? "red" : "")">@Convert.ToInt32(item.RefundAmount).ToString("N0")</span></td>
+                        <td>
+                            @paymentTypeName
+                        </td>
+                        <td>
+                            @if (item.RefundStatus == 2)
+                            {
+                                @:已退款
+                            }
+                            else if (item.RefundStatus == 3)
+                            {
+                                @:已部分退款
+                            }
+                            else
+                            {
+                                @:-
+                            }
+                        </td>
+                    </tr>
+                }
+
+                @if (ViewBag.IsLastPage ?? false)
+                {
+                    <tr class="stf-sum">
+                        <td colspan="16">小計：共@(Model != null && Model.Count() > 0 ? Model[0].TotalCount : 0)筆</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+    { Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }
+}
+

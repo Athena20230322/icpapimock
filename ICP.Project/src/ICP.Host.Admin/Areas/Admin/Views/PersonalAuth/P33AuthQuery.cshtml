@@ -1,0 +1,51 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model P33AuthQueryVM
+@{
+    Layout = null;
+    if (Model == null)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml");
+        return;
+    }
+
+    Func<short, string> IsPass2String = isPass =>
+    {
+        switch (isPass)
+        {
+            case 0:
+                return "未驗證";
+            case 1:
+                return "驗證成功";
+            case 2:
+                return "身份證重覆";
+            case 3:
+                return "失敗";
+            default:
+                return "-";
+        }
+    };
+}
+<div class="sb-multi">
+    <div class="sc-box scb-table st-verify-id-p33">
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">驗證狀態</p></li>
+                <li><p class="sth-txt">通報案件筆數</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td>@IsPass2String(Model.IsPass)</td>
+                        <td>@Model.DataCount</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

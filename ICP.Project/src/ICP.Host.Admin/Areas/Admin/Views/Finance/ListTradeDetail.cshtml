@@ -1,0 +1,103 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models.Finance.TradeDetail;
+@model IPagedList<QryTradeDetailRes>
+@{
+    Layout = null;
+}
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="javascript:;" onclick="Export()" class="btn btn-blue-border bd-rdi" title="匯出Excel">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出Excel
+        </a>
+    </div>
+</div>
+<div class="st-scroll-tip">
+    <span class="sst-txt">往右滾動看更多</span>
+</div>
+<div class="site-body sc-box scb-table st-control stb-oneline st-ftrans-detail">
+    <div class="scb-table-body stb-thbg">
+        <table>
+            <thead>
+                <tr>
+                    <th>交易類型</th>
+                    <th>訂單日期</th>
+                    <th>付款日期</th>
+                    <th>傳輸日期</th>
+                    <th>撥款日期</th>
+                    <th>退款日期</th>
+                    <th>收款方電支帳號</th>
+                    <th>付款方電支帳號</th>
+                    <th>平台商編號</th>
+                    <th>icashpay 訂單編號</th>
+                    <th>特店訂單編號</th>
+                    <th>付款方式</th>
+                    <th>款項來源(銀行)</th>
+                    <th>原始訂單金額</th>
+                    <th>信託金額</th>
+                    <th>實際收到金額</th>
+                    <th>點數折抵金額</th>
+                    <th>交易手續費(%數 /$筆)</th>
+                    <th>交易手續費金額</th>
+                    <th>應撥/退款項 (淨額)</th>
+                    <th>付款狀態</th>
+                    <th>撥款狀態</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.TradeStatusName</td>
+                        <td>@item.CreateDate.ToString("yyyy/MM/dd HH:ss:mm")</td>
+                        <td>@(item.PaymentDate == null ? "-" : string.Format("{0:yyyy/MM/dd HH:ss:mm}", item.PaymentDate))</td>
+                        <td>@(item.TransmittalDate == null ? "-" : string.Format("{0:yyyy/MM/dd HH:ss:mm}", item.TransmittalDate))</td>
+                        <td>@(item.AllocateDate == null ? "-" : string.Format("{0:yyyy/MM/dd HH:ss:mm}", item.AllocateDate))</td>
+                        <td>@(item.RefundDate == null ? "-" : string.Format("{0:yyyy/MM/dd HH:ss:mm}", item.RefundDate))</td>
+                        <td>@item.PayeeICPMID</td>
+                        <td>@item.PayerICPMID</td>
+                        <td>@(item.PlatformID == 0 ? "-" : item.PlatformID.ToString())</td>
+                        <td>@item.TradeNo</td>
+                        <td>@item.MerchantTradeNo</td>
+                        <td>@item.PaymentTypeName</td>
+                        <td>@item.PaymentSource</td>
+                        <td><span class="@(item.TotalAmount<0?"red":"")">@item.TotalAmount.ToString("N0")</span></td>
+                        <td><span class="@(item.TrustAmt<0?"red":"")">@item.TrustAmt.ToString("N0")</span></td>
+                        <td><span class="@(item.RealAmt<0?"red":"")">@item.RealAmt.ToString("N0")</span></td>
+                        <td><span class="@(item.BonusAmt<0?"red":"")">@item.BonusAmt.ToString("N0")</span></td>
+                        <td>@item.ChargeFee</td>
+                        <td><span class="@(item.ChargeFeeAmt<0?"red":"")">@item.ChargeFeeAmt.ToString("N2")</span></td>
+                        <td><span class="@(item.AllocateAmt<0?"red":"")">@item.AllocateAmt.ToString("N2")</span></td>
+                        <td>@item.PaymentStatusName</td>
+                        <td>@item.AllocateStatusName</td>
+                    </tr>
+                }
+                @if (ViewBag.IsLastPage ?? false)
+                {
+                    <tr class="stf-sum">
+                        <td colspan="13">小計：共 @Model[0].TotalCount.ToString("N0") 筆</td>
+                        <td><span class="@(Model[0].SumTotalAmt<0?"red":"")">@Model[0].SumTotalAmt.ToString("N0")</span></td>
+                        <td><span class="@(Model[0].SumTrustAmt<0?"red":"")">@Model[0].SumTrustAmt.ToString("N0")</span></td>
+                        <td><span class="@(Model[0].SumRealAmt<0?"red":"")">@Model[0].SumRealAmt.ToString("N0")</span></td>
+                        <td><span class="@(Model[0].SumBonusAmt<0?"red":"")">@Model[0].SumBonusAmt.ToString("N0")</span></td>
+                        <td>-</td>
+                        <td><span class="@(Model[0].SumChargeFeeAmt<0?"red":"")">@Model[0].SumChargeFeeAmt.ToString("N2")</span></td>
+                        <td><span class="@(Model[0].SumAllocateAmt<0?"red":"")">@Model[0].SumAllocateAmt.ToString("N2")</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@{Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("ListTradeDetail", Model, ViewBag.QueryModel));}
+
+@if (Model.Count == 0)
+{
+    <script type="text/javascript">
+        alert("查無資料");
+    </script>
+}

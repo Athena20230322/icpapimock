@@ -1,0 +1,243 @@
+@import url(third_party/flatpickr.min.css);
+@import url(page.css);
+.scb-table.st-verify-search {
+  width: 618px;
+  margin-right: 20px; }
+  .scb-table.st-verify-search .scb-table-header li:nth-child(1), .scb-table.st-verify-search .scb-table-body col:nth-child(1) {
+    width: 25%; }
+  .scb-table.st-verify-search .scb-table-header li:nth-child(2), .scb-table.st-verify-search .scb-table-body col:nth-child(2) {
+    width: 25%; }
+  .scb-table.st-verify-search .scb-table-header li:nth-child(3), .scb-table.st-verify-search .scb-table-body col:nth-child(3) {
+    width: 25%; }
+  .scb-table.st-verify-search .scb-table-header li:nth-child(4), .scb-table.st-verify-search .scb-table-body col:nth-child(4) {
+    width: 25%; }
+  .scb-table.st-verify-search .svs-sum {
+    text-align: right;
+    height: 40px;
+    background: white;
+    padding: 15px 20px; }
+
+.scb-table.st-account-verify .scb-table-header li:nth-child(1), .scb-table.st-account-verify .scb-table-body col:nth-child(1) {
+  width: 15%; }
+
+.scb-table.st-account-verify .scb-table-header li:nth-child(2), .scb-table.st-account-verify .scb-table-body col:nth-child(2) {
+  width: 14%; }
+
+.scb-table.st-account-verify .scb-table-header li:nth-child(3), .scb-table.st-account-verify .scb-table-body col:nth-child(3) {
+  width: 14%; }
+
+.scb-table.st-account-verify .scb-table-header li:nth-child(4), .scb-table.st-account-verify .scb-table-body col:nth-child(4) {
+  width: 14%; }
+
+.scb-table.st-account-verify .scb-table-header li:nth-child(5), .scb-table.st-account-verify .scb-table-body col:nth-child(5) {
+  width: 14%; }
+
+.scb-table.st-account-verify .scb-table-header li:nth-child(6), .scb-table.st-account-verify .scb-table-body col:nth-child(6) {
+  width: 15%; }
+
+.scb-table.st-account-verify .scb-table-header li:nth-child(7), .scb-table.st-account-verify .scb-table-body col:nth-child(7) {
+  width: 14%; }
+
+.scb-table.st-account-verify2 {
+  width: 618px;
+  margin-right: 20px; }
+  .scb-table.st-account-verify2 .scb-table-header li:nth-child(1), .scb-table.st-account-verify2 .scb-table-body col:nth-child(1) {
+    width: 33.333%; }
+  .scb-table.st-account-verify2 .scb-table-header li:nth-child(2), .scb-table.st-account-verify2 .scb-table-body col:nth-child(2) {
+    width: 33.333%; }
+  .scb-table.st-account-verify2 .scb-table-header li:nth-child(3), .scb-table.st-account-verify2 .scb-table-body col:nth-child(3) {
+    width: 33.333%; }
+
+.scb-table.st-account-verify3 td:nth-child(8) {
+  text-align: right; }
+
+.scb-table.st-account-verify3 td:nth-child(13) {
+  text-align: right; }
+
+.scb-table.st-account-verify3 .sav3-sum td {
+  height: 40px;
+  background: white; }
+
+.scb-table.st-bank-setting .scb-table-header li:nth-child(1), .scb-table.st-bank-setting .scb-table-body col:nth-child(1) {
+  width: 15%; }
+
+.scb-table.st-bank-setting .scb-table-header li:nth-child(2), .scb-table.st-bank-setting .scb-table-body col:nth-child(2) {
+  width: 38%; }
+
+.scb-table.st-bank-setting .scb-table-header li:nth-child(3), .scb-table.st-bank-setting .scb-table-body col:nth-child(3) {
+  width: 11%; }
+
+.scb-table.st-bank-setting .scb-table-header li:nth-child(4), .scb-table.st-bank-setting .scb-table-body col:nth-child(4) {
+  width: 11%; }
+
+.scb-table.st-bank-setting .scb-table-header li:nth-child(5), .scb-table.st-bank-setting .scb-table-body col:nth-child(5) {
+  width: 14%; }
+
+.scb-table.st-bank-setting .scb-table-header li:nth-child(6), .scb-table.st-bank-setting .scb-table-body col:nth-child(6) {
+  width: 11%; }
+
+.scb-table.st-bank-setting .scb-table-body td:nth-child(2) {
+  text-align: left; }
+
+.scb-table.st-bank-setting a {
+  text-decoration: underline; }
+
+.scb-table.st-fund-trans a {
+  text-decoration: underline; }
+
+.scb-table.st-bank-info .scb-table-header li:nth-child(1), .scb-table.st-bank-info .scb-table-body col:nth-child(1) {
+  width: 15%; }
+
+.scb-table.st-bank-info .scb-table-header li:nth-child(2), .scb-table.st-bank-info .scb-table-body col:nth-child(2) {
+  width: 8%; }
+
+.scb-table.st-bank-info .scb-table-header li:nth-child(3), .scb-table.st-bank-info .scb-table-body col:nth-child(3) {
+  width: 10%; }
+
+.scb-table.st-bank-info .scb-table-header li:nth-child(4), .scb-table.st-bank-info .scb-table-body col:nth-child(4) {
+  width: 31%; }
+
+.scb-table.st-bank-info .scb-table-header li:nth-child(5), .scb-table.st-bank-info .scb-table-body col:nth-child(5) {
+  width: 9%; }
+
+.scb-table.st-bank-info .scb-table-header li:nth-child(6), .scb-table.st-bank-info .scb-table-body col:nth-child(6) {
+  width: 12%; }
+
+.scb-table.st-bank-info .scb-table-header li:nth-child(7), .scb-table.st-bank-info .scb-table-body col:nth-child(7) {
+  width: 6%; }
+
+.scb-table.st-bank-info .scb-table-header li:nth-child(8), .scb-table.st-bank-info .scb-table-body col:nth-child(8) {
+  width: 9%; }
+
+.scb-table.st-monthly-report .scb-table-header li:nth-child(1), .scb-table.st-monthly-report .scb-table-body col:nth-child(1) {
+  width: 10%; }
+
+.scb-table.st-monthly-report .scb-table-header li:nth-child(2), .scb-table.st-monthly-report .scb-table-body col:nth-child(2) {
+  width: 14%; }
+
+.scb-table.st-monthly-report .scb-table-header li:nth-child(3), .scb-table.st-monthly-report .scb-table-body col:nth-child(3) {
+  width: 14%; }
+
+.scb-table.st-monthly-report .scb-table-header li:nth-child(4), .scb-table.st-monthly-report .scb-table-body col:nth-child(4) {
+  width: 11%; }
+
+.scb-table.st-monthly-report .scb-table-header li:nth-child(5), .scb-table.st-monthly-report .scb-table-body col:nth-child(5) {
+  width: 10%; }
+
+.scb-table.st-monthly-report .scb-table-header li:nth-child(6), .scb-table.st-monthly-report .scb-table-body col:nth-child(6) {
+  width: 11%; }
+
+.scb-table.st-monthly-report .scb-table-header li:nth-child(7), .scb-table.st-monthly-report .scb-table-body col:nth-child(7) {
+  width: 14%; }
+
+.scb-table.st-monthly-report .scb-table-header li:nth-child(8), .scb-table.st-monthly-report .scb-table-body col:nth-child(8) {
+  width: 16%; }
+
+.scb-table.st-monthly-report .smr-sum td {
+  height: 44px;
+  background: #FFF;
+  text-align: left; }
+
+.scb-table.st-transfer-report .scb-table-header li:nth-child(1), .scb-table.st-transfer-report .scb-table-body col:nth-child(1) {
+  width: 14%; }
+
+.scb-table.st-transfer-report .scb-table-header li:nth-child(2), .scb-table.st-transfer-report .scb-table-body col:nth-child(2) {
+  width: 16%; }
+
+.scb-table.st-transfer-report .scb-table-header li:nth-child(3), .scb-table.st-transfer-report .scb-table-body col:nth-child(3) {
+  width: 16%; }
+
+.scb-table.st-transfer-report .scb-table-header li:nth-child(4), .scb-table.st-transfer-report .scb-table-body col:nth-child(4) {
+  width: 12%; }
+
+.scb-table.st-transfer-report .scb-table-header li:nth-child(5), .scb-table.st-transfer-report .scb-table-body col:nth-child(5) {
+  width: 12%; }
+
+.scb-table.st-transfer-report .scb-table-header li:nth-child(6), .scb-table.st-transfer-report .scb-table-body col:nth-child(6) {
+  width: 16%; }
+
+.scb-table.st-transfer-report .scb-table-header li:nth-child(7), .scb-table.st-transfer-report .scb-table-body col:nth-child(7) {
+  width: 14%; }
+
+.scb-table.st-transfer-report .stb-sum td:nth-child(1) {
+  text-align: center; }
+
+.scb-table.st-etr-detail1 .stb-btn-box .btn, .scb-table.st-etr-detail2 .stb-btn-box .btn {
+  width: auto;
+  min-width: 60px; }
+
+.scb-table.st-etr-detail1 .stb-sum td:nth-child(1), .scb-table.st-etr-detail2 .stb-sum td:nth-child(1) {
+  text-align: center; }
+
+.scb-table.st-member-withdrawal .stb-sum td:nth-child(1), .scb-table.st-member-withdrawal3 .stb-sum td:nth-child(1) {
+  text-align: center; }
+
+.scb-table.st-member-withdrawal .stb-btn-box .btn, .scb-table.st-member-withdrawal3 .stb-btn-box .btn {
+  width: auto;
+  min-width: 60px; }
+
+.scb-table.st-member-withdrawal2 {
+  width: 618px;
+  margin-right: 20px; }
+  .scb-table.st-member-withdrawal2 .scb-table-header li:nth-child(1), .scb-table.st-member-withdrawal2 .scb-table-body col:nth-child(1) {
+    width: 33.333%; }
+  .scb-table.st-member-withdrawal2 .scb-table-header li:nth-child(2), .scb-table.st-member-withdrawal2 .scb-table-body col:nth-child(2) {
+    width: 33.333%; }
+  .scb-table.st-member-withdrawal2 .scb-table-header li:nth-child(3), .scb-table.st-member-withdrawal2 .scb-table-body col:nth-child(3) {
+    width: 33.333%; }
+  .scb-table.st-member-withdrawal2 .stb-sum td:nth-child(1) {
+    text-align: center; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(1), .scb-table.st-edaily-fees .scb-table-body col:nth-child(1) {
+  width: 14%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(2), .scb-table.st-edaily-fees .scb-table-body col:nth-child(2) {
+  width: 11%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(3), .scb-table.st-edaily-fees .scb-table-body col:nth-child(3) {
+  width: 9%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(4), .scb-table.st-edaily-fees .scb-table-body col:nth-child(4) {
+  width: 9%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(5), .scb-table.st-edaily-fees .scb-table-body col:nth-child(5) {
+  width: 10%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(6), .scb-table.st-edaily-fees .scb-table-body col:nth-child(6) {
+  width: 9%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(7), .scb-table.st-edaily-fees .scb-table-body col:nth-child(7) {
+  width: 10%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(8), .scb-table.st-edaily-fees .scb-table-body col:nth-child(8) {
+  width: 9%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(9), .scb-table.st-edaily-fees .scb-table-body col:nth-child(9) {
+  width: 9%; }
+
+.scb-table.st-edaily-fees .scb-table-header li:nth-child(10), .scb-table.st-edaily-fees .scb-table-body col:nth-child(10) {
+  width: 10%; }
+
+.scb-table.st-edaily-fees a {
+  text-decoration: underline; }
+
+.scb-table.st-emonthly-receive .scb-table-body tr:nth-child(2n), .scb-table.st-eaccount-user .scb-table-body tr:nth-child(2n), .scb-table.st-emonthly-balance .scb-table-body tr:nth-child(2n), .scb-table.st-emonthly-accountnum .scb-table-body tr:nth-child(2n), .scb-table.st-emonthly-trans .scb-table-body tr:nth-child(2n), .scb-table.st-emonthly-pay .scb-table-body tr:nth-child(2n), .scb-table.st-emonthly-grading .scb-table-body tr:nth-child(2n), .scb-table.st-emonthly-paytool .scb-table-body tr:nth-child(2n) {
+  background: white; }
+
+.scb-table.st-emonthly-receive .scb-table-body tr:hover td, .scb-table.st-eaccount-user .scb-table-body tr:hover td, .scb-table.st-emonthly-balance .scb-table-body tr:hover td, .scb-table.st-emonthly-accountnum .scb-table-body tr:hover td, .scb-table.st-emonthly-trans .scb-table-body tr:hover td, .scb-table.st-emonthly-pay .scb-table-body tr:hover td, .scb-table.st-emonthly-grading .scb-table-body tr:hover td, .scb-table.st-emonthly-paytool .scb-table-body tr:hover td {
+  background: #fffeed; }
+
+.scb-table.st-emonthly-receive .scb-table-body td, .scb-table.st-eaccount-user .scb-table-body td, .scb-table.st-emonthly-balance .scb-table-body td, .scb-table.st-emonthly-accountnum .scb-table-body td, .scb-table.st-emonthly-trans .scb-table-body td, .scb-table.st-emonthly-pay .scb-table-body td, .scb-table.st-emonthly-grading .scb-table-body td, .scb-table.st-emonthly-paytool .scb-table-body td {
+  height: 44px; }
+
+.scb-table.st-emonthly-receive .scb-table-body .ste-width th, .scb-table.st-eaccount-user .scb-table-body .ste-width th, .scb-table.st-emonthly-balance .scb-table-body .ste-width th, .scb-table.st-emonthly-accountnum .scb-table-body .ste-width th, .scb-table.st-emonthly-trans .scb-table-body .ste-width th, .scb-table.st-emonthly-pay .scb-table-body .ste-width th, .scb-table.st-emonthly-grading .scb-table-body .ste-width th, .scb-table.st-emonthly-paytool .scb-table-body .ste-width th {
+  min-width: 128px; }
+
+.scb-table.st-emonthly-trans, .scb-table.st-emonthly-pay, .scb-table.st-emonthly-grading, .scb-table.st-emonthly-paytool {
+  width: 850px; }
+
+.scb-table.st-edaily-amountcheck {
+  width: 450px; }
+
+.scb-form .sbf-date-box2 .sd2-block {
+  width: 82px; }

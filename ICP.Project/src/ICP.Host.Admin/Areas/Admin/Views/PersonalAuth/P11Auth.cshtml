@@ -1,0 +1,164 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@using ICP.Library.Models.MemberModels;
+@model P11AuthVM
+@{
+        // 取得發證縣市
+        var IssueLocations = (List<MemberAuthIssueLocation>)ViewBag.IssueLocations;
+        int iMaxBirthYear = DateTime.Today.Year - 1911;
+        //帶入起始年份(民國)~現在
+        Func<int, IEnumerable<SelectListItem>> GetYearOptions = startYear =>
+        {
+            int Year = DateTime.Now.Year - 1911;
+            List<SelectListItem> Items = new List<SelectListItem>();
+
+            for (int i = startYear; i < Year + 1; i++)
+            {
+                Items.Add(new SelectListItem { Text = i.ToString(), Value = (i + 1911).ToString("D3")});
+            }
+            //遞減順序排列
+            Items = Items.OrderByDescending(i => i.Value).ToList();
+            return Items;
+        };
+
+        Func<IEnumerable<SelectListItem>> GetMonthOptions = () =>
+        {
+            List<SelectListItem> Items = new List<SelectListItem>();
+            int NowMonth = DateTime.Today.Month;
+            for (int i = 1; i <= 12; i++)
+            {
+                Items.Add(new SelectListItem { Text = i.ToString(), Value = (i).ToString("00") });
+            }
+            return Items;
+        };
+
+        Func<IEnumerable<SelectListItem>> GetDayOptions = () =>
+        {
+            List<SelectListItem> Items = new List<SelectListItem>();
+            int NowDay = DateTime.Today.Day;
+            for (int i = 1; i <= 31; i++)
+            {
+                Items.Add(new SelectListItem { Text = i.ToString(), Value = (i).ToString("00") });
+            }
+            return Items;
+        };
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/PersonalAuth/P11Auth/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("P11AuthQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" />
+            @Html.TextBoxFor(t => t.IssueDateYear, new { id = "refreshIssueDateYear" })
+            @Html.TextBoxFor(t => t.IssueDateMonth, new { id = "refreshIssueDateMonth" })
+            @Html.TextBoxFor(t => t.IssueDateDay, new { id = "refreshIssueDateDay" })
+            @Html.TextBoxFor(t => t.BirthdayYear, new { id = "refreshBirthdayYear" })
+            @Html.TextBoxFor(t => t.BirthdayMonth, new { id = "refreshBirthdayMonth" })
+            @Html.TextBoxFor(t => t.BirthdayDay, new { id = "refreshBirthdayDay" })
+            @Html.TextBoxFor(t => t.IDNO, new { id = "refreshIDNO" })
+            @Html.Hidden("queryIssueLocationID")
+            @Html.Hidden("queryIsPicture")
+            @Html.Hidden("queryObtainType")
+        }
+    </div>
+    @using (Ajax.BeginForm("P11AuthQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <input type="hidden" name="PageSize" value="5" />
+        <div class="scb-form sf-2column">
+            <dl>
+                <dt class="oneline-inp">@Html.LabelFor(t => t.IDNO)<sup class="inp-required">*</sup></dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.IDNO, new { id = "queryIDNO", placeholder = "請輸入身分證字號" })
+                    @Html.ValidationMessageFor(t => t.IDNO, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">領補換類別<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.ObtainType, new SelectListItem[]
+                        {
+                            new SelectListItem { Text = "初發", Value = "1" },
+                            new SelectListItem { Text = "補發", Value = "2" },
+                            new SelectListItem { Text = "換發", Value = "3" }
+                        }, new { @id = "queryObtainType" })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">領補換日期<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box2">
+                    <label class="def-select sd2-block">
+                        @Html.DropDownListFor(t => t.IssueDateYear, GetYearOptions(94), "---",new { @id = "queryIssueDateYear" })
+                    </label>
+                    <span class="sd2-txt">年</span>
+                    <label class="def-select sd2-block">
+                        @Html.DropDownListFor(t => t.IssueDateMonth, GetMonthOptions(), "---", new { @id = "queryIssueDateMonth" })
+                    </label>
+                    <span class="sd2-txt">月</span>
+                    <label class="def-select sd2-block">
+                        @Html.DropDownListFor(t => t.IssueDateDay, GetDayOptions(), "---", new { @id = "queryIssueDateDay" })
+                    </label>
+                    <span class="sd2-txt">日</span>
+                    @Html.ValidationMessageFor(t => t.IssueDateYear, null, new { @class = "input-error-txt" }, "div")
+                    @Html.ValidationMessageFor(t => t.IssueDateMonth, null, new { @class = "input-error-txt" }, "div")
+                    @Html.ValidationMessageFor(t => t.IssueDateDay, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">領補換地點<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.IssueLocationID, IssueLocations.Select(t => new SelectListItem { Text = t.IssueLocationName, Value = t.IssueLocationID.ToString() }), new { @id = "queryIssueLocationID" })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">出生日期<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box2">
+                    <label class="def-select sd2-block">
+                        @Html.DropDownListFor(t => t.BirthdayYear, GetYearOptions(1), "---", new { @id = "queryBirthdayYear" })
+                    </label>
+                    <span class="sd2-txt">年</span>
+                    <label class="def-select sd2-block">
+                        @Html.DropDownListFor(t => t.BirthdayMonth, GetMonthOptions(), "---", new { @id = "queryBirthdayMonth" })
+                    </label>
+                    <span class="sd2-txt">月</span>
+                    <label class="def-select sd2-block">
+                        @Html.DropDownListFor(t => t.BirthdayDay, GetDayOptions(), "---", new { @id = "queryBirthdayDay" })
+                    </label>
+                    <span class="sd2-txt">日</span>
+                    @Html.ValidationMessageFor(t => t.BirthdayYear, null, new { @class = "input-error-txt" }, "div")
+                    @Html.ValidationMessageFor(t => t.BirthdayMonth, null, new { @class = "input-error-txt" }, "div")
+                    @Html.ValidationMessageFor(t => t.BirthdayDay, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">是否免印相片<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(t => t.IsPicture, new SelectListItem[]
+                        {
+                            new SelectListItem { Value = "1", Text = "印" },
+                            new SelectListItem { Value = "0", Text = "免印" }
+                        }, new { @id = "queryIsPicture" })
+                    </label>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="btn-box">
+            <a id="lnkQuery" href="#" class="btn" title="送出">送出</a>
+            <a id="lnkReset" href="#" class="btn btn-blue-border" title="清除條件">清除條件</a>
+        </div>
+    }
+</div>
+<div id="queryResult">
+</div>

@@ -1,0 +1,49 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerSecurityManage
+@model IPBlackAddModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerSecurityManage/AddIPBlackList/action.js"></script>
+}
+
+<div id="add-blacklist-popup" class="add-blacklist-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">新增黑名單</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>IP位置</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.IP, new { @class = "pp-inp", placeholder = "請輸入完整IP" })
+                            @Html.ValidationMessageFor(t => t.IP, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>加入原因</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.LockMemo, new { @class = "pp-textarea", placeholder = "請輸入原因", @maxLength = 150 })
+                            <div class="input-tip-txt itt-r itt-er" id="input-tip-txt"><span>0</span>/150</div>
+                            @Html.ValidationMessageFor(t => t.LockMemo, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <input type="submit" id="btnSubmit" style="display:none;" />
+                <a href="#" class="btn disabled link-submit btn-add" title="送出">送出</a>
+            </div>
+        }
+        </div>
+</div>
+
+
+

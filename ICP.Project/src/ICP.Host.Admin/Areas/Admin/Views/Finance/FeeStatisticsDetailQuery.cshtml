@@ -1,0 +1,78 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentCenter;
+@model IPagedList<FeeStatisticsDetailModel>
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/finance.css" rel="stylesheet" />
+}
+<div id="fee-statistics-popup" class="fee-statistics-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <div class="pp-content">
+            <h4 class="pp-title">詳細資料</h4>
+
+            <div class="pp-function">
+                <div class="btn-box">
+                    <a href="@Url.Action("ExportFeeStatisticsDetail", ViewBag.QueryModel)" class="btn btn-blue-border bd-rdi" title="匯出">
+                        <span class="icon-ic-exprot bb-icon"></span>
+                        匯出 Excel
+                    </a>
+                </div>
+            </div>
+
+            <div class="pp-table pt-fee-statistics">
+                <div class="pp-table-header">
+                    <ul>
+                        <li><p class="sth-txt">撥款日期</p></li>
+                        <li><p class="sth-txt">電支帳號</p></li>
+                        <li><p class="sth-txt">交易序號</p></li>
+                        <li><p class="sth-txt">交易/儲值日期</p></li>
+                        <li><p class="sth-txt">交易/儲值金額</p></li>
+                        <li><p class="sth-txt pth-twoline">手續費/佣金費率<br>( %數 / $筆)</p></li>
+                        <li><p class="sth-txt">手續費/佣金</p></li>
+                        <li><p class="sth-txt">退款金額</p></li>
+                    </ul>
+                </div>
+                <div class="pp-table-body">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.AllocateDate.ToShortDateString()</td>
+                                <td>@item.MerchantID</td>
+                                <td>@item.TradeNo</td>
+                                <td>@item.TradeDate.ToString("yyyy/MM/dd HH:mm:ss")</td>
+                                <td>@item.Amount.ToString("N0")</td>
+                                <td>@item.FeeRate</td>
+                                <td>@item.Fee.ToString("N2")</td>
+                                <td>@item.RefundAmount.ToString("N0")</td>
+                            </tr>
+                        }
+                        <tr class="ptf-sum">
+                            <td colspan="4">小計：共 @Model.Count.ToString("N0") 筆</td>
+                            <td>@Model.Sum(x => x.Amount).ToString("N0")</td>
+                            <td>-</td>
+                            <td>@Model.Sum(x => x.Fee).ToString("N2")</td>
+                            <td>@Model.Sum(x => x.RefundAmount).ToString("N0")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

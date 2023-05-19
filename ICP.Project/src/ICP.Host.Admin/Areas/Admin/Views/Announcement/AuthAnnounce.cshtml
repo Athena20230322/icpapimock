@@ -1,0 +1,124 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.Announcement
+@model ModifyAnnounceVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/news.css" rel="stylesheet" />
+}
+@if (TempData["RtnMsg"] != null)
+{
+    <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["RtnMsg"]));
+        alert(message);
+    </script>
+}
+
+@Html.ValidationSummary()
+@using (Html.BeginForm("AuthAnnounce", "Announcement", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.NID);
+    @Html.HiddenFor(m => m.AuthStatus);
+    <div class="sc-box scb-news">
+        <h4 class="content-title">訊息公告基本設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.CategoryName)</dt>
+                <dd>
+                    <div class="sn-review-box">@Html.DisplayFor(m => m.CategoryName)</div>
+                </dd>
+            </dl>
+            <dl class="sf-check-box">
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.StartDate)</dt>
+                <dd>
+                    <div class="sn-review-box">@Html.DisplayFor(m => m.StartDate) @Html.DisplayFor(m => m.StartDateTime)</div>
+                </dd>
+            </dl>
+            <dl class="sf-radio-box">
+                <dt class="oneline-inp">是否置頂</dt>
+                <dd>
+                    <div class="sn-review-box">@(Model.IsTop == 0 ? "否" : "是")</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.IsTopStartDate)<span class="sf-title-tip">(非必填)</span></dt>
+                <dd>
+                    @if (Model.IsTop == 0)
+                    {
+                        <div class="sn-review-box"></div>
+                    }
+                    else
+                    {
+                        <div class="sn-review-box">@Html.DisplayFor(m => m.IsTopStartDate) @Html.DisplayFor(m => m.IsTopStartDateTime) ~ @Html.DisplayFor(m => m.IsTopEndDate) @Html.DisplayFor(m => m.IsTopEndDateTime)</div>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="sc-box scb-news">
+        <h4 class="content-title">訊息公告內容設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.Title)</dt>
+                <dd>
+                    <div class="sn-review-box">@Html.DisplayFor(m => m.Title)</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.AnnounceContent)</dt>
+                <dd>
+                    <div class="sn-review-box">
+                        @Html.Raw(Model.AnnounceContent)
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="sc-box scb-news">
+        <h4 class="content-title">訊息公告發送設定</h4>
+        <div class="scb-form">
+            <dl class="sf-radio-box">
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.AnnounceType)</dt>
+                <dd>
+                    <div class="sn-review-box">@(Model.AnnounceType == 0 ? "全會員" : "自行上傳欲發送電支帳號")</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>上傳發送名單<span class="sf-title-tip">(非必填)</span></dt>
+                <dd>
+                    <ul class="sn-send-list">
+                        @if (Model.CsvPathList != null)
+                        {
+                            if (Model.CsvPathList.Count > 0)
+                            {
+                                foreach (var item in Model.CsvPathList)
+                                {
+                                    <li><a href="@item.FileName" target="_blank">發送名單檔@(Model.CsvPathList.IndexOf(item) + 1).csv</a></li>
+                                }
+                            }
+                        }
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="scb-bottom-btn sbb-center">
+        <a href="javascript:setAuthStatus(2);" data-effect="mfp-zoom-in" class="btn btn-gray" title="退件">退件</a>
+        <a href="javascript:setAuthStatus(1);" data-effect="mfp-zoom-in" class="btn" title="放行">放行</a>
+        <input type="submit" id="btnSubmit" value="query" style="display:none;" />
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        libs.alert.validationSummary();
+
+        function setAuthStatus(s) {
+            $('#AuthStatus').val(s);
+            $('#btnSubmit').click();
+        }
+    </script>
+}

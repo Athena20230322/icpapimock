@@ -1,0 +1,227 @@
+@import url(third_party/flatpickr.min.css);
+@import url(page.css);
+.scb-table a {
+  text-decoration: underline; }
+
+.scb-table .btn {
+  text-decoration: none; }
+
+.scb-table.st-daily-report .scb-table-header li:nth-child(1), .scb-table.st-daily-report .scb-table-body col:nth-child(1) {
+  width: 14%; }
+
+.scb-table.st-daily-report .scb-table-header li:nth-child(2), .scb-table.st-daily-report .scb-table-body col:nth-child(2) {
+  width: 14%; }
+
+.scb-table.st-daily-report .scb-table-header li:nth-child(3), .scb-table.st-daily-report .scb-table-body col:nth-child(3) {
+  width: 15%; }
+
+.scb-table.st-daily-report .scb-table-header li:nth-child(4), .scb-table.st-daily-report .scb-table-body col:nth-child(4) {
+  width: 14%; }
+
+.scb-table.st-daily-report .scb-table-header li:nth-child(5), .scb-table.st-daily-report .scb-table-body col:nth-child(5) {
+  width: 14%; }
+
+.scb-table.st-daily-report .scb-table-header li:nth-child(6), .scb-table.st-daily-report .scb-table-body col:nth-child(6) {
+  width: 15%; }
+
+.scb-table.st-daily-report .scb-table-header li:nth-child(7), .scb-table.st-daily-report .scb-table-body col:nth-child(7) {
+  width: 14%; }
+
+.scb-table.st-daily-report .scb-table-header li {
+  padding: 0 3px; }
+
+.scb-table.st-daily-report .scb-table-body td {
+  padding: 15px 2px; }
+  .scb-table.st-daily-report .scb-table-body td.srr-total {
+    text-align: left;
+    padding-left: 10px; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(1), .scb-table.st-bank-fees .scb-table-body col:nth-child(1) {
+  width: 12%; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(2), .scb-table.st-bank-fees .scb-table-body col:nth-child(2) {
+  width: 7%; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(3), .scb-table.st-bank-fees .scb-table-body col:nth-child(3) {
+  width: 12%; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(4), .scb-table.st-bank-fees .scb-table-body col:nth-child(4) {
+  width: 12%; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(5), .scb-table.st-bank-fees .scb-table-body col:nth-child(5) {
+  width: 16%; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(6), .scb-table.st-bank-fees .scb-table-body col:nth-child(6) {
+  width: 12%; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(7), .scb-table.st-bank-fees .scb-table-body col:nth-child(7) {
+  width: 12%; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(8), .scb-table.st-bank-fees .scb-table-body col:nth-child(8) {
+  width: 7%; }
+
+.scb-table.st-bank-fees .scb-table-header li:nth-child(9), .scb-table.st-bank-fees .scb-table-body col:nth-child(9) {
+  width: 10%; }
+
+.scb-table.st-saccount-detail th:nth-child(3) {
+  min-width: 150px; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(1), .scb-table.st-bank-business .scb-table-body col:nth-child(1), .scb-table.st-bank-business2 .scb-table-header li:nth-child(1), .scb-table.st-bank-business2 .scb-table-body col:nth-child(1) {
+  width: 16%; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(2), .scb-table.st-bank-business .scb-table-body col:nth-child(2), .scb-table.st-bank-business2 .scb-table-header li:nth-child(2), .scb-table.st-bank-business2 .scb-table-body col:nth-child(2) {
+  width: 10%; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(3), .scb-table.st-bank-business .scb-table-body col:nth-child(3), .scb-table.st-bank-business2 .scb-table-header li:nth-child(3), .scb-table.st-bank-business2 .scb-table-body col:nth-child(3) {
+  width: 10%; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(4), .scb-table.st-bank-business .scb-table-body col:nth-child(4), .scb-table.st-bank-business2 .scb-table-header li:nth-child(4), .scb-table.st-bank-business2 .scb-table-body col:nth-child(4) {
+  width: 13%; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(5), .scb-table.st-bank-business .scb-table-body col:nth-child(5), .scb-table.st-bank-business2 .scb-table-header li:nth-child(5), .scb-table.st-bank-business2 .scb-table-body col:nth-child(5) {
+  width: 10%; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(6), .scb-table.st-bank-business .scb-table-body col:nth-child(6), .scb-table.st-bank-business2 .scb-table-header li:nth-child(6), .scb-table.st-bank-business2 .scb-table-body col:nth-child(6) {
+  width: 11%; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(7), .scb-table.st-bank-business .scb-table-body col:nth-child(7), .scb-table.st-bank-business2 .scb-table-header li:nth-child(7), .scb-table.st-bank-business2 .scb-table-body col:nth-child(7) {
+  width: 9%; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(8), .scb-table.st-bank-business .scb-table-body col:nth-child(8), .scb-table.st-bank-business2 .scb-table-header li:nth-child(8), .scb-table.st-bank-business2 .scb-table-body col:nth-child(8) {
+  width: 10%; }
+
+.scb-table.st-bank-business .scb-table-header li:nth-child(9), .scb-table.st-bank-business .scb-table-body col:nth-child(9), .scb-table.st-bank-business2 .scb-table-header li:nth-child(9), .scb-table.st-bank-business2 .scb-table-body col:nth-child(9) {
+  width: 11%; }
+
+.scb-table.st-bank-business .scb-table-header li, .scb-table.st-bank-business2 .scb-table-header li {
+  padding: 0 3px; }
+
+.scb-table.st-bank-business .scb-table-body td, .scb-table.st-bank-business2 .scb-table-body td {
+  padding: 15px 2px; }
+
+.scb-table.st-bank-business3 .scb-table-header li:nth-child(1), .scb-table.st-bank-business3 .scb-table-body col:nth-child(1) {
+  width: 16%; }
+
+.scb-table.st-bank-business3 .scb-table-header li:nth-child(2), .scb-table.st-bank-business3 .scb-table-body col:nth-child(2) {
+  width: 17%; }
+
+.scb-table.st-bank-business3 .scb-table-header li:nth-child(3), .scb-table.st-bank-business3 .scb-table-body col:nth-child(3) {
+  width: 17%; }
+
+.scb-table.st-bank-business3 .scb-table-header li:nth-child(4), .scb-table.st-bank-business3 .scb-table-body col:nth-child(4) {
+  width: 17%; }
+
+.scb-table.st-bank-business3 .scb-table-header li:nth-child(5), .scb-table.st-bank-business3 .scb-table-body col:nth-child(5) {
+  width: 14%; }
+
+.scb-table.st-bank-business3 .scb-table-header li:nth-child(6), .scb-table.st-bank-business3 .scb-table-body col:nth-child(6) {
+  width: 19%; }
+
+.scb-table.st-bank-business3 .scb-table-header li {
+  padding: 0 3px; }
+
+.scb-table.st-bank-business3 .scb-table-body td {
+  padding: 15px 2px; }
+
+.scb-table.st-bank-business4 .scb-table-header li:nth-child(1), .scb-table.st-bank-business4 .scb-table-body col:nth-child(1), .scb-table.st-bank-business5 .scb-table-header li:nth-child(1), .scb-table.st-bank-business5 .scb-table-body col:nth-child(1) {
+  width: 16%; }
+
+.scb-table.st-bank-business4 .scb-table-header li:nth-child(2), .scb-table.st-bank-business4 .scb-table-body col:nth-child(2), .scb-table.st-bank-business5 .scb-table-header li:nth-child(2), .scb-table.st-bank-business5 .scb-table-body col:nth-child(2) {
+  width: 14%; }
+
+.scb-table.st-bank-business4 .scb-table-header li:nth-child(3), .scb-table.st-bank-business4 .scb-table-body col:nth-child(3), .scb-table.st-bank-business5 .scb-table-header li:nth-child(3), .scb-table.st-bank-business5 .scb-table-body col:nth-child(3) {
+  width: 14%; }
+
+.scb-table.st-bank-business4 .scb-table-header li:nth-child(4), .scb-table.st-bank-business4 .scb-table-body col:nth-child(4), .scb-table.st-bank-business5 .scb-table-header li:nth-child(4), .scb-table.st-bank-business5 .scb-table-body col:nth-child(4) {
+  width: 11%; }
+
+.scb-table.st-bank-business4 .scb-table-header li:nth-child(5), .scb-table.st-bank-business4 .scb-table-body col:nth-child(5), .scb-table.st-bank-business5 .scb-table-header li:nth-child(5), .scb-table.st-bank-business5 .scb-table-body col:nth-child(5) {
+  width: 9%; }
+
+.scb-table.st-bank-business4 .scb-table-header li:nth-child(6), .scb-table.st-bank-business4 .scb-table-body col:nth-child(6), .scb-table.st-bank-business5 .scb-table-header li:nth-child(6), .scb-table.st-bank-business5 .scb-table-body col:nth-child(6) {
+  width: 12%; }
+
+.scb-table.st-bank-business4 .scb-table-header li:nth-child(7), .scb-table.st-bank-business4 .scb-table-body col:nth-child(7), .scb-table.st-bank-business5 .scb-table-header li:nth-child(7), .scb-table.st-bank-business5 .scb-table-body col:nth-child(7) {
+  width: 9%; }
+
+.scb-table.st-bank-business4 .scb-table-header li:nth-child(8), .scb-table.st-bank-business4 .scb-table-body col:nth-child(8), .scb-table.st-bank-business5 .scb-table-header li:nth-child(8), .scb-table.st-bank-business5 .scb-table-body col:nth-child(8) {
+  width: 15%; }
+
+.scb-table.st-bank-business4 .scb-table-header li, .scb-table.st-bank-business5 .scb-table-header li {
+  padding: 0 3px; }
+
+.scb-table.st-bank-business4 .scb-table-body td, .scb-table.st-bank-business5 .scb-table-body td {
+  padding: 15px 2px; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(1), .scb-table.st-invoice-recon .scb-table-body col:nth-child(1) {
+  width: 12%; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(2), .scb-table.st-invoice-recon .scb-table-body col:nth-child(2) {
+  width: 12%; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(3), .scb-table.st-invoice-recon .scb-table-body col:nth-child(3) {
+  width: 11%; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(4), .scb-table.st-invoice-recon .scb-table-body col:nth-child(4) {
+  width: 10%; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(5), .scb-table.st-invoice-recon .scb-table-body col:nth-child(5) {
+  width: 10%; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(6), .scb-table.st-invoice-recon .scb-table-body col:nth-child(6) {
+  width: 11%; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(7), .scb-table.st-invoice-recon .scb-table-body col:nth-child(7) {
+  width: 12%; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(8), .scb-table.st-invoice-recon .scb-table-body col:nth-child(8) {
+  width: 10%; }
+
+.scb-table.st-invoice-recon .scb-table-header li:nth-child(9), .scb-table.st-invoice-recon .scb-table-body col:nth-child(9) {
+  width: 12%; }
+
+.scb-table.st-invoice-recon .scb-table-header li {
+  padding: 0 3px; }
+
+.scb-table.st-invoice-recon .scb-table-body td {
+  padding: 15px 2px; }
+
+.scb-table.st-center-statistics {
+  overflow-x: hidden; }
+  .scb-table.st-center-statistics thead th {
+    height: 44px; }
+  .scb-table.st-center-statistics .scb-table-body td, .scb-table.st-center-statistics .scb-table-body th {
+    padding: 15px 8px; }
+
+.scb-table.st-account-monthly thead th {
+  height: 44px; }
+
+.scb-table.st-account-monthly .scb-table-body col:nth-child(1) {
+  width: 18%; }
+
+.scb-table.st-account-monthly .scb-table-body col:nth-child(2) {
+  width: 18%; }
+
+.scb-table.st-account-monthly .scb-table-body col:nth-child(3) {
+  width: 16%; }
+
+.scb-table.st-account-monthly .scb-table-body col:nth-child(4) {
+  width: 16%; }
+
+.scb-table.st-account-monthly .scb-table-body col:nth-child(5) {
+  width: 16%; }
+
+.scb-table.st-account-monthly .scb-table-body col:nth-child(6) {
+  width: 16%; }
+
+.scb-table .stf-sum {
+  color: #4a4a4a; }
+  .scb-table .stf-sum td {
+    height: 40px;
+    background: #FFF; }
+    .scb-table .stf-sum td:nth-child(1) {
+      text-align: left;
+      padding: 15px 15px; }
+
+.scb-form .sbf-date-box2 .sd2-block {
+  width: 82px; }

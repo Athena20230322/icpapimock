@@ -1,0 +1,48 @@
+﻿@using ICP.Modules.Mvc.Admin.Enums
+@model ICP.Modules.Mvc.Admin.Models.ViewModels.MemberDeviceIdVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+
+<div id="unlocking-popup" class="unlocking-popup mg-popup mfp-with-anim ">
+    <div class="pp-container">
+        @using(Html.BeginForm("EditMemberDeviceIdResult", "MemberDeviceIdManage",FormMethod.Post, new { @enctype = "multipart/form-data", @onclick = "return false" }))
+        {
+
+            @Html.HiddenFor(m=>m.DeviceID)
+            <div class="pp-content">
+                    @if (Model.Status == (int)MemberDeviceIdStatusType.Lock)
+                    {
+                        <h4 class="pp-title">解除封鎖</h4>
+                        <input type="hidden" name="Status" value="@((int)MemberDeviceIdStatusType.UnLock)">
+                    }
+                    @if (Model.Status == (int)MemberDeviceIdStatusType.UnLock)
+                    {
+                        <h4 class="pp-title">鎖定</h4>
+                        <input type="hidden" name="Status" value="@((int)MemberDeviceIdStatusType.Lock)">
+                    }
+                    <div class="pp-form">
+                        <dl>
+                            <dt>裝置 ID</dt>
+                            <dd>@Html.DisplayTextFor(m => m.DeviceID)</dd>
+                        </dl>
+                        <dl>
+                            <dt>備註<sup class="inp-required">*</sup></dt>
+                            <dd>
+                                @Html.TextAreaFor(m => m.Memo, new { @class = "pp-textarea",@maxlength = "150", @onkeyup = "wordsTotal();ChangeDisabled();" })
+                                @Html.ValidationMessageFor(m => @m.Memo, null, new { @class = "input-error-txt" }, "div")
+                                <div class="input-tip-txt itt-r itt-er" id="countMemo">0/150</div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            <div class="mp-btn-block2">
+                <a href="" class="btn link-submit disabled" title="確認">確認</a>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@model QueryAppFunctionSwitchVM
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/page.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/system.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/FunctionSwitch/Index/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "POST" }))
+        {
+            <input type="submit" />
+            @Html.TextBoxFor(t => t.FunctionName)
+        }
+    </div>
+    @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "POST" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-list-box">
+            <ul class="content-list">
+                <li>如臨時要進行系統維護，請直接將開關狀態關閉(維護功能開啟後，該App功能將無法使用)。</li>
+                <li>如提早知道功能要開啟或關閉，可以點選「設定關閉時間」進行設定。</li>
+            </ul>
+        </div>
+        <div class="scb-search-box">
+            <div class="scb-search">
+                <span class="icon-ic-search ssr-icon"></span>
+                @Html.TextBoxFor(t => t.FunctionName, new { @class = "ssr-inp", @placeholder = "輸入欲查詢群組名稱關鍵字搜尋" })
+            </div>
+        </div>
+    }
+</div>
+<div id="queryResult">
+</div>

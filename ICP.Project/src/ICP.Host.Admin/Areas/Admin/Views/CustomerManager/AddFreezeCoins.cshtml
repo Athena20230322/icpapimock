@@ -1,0 +1,56 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager
+@model AddFreezeCoinsModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+    {
+    <script src="~/Areas/Admin/Scripts/CustomerManager/AddFreezeCoins/action.js"></script>
+}
+
+<div id="add-freezfunds-popup" class="add-freezfunds-popup edit-ac-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" value="@Model.MID" name="MID" />
+            <input type="hidden" id="TotalCash" name="TotalCash" value="@Model.TotalCash" />
+            <div class="pp-content">
+                <h4 class="pp-title">新增凍結款</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>目前帳戶餘額</dt>
+                        <dd>@string.Format("{0:N0}", Model.TotalCash)</dd>
+                    </dl>
+                    <dl>
+                        <dt>欲凍結金額<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.FreezeCash, new { @class = "pp-inp", placeholder = "請輸入金額" })
+                            @Html.ValidationMessageFor(t => t.FreezeCash, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>凍結原因<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.Remark, new { @class = "pp-textarea", placeholder = "請輸入凍結原因", @maxLength = 200 })
+                            <div class="input-tip-txt itt-r itt-er" id="input-tip-txt">0/200</div>
+                            @Html.ValidationMessageFor(t => t.Remark, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+
+                </div>
+
+                <div class="mp-btn-block2">
+                    <a href="#" class="btn disabled link-submit" title="確認送出">確認送出</a>
+                </div>
+
+            </div>
+
+
+        }
+    </div>
+</div>

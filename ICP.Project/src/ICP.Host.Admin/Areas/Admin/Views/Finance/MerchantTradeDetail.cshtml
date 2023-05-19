@@ -1,0 +1,71 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.Finance.MerchantTradeDetail;
+@model QryMerchantTradeDetailReq
+@section header{
+    <link href="~/Areas/Admin/Content/css/finance.css" rel="stylesheet" />
+}
+
+    <div class="sc-box no-edge">
+        @using (Ajax.BeginForm("ListMerchantTradeDetail", null, new AjaxOptions { UpdateTargetId = "queryResult" }, new { id = "queryForm" }))
+        {
+            <div class="scb-form sf-2column">
+                <dl class="sbf-date-single">
+                    <dt class="oneline-inp">日期區間</dt>
+                    <dd class="sbf-date-box">
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(m => m.DateStart, new { @class = "flatpickr flatpickr-input active minD", placeholder = "起始日期", @readonly = "readonly" })
+                        </label>
+                        <span class="sdb-txt">至</span>
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(m => m.DateEnd, new { @class = "flatpickr flatpickr-input active maxD", placeholder = "結束日期", @readonly = "readonly" })
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">帳務類型</dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(m => m.TradeModeID, Model.TradeModeList, new { onchange = "BindPaymentTypeList()" })
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">電支使用者</dt>
+                    <dd class="sf-2inp s2i-2">
+                        <label class="def-select s2i-item">
+                            @Html.DropDownListFor(m => m.UserType, Model.UserTypeList)
+                        </label>
+                        @Html.TextBoxFor(m => m.User, new { @class = "s2i-item", maxlength = 20 })
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">交易類型</dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(m => m.PaymentTypeID, Model.PaymentTypeList, new { onchange = "BindPaymentSubTypeList()" })
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">交易子類型</dt>
+                    <dd>
+                        <label class="def-select">
+                            @Html.DropDownListFor(m => m.PaymentSubTypeID, Model.PaymentSubTypeList)
+                        </label>
+                    </dd>
+                </dl>
+            </div>
+
+
+            <div class="btn-box">
+                <a id="lnkQuery" href="javascript:;" class="btn" title="查詢">查詢</a>
+                <a id="lnkReset" href="javascript:;" class="btn btn-blue-border" title="清除條件">清除條件</a>
+            </div>
+        }
+    </div>
+
+<div id="queryResult">
+</div>
+
+@section scripts {
+    <script src="~/Areas/Admin/Scripts/Finance/MerchantTradeDetail/action.js"></script>
+}

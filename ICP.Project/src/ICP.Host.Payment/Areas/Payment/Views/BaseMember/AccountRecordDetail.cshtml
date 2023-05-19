@@ -1,0 +1,172 @@
+﻿@using ICP.Library.Services.MemberServices
+@model List<ICP.Modules.Mvc.Payment.Models.BaseMember.AccountRecordDbRes>
+
+@{
+    string statusCssClass = "";
+    string urlController = "QueryTrade";
+    string urlAction = "";
+    string datetime = "";
+    string accReordType = "";
+    int amount = 0;
+    int rowID = 0;
+
+    LibMemberInfoCommonService libMemberInfoCommonService = new LibMemberInfoCommonService();
+}
+
+<script>
+    $('.toggle_box').jscroll({
+        loadingHtml: '<small>Loading...</small>',
+        padding: 200,
+        debug: true,
+        autoTrigger: true,
+        autoTriggerUntil: 10,
+        nextSelector: 'a.page:last'
+    });
+</script>
+
+<ul class="toggle_box" id="account_record_list">
+    @if (Model != null)
+    {
+        if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                if(item.RowID > rowID)
+                {
+                    rowID = item.RowID;
+                }
+
+                switch (item.TradeModeID)
+                {
+                    case 1:
+                        statusCssClass = "";
+                        urlAction = "PaidDetail";
+                        datetime = item.PaymentDate.ToString("yyyy/MM/dd HH:mm");
+                        accReordType = "支付";
+                        amount = Convert.ToInt32(item.Amount);
+
+                        if (new int[] { 0, 4 }.Contains(item.TradeStatus))
+                        {
+                            statusCssClass = "error";
+                            datetime = item.CreateDate.ToString("yyyy/MM/dd HH:mm");
+                        }
+                        else if (new int[] { 2, 3 }.Contains(item.TradeStatus))
+                        {
+                            urlAction = "PaidDetail";
+                            datetime = item.RefundDate.ToString("yyyy/MM/dd HH:mm");
+                            accReordType = "退款";
+                            amount = Convert.ToInt32(item.Amount - item.RefundAMT);
+
+                            if (item.TradeStatus == 2 && amount == 0)
+                            {
+                                statusCssClass = "return";
+                            }
+                        }
+
+                        break;
+                    case 2:
+                        statusCssClass = "";
+                        switch (item.PaymentTypeID)
+                        {
+                            case 2:
+                                urlAction = "ACLinkTopUpDetail";
+
+                                break;
+                            case 3:
+                                urlAction = "ATMTopUpDetail";
+
+                                break;
+                            case 4:
+                            case 5:
+                            default:
+                                urlAction = "CashTopUpDetail";
+
+                                break;
+                        }
+                        datetime = item.CreateDate.ToString("yyyy/MM/dd HH:mm");
+                        accReordType = "儲值";
+                        amount = Convert.ToInt32(item.Amount);
+
+                        if (item.TradeStatus == 0)
+                        {
+                            statusCssClass = "error";
+
+                            if (item.PaymentTypeID == 3)
+                            {
+                                statusCssClass = "waitting";
+                            }
+                        }
+
+                        break;
+                    case 3:
+                        statusCssClass = "";
+                        urlAction = "TransferDetail";
+                        datetime = item.CreateDate.ToString("yyyy/MM/dd HH:mm");
+                        switch (item.ReceiveTransfer)
+                        {
+                            case 0:
+                                accReordType = "轉出";
+
+                                break;
+                            case 1:
+                                accReordType = "轉入";
+
+                                break;
+                        }
+
+                        amount = Convert.ToInt32(item.Amount);
+                        item.TitleName = libMemberInfoCommonService.ConcealPartialCName(item.TitleName, 'Ｏ');
+
+                        if (item.TradeStatus == 0)
+                        {
+                            statusCssClass = "error";
+                        }
+
+                        break;
+                    case 4:
+                        statusCssClass = "";
+                        urlAction = "BankTransferDetail";
+                        datetime = item.CreateDate.ToString("yyyy/MM/dd HH:mm");
+                        accReordType = "提領";
+                        amount = Convert.ToInt32(item.Amount);
+
+                        if (item.TradeStatus == 0)
+                        {
+                            statusCssClass = "error";
+                        }
+
+                        break;
+                }
+                <li @(statusCssClass == "" ? "" : "class=\"" + statusCssClass + "\"")>
+                    <a href="javascript: return false;" onclick="iCashJSContext.call('PushWeb',{title:'@(accReordType)明細',url:'@Url.Action(urlAction, urlController, new { TradeID = item.TradeID }, Request.Url.Scheme)@(item.ReceiveTransfer == 1 ? "&ReceiveTransfer=1" : "")'});">
+                        <div class="flex">
+                            <div class="col2"><span class="gray time">@(datetime)</span><br><span class="br">@(item.TitleName)</span><br><span class="gray">@(accReordType)</span></div>
+                            <div class="col"><span>NT$<span>@(amount)</span></span></div>
+                        </div>
+                    </a>
+                </li>
+            }
+
+            if (rowID < Model[0].MaxRow)
+            {
+                <a style="display: none" class="page" href="@Url.Action("AccountRecordDetail", "BaseMember", new { AccRecordType = Model[0].AccRecordType, DateType = 3, StartDate = Model[0].StartDate.ToString("yyyy/MM/dd"), EndDate = Model[0].EndDate.ToString("yyyy/MM/dd"), KeyWords = Model[0].KeyWords, RowID = rowID })">　</a>
+            }
+        }
+    }
+</ul>
+
+<script type="text/javascript">
+    if ('@ViewBag.errMsg' != "") {
+        alert('@ViewBag.errMsg');
+    }
+
+    // 呼叫APP原生用的
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.async = true;
+        js.src = "@Url.Content("~/Scripts/icashjscontext.js")";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'icash-JSContext'));
+</script>

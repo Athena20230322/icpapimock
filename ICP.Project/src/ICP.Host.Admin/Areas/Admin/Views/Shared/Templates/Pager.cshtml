@@ -1,0 +1,53 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model PagerModel
+@{
+    if (Model.ajaxOptions == null)
+    {
+        Model.ajaxOptions = new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "Post" };
+    }
+
+    if (Model.action == null)
+    {
+        Model.action = "Query";
+    }
+}
+@if (Model.model != null && Model.model.PageCount > 1)
+{
+<style>
+    .sc-pagenum-box .spb-txt { min-width: 68px; }
+    .sc-pagenum-box a { cursor: default; }
+    .sc-pagenum-box a[href] { cursor: pointer; }
+</style>
+<div class="sc-pagenum-box">
+    @Html.PagedListPager(
+        Model.model,
+        page =>
+        {
+            Model.query.PageNo = page;
+            return Url.Action(Model.action, Model.query);
+        }, PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+        {
+            UlElementClasses = new[] { "spb-list" },
+            MaximumPageNumbersToDisplay = 6,
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+            LinkToFirstPageFormat = "<span page=\"first\" title=\"第 1 頁\">第 1 頁</span>",
+            LinkToNextPageFormat = "<span class=\"spl-arrow sla-next\"></span>",
+            LinkToPreviousPageFormat = "<span class=\"spl-arrow\"></span>",
+            LinkToLastPageFormat = "<span page=\"last\" title=\"最後一頁\">最後一頁</span>",
+
+        }, Model.ajaxOptions)
+    )
+</div>
+<script>
+    $(function () {
+        var $ul = $('.sc-pagenum-box:first ul.spb-list:first');
+        $ul.find('span[page="first"]').parent().addClass('spb-txt');
+        var $actLi = $ul.find('li.active:first ');
+        $actLi.html('<a class="">' + $actLi.text() + '</a>');
+        $ul.find('span[page="last"]').parent().addClass('spb-txt');
+    });
+</script>
+}

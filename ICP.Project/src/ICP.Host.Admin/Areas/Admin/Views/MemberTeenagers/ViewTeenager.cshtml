@@ -1,0 +1,281 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Library.Models.MemberModels;
+@model UpdateTeenagerViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    // 取得發證縣市
+    var IssueLocations = (List<MemberAuthIssueLocation>)ViewBag.IssueLocations;
+    Func<string, string> getIssueLocationName = IssueLocationID =>
+    {
+        var item = IssueLocations.FirstOrDefault(t => t.IssueLocationID == IssueLocationID);
+
+        if (item == null) return string.Empty;
+
+        return item.IssueLocationName;
+    };
+
+    Func<DateTime?, Func<DateTime, int>, int, string> emptyDT2IntPad = (dt, func, padLength) =>
+    {
+        return dt != null ? func(dt.Value).ToString().PadLeft(padLength, '0') : string.Empty;
+    };
+
+
+    var legalDetails = Model.LegalDetails.Select(LegalDetail =>
+    {
+        // 戶籍謄本資料
+        int iFile1 = 0;
+        int iFile2 = 0;
+        var LegalFiles = new string[]
+        {
+            LegalDetail.FilePath1,
+            LegalDetail.FilePath2,
+            LegalDetail.FilePath3,
+            LegalDetail.FilePath4,
+            LegalDetail.FilePath5,
+            LegalDetail.FilePath6
+        }
+        .Select(t => new
+        {
+            filePath = t,
+            UploadType = 2 + (++iFile1)
+        })
+        .Where(t => !string.IsNullOrWhiteSpace(t.filePath))
+        .Select(t =>
+        {
+            string fileName = "檔案";
+            iFile2++;
+            switch (iFile2)
+            {
+                case 1: fileName += "一"; break;
+                case 2: fileName += "二"; break;
+                case 3: fileName += "三"; break;
+                case 4: fileName += "四"; break;
+                case 5: fileName += "五"; break;
+                case 6: fileName += "六"; break;
+            }
+            return new
+            {
+                t.filePath,
+                t.UploadType,
+                fileName
+            };
+        })
+        .ToList();
+
+        return new
+        {
+            LegalDetail,
+            LegalFiles
+        };
+    });
+
+
+}
+@section scripts{
+<script src="~/Areas/Admin/Scripts/MemberTeenagers/ViewTeenager/action.js"></script>
+}
+<div class="agentdata-review-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">代理人審核資料</h4>
+
+                <div class="pp-form">
+                    <div class="ppf-subcontent">
+                        <h4 class="pfs-title">未成年申請人 </h4>
+
+                        <div class="pfs-box psb-nopd psb-id">
+                            <div class="mp-tip red">請確認身分資料是否正確</div>
+
+                            <dl>
+                                <dt>身分證件資料</dt>
+                                <dd>
+                                    <div class="amp-id-photo">
+                                        <div class="aip-box">
+                                            <div class="aip-txt">正面</div>
+                                            <div class="aip-img">
+                                                <img src="@Model.AuthIDNO.FilePath1" alt="身分證">
+                                            </div>
+                                            <div class="mp-btn-block2 mb2-min">
+                                                <a href="@Model.AuthIDNO.FilePath1" class="btn btn-blue-border" title="放大" target="_blank">放大</a>
+                                            </div>
+                                        </div>
+                                        <div class="aip-box">
+                                            <div class="aip-txt">正面</div>
+                                            <div class="aip-img">
+                                                <img src="@Model.AuthIDNO.FilePath2" alt="身分證">
+                                            </div>
+                                            <div class="mp-btn-block2 mb2-min">
+                                                <a href="@Model.AuthIDNO.FilePath2" class="btn btn-blue-border" title="放大" target="_blank">放大</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+
+                        <div class="pfs-box">
+                            <dl>
+                                <dt>姓名</dt>
+                                <dd>
+                                    <div class="pf-regular-box">@Model.CName</div>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>身分證字號</dt>
+                                <dd>
+                                    <div class="pf-regular-box">@Model.AuthIDNO.IDNO</div>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>領補換類別</dt>
+                                <dd>
+                                    <div class="pf-regular-box">
+                                        @switch (Model.AuthIDNO.ObtainType)
+                                        {
+                                            case 1:
+                                                @("初發")
+                                                break;
+                                            case 2:
+                                                @("補發")
+                                                break;
+                                            case 3:
+                                                @("換發")
+                                                break;
+                                        }
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>領補換日期</dt>
+                                <dd class="pf-date-box2">
+                                    <div class="pf-regular-box pd2-block">
+                                        @emptyDT2IntPad(Model.AuthIDNO.IssueDate, t => t.Year - 1911, 3)
+                                    </div>
+                                    <span class="pd2-txt">年</span>
+                                    <div class="pf-regular-box pd2-block">
+                                        @emptyDT2IntPad(Model.AuthIDNO.IssueDate, t => t.Month, 2)
+                                    </div>
+                                    <span class="pd2-txt">月</span>
+                                    <div class="pf-regular-box pd2-block">
+                                        @emptyDT2IntPad(Model.AuthIDNO.IssueDate, t => t.Day, 2)
+                                    </div>
+                                    <span class="pd2-txt">日</span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>領補換地點</dt>
+                                <dd>
+                                    <div class="pf-regular-box">
+                                        @getIssueLocationName(Model.AuthIDNO.IssueLocationID)
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>出生日期</dt>
+                                <dd class="pf-date-box2">
+                                    <div class="pf-regular-box pd2-block">
+                                        @emptyDT2IntPad(Model.AuthIDNO.Birthday, t => t.Year - 1911, 3)
+                                    </div>
+                                    <span class="pd2-txt">年</span>
+                                    <div class="pf-regular-box pd2-block">
+                                        @emptyDT2IntPad(Model.AuthIDNO.Birthday, t => t.Month, 2)
+                                    </div>
+                                    <span class="pd2-txt">月</span>
+                                    <div class="pf-regular-box pd2-block">
+                                        @emptyDT2IntPad(Model.AuthIDNO.Birthday, t => t.Day, 2)
+                                    </div>
+                                    <span class="pd2-txt">日</span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>是否免印相片</dt>
+                                <dd>
+                                    <div class="pf-regular-box">
+                                        @if (Model.AuthIDNO.IsPicture == 1)
+                                        {
+                                            @("列印")
+                                        }
+                                        else
+                                        {
+                                            @("免印")
+                                        }
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="ppf-subcontent">
+                        <h4 class="pfs-title">法定代理人(父母)</h4>
+@foreach (var detail in legalDetails)
+{
+                        <div class="pfs-box psb-nopd psb-id">
+                            <div class="mp-tip red">請確認身分資料是否正確</div>
+                            <dl>
+                                <dt>身分證件資料</dt>
+                                <dd>
+                                    <div class="amp-id-photo">
+                                        <div class="aip-box">
+                                            <div class="aip-txt">正面</div>
+                                            <div class="aip-img">
+                                                <img src="@detail.LegalDetail.IDNOFile1" alt="身分證">
+                                            </div>
+                                            <div class="mp-btn-block2 mb2-min">
+                                                <a href="@detail.LegalDetail.IDNOFile1" class="btn btn-blue-border" target="_blank" title="放大">放大</a>
+                                            </div>
+                                        </div>
+                                        <div class="aip-box">
+                                            <div class="aip-txt">正面</div>
+                                            <div class="aip-img">
+                                                <img src="@detail.LegalDetail.IDNOFile2" alt="身分證">
+                                            </div>
+                                            <div class="mp-btn-block2 mb2-min">
+                                                <a href="@detail.LegalDetail.IDNOFile2" class="btn btn-blue-border" target="_blank" title="放大">放大</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="pfs-box psb-file">
+                            <dl>
+                                <dt>戶籍謄本資料</dt>
+                                <dd>
+                                    <ul class="psb-file-list">
+                                        @foreach (var item in detail.LegalFiles)
+                                        {
+                                            <li>
+                                                <a href="@item.filePath" class="pfl-link" target="_blank">@item.fileName</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                        <br />
+}
+                    </div>
+
+                    <dl>
+                        <dt>備註</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.Note, new { @class = "pp-textarea", placeholder = "請輸入備註說明", maxlength = 200 })
+                            <div class="input-tip-txt itt-r itt-er"><span>0</span>/200</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="javascript:;" class="btn link-submit disabled" title="儲存">儲存</a>
+                <a href="javascript:;" class="btn btn-gray popup-close" title="取消">取消</a>
+            </div>
+        }
+    </div>
+</div>

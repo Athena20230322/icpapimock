@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4D21865C-0686-4510-B609-5C374BC36FAA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICP.Modules.Mvc.Admin</RootNamespace>
+    <AssemblyName>ICP.Modules.Mvc.Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Beta|AnyCPU'">
+    <OutputPath>bin\Beta\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Extras.DynamicProxy, Version=4.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Extras.DynamicProxy.4.5.0\lib\net45\Autofac.Extras.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="X.PagedList, Version=7.6.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.7.6.0\lib\net461\X.PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList.Mvc, Version=7.6.0.0, Culture=neutral, PublicKeyToken=c6e0b5b21f916f4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.Mvc.7.6.0\lib\net461\X.PagedList.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AdminMvcModule.cs" />
+    <Compile Include="App_Start\AdminMvcAreaRegistration.cs" />
+    <Compile Include="App_Start\Profiles\MemberProfile.cs" />
+    <Compile Include="App_Start\Profiles\SystemAdminProfile.cs" />
+    <Compile Include="Attributes\ImageAttribute.cs" />
+    <Compile Include="Attributes\UserExecutedLogAttribute.cs" />
+    <Compile Include="Attributes\UserLoginAuthAttribute.cs" />
+    <Compile Include="Commands\FunctionSwitchCommand.cs" />
+    <Compile Include="Commands\AnnouncementCommand.cs" />
+    <Compile Include="Commands\BannerCommand.cs" />
+    <Compile Include="Commands\CalendarCommand.cs" />
+    <Compile Include="Commands\CustomServiceRecordCommand.cs" />
+    <Compile Include="Commands\CustomerManagerCommand.cs" />
+    <Compile Include="Commands\CustomerSecurityManageCommand.cs" />
+    <Compile Include="Commands\AppManagementCommand.cs" />
+    <Compile Include="Commands\DepartmentCommand.cs" />
+    <Compile Include="Commands\AccountCommand.cs" />
+    <Compile Include="Commands\FrameCommand.cs" />
+    <Compile Include="Commands\IPRecordCommand.cs" />
+    <Compile Include="Commands\MailLibraryManageCommand.cs" />
+    <Compile Include="Commands\FinanceCommand.cs" />
+    <Compile Include="Commands\MerchantDataCommand.cs" />
+    <Compile Include="Commands\MemberIdentityVerificationCountCommand.cs" />
+    <Compile Include="Commands\PaymentCenterCommand.cs" />
+    <Compile Include="Commands\MemberDeviceIdManageCommand.cs" />
+    <Compile Include="Commands\SystemLogCommand.cs" />
+    <Compile Include="Commands\PersonalAuthCommand.cs" />
+    <Compile Include="Commands\MemberTeenagersCommand.cs" />
+    <Compile Include="Commands\MemberBankCommand.cs" />
+    <Compile Include="Commands\MemberIDNOCommand.cs" />
+    <Compile Include="Commands\PaymentStatisticsCommand.cs" />
+    <Compile Include="Commands\PermissionsCommand.cs" />
+    <Compile Include="Commands\SuspenseMainCommand.cs" />
+    <Compile Include="Commands\UnregisteredDataCommand.cs" />
+    <Compile Include="Commands\BonusCommand.cs" />
+    <Compile Include="Commands\TopUpReportCommand.cs" />
+    <Compile Include="Commands\RefundReportCommand.cs" />
+    <Compile Include="Commands\UserCommand.cs" />
+    <Compile Include="Commands\UserGroupCommand.cs" />
+    <Compile Include="Commands\UserGroupRelationCommand.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AppFunctionSwitchController.cs" />
+    <Compile Include="Controllers\FunctionSwitchController.cs" />
+    <Compile Include="Controllers\AnnouncementController.cs" />
+    <Compile Include="Controllers\AppManagementController.cs" />
+    <Compile Include="Controllers\BannerController.cs" />
+    <Compile Include="Controllers\SystemLogController.cs" />
+    <Compile Include="Controllers\CustomServiceRecordController.cs" />
+    <Compile Include="Controllers\FinanceController.cs" />
+    <Compile Include="Controllers\BaseAdminController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\CustomerManagerController.cs" />
+    <Compile Include="Controllers\CustomerSecurityManageController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\FrameController.cs" />
+    <Compile Include="Controllers\IPRecordController.cs" />
+    <Compile Include="Controllers\MailLibraryManageController.cs" />
+    <Compile Include="Controllers\MerchantDataController.cs" />
+    <Compile Include="Controllers\MemberDeviceIdManageController.cs" />
+    <Compile Include="Controllers\RefundReportController.cs" />
+    <Compile Include="Controllers\MemberIdentityVerificationCountController.cs" />
+    <Compile Include="Controllers\SuspenseMainController.cs" />
+    <Compile Include="Controllers\PersonalAuthController.cs" />
+    <Compile Include="Controllers\MemberTeenagersController.cs" />
+    <Compile Include="Controllers\MemberBankController.cs" />
+    <Compile Include="Controllers\MemberIDNOController.cs" />
+    <Compile Include="Controllers\PaymentStatisticsController.cs" />
+    <Compile Include="Controllers\PermissionsController.cs" />
+    <Compile Include="Controllers\UnregisteredDataController.cs" />
+    <Compile Include="Controllers\BonusController.cs" />
+    <Compile Include="Controllers\TopUpReportController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserGroupController.cs" />
+    <Compile Include="Controllers\UserGroupRelationController.cs" />
+    <Compile Include="Enums\AuthorizeResultType.cs" />
+    <Compile Include="Enums\MappingMethodAction.cs" />
+    <Compile Include="Enums\MemberDeviceIdStatusType.cs" />
+    <Compile Include="Enums\UserPermissionSpecialType.cs" />
+    <Compile Include="Interfaces\IMenuItem.cs" />
+    <Compile Include="Models\AccountChangePwdModel.cs" />
+    <Compile Include="Models\AccountLoginModel.cs" />
+    <Compile Include="Models\AccountResetPwdModel.cs" />
+    <Compile Include="Models\Banner\QryBannerVM.cs" />
+    <Compile Include="Models\ViewModels\Bonus\QryBonusReq.cs" />
+    <Compile Include="Models\ViewModels\Bonus\QryBonusRes.cs" />
+    <Compile Include="Models\CustomerManager\AddOverSeaP11Model.cs" />
+    <Compile Include="Models\CustomerManager\UploadOverSeaResultModel.cs" />
+    <Compile Include="Models\CustomerManager\UpdateUniformIDStatusModel.cs" />
+    <Compile Include="Models\CustomerManager\OverSeaFileUploadModel.cs" />
+    <Compile Include="Models\CustomerManager\AddOverSeaMemberDataModel.cs" />
+    <Compile Include="Enums\AuthStatusType.cs" />
+    <Compile Include="Models\AppFunctionSwitchLog.cs" />
+    <Compile Include="Models\AppFunctionSwitchRev.cs" />
+    <Compile Include="Models\Announcement\ModifyCategoryVM.cs" />
+    <Compile Include="Models\Announcement\ListCategoryDbReq.cs" />
+    <Compile Include="Models\Announcement\ModifyAnnounceDbReq.cs" />
+    <Compile Include="Models\Announcement\GetAnnounceDbRes.cs" />
+    <Compile Include="Models\Announcement\ModifyAnnounceVM.cs" />
+    <Compile Include="Models\Announcement\ListCategoryDbRes.cs" />
+    <Compile Include="Models\Announcement\ListAnnounceDbReq.cs" />
+    <Compile Include="Models\Announcement\ListAnnounceDbRes.cs" />
+    <Compile Include="Models\Banner\BannerSiteModel.cs" />
+    <Compile Include="Models\Banner\GetBannerRes.cs" />
+    <Compile Include="Models\Banner\ListBannerReq.cs" />
+    <Compile Include="Models\Banner\ListBannerRes.cs" />
+    <Compile Include="Models\Banner\ListBannerVM.cs" />
+    <Compile Include="Models\Banner\ModifyBannerReq.cs" />
+    <Compile Include="Models\Banner\ModifyBannerVM.cs" />
+    <Compile Include="Models\CalendarQuery.cs" />
+    <Compile Include="Models\CustomerManager\AddFreezeCoinsModel.cs" />
+    <Compile Include="Models\CustomerManager\AuthCellPhoneListLogVM.cs" />
+    <Compile Include="Models\CustomerManager\ListOverSeaUserResultModel.cs" />
+    <Compile Include="Models\CustomerManager\ListOverSeaUserQryVM.cs" />
+    <Compile Include="Models\CustomerManager\AuthCNameListLogVM.cs" />
+    <Compile Include="Models\CustomerManager\AuthMemberUpgradeListLogVM.cs" />
+    <Compile Include="Models\CustomerManager\DetailMemberDataVM.cs" />
+    <Compile Include="Models\CustomerManager\EditCellPhoneModel.cs" />
+    <Compile Include="Models\CustomerManager\FreezeCoinsModel.cs" />
+    <Compile Include="Models\CustomerManager\MemberAuthIDNOVM.cs" />
+    <Compile Include="Models\Finance\MerchantTradeDetail\QryMerchantTradeDetailDbReq.cs" />
+    <Compile Include="Models\CustomerServiceRecord\AddCustomServiceRecord.cs" />
+    <Compile Include="Models\CustomerServiceRecord\CustomerServiceRecordNote.cs" />
+    <Compile Include="Models\CustomerServiceRecord\QueryCustomServiceRecordResult.cs" />
+    <Compile Include="Models\CustomerServiceRecord\QueryCustomServiceRecord.cs" />
+    <Compile Include="Models\CustomerServiceRecord\SettingOptions.cs" />
+    <Compile Include="Models\Finance\ListTradeTypeDbRes.cs" />
+    <Compile Include="Models\Finance\MerchantTradeDetail\QryMerchantTradeDetailDbRes.cs" />
+    <Compile Include="Models\Finance\MerchantTradeDetail\QryMerchantTradeDetailReq.cs" />
+    <Compile Include="Models\Finance\MerchantTradeDetail\QryMerchantTradeDetailRes.cs" />
+    <Compile Include="Models\Finance\TradeDetail\QryTradeDetailDbReq.cs" />
+    <Compile Include="Models\Finance\TradeDetail\QryTradeDetailReq.cs" />
+    <Compile Include="Models\Finance\TradeDetail\QryTradeDetailDbRes.cs" />
+    <Compile Include="Models\Finance\TradeDetail\QryTradeDetailRes.cs" />
+    <Compile Include="Models\CustomerSecurityManage\IPBlackAddModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\RegistIPBlackListModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\RegistIPBlackQryModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\RegistIPListLogModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\RegistIPListModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\TakeCashLimitQryVM.cs" />
+    <Compile Include="Models\CustomerSecurityManage\TakeCashLimitAddOrUpdateModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\TakeCashLimitListLogModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\IDNOBlackListLogModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\TakeCashLimitListModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\TakeCashLimitQryModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\OTPBlackListLogModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\OTPBlackQryVM.cs" />
+    <Compile Include="Models\CustomerSecurityManage\OTPBlackUpdateModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\OTPBlackUnLockModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\OTPBlackLockModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\OTPBlackQryModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\OTPBlackListModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\IPBlackListLogModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\IDNOBlackListModel .cs" />
+    <Compile Include="Models\CustomerSecurityManage\IDNOBlackAddOrUpdateModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\IDNOBlackQryModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\IPBlackUpdateModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\IPBlackListModel.cs" />
+    <Compile Include="Models\CustomerSecurityManage\IPBlackQryModel.cs" />
+    <Compile Include="Models\FunctionCategoryLog.cs" />
+    <Compile Include="Models\FunctionCategoryStatusRev.cs" />
+    <Compile Include="Models\IPRecord\QueryIPRecord.cs" />
+    <Compile Include="Models\IPRecord\QueryIPRecordResult.cs" />
+    <Compile Include="Models\IssueLocation.cs" />
+    <Compile Include="Models\Logging\CustomerAllocateDayLog.cs" />
+    <Compile Include="Models\Logging\CustomerAnnualFeeLog.cs" />
+    <Compile Include="Models\Logging\CustomerArchivingNoLog.cs" />
+    <Compile Include="Models\Logging\CustomerAuditLog.cs" />
+    <Compile Include="Models\Logging\CustomerMemoLog.cs" />
+    <Compile Include="Models\Logging\CustomerMinimunRetentionLog.cs" />
+    <Compile Include="Models\Logging\CustomerMutipleLogModel.cs" />
+    <Compile Include="Models\Logging\CustomerSalesLog.cs" />
+    <Compile Include="Models\Logging\CustomerTransferUsedLimitLog.cs" />
+    <Compile Include="Models\MerchantModels\AuditStatusModel.cs" />
+    <Compile Include="Models\MerchantModels\CustomerAllocateDayModel.cs" />
+    <Compile Include="Models\MerchantModels\CustomerBasic.cs" />
+    <Compile Include="Models\MerchantModels\CustomerContractModel.cs" />
+    <Compile Include="Models\MerchantModels\CustomerDataModel.cs" />
+    <Compile Include="Models\MerchantModels\CustomerDetailModel.cs" />
+    <Compile Include="Models\MerchantModels\MerchantCategory.cs" />
+    <Compile Include="Models\PaymentStatistics\PaymentMonitor\QryPaymentMonitorDbReq.cs" />
+    <Compile Include="Models\PaymentStatistics\PaymentMonitor\QryPaymentMonitorDbRes.cs" />
+    <Compile Include="Models\PaymentStatistics\PaymentMonitor\QryPaymentMonitorLogReq.cs" />
+    <Compile Include="Models\PaymentStatistics\PaymentMonitor\QryPaymentMonitorReq.cs" />
+    <Compile Include="Models\PaymentStatistics\PaymentMonitor\QryPaymentMonitorRes.cs" />
+    <Compile Include="Models\PaymentCenter\FeeStatistics\FeeStatisticsDetailModel.cs" />
+    <Compile Include="Models\PaymentCenter\FeeStatistics\FeeStatisticsDetailQueryModel.cs" />
+    <Compile Include="Models\PaymentCenter\FeeStatistics\FeeStatisticsModel.cs" />
+    <Compile Include="Models\PaymentCenter\FeeStatistics\FeeStatisticsQueryModel.cs" />
+    <Compile Include="Models\MemberIdentityVerificationCount\QueryMemberIdentityVerificationCountResult.cs" />
+    <Compile Include="Models\MemberIdentityVerificationCount\QueryMemberIdentityVerificationCount.cs" />
+    <Compile Include="Models\PaymentStatistics\TimingMonitor\TimingMonitorDbReq.cs" />
+    <Compile Include="Models\PaymentStatistics\TimingMonitor\TimingMonitorRes.cs" />
+    <Compile Include="Models\PaymentStatistics\TimingMonitor\QryTimingMonitorVM.cs" />
+    <Compile Include="Models\MemberAuthIDNO.cs" />
+    <Compile Include="Models\MemberBankAccount.cs" />
+    <Compile Include="Models\MemberModels\MemberDeviceIdModel.cs" />
+    <Compile Include="Models\ViewModels\MemberDeviceIdQuery.cs" />
+    <Compile Include="Models\ViewModels\MemberDeviceIdVM.cs" />
+    <Compile Include="Models\MemberModels\P11AuthHistoryQuery.cs" />
+    <Compile Include="Models\MemberModels\P33AuthHistoryQuery.cs" />
+    <Compile Include="Models\MemberModels\UpdateMemberBankAccount.cs" />
+    <Compile Include="Models\PaymentStatistics\IncomeMonitor\QryIncomeMonitorDbReq.cs" />
+    <Compile Include="Models\PaymentStatistics\IncomeMonitor\QryIncomeMonitorReq.cs" />
+    <Compile Include="Models\PaymentStatistics\IncomeMonitor\QryIncomeMonitorDbRes.cs" />
+    <Compile Include="Models\PaymentStatistics\IncomeMonitor\QryIncomeMonitorRes.cs" />
+    <Compile Include="Models\PaymentStatistics\IncomeMonitor\QryIncomeMonitorLogReq.cs" />
+    <Compile Include="Models\MemberModels\P11AuthHistory.cs" />
+    <Compile Include="Models\UserExecuted.cs" />
+    <Compile Include="Models\ViewModels\CustomerServiceRecord\AddCustomServiceRecordVM.cs" />
+    <Compile Include="Models\ViewModels\CustomerServiceRecord\UpdateCustomServiceRecordVM.cs" />
+    <Compile Include="Models\PaymentStatistics\TimingMonitor\TimingMonitorLogVM.cs" />
+    <Compile Include="Models\SuspenseMain.cs" />
+    <Compile Include="Models\SuspenseSetting.cs" />
+    <Compile Include="Models\UnregisteredData.cs" />
+    <Compile Include="Models\TopUpReportQueryCondition.cs" />
+    <Compile Include="Models\TopUpReportQueryResult.cs" />
+    <Compile Include="Models\PaymentCenter\DailyRevenueStatistics\DailyRevenueStatisticsModel.cs" />
+    <Compile Include="Models\PaymentCenter\DailyRevenueStatistics\DailyRevenueStatisticsQueryModel.cs" />
+    <Compile Include="Models\PaymentCenter\TradeStatistics\TradeStatisticsDetailModel.cs" />
+    <Compile Include="Models\PaymentCenter\TradeStatistics\TradeStatisticsDetailQueryModel.cs" />
+    <Compile Include="Models\PaymentCenter\TradeStatistics\TradeStatisticsModel.cs" />
+    <Compile Include="Models\PaymentCenter\TradeStatistics\TradeStatisticsQueryModel.cs" />
+    <Compile Include="Models\RefundReportQueryCondition.cs" />
+    <Compile Include="Models\RefundReportQueryResult.cs" />
+    <Compile Include="Models\SystemLog\SystemError\SystemErrorDetailRes.cs" />
+    <Compile Include="Models\SystemLog\SystemError\QrySystemErrorRes.cs" />
+    <Compile Include="Models\SystemLog\SystemError\QrySystemErrorReq.cs" />
+    <Compile Include="Models\MemberIdentityVerificationCount\QueryJCICChargeFeeSettingResult.cs" />
+    <Compile Include="Models\ViewModels\MemberIdentityVerificationCount\QueryResultVM.cs" />
+    <Compile Include="Models\ViewModels\CustomerDataQueryModel.cs" />
+    <Compile Include="Models\ViewModels\CustomerDataQueryResult.cs" />
+    <Compile Include="Models\ViewModels\P11AuthHistoryVM.cs" />
+    <Compile Include="Models\ViewModels\P11AuthHistoryQueryVM.cs" />
+    <Compile Include="Models\MemberModels\P33AuthHistory.cs" />
+    <Compile Include="Models\ViewModels\P33AuthHistoryVM.cs" />
+    <Compile Include="Models\ViewModels\P11AuthQueryVM.cs" />
+    <Compile Include="Models\ViewModels\P33AuthVM.cs" />
+    <Compile Include="Models\ViewModels\P11AuthVM.cs" />
+    <Compile Include="Models\ViewModels\P33AuthQueryVM.cs" />
+    <Compile Include="Models\ViewModels\P33AuthHistoryQueryVM.cs" />
+    <Compile Include="Models\PaymentStatistics\AddMonitorLogDbReq.cs" />
+    <Compile Include="Models\PaymentStatistics\ListMonitorLogDbRes.cs" />
+    <Compile Include="Models\PaymentStatistics\ListWithdrawDbReq.cs" />
+    <Compile Include="Models\PaymentStatistics\ListWithdrawDbRes.cs" />
+    <Compile Include="Models\PaymentStatistics\QueryWithdrawVM.cs" />
+    <Compile Include="Models\PaymentStatistics\WithdrawLogVM.cs" />
+    <Compile Include="Models\QueryMemberBankAccount.cs" />
+    <Compile Include="Models\QueryMemberIDNO.cs" />
+    <Compile Include="Models\UpdateAppFunctionSwitch.cs" />
+    <Compile Include="Models\ViewModels\AddAppFunctionSwitchRevVM.cs" />
+    <Compile Include="Models\ViewModels\AddFunctionSwitchRevVM.cs" />
+    <Compile Include="Models\ViewModels\EditAuthIDNOVM.cs" />
+    <Compile Include="Models\ViewModels\EditBankAccountVM.cs" />
+    <Compile Include="Models\ViewModels\QueryAppFunctionSwitchVM.cs" />
+    <Compile Include="Models\ViewModels\CustomerServiceRecord\CustomerServiceRecordNoteVM.cs" />
+    <Compile Include="Models\ViewModels\CustomerServiceRecord\QueryCustomServiceRecordResultVM.cs" />
+    <Compile Include="Models\ViewModels\QueryFunctionSwitchVM.cs" />
+    <Compile Include="Models\ViewModels\QueryIPRecordResultVM.cs" />
+    <Compile Include="Models\ViewModels\CustomerServiceRecord\QueryCustomServiceRecordVM.cs" />
+    <Compile Include="Models\ViewModels\QueryIPRecordVM.cs" />
+    <Compile Include="Models\ViewModels\QueryMemberBankAccountVM.cs" />
+    <Compile Include="Models\ViewModels\MemberIdentityVerificationCount\QueryVM.cs" />
+    <Compile Include="Models\ViewModels\QueryMemberIDNOVM.cs" />
+    <Compile Include="Models\CustomerManager\QueryFreezeCoinsModel.cs" />
+    <Compile Include="Models\CustomerManager\FreezeCoinsQueryModel.cs" />
+    <Compile Include="Models\ViewModels\MemberAuthIDNOModel.cs" />
+    <Compile Include="Models\CustomerManager\MemberBankAccountVM.cs" />
+    <Compile Include="Models\CustomerManager\MemberNotifyMessageDetailModel.cs" />
+    <Compile Include="Models\CustomerManager\MemberNotifyMessageModel.cs" />
+    <Compile Include="Models\CustomerManager\MemberVerifyStatus.cs" />
+    <Compile Include="Models\CustomerManager\ReleaseFreezeCoinsModel.cs" />
+    <Compile Include="Models\CustomerManager\ReturnFreezeCoinsModel.cs" />
+    <Compile Include="Models\CustomerManager\UnLockSMSLogModel.cs" />
+    <Compile Include="Models\CustomerManager\UnLockSMSVM.cs" />
+    <Compile Include="Models\CustomerManager\UpdateCellPhoneModel.cs" />
+    <Compile Include="Models\CustomerManager\UserCoinsModel.cs" />
+    <Compile Include="Models\APPSetting.cs" />
+    <Compile Include="Models\ViewModels\APPSettingLog.cs" />
+    <Compile Include="Models\ViewModels\APPSettingQueryResult.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\FunctionCatagory.cs" />
+    <Compile Include="Models\CheckUserForgetTokenResult.cs" />
+    <Compile Include="Models\HolidayWorkingDayModel.cs" />
+    <Compile Include="Models\MailLibrary\MailContentModel.cs" />
+    <Compile Include="Models\MailLibrary\ContentQueryModel.cs" />
+    <Compile Include="Models\MailLibrary\ContentQueryResult.cs" />
+    <Compile Include="Models\MailLibrary\MailTag.cs" />
+    <Compile Include="Models\MailLibrary\NotifyContentModel.cs" />
+    <Compile Include="Models\MailLibrary\NotifyTag.cs" />
+    <Compile Include="Models\MemberModels\MemberAuthIDNOModel.cs" />
+    <Compile Include="Models\MemberModels\UpdateMemberAuthIDNO.cs" />
+    <Compile Include="Models\MemberModels\MemberTeenagersQuery.cs" />
+    <Compile Include="Models\MemberModels\UpdateMemberAuthUniformID.cs" />
+    <Compile Include="Models\MemberModels\UpdateTeenagerModel.cs" />
+    <Compile Include="Models\MemberModels\UpdateTeenagersLegalDetailModel.cs" />
+    <Compile Include="Models\PermissionModel.cs" />
+    <Compile Include="Models\UpdateUserLoginTokenResult.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserCookieModel.cs" />
+    <Compile Include="Models\UserGroup.cs" />
+    <Compile Include="Models\UserGroupFunctionPermission.cs" />
+    <Compile Include="Models\UserGroupQuery.cs" />
+    <Compile Include="Models\UserGroupRelation.cs" />
+    <Compile Include="Models\UserLoginResult.cs" />
+    <Compile Include="Models\UserPermissionSpecial.cs" />
+    <Compile Include="Models\UserQuery.cs" />
+    <Compile Include="Models\AccountForgetPwdModel.cs" />
+    <Compile Include="Models\UserSecurity.cs" />
+    <Compile Include="Models\ViewModels\FrameMenuItem.cs" />
+    <Compile Include="Models\ViewModels\MemberInfoManage.cs" />
+    <Compile Include="Models\ViewModels\PagerModel.cs" />
+    <Compile Include="Models\ViewModels\PermissionViewModel.cs" />
+    <Compile Include="Models\ViewModels\QueryMemberResultVM.cs" />
+    <Compile Include="Models\ViewModels\QueryMemberVM.cs" />
+    <Compile Include="Models\ViewModels\MemberTeenagersQueryResult.cs" />
+    <Compile Include="Models\ViewModels\QuerySuspenseMainVM.cs" />
+    <Compile Include="Models\ViewModels\QueryUnregisteredDataVM.cs" />
+    <Compile Include="Models\ViewModels\SuspenseMainLogVM.cs" />
+    <Compile Include="Models\ViewModels\SuspenseMainVM.cs" />
+    <Compile Include="Models\ViewModels\UpdateSuspenseMainVM.cs" />
+    <Compile Include="Models\ViewModels\UpdateTeenagerViewModel.cs" />
+    <Compile Include="Models\ViewModels\UploadFileVM.cs" />
+    <Compile Include="Models\ViewModels\UserGroupQueryResult.cs" />
+    <Compile Include="Models\ViewModels\UserQueryResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\FunctionSwitchRepository.cs" />
+    <Compile Include="Repositories\AnnouncementRepository.cs" />
+    <Compile Include="Repositories\BannerRepository.cs" />
+    <Compile Include="Repositories\CalendarRepository.cs" />
+    <Compile Include="Repositories\AppManagementRepository.cs" />
+    <Compile Include="Repositories\CustomServiceRecordRepository.cs" />
+    <Compile Include="Repositories\ConfigRepository.cs" />
+    <Compile Include="Repositories\CustomerManagerRepository.cs" />
+    <Compile Include="Repositories\CustomerSecurityManageRepositories.cs" />
+    <Compile Include="Repositories\DepartmentRepository.cs" />
+    <Compile Include="Repositories\FunctionCatagoryRepository.cs" />
+    <Compile Include="Repositories\MemberIdentityVerificationCountRepository.cs" />
+    <Compile Include="Repositories\IPRecordRepository.cs" />
+    <Compile Include="Repositories\LoggingRepository.cs" />
+    <Compile Include="Repositories\MailLibraryManageRepository.cs" />
+    <Compile Include="Repositories\MailManageRepository.cs" />
+    <Compile Include="Repositories\MemberAuthRepository.cs" />
+    <Compile Include="Repositories\FinanceRepository.cs" />
+    <Compile Include="Repositories\MerchantDataRepository.cs" />
+    <Compile Include="Repositories\PaymentCenterRepository.cs" />
+    <Compile Include="Repositories\MemberDeviceIdManageRepository.cs" />
+    <Compile Include="Repositories\SystemLogRepository.cs" />
+    <Compile Include="Repositories\PersonalAuthRepository.cs" />
+    <Compile Include="Repositories\MemberTeenagersRepository.cs" />
+    <Compile Include="Repositories\MemberBankRepository.cs" />
+    <Compile Include="Repositories\MemberIDNORepository.cs" />
+    <Compile Include="Repositories\NotifyManageRepository.cs" />
+    <Compile Include="Repositories\PaymentStatisticsRepository.cs" />
+    <Compile Include="Repositories\UserExecutedRepository.cs" />
+    <Compile Include="Repositories\PrivilegeRepository.cs" />
+    <Compile Include="Repositories\SuspenseMainRepository.cs" />
+    <Compile Include="Repositories\UnregisteredDataRepository.cs" />
+    <Compile Include="Repositories\BonusRepository.cs" />
+    <Compile Include="Repositories\TopUpReportRepository.cs" />
+    <Compile Include="Repositories\RefundReportRepository.cs" />
+    <Compile Include="Repositories\UserGroupRelationRepository.cs" />
+    <Compile Include="Repositories\UserGroupRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Services\FunctionSwitchService.cs" />
+    <Compile Include="Services\AnnouncementService.cs" />
+    <Compile Include="Services\BannerService.cs" />
+    <Compile Include="Services\CalendarService.cs" />
+    <Compile Include="Services\ExportDataService.cs" />
+    <Compile Include="Services\CustomServiceRecordService.cs" />
+    <Compile Include="Services\CustomerManagerService.cs" />
+    <Compile Include="Services\CustomerSecurityManageService.cs" />
+    <Compile Include="Services\AppManagementService.cs" />
+    <Compile Include="Services\DepartmentService.cs" />
+    <Compile Include="Services\FrameService.cs" />
+    <Compile Include="Services\FunctionCategoryService.cs" />
+    <Compile Include="Services\MemberIdentityVerificationCountService.cs" />
+    <Compile Include="Services\IPRecordService.cs" />
+    <Compile Include="Services\LoggingService.cs" />
+    <Compile Include="Services\LoginService.cs" />
+    <Compile Include="Services\MailLibraryManageService.cs" />
+    <Compile Include="Services\MailManageService.cs" />
+    <Compile Include="Services\MemberAuthService.cs" />
+    <Compile Include="Services\FinanceService.cs" />
+    <Compile Include="Services\MerchantDataService.cs" />
+    <Compile Include="Services\PaymentCenterService.cs" />
+    <Compile Include="Services\MemberDeviceIdService.cs" />
+    <Compile Include="Services\SystemLogService.cs" />
+    <Compile Include="Services\PersonalAuthService.cs" />
+    <Compile Include="Services\MemberTeenagersService.cs" />
+    <Compile Include="Services\MemberBankService.cs" />
+    <Compile Include="Services\MemberIDNOService.cs" />
+    <Compile Include="Services\NotifyManageService.cs" />
+    <Compile Include="Services\PaymentStatisticsService.cs" />
+    <Compile Include="Services\PrivilegeService.cs" />
+    <Compile Include="Services\SuspenseMainService.cs" />
+    <Compile Include="Services\UnregisteredDataService.cs" />
+    <Compile Include="Services\BonusService.cs" />
+    <Compile Include="Services\UserExecutedService.cs" />
+    <Compile Include="Services\TopUpReportService.cs" />
+    <Compile Include="Services\RefundReportService.cs" />
+    <Compile Include="Services\UserGroupRelationService.cs" />
+    <Compile Include="Services\UserGroupService.cs" />
+    <Compile Include="Services\UserService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICP.Infrastructure.Abstractions\ICP.Infrastructure.Abstractions.csproj">
+      <Project>{49FA2325-427A-4684-9FCA-E23964F02211}</Project>
+      <Name>ICP.Infrastructure.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Infrastructure.Core.Web\ICP.Infrastructure.Core.Web.csproj">
+      <Project>{BC6A1804-4574-414B-B677-19148E4D2034}</Project>
+      <Name>ICP.Infrastructure.Core.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Infrastructure.Core\ICP.Infrastructure.Core.csproj">
+      <Project>{724872BC-C923-434D-AB6A-CA502BE46DC8}</Project>
+      <Name>ICP.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Abstractions\ICP.Library.Abstractions.csproj">
+      <Project>{0e024538-6d08-4836-aeba-d78be5631571}</Project>
+      <Name>ICP.Library.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Commands\ICP.Library.Commands.csproj">
+      <Project>{0CF75D58-AD58-4A2A-902A-42F9502065DF}</Project>
+      <Name>ICP.Library.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Models\ICP.Library.Models.csproj">
+      <Project>{8f95e4bf-e15b-45eb-937b-d711e44ddf04}</Project>
+      <Name>ICP.Library.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Repositories\ICP.Library.Repositories.csproj">
+      <Project>{6D3F65C6-6F56-46BA-92C0-E584259692B1}</Project>
+      <Name>ICP.Library.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Services\ICP.Library.Services.csproj">
+      <Project>{C0CCC96A-C41F-4E87-BC82-15B3876B6DD0}</Project>
+      <Name>ICP.Library.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+</Project>

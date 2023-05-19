@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "ChinaTrustACLinkInfoConfirm";
+    Layout = "~/Areas/Member/Views/Shared/_ACLinkChinaTrustLayout.cshtml";
+}
+
+@using (Html.BeginForm("ChinaTrustOtpAuth", "ACLink", FormMethod.Post))
+{
+    <div id="wrapper">
+        <header></header>
+        <section id="bank01">
+            <div class="bank_white">
+                <div class="bank_tt1 br">請再次確認下列資訊</div>
+                <ul class="toggle_box" id="record_detial">
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>身分證字號</span></div>
+                            <div class="col"><span>@ViewBag.idno</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>連結類別</span></div>
+                            <div class="col"><span>icash Pay</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>icash Pay帳號</span></div>
+                            <div class="col"><span>@ViewBag.mid</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>生日</span></div>
+                            <div class="col"><span>@ViewBag.birth</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>約定連結帳號</span></div>
+                            <div class="col"><span>@ViewBag.bankAccount</span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="text note_content">
+                提醒您:<br>
+                中國信託銀行將發送OTP密碼至您留存於銀行的手機號碼，請確認:<br>
+                <ol>
+                    <li class="b">行動電話為開機狀態；</li>
+                    <li class="b">門號未拒收"商務簡訊"；</li>
+                    <li class="b">簡訊接收量足夠</li>
+                </ol>
+            </div>
+            <div class="btn_bottom">
+                <a href="#" class="btn_txt" id="btnSubmit">確&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;認</a>
+            </div>
+        </section>
+        <footer></footer>
+    </div>
+    <input type="hidden" name="MID" value="@ViewBag.mid" />
+    <input type="hidden" name="IDNO" value="@ViewBag.idno" />
+    <input type="hidden" name="Birth" value="@ViewBag.Birth" />
+    <input type="hidden" name="BankAccount" value="@ViewBag.BankAccount" />
+    <input type="hidden" name="AgreeTime" value="@ViewBag.agreeTime" />
+
+}
+<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/device.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/action.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#btnSubmit').click(function () {
+            $('form').submit();
+        });
+    })
+</script>
+

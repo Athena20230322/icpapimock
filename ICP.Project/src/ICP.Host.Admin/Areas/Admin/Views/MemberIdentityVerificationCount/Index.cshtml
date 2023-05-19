@@ -1,0 +1,72 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels.MemberIdentityVerificationCount;
+@model QueryVM
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/account.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/MemberIdentityVerificationCount/Index/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" />
+            @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new { id = "refreshStartDate" })
+            @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new { id = "refreshEndDate" })
+            @Html.Hidden("AuthType")
+        }
+    </div>
+    @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-form sf-2column">
+            <dl>
+                <dt class="oneline-inp">查詢起訖時間</dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "querStartDate" },
+                            { "class", "flatpickr flatpickr-input active minD" },
+                            { "placeholder", "起始日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-maxDate_input", "#queryEndDate" }
+                        })
+                    </label>
+
+                    <span class="sdb-txt">至</span>
+
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryEndDate" },
+                            { "class", "flatpickr flatpickr-input active maxD" },
+                            { "placeholder", "結束日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate_input", "#querStartDate" }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">項目</dt>
+                <dd>
+                    <label class="def-select">
+                        <select name="AuthType">
+                            <option value="">全部</option>
+                            <option value="0">聯徵_P11身分驗證筆數</option>
+                            <option value="1">聯徵_P33身分驗證筆數</option>
+                        </select>
+                    </label>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="btn-box">
+            <a id="lnkQuery" href="#" class="btn" title="查詢">查詢</a>
+            <a id="lnkReset" href="#" class="btn btn-blue-border clear-form" title="清除條件">清除條件</a>
+        </div>
+    }
+</div>
+<div id="queryResult">
+</div>

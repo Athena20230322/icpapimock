@@ -1,0 +1,55 @@
+﻿@section header{
+    <link href="~/Areas/Admin/Content/css/news.css" rel="stylesheet" />
+}
+
+<div class="sc-box no-edge">
+    @using (Ajax.BeginForm("CategoryQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <div class="scb-list-box">
+            <ul class="content-list">
+                <li>訊息公告類別用於發布訊息公告時，可選擇該則訊息公告要分類的選項(例：新聞、維護等)。 </li>
+                <li>如選單沒有欲使用的分類，請先點選「新增類別」。</li>
+                <li>如刪除類別，原該類別訊息公告會自動移轉至其他。</li>
+                <li>類別「其他」因上方原因，故無法編輯及刪除。</li>
+            </ul>
+        </div>
+        <div class="scb-search-box">
+            <div class="scb-search">
+                <span class="icon-ic-search ssr-icon"></span>
+                <input type="text" d="queryName" name="CategoryName" class="ssr-inp" placeholder="輸入欲查詢類別名稱搜尋">
+            </div>
+        </div>
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+    }
+</div>
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("AddCategory")" data-update-callback="query" class="libs-dialog-form btn" title="新增類別">
+            <span class="icon-ic-add bb-icon"></span>
+            新增類別
+        </a>
+    </div>
+</div>
+
+<div id="queryResult">
+</div>
+
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/Announcement/Category/action.js"></script>
+    <script type="text/javascript">
+        (function () {
+            $(document).on('click', 'a.link-submit2', function () {
+                var $t = $(this);
+                if ($t.is('.disabled')) return false;
+
+                if ($('#Status').val() == 0) {
+                    if (!confirm("類別狀態設定為關閉，是否確定送出?")) return false;
+                }
+
+                $(this).parents('form:first').submit();
+                return false;
+            });
+    })();
+    </script>
+}

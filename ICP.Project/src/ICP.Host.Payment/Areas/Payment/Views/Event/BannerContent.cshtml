@@ -1,0 +1,16 @@
+﻿@using ICP.Modules.Mvc.Payment.Models.Event.Banner;
+@model GetBannerRes
+@{
+    Layout = "~/Areas/Payment/Views/Shared/_LayoutForWebView.cshtml";
+}
+
+@if (!string.IsNullOrEmpty(Model.ImagePath)){
+    <div id="offer_vision1" >
+        <a href="@Model.UrlLink" target="@(Model.OpenNewWindow == 0 ? "" : "_blank")">
+            <img src="@Model.ImagePath" />
+        </a>
+    </div>
+}
+
+@Html.Raw(Model.BannerContent)
+

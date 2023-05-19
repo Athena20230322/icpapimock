@@ -1,0 +1,92 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels.CustomerServiceRecord
+@model UpdateCustomServiceRecordVM
+@{
+    IEnumerable<SelectListItem> StatusOptions = (IEnumerable<SelectListItem>)ViewBag.StatusOptions;
+    QueryCustomServiceRecordResultVM Result = (QueryCustomServiceRecordResultVM)ViewBag.Result;
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomServiceRecord/Update/action.js"></script>
+}
+<div class="sc-box scb-table stb-horizontal st-rec-detail">
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>案件編號</th>
+                    <td>@Result.CaseNo</td>
+                    <th>回報者姓名</th>
+                    <td>@Result.CName</td>
+                </tr>
+                <tr>
+                    <th>問題類別</th>
+                    <td>@Result.TypeDescription</td>
+                    <th>電支帳號</th>
+                    <td>@Result.ICPMID</td>
+                </tr>
+                <tr>
+                    <th>進線管道</th>
+                    <td>@Result.GateWayDescription</td>
+                    <th>手機號碼</th>
+                    <td>@Result.CellPhone</td>
+                </tr>
+                <tr>
+                    <th>E-mail</th>
+                    <td>@Result.Email</td>
+                    <th>訂單編號</th>
+                    <td>@Result.TradeNo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<h4 class="sc-subtitle">案件記錄內容</h4>
+<div class="sc-box">
+    <div class="scb-rec-content">
+        @foreach (var item in Result.Notes)
+        {
+            <dl>
+                <dt>@item.CreateDate.ToString("MM/dd")</dt>
+                <dd>@item.Note</dd>
+            </dl>
+        }
+    </div>
+</div>
+@using (Html.BeginForm("Update", "CustomServiceRecord"))
+{
+    <input type="hidden" name="CustomerServiceID" value="@Result.CustomerServiceID" />
+    <div class="sc-box scb-padding">
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">變更案件進度<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(m => m.Status, StatusOptions, "請選擇")
+                    </label>
+                    @Html.ValidationMessageFor(m => m.Status, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt>新增記錄內容<sup class="inp-required">*</sup></dt>
+                <dd>
+                    @Html.TextAreaFor(m => m.Note, new { @class = "pp-textarea", placeholder = "請輸入案件備註內容", maxLength = 1000 })
+                    <div class="input-tip-txt itt-r" id="input-tip-txt">0/1000</div>
+                    @Html.ValidationMessageFor(m => m.Note, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="scb-bottom-btn sbb-center">
+        <a id="updateCustomServiceRecord" href="#" data-effect="mfp-zoom-in" class="open-popup-link btn link-submit" title="確定更新">確定更新</a>
+    </div>
+}

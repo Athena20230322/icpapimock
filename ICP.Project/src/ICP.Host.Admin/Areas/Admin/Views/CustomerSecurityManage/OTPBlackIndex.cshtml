@@ -1,0 +1,117 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerSecurityManage
+@model OTPBlackQryVM
+
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerSecurityManage/OTPBlackIndex/action.js?t=2"></script>
+}
+
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("OTPBlackQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" id="btnQuery" value="query" />
+            <input type="hidden" name="PageSize" value="5" id="refreshPageSize" />
+            <input type="hidden" name="PageNo" value="1"  id="refreshPageNo"/>
+            @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new { id = "refreshCreateDateBegin" })
+            @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new { id = "refreshCreateDateEnd" })
+            @Html.TextBoxFor(t => t.CellPhone, new { id = "refreshCellPhone" })
+            @Html.TextBoxFor(t => t.Email, new { id = "refreshEmail" })
+            @Html.TextBoxFor(t => t.IDNO, new { id = "refreshIDNO" })
+        }
+    </div>
+
+    @using (Ajax.BeginForm("OTPBlackQuery", new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "POST" }))
+    {       
+
+        <div class="scb-form sf-2column">
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">最近封鎖時間<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryCreateDateBegin" },
+                            { "class", "flatpickr flatpickr-input active" },
+                            { "placeholder", "起始日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate", DateTime.Today.AddYears(-1).ToString("yyyy-01-01") },
+                            { "flatpickr-maxDate_input", "#queryCreateDateEnd" }
+                        })
+                    </label>
+
+                    <span class="sdb-txt">至</span>
+
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryCreateDateEnd" },
+                            { "class", "flatpickr flatpickr-input active" },
+                            { "placeholder", "結束日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate_input", "#queryCreateDateBegin" },
+                            { "flatpickr-maxDate", DateTime.Today.ToString("yyyy-MM-dd") }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">手機號碼</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.CellPhone, new { id = "queryCellPhone", placeholder = "請輸入手機號碼", maxlength = 15 })
+                    @Html.ValidationMessageFor(t => t.CellPhone, null, new { @class = "ssr-inp sri-2" }, "div")
+                 
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">E-mail</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.Email, new { id = "queryEmail", placeholder = "請輸入E-mail", maxlength = 100 })
+                    @Html.ValidationMessageFor(t => t.Email, null, new { @class = "ssr-inp sri-2" }, "div")
+                    
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">身分證字號</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.IDNO, new { id = "queryIDNO", placeholder = "請輸入身分證字號", maxlength = 20 })
+                    @Html.ValidationMessageFor(t => t.IDNO, null, new { @class = "ssr-inp sri-2" }, "div")
+                   
+                </dd>
+            </dl>
+
+
+        </div>
+
+        <div class="btn-box">
+            <a id="lnkQuery" href="#" class="btn link-submit" title="查詢">查詢</a>
+            <a id="lnkReset" href="#" class="btn btn-blue-border" title="清除條件">清除條件</a>
+        </div>
+
+    }
+</div>
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("AddBlackOTP")" class="libs-dialog-form btn" data-update-callback="trigger" title="新增">
+            <span class="icon-ic-add bb-icon"></span>
+            新增
+        </a>
+        
+        <a href="#" id="ExportCSV" class="btn btn-blue-border bd-rdi" title="匯出EXCEL">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出EXCEL
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>
