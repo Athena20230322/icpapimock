@@ -130,3 +130,7 @@ C:\icashendurance\前台查詢\ICP.Project\src\ICP.Host.APIService\obj\Debug\ICP
 C:\icashendurance\前台查詢\ICP.Project\src\ICP.Host.APIService\obj\Debug\ICP.Host.APIService.csproj.CopyComplete
 C:\icashendurance\前台查詢\ICP.Project\src\ICP.Host.APIService\obj\Debug\ICP.Host.APIService.dll
 C:\icashendurance\前台查詢\ICP.Project\src\ICP.Host.APIService\obj\Debug\ICP.Host.APIService.pdb
+C:\icpapimock\ICP.Project\src\ICP.Host.APIService\obj\Debug\ICP.Host.APIService.csproj.AssemblyReference.cache
+C:\icpapimock\ICP.Project\src\ICP.Host.APIService\obj\Debug\ICP.Host.APIService.csproj.CoreCompileInputs.cache
+C:\icpapimock\ICP.Project\src\ICP.Host.APIService\obj\Debug\ICP.Host.APIService.dll
+C:\icpapimock\ICP.Project\src\ICP.Host.APIService\obj\Debug\ICP.Host.APIService.pdb

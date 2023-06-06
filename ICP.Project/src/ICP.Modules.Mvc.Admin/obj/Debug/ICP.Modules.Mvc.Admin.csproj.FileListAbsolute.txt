@@ -125,3 +125,5 @@ D:\ICP\ICP.Project\src\ICP.Modules.Mvc.Admin\bin\Debug\roslyn\VBCSCompiler.exe
 D:\ICP\ICP.Project\src\ICP.Modules.Mvc.Admin\bin\Debug\roslyn\VBCSCompiler.exe.config
 D:\ICP\ICP.Project\src\ICP.Modules.Mvc.Admin\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\ICP\ICP.Project\src\ICP.Modules.Mvc.Admin\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\icpapimock\ICP.Project\src\ICP.Modules.Mvc.Admin\obj\Debug\ICP.Modules.Mvc.Admin.dll
+C:\icpapimock\ICP.Project\src\ICP.Modules.Mvc.Admin\obj\Debug\ICP.Modules.Mvc.Admin.pdb

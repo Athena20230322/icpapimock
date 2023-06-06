@@ -1,12 +1,12 @@
 {
   "dev": {
-    "member": "http://localhost:3311",
+    "member": "https://icp-member-stage.icashpay.com.tw",
     "payment": "http://localhost:3312"
   },
 
   "beta": {
-    "member": "https://icp-member-preprod.icashpay.com.tw",
-    "payment": "https://icp-payment-preprod.icashpay.com.tw"
+    "member": "https://icp-member-stage.icashpay.com.tw",
+    "payment": "https://icp-payment-stage.icashpay.com.tw"
   },
 
   "stage": {

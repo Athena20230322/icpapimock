@@ -14,6 +14,20 @@
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
         }
       },
+
+      {
+        "host": "member",
+        "name": "M0001_1 刷新AppToken(2023)",
+        "url": "/app/MemberInfo/RefreshLoginToken2023",
+        "json": {
+          "IDNo": "G107988577"
+        },
+        "specs": {
+          "IDNo": "身分證字號"
+        }
+      },
+
+
       {
         "host": "member",
         "name": "M0002 檢查會員驗證狀態",
@@ -720,7 +734,7 @@
         "url": "/app/ChatMember/AcceptFriendInvite",
         "json": {
           "FriendChatMID": ""
-         
+
         },
         "specs": {
           "FriendChatMID": "好友聊天會員編號"

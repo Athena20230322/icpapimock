@@ -99,3 +99,7 @@ C:\icashenduranceold\前台查詢\ICP.Project\src\ICP.Host.ApiTest\obj\Debug\ICP
 C:\icashenduranceold\前台查詢\ICP.Project\src\ICP.Host.ApiTest\obj\Debug\ICP.Host.ApiTest.csproj.CoreCompileInputs.cache
 C:\icashenduranceold\前台查詢\ICP.Project\src\ICP.Host.ApiTest\obj\Debug\ICP.Host.ApiTest.dll
 C:\icashenduranceold\前台查詢\ICP.Project\src\ICP.Host.ApiTest\obj\Debug\ICP.Host.ApiTest.pdb
+C:\icpapimock\ICP.Project\src\ICP.Host.ApiTest\obj\Debug\ICP.Host.ApiTest.csproj.AssemblyReference.cache
+C:\icpapimock\ICP.Project\src\ICP.Host.ApiTest\obj\Debug\ICP.Host.ApiTest.csproj.CoreCompileInputs.cache
+C:\icpapimock\ICP.Project\src\ICP.Host.ApiTest\obj\Debug\ICP.Host.ApiTest.dll
+C:\icpapimock\ICP.Project\src\ICP.Host.ApiTest\obj\Debug\ICP.Host.ApiTest.pdb
