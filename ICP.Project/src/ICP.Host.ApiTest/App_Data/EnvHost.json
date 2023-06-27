@@ -12,5 +12,17 @@
   "stage": {
     "member": "https://icp-member-stage.icashpay.com.tw",
     "payment": "https://icp-payment-stage.icashpay.com.tw"
+  },
+  "uat": {
+    "member": "https://icp-member-preprod.icashpay.com.tw",
+    "payment": "https://icp-payment-preprod.icashpay.com.tw"
+
+  },
+  "prod": {
+    "member": "https://member.icashpay.com.tw",
+    "payment": "https://payment.icashpay.com.tw"
+
   }
+
+
 }
