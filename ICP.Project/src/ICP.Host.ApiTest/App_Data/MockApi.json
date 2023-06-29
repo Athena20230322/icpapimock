@@ -134,12 +134,14 @@
         "url": "/app/MemberInfo/SendAuthSMS",
         "json": {
           "LoginTokenID": "7933292712F6468382D561B24868E118",
+          "UserCode": "",
           "CellPhone": "0908009004",
           "SMSAuthType": 5
         },
         "specs": {
           "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1~5需傳)",
-          "CellPhone": "手機號碼",
+          "UserCode": "登入帳號，格式：6-12碼半形英數混合※當SMSAuthType=2時必需帶入",
+          "CellPhone": "手機號碼檢查帶入的手機號碼與系統紀錄要發送的手機號碼是否一致",
           "SMSAuthType": "驗證類別 1：註冊時發送簡訊 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 5：換機驗證發送簡訊 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8：修改手機號碼"
         }
       },
@@ -151,25 +153,7 @@
           "CellPhone": "0908009004"
         },
         "specs": {
-          "CellPhone": "手機號碼"
-        }
-      },
-      {
-        "host": "member",
-        "name": "M0009 檢查簡訊驗證碼_共用",
-        "url": "/app/MemberInfo/CheckAuthSMS",
-        "json": {
-          "LoginTokenID": "7933292712F6468382D561B24868E118",
-          "CellPhone": "0908009504",
-          "SMSAuthType": 8,
-          "AuthCode": "",
-          "Idno": "L186020804"
-        },
-        "specs": {
-          "LoginTokenID": "登入/註冊TokenID",
-          "CellPhone": "手機號碼",
-          "SMSAuthType": "驗證類別 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入)",
-          "AuthCode": "簡訊驗證碼"
+          "CellPhone": "手機號碼依帶入的手機號碼發送簡訊驗證"
         }
       },
       {
@@ -178,6 +162,7 @@
         "url": "/app/MemberInfo/CheckAuthSMS2023",
         "json": {
 
+          "LoginTokenID": "",
           "CellPhone": "0908009004",
           "SMSAuthType": 8,
           "AuthCode": "",
@@ -186,11 +171,30 @@
         "specs": {
           "LoginTokenID": "登入/註冊TokenID",
           "CellPhone": "手機號碼",
-          "SMSAuthType": "驗證類別 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8:修改手機號碼發送簡訊(已登入)",
+          "SMSAuthType": "驗證類別 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8:修改手機號碼發送簡訊(已登入)===========(1)：註冊時發送簡訊 (請使用 M0010 檢查簡訊驗證碼_註冊 驗證) (5)：換機驗證發送簡訊(請使用 M0005 會員登入 驗證)",
           "AuthCode": "簡訊驗證碼",
           "IDNo": "身份證字號 或 居留證號碼"
         }
       },
+      {
+        "host": "member",
+        "name": "M0009 檢查簡訊驗證碼_共用",
+        "url": "/app/MemberInfo/CheckAuthSMS",
+        "json": {
+          "LoginTokenID": "",
+          "CellPhone": "0908009504",
+          "SMSAuthType": 8,
+          "AuthCode": "",
+          "Idno": "L186020804"
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID(SMSAuthType=1,2需傳)",
+          "CellPhone": "手機號碼",
+          "SMSAuthType": "驗證類別 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8：修改手機號碼發送簡訊(已登入)(當SMSAuthType=8，驗證通過時需一併更新手機號碼) ===========(1)：註冊時發送簡訊 (請使用 M0010 檢查簡訊驗證碼_註冊 驗證) (5)：換機驗證發送簡訊(請使用 M0005 會員登入 驗證)",
+          "AuthCode": "簡訊驗證碼"
+        }
+      },
+
 
 
       {
@@ -198,7 +202,7 @@
         "name": "M0010 檢查簡訊驗證碼_註冊",
         "url": "/app/MemberInfo/CheckRegisterAuthSMS",
         "json": {
-          "LoginTokenID": "7933292712F6468382D561B24868E118",
+          "LoginTokenID": "",
           "CellPhone": "0918152519",
           "AuthCode": ""
         },
@@ -219,7 +223,7 @@
           "ConfirmLoginPwd": "Aa678910"
         },
         "specs": {
-          "OriginalLoginPwd": "原登入密碼",
+          "OriginalLoginPwd": "原登入密碼※當ChangeType=1時必填",
           "NewLoginPwd": "新的登入密碼",
           "ConfirmLoginPwd": "再次確認登入密碼"
         }
@@ -283,7 +287,7 @@
           "Status": "False"
         },
         "specs": {
-          "FingerPrintPwd": "狀態"
+          "FingerPrintPwd": "狀態False：停用, True：啟用"
         }
       },
       {
@@ -336,10 +340,10 @@
         },
         "specs": {
           "Options": {
-            "name": "設定清單",
+            "name": "選項清單",
             "specs": {
               "OptionName": "設定名稱",
-              "OptionValue": "名稱值"
+              "OptionValue": "選項設定值"
             }
           }
         }
@@ -352,7 +356,7 @@
           "OptionName": "test1"
         },
         "specs": {
-          "OptionName": "名稱名稱(選填)"
+          "OptionName": "選項名稱"
         }
       },
       {
@@ -382,7 +386,7 @@
         "name": "M0024 重設登入密碼",
         "url": "/app/MemberInfo/ResetLoginPwd",
         "json": {
-          "LoginTokenID": "0F04DBF955004B99B8963688EA328016",
+          "LoginTokenID": "",
           "NewLoginPwd": "123456",
           "ConfirmLoginPwd": "123456"
         },
@@ -457,7 +461,11 @@
           ]
         },
 
-        "specs": {}
+        "specs": {
+          "AgreeItems": "同意項目",
+          "AgreeType": "同意項目1：個資聲明2：電子支付機構業務定型化契約3：隱私權政策與條款4：交易限額說明",
+          "AgreeStatus": "同意狀態0：尚未同意1：同意2：不同意"
+        }
       },
       {
         "host": "member",
@@ -489,8 +497,6 @@
         },
         "specs": {
           "ChatMemberID": "聊天會員編號",
-
-
           "ArrayMID": "用來查詢的MID，限制100筆"
 
         }
@@ -541,6 +547,19 @@
       },
       {
         "host": "member",
+        "name": "M0034 設定大頭貼",
+        "url": "/app/MemberInfo/SetProPic",
+        "json": {
+
+
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
         "name": "M0035  刪除綁定銀行帳戶",
         "url": "/app/MemberInfo/DelAccountBind",
         "json": {
@@ -551,7 +570,9 @@
 
         },
         "specs": {
-          "AccountType": "刪除帳戶類別 1：連結扣款帳戶 2：提領轉入帳戶"
+          "AccountType": "刪除帳戶類別 1：連結扣款帳戶 2：提領轉入帳戶",
+          "BankCode": "銀行代碼",
+          "AccountID": "銀行帳戶編號(系統定義流水號)"
         }
       },
       {
@@ -565,13 +586,7 @@
           "AccountType": "綁定帳戶類別 1：連結扣款 2：餘額提領轉入"
         }
       },
-      {
-        "host": "member",
-        "name": "M0041 Socket Server使用者驗證",
-        "url": "/api/Member/MemberInfo/PrivateUserAuth",
-        "json": {},
-        "specs": {}
-      },
+
       {
         "host": "member",
         "name": "M0037 首次登入設定帳密",
@@ -582,8 +597,8 @@
           "ConfirmLoginPwd": "Aa1234"
         },
         "specs": {
-          "UserCode": "登入帳號",
-          "LoginPwd": "登入密碼",
+          "UserCode": "登入帳號，格式：6-12碼半形英數混合",
+          "LoginPwd": "登入密碼，格式：6-12碼半形英數混合",
           "ConfirmLoginPwd": "再次確認登入密碼"
         }
       },
@@ -596,7 +611,6 @@
 
         },
         "specs": {
-
 
         }
       },
@@ -634,6 +648,13 @@
       },
       {
         "host": "member",
+        "name": "M0041 Socket Server使用者驗證",
+        "url": "/api/Member/MemberInfo/PrivateUserAuth",
+        "json": {},
+        "specs": {}
+      },
+      {
+        "host": "member",
         "name": "M0042 取得載具資訊",
         "url": "/app/MemberInfo/GetEInvoiceCarrierInfo",
         "json": {},
@@ -656,7 +677,9 @@
         "json": {
           "EinvoicePeriod": "10806"
         },
-        "specs": {}
+        "specs": {
+          "EinvoicePeriod": "發票期別 格式：YYYMM(民國年+當期別的偶數月份)※e.g. 108年01-02月，帶入10802"
+        }
       },
       {
         "host": "member",
@@ -666,7 +689,10 @@
           "EinvoicePeriod": "10806",
           "EinvoiceNum": "QQ-123456"
         },
-        "specs": {}
+        "specs": {
+          "EinvoicePeriod": "發票期別 格式：YYYMM(民國年+當期別的偶數月份)※e.g. 108年01-02月，帶入10802",
+          "EinvoiceNum": "發票號碼"
+        }
       },
       {
         "host": "member",
@@ -720,7 +746,10 @@
           "PageNo": 1,
           "PageSize": 10
         },
-        "specs": {}
+        "specs": {
+          "PageNo": "分頁",
+          "PageSize": "分頁筆數"
+        }
       },
 
       {
@@ -728,8 +757,7 @@
         "name": "M0052 新增提領轉入帳戶",
         "url": "/app/MemberInfo/AddWithdrawAccountBind",
         "json": {
-          "AccountID": 135,
-          "AgreeLevelUp": true,
+
 
           "BankAccount": "********90001",
           "BankCode": "006",
@@ -748,18 +776,24 @@
         "name": "M0053 餘額提領",
         "url": "/app/MemberInfo/AddWithdrawBalance",
         "json": {
-          "AccountID": 135,
-          "AgreeLevelUp": true,
-          "Amount": 1,
+          "BankCode": "006",
           "BankAccount": "********90001",
-          "BankCode": "006"
+          "AccountID": 135,
+          "Amount": 1,
+          "AgreeLevelUp": true
+
+
+
         },
         "specs": {
-          "AccountID": "銀行帳戶編號(系統定義流水號)",
-          "AgreeLevelUp": "是否同意升級為二類會員 False：不同意 True：同意",
-          "Amount": "提領金額",
+          "BankCode": "銀行代碼",
           "BankAccount": "銀行帳號",
-          "BankCode": "銀行代碼"
+          "AccountID": "銀行帳戶編號(系統定義流水號)",
+          "Amount": "提領金額",
+          "AgreeLevelUp": "是否同意升級為二類會員 False：不同意 True：同意"
+
+
+
         }
       },
       {
@@ -769,9 +803,55 @@
         "json": {
           "FriendChatMID": ""
 
+
+
         },
         "specs": {
           "FriendChatMID": "好友聊天會員編號"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0057 手機號碼搜尋會員資料",
+        "url": "/app/ChatMember/QueryChatMemberByCellPhone",
+        "json": {
+          "ChatMemberID": "14136",
+          "ArrayCellPhone": [
+            "0908009004"
+          ]
+
+        },
+        "specs": {
+          "ChatMemberID": "聊天會員編號",
+          "ArrayCellPhone": "用來查詢的手機號碼，限制100筆"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0063 取得好友列表",
+        "url": "/app/ChatMember/ListFriends",
+        "json": {
+          "PageNo": "1",
+          "PageSize": "10"
+
+
+        },
+        "specs": {
+          "PageNo": "分頁",
+          "PageSize": "分頁筆數"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0064 更新好友列表",
+        "url": "/app/ChatMember/ListFriendsUpdate",
+        "json": {
+          "LastUpdateTime": ""
+
+
+        },
+        "specs": {
+          "LastUpdateTime": "最後更新時間 (取得該時間之後的更新) 格式：2019/01/01 00:00:00"
         }
       },
 
@@ -780,11 +860,15 @@
         "name": "M0065 取得聊天列表",
         "url": "/app/ChatMember/ListDialog",
         "json": {
-
+          "ArrayDialogID": null,
+          "PageNo": "1",
+          "PageSize": "10"
 
         },
         "specs": {
-          "FriendChatMID": "好友聊天會員編號"
+          "ArrayDialogID": "指定查詢聊天室※ 若沒有帶入指定聊天室，則回傳有對話紀錄的所有聊天室清單",
+          "PageNo": "分頁",
+          "PageSize": "分頁筆數"
         }
       },
       {
@@ -795,7 +879,7 @@
           "BankCode": "004"
         },
         "specs": {
-          "ModifyDate": "最後一次更新的TimeStemp"
+          "BankCode": "銀行代碼"
         }
       },
       {
@@ -803,9 +887,13 @@
         "name": "M0076 訊息中心同步",
         "url": "/app/MemberInfo/ListSynNotifyMessage",
         "json": {
+          "MaxNID": null,
+          "MinNID": null,
           "ModifyDate": 1559723427
         },
         "specs": {
+          "MaxNID": "ID區間 (最大)",
+          "MinNID": "ID區間 (最小)",
           "ModifyDate": "最後一次更新的TimeStemp"
         }
       },
@@ -818,6 +906,30 @@
         },
         "specs": {
           "MsgID": "訊息ID"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0078 取得轉入者資料",
+        "url": "/app/ChatMember/CheckTransferReceiver",
+        "json": {
+          "ReceivedICPMID": "",
+          "ReceivedCName": ""
+        },
+        "specs": {
+          "ReceivedICPMID": "轉入者icash Pay電支帳號",
+          "ReceivedCName": "轉入者戶名"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0084 取得線上開戶銀行清單",
+        "url": "/app/MemberInfo/GetListOnlineBankInfo",
+        "json": {
+
+        },
+        "specs": {
+
         }
       },
       {
@@ -836,6 +948,30 @@
       },
       {
         "host": "member",
+        "name": "M0086 信用卡解綁",
+        "url": "/app/MemberInfo/UnBindMemberCreditCard",
+        "json": {
+          "PanID": ""
+        },
+        "specs": {
+          "PanID": "信用卡ID"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0087 信用卡暱稱設定",
+        "url": "/app/MemberInfo/SetCreditCardAbbr",
+        "json": {
+          "PanID": "",
+          "CreditCardAbbr": ""
+        },
+        "specs": {
+          "PanID": "信用卡ID",
+          "CreditCardAbbr": "信用卡別名"
+        }
+      },
+      {
+        "host": "member",
         "name": "M0088 信用卡綁定",
         "url": "/app/MemberInfo/BindMemberCreditCard",
         "json": {
@@ -847,7 +983,12 @@
 
         },
         "specs": {
-          "ICash2List": "M0088 信用卡綁定"
+          "CustID": "身分證字號",
+          "Pan": "信用卡號",
+          "ExpDate": "信用卡號",
+          "CVV2": "卡片到期日",
+          "CheckMacValue": "檢核碼"
+
         }
       },
       {
@@ -877,6 +1018,48 @@
       },
       {
         "host": "member",
+        "name": "M0091 綁定icash2.0至icashpay",
+        "url": "/app/ICash2Bind/ICash2Binding",
+        "json": {
+          "CardNo": "",
+          "CardName": "",
+          "IsRegisted": "",
+          "BankCode": "",
+          "BankAccount": "",
+          "Name": "",
+          "TwId": "",
+          "Mobile": "",
+          "Email": "",
+          "Birthday": "",
+          "IssueDate": "",
+          "IssueType": "",
+          "IssueLoc": "",
+          "Country": "",
+          "ZipCode": "",
+          "Address": ""
+
+        },
+        "specs": {
+          "CardNo": "icash 2.0 卡號",
+          "CardName": "卡片自訂名稱",
+          "IsRegisted": "是否已記名 icash2.0",
+          "BankCode": "銀行別",
+          "BankAccount": "銀行帳戶",
+          "Name": "姓名",
+          "TwId": "身分證號",
+          "Mobile": "手機號碼",
+          "Email": "電子郵件信箱",
+          "Birthday": "生日",
+          "IssueDate": "發證日期",
+          "IssueType": "領補換代號",
+          "IssueLoc": "發證地點編號",
+          "Country": "國別",
+          "ZipCode": "郵遞區號",
+          "Address": "住址"
+        }
+      },
+      {
+        "host": "member",
         "name": "M0092 解除icash2.0綁定icashpay",
         "url": "/app/ICash2Bind/ICash2UnBinding",
         "json": {
@@ -897,6 +1080,20 @@
         },
         "specs": {
           "isGetAll": "是否取得全部行銷活動"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0094 指定行銷活動發動",
+        "url": "/app/MemberInfo/CampaignAction",
+        "json": {
+          "ActivityID": "",
+          "Action": ""
+
+        },
+        "specs": {
+          "ActivityID": "活動代號",
+          "Action": "活動動作"
         }
       },
       {
@@ -932,7 +1129,39 @@
           "ADEndTime": "2023/06/08 09:44:33"
         },
         "specs": {
-          "CardNo": "icash 2.0 卡號"
+          "ADType": "廣告位置 0: (預設)全撈 1: 快速貸款 2: 不綁約，隨時還清 3: 低利率 4: 優惠信用貸款",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0098 檢查是否需要更新APP",
+        "url": "/app/MemberInfo/CheckIsUpdate",
+        "json": {
+          "VersionCode": "2.0.6"
+
+        },
+        "specs": {
+          "VersionCode": "APP版本號 格式：2.0.6"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0099 綁定認同卡",
+        "url": "/app/MemberInfo/BindBrandCreditCard",
+        "json": {
+          "CustID": "",
+          "PanID": ""
+
+
+        },
+        "specs": {
+          "CustID": "身分證字號",
+          "PanID": "信用卡ID"
+
+
         }
       },
 
@@ -976,7 +1205,53 @@
       },
       {
         "host": "member",
-        "name": "Ｍ0111 設定是否可被搜尋",
+        "name": "M0104 搜尋icashPay聯絡人",
+        "url": "/app/ChatMember/QueryTransferInfoByCellPhoneOrIcpmid",
+        "json": {
+          "QueryNo": "0908009004"
+
+        },
+        "specs": {
+          "QueryNo": "手機 or ICP MID"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0105_1 富邦產險廣告資料查詢(2022)",
+        "url": "/app/MemberInfo/GetInsuranceAD2022",
+        "json": {
+          "ADType": "0",
+          "ADStartTime": "2021/06/08 09:44:33",
+          "ADEndTime": "2023/06/20 09:44:33"
+
+        },
+        "specs": {
+          "ADType": "廣告種類 0: (預設)全撈 1: 廣告Banner2. 專屬優惠3. 熱門商品4. 險種選擇",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0105 富邦產險廣告資料查詢",
+        "url": "/app/MemberInfo/GetInsuranceAD",
+        "json": {
+          "ADType": "0",
+          "ADStartTime": "2021/06/08 09:44:33",
+          "ADEndTime": "2023/06/08 09:44:33"
+
+        },
+        "specs": {
+          "ADType": "廣告種類 0: (預設)全撈 1: 廣告Banner2. 專屬優惠3. 熱門商品4. 險種選擇",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0111 設定是否可被搜尋",
         "url": "/app/ChatMember/UpdateMemberSearchEnableStatus",
         "json": {
           "SearchEnable": true
@@ -1053,6 +1328,20 @@
       },
       {
         "host": "member",
+        "name": "M0126 取得帳戶詳細紀錄",
+        "url": "/app/MemberInfo/GetAccountDetailRecord",
+        "json": {
+
+          "RecordID": ""
+
+        },
+        "specs": {
+          "RecordID": "帳戶紀錄ID"
+
+        }
+      },
+      {
+        "host": "member",
         "name": "M0127 查詢綁定會員特約機構",
         "url": "/app/MemberInfo/QueryMMember",
         "json": {
@@ -1103,6 +1392,40 @@
           "ADType": "廣告類別"
         }
       },
+      {
+        "host": "member",
+        "name": "M0137 設定icash2.0綁定連結帳戶儲值",
+        "url": "/app/ICash2Bind/SetICash2TopUpBankAccount",
+        "json": {
+
+          "CardNo": "",
+          "IsOpenBindBank": "",
+          "PayID": ""
+
+        },
+        "specs": {
+          "CardNo": "icash 2.0 卡號",
+          "IsOpenBindBank": "是否開啟綁定銀行儲值功能true：銀行儲值開啟中false：銀行儲值關閉中",
+          "PayID": "付款方式識別碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0138取得轉入者資料",
+        "url": "/app/ChatMember/getTransferReceiverInfo",
+        "json": {
+
+          "ReceivedICPMID": "",
+          "BankCode": "",
+          "BankAccount": ""
+
+        },
+        "specs": {
+          "ReceivedICPMID": "轉入者icash Pay電支帳號 (icashPay會員，必填)",
+          "BankCode": "機構代號 (非icashPay會員，必填)",
+          "BankAccount": "機構帳號 (非icashPay會員，必填)"
+        }
+      },
 
       {
         "host": "member",
@@ -1116,7 +1439,9 @@
 
         },
         "specs": {
-          "ADType": "廣告類別"
+          "ADType": "廣告種類 0: (預設)全撈1: 銀行帳戶Banner2: 信用卡Banner",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
         }
       },
       {
@@ -1131,6 +1456,24 @@
         },
         "specs": {
           "IsAccountLink": "是否為銀行帳戶廣告"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0141 補傳會員身分證圖片(2022)",
+        "url": "/app/MemberInfo/AuthIDImage",
+        "json": {
+
+          "UpdateIDImageType": "",
+          "UpdateUnderage": ""
+
+
+
+
+        },
+        "specs": {
+          "UpdateIDImageType": "需要更新身分證圖片資料種類0: 不需要更新1: P55需補身分證(本國成年人)2: 法代需補身分證3: 法代需補戶口名簿或戶籍謄本4: 法代需補身份證及戶口名簿/戶籍謄本5: 外國人需補居留證",
+          "UpdateUnderage": "未成年人MID"
         }
       },
       {
@@ -1164,12 +1507,72 @@
         "name": "M0144取得常用帳單(2022)",
         "url": "/app/OnlinePayment/GetCommonBillList",
         "json": {
+          "ItemID": "篩選項目(如未帶入item，返回全部常用設定)"
+        },
+        "specs": {
+          "ItemID": ""
 
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0145新增常用帳單(2022)",
+        "url": "/app/OnlinePayment/AddCommonBill",
+        "json": {
+          "CommonName": "",
+          "ItemID": "",
+          "BillData": ""
+        },
+        "specs": {
+          "CommonName": "常用帳單名稱",
+          "ItemID": "常用帳單項目",
+          "BillData": "常用帳單資料(水號、電號等...)"
 
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0146編輯常用帳單(2022)",
+        "url": "/app/OnlinePayment/EditCommonBill",
+        "json": {
+          "CommonID": "",
+          "CommonName": "",
+          "ItemID": "",
+          "BillData": ""
+        },
+        "specs": {
+          "CommonID": "常用帳單ID",
+          "CommonName": "常用帳單名稱",
+          "ItemID": "常用帳單項目",
+          "BillData": "常用帳單資料(水號、電號等...)"
 
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0147刪除常用帳單(2022)",
+        "url": "/app/OnlinePayment/DelCommonBillList",
+        "json": {
+          "CommonID": ""
 
         },
         "specs": {
+          "CommonID": "常用帳單ID"
+
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0148取得本月待繳帳單(2022)",
+        "url": "/app/OnlinePayment/GetWaitPaymentBillList",
+        "json": {
+          "ItemID": ""
+
+        },
+        "specs": {
+          "ItemID": "篩選項目(如未帶入item，返回全部待繳)"
+
 
         }
       },
@@ -1179,11 +1582,11 @@
         "url": "/app/MemberInfo/CheckIsOP",
         "json": {
 
-          "CellPhone": "0912334465"
+          "CellPhone": "0908009004"
 
         },
         "specs": {
-          "MsgID": "訊息ID"
+          "CellPhone": "註冊使用的手機號碼"
         }
       },
       {
@@ -1192,8 +1595,8 @@
         "url": "/app/MemberInfo/RegisterOpMember",
         "json": {
 
-          "CellPhone": "0912334465",
-          "Birthday": "2001-01-01"
+          "CellPhone": "0908009004",
+          "Birthday": "1986-06-22"
         },
         "specs": {
           "CellPhone": "註冊使用的手機號碼",
@@ -1206,7 +1609,7 @@
         "url": "/app/MemberCallBack/ReturnAuthAPIUrl",
         "json": {
 
-          "CellPhone": "0912334466"
+          "CellPhone": "0908009004"
         },
         "specs": {
           "CellPhone": "註冊使用的手機號碼"
@@ -1496,9 +1899,9 @@
         "name": "P0010 連結帳戶儲值",
         "url": "/app/AccountLink/TopUpByAccountLink",
         "json": {
-          "BankCode": "822",
+          "BankCode": "013",
           "AccountID": 9,
-          "Amount": 100
+          "Amount": 10
         },
         "specs": {
           "BankCode": "銀行代碼",
@@ -1591,6 +1994,7 @@
           "MerchantQRcode": "iikipS2y+kWFlOKhPs4Q+auZT1SMxc+SVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ+w56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW+G8shNS+20qKszoGrCTFcy2u7WNdD0qg2lupJI28V+s6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3uiMya4ukJnFuHHejQlc50pUNBfITS4akbyZ7UxwZXTBUj/Yj1EVyZ/G5kOPL7xMpabK0NqNrO1dQ8/BGhEJAuMnPX1zsJkbSr4d2a55TL5hYI8TNGBI7LgmSTg//Xh/eNXXHs3Ai2n85SPIWbMYDh+3gQBPsscquzDc6djP5CRZnFg0RAd19JuMVOQEf4AJgc+jXGC1D+rCGjxOusIEXmTVa77nKn+OpQ63td7Lre8D69+xRc8ivX27lelzlNcRUlpogGcv17jilzZSj+d6A330/9eKgiVLi2+ybM18CbkPdMS1MCTkj6KQau55ANO8RziNz+/zJZNzkJeVSFindhfLrGldE3UncsQjaUfZPMkp/S88ccDMB90HHyuDV0sKzqdsMD61AGtPE8XS8tcGQChk0uhGg+tp36i0cCAIeUDLugyfOOjgTZTi6IyzbpgI1amSaUUfoZhW4OQvTyyAZmg=="
         },
         "specs": {
+          "MerchantQRcode": "QRCode URL"
 
         }
       },
@@ -1612,6 +2016,14 @@
 
         },
         "specs": {
+          "MerchantID": "廠商編號",
+          "Amount": "交易金額",
+          "PayID": "付款方式識別碼",
+          "Mission": "任務編號",
+          "Team_number": "車隊編號",
+          "MerchantTradeNo": "特店訂單編號",
+          "StoreID": "分店編號",
+          "StoreName": "分店名稱"
 
         }
       },
@@ -1625,6 +2037,7 @@
           "PlatformID": "",
           "MerchantTradeNo": "",
           "ts": "",
+          "PayID": "",
           "UsePoint": "",
           "ChargeVersionType": "",
           "UsePointType": "",
@@ -1633,6 +2046,15 @@
 
         },
         "specs": {
+          "MerchantID": "交易平台ID",
+          "PlatformID": "平台代碼",
+          "MerchantTradeNo": "交易編號",
+          "ts": "時間戳辨識字串",
+          "PayID": "付款方式ID",
+          "UsePoint": "當UsePointType為1、2時此參數必填UsePointType 如 = 1，而使用者開啟點數開關1.當點數數量大於訂單金額時，帶入訂單金額2.當點數數量小於訂單金額時，帶入點數數量(小數點以後捨去)UsePointType 如 = 2, 可自行輸入點數帶入",
+          "ChargeVersionType": "2/17未來不需帶此參數========================線上支付版本類型.新版本APP才會帶入此參數，如無參數預設為v1版本",
+          "UsePointType": "2/17確認不需帶此參數========================使用點數種類(兌點)0: 不可使用點數折抵1: 可使用點數2: 可自行輸入折抵點數額3: 點數功能維護中",
+          "AccumulatedPointsType": "2/17確認不需帶此參數========================累積點數種類(累點)0: 不可累積點數1: 可累積點數"
 
         }
       },
@@ -1654,7 +2076,14 @@
 
         },
         "specs": {
-
+          "PayChatMID": "轉出者ChatMemberID",
+          "ReceivedChatMID": "轉入者聊天會員帳號 (icashPay會員，必填)",
+          "TransferAmount": "轉帳金額",
+          "Remark": "轉帳備註",
+          "TradeToken": "轉帳的交易Token",
+          "PaymentType": "付款方式1：帳戶餘額※預留欄位，目前轉帳付款方式只有帳戶餘額",
+          "BankCode": "機構代號 (非icashPay會員，必填)",
+          "BankAccount": "機構帳號 (非icashPay會員，必填)"
         }
       },
 
