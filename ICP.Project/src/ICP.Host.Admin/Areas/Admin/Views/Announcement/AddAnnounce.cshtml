@@ -1,0 +1,348 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.Announcement
+@model ModifyAnnounceVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/news.css" rel="stylesheet" />
+}
+@if (TempData["RtnMsg"] != null)
+{
+    <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["RtnMsg"]));
+        alert(message);
+    </script>
+}
+
+@Html.ValidationSummary()
+@using (Html.BeginForm("AddAnnounce", "Announcement", FormMethod.Post, new { onsubmit = "return submitConfirm(true)" }))
+{
+    <div class="sc-box scb-news">
+        <h4 class="content-title">訊息公告基本設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.CategoryList)</dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(m => m.CategoryID, Model.CategoryList, "請選擇訊息公告類別")
+                    </label>
+                    @Html.ValidationMessageFor(m => m.CategoryID, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl class="sf-check-box">
+                <dt>@Html.DisplayNameFor(m => m.StartDate)</dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.StartDate, new { @class = "flatpickr flatpickr-input active normalD", placeholder = "起始日期", @readonly = "readonly" })
+                    </label>
+                    <label class="sdb-item sdb-time">
+                        @Html.TextBoxFor(m => m.StartDateTime, new { @class = "flatpickr flatpickr-input active time", placeholder = "起始時間", @readonly = "readonly" })
+                    </label>
+                    @Html.ValidationMessageFor(m => m.StartDate, null, new { @class = "input-error-txt" }, "div")
+                    @Html.ValidationMessageFor(m => m.StartDateTime, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl class="sf-radio-box">
+                <dt>@Html.DisplayNameFor(m => m.IsTop)</dt>
+                <dd>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.IsTop, 1, new { id = "tp_yes", @onclick = "isTopSetting();" })
+                        <label for="tp_yes" class="radio">是</label>
+                    </div>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.IsTop, 0, new { id = "tp_no", @onclick = "isTopSetting();" })
+                        <label for="tp_no" class="radio">否</label>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.IsTopStartDate)<span class="sf-title-tip">(非必填)</span></dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.IsTopStartDate, new { @class = "flatpickr flatpickr-input active minD", placeholder = "起始日期", @readonly = "readonly" })
+                    </label>
+                    <label class="sdb-item sdb-time">
+                        @Html.TextBoxFor(m => m.IsTopStartDateTime, new { @class = "flatpickr flatpickr-input active time", placeholder = "起始時間", @readonly = "readonly" })
+                    </label>
+                    <span class="sdb-txt">至</span>
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.IsTopEndDate, new { @class = "flatpickr flatpickr-input active maxD", placeholder = "結束日期", @readonly = "readonly" })
+                    </label>
+                    <label class="sdb-item sdb-time">
+                        @Html.TextBoxFor(m => m.IsTopEndDateTime, new { @class = "flatpickr flatpickr-input active time", placeholder = "結束時間", @readonly = "readonly" })
+                    </label>
+                    <div class="input-error-txt" id="isTopTimeError" style="display: none;">請選擇置頂起迄時間</div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="sc-box scb-news">
+        <h4 class="content-title">訊息公告內容設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.Title)</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Title, new { placeholder = "請填寫標題", @maxlength = "20" })
+                    <div class="input-tip-txt itt-r itt-er"><p id="titleLength">0/20</p></div>
+                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.ImagePathList)<span class="sf-title-tip">(非必填)</span></dt>
+                <dd>
+                    <div class="def-file">
+                        @Html.TextBox("ImageFile", null, new { type = "file", accept = "image/*", @class = "dff-input" })
+                        <div class="btn btn-blue-border dff-btn">上傳檔案</div>
+                        <div class="dff-no-file" id="ImageFileUrl">未選擇任何檔案</div>
+                    </div>
+                    @if (Model.ImagePathList == null)
+                    {
+                        <div class="dff-photo" id="ImagePathList">
+                            <ul id="preViewImageList"></ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dff-photo" id="ImagePathList">
+                            <ul id="preViewImageList">
+                                @if (Model.ImagePathList.Count > 0)
+                                {
+                                    foreach (var item in Model.ImagePathList)
+                                    {
+                                        <li>
+                                            <div class="dfp-holder">
+                                                <img src="@item" alt="@item">
+                                            </div>
+                                            <div class="dfp-close">
+                                                <span class="icon-ic_fail_svg dpc-ic del"></span>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                            @if (Model.ImagePathList.Count > 0)
+                            {
+                                foreach (var item in Model.ImagePathList)
+                                {
+                                    <input type="hidden" name="ImagePathList[@Model.ImagePathList.IndexOf(item)]" />
+                                }
+                            }
+                        </div>
+                    }
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.AnnounceContent)</dt>
+                <dd>
+                    <div class="sn-txtedit-box">
+                        @Html.TextAreaFor(m => m.AnnounceContent, new { @class = "pp-inp", placeholder = "請輸入內容" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.AnnounceContent, null, new { @class = "input-error-txt" }, "div")
+                    <div class="input-error-txt" id="contentError" style="display: none;">請輸入10-1000字內容</div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="sc-box scb-news">
+        <h4 class="content-title">訊息公告發送設定</h4>
+        <div class="scb-form">
+            <dl class="sf-radio-box">
+                <dt>@Html.DisplayNameFor(m => m.AnnounceType)</dt>
+                <dd>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.AnnounceType, 0, new { id = "st_all", @checked = true, @onclick = "announceTypeSetting();" })
+                        <label for="st_all" class="radio">全會員</label>
+                    </div>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.AnnounceType, 1, new { id = "st_specific", @onclick = "announceTypeSetting();" })
+                        <label for="st_specific" class="radio">自行上傳欲發送電支帳號</label>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.CsvPathList)<span class="sf-title-tip">(非必填)</span></dt>
+                <dd>
+                    <div class="input-tip-txt itt-top">※僅接受CSV檔，檔內僅需有電支帳號欄位，不得有其他多餘資訊</div>
+                    <div class="def-file">
+                        @Html.TextBox("MidFile", null, new { type = "file", accept = ".csv", @class = "dff-input" })
+                        <div class="btn btn-blue-border dff-btn">上傳檔案</div>
+                        <div class="dff-no-file" id="CsvFileUrl">未選擇任何檔案</div>
+                    </div>
+                    <div class="input-error-txt" id="MidFileError" style="display: none;">請選擇檔案</div>
+                    @if (Model.CsvPathList == null)
+                    {
+                        <div class="dff-link" id="CsvPathList">
+                            <ul id="preViewCsvList"></ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dff-link" id="CsvPathList">
+                            <ul id="preViewCsvList">
+                                @if (Model.CsvPathList.Count > 0)
+                                {
+                                    foreach (var item in Model.CsvPathList)
+                                    {
+                                        <li class="item@(Model.CsvPathList.IndexOf(item))">
+                                            <a href="@item.FileName" class="dfl-name" target="_blank">發送名單檔@(Model.CsvPathList.IndexOf(item) + 1)</a>
+                                            <a class="dfl-delete"><span>刪除</span></a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                            @if (Model.CsvPathList.Count > 0)
+                            {
+                                foreach (var item in Model.CsvPathList)
+                                {
+                                    <input type="hidden" class="item@(Model.CsvPathList.IndexOf(item)) FileID" name="CsvPathList[@Model.CsvPathList.IndexOf(item)].FileID" value="@item.FileID" />
+                                    <input type="hidden" class="item@(Model.CsvPathList.IndexOf(item)) FileName" name="CsvPathList[@Model.CsvPathList.IndexOf(item)].FileName" value="@item.FileName" />
+                                    <input type="hidden" class="item@(Model.CsvPathList.IndexOf(item)) Status" name="CsvPathList[@Model.CsvPathList.IndexOf(item)].Status" value="@item.Status" />
+                                }
+                            }
+                        </div>
+                    }
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.TestMidList)</dt>
+                <dd>
+                    <div class="input-tip-txt itt-top">※請輸入測試發送電支帳號，多組帳號中間請以「，」隔開</div>
+                    @Html.TextBoxFor(m => m.TestMidList, new { placeholder = "填寫測試發送帳號" })
+                    @Html.HiddenFor(m => m.IsTest)
+                    <div class="input-btn-box">
+                        <div class="btn disabled" id="btnTest">送出</div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="scb-bottom-btn sbb-center">
+        <a href="#addnews-tip-popup" data-effect="mfp-zoom-in" class="btn link-submit" title="新增">新增</a>
+    </div>
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Admin/Scripts/clipboard.min.js")"></script>
+    <script src="@Url.Content("~/Areas/Admin/Scripts/Announcement/Modify/action.js?v=1")"></script>
+    <script type="text/javascript">
+        libs.alert.validationSummary();
+
+        $('#ImageFile').on('change', function () {
+            var data = new FormData();
+            var files = $(this)[0].files;
+
+            if (files.length > 0) {
+                data.append("ImageFile", files[0]);
+            } else {
+                return false;
+            }
+
+            if (!files[0].type.match('image.*')) {
+                alert("檔案格式僅能使用 jpg / jpeg / png 三種檔案格式");
+                return false;
+            }
+
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = function (e) {
+                var img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                    var width = this.width;
+                    if (width > 728) {
+                        if (confirm("尺寸不符是否確定上傳？(寬度：728)")) {
+                            postFile(data);
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    else {
+                        postFile(data);
+                    }
+                };
+            }
+        });
+
+        function postFile(data) {
+           $.ajax({
+                type: "POST",
+                url: "@Url.Action("UploadImage")",
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                data: data,
+                success: function (result) {
+                    if (result.RtnCode == 1) {
+                        renderImg(result.RtnData);
+                    } else {
+                        alert(result.RtnMsg);
+                    }
+
+                    $('#ImageFile').val(null);
+                },
+                error: function () {
+                    alert('請稍候在試 !!');
+                }
+            });
+        }
+
+        $('#MidFile').on('change', function () {
+            var data = new FormData();
+            var files = $(this)[0].files;
+            if (files.length > 0) {
+                data.append("MidFile", files[0]);
+            } else {
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("UploadMidFile")",
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                data: data,
+                success: function (result) {
+                    if (result.RtnCode == 1) {
+                        renderCsv(result.RtnData);
+                    } else {
+                        alert(result.RtnMsg);
+                    }
+
+                    $('#File').val(null);
+                },
+                error: function () {
+                    alert('請稍候在試 !!');
+                }
+            });
+        });
+
+        $('#btnTest').on('click', function () {
+            if (submitConfirm(false)) {
+                var data = getSendTestData();
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("SendTest")",
+                    data: data,
+                    success: function (result) {
+                        if (result.RtnCode == 1) {
+                            $('#IsTest').val(true);
+                            alert('發送成功');
+                        } else {
+                            alert(result.RtnMsg);
+                        }
+                    },
+                    error: function () {
+                        alert('請稍候在試 !!');
+                    }
+                });
+            }
+        });
+    </script>
+}

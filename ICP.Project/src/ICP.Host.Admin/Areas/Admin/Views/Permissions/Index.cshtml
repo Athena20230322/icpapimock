@@ -1,0 +1,75 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@{
+    List<UserGroupQueryResult> ListUserGroup = ViewBag.ListUserGroup;
+
+    bool GroupUser = ViewBag.GroupUser;
+
+    string EditActionUrl = "Edit";
+
+    if (GroupUser)
+    {
+        EditActionUrl = "EditGroupUser";
+    }
+}
+@section scripts
+{
+    @if (GroupUser)
+    {
+<script src="~/Areas/Admin/Scripts/Permissions/GroupUser/action.js"></script>
+    }
+}
+<div class="sc-box no-edge">
+    @using (Ajax.BeginForm(EditActionUrl, new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "Get" }))
+    {
+        <div class="scb-list-box">
+            <ul class="content-list">
+                @if (GroupUser)
+                {
+                    <li>此功能需先於「群組名稱管理」創立的部門或後台群組分類，在至「群組權限管理」設定好該群組的功能項目後於此設定該群組內的人員可使用的功能權限。</li>
+                    <li>設定的功能會依照該功能實際可用項目顯示，不會因為權限管理設定了某個功能，於該功能就真的出現，例：群組權限管理勾選了匯入，但實際功能沒有匯入功能，故勾選了也不會多出匯入功能。</li>
+                    <li>先選擇要調整人員所在的「群組」後選擇需調整權限的「人員」。</li>
+                }
+                else
+                {
+
+                    <li>此功能需先於「群組名稱管理」創立的部門或後台群組分類，設定完後於此可設定該部門群組可使用的後台左側功能。</li>
+                    <li>設定的功能會依照該功能實際可用項目顯示，不會因為權限管理設定了某個功能，於該功能就真的出現，例：群組權限管理勾選了匯入，但實際功能沒有匯入功能，故勾選了也不會多出匯入功能。</li>
+                }
+                <li>點選各功能名稱左側的勾選框，該功能的全部勾選框，會直接全選。</li>
+                <li>設定完請先點選「儲存設定」後再離開頁面。</li>
+            </ul>
+        </div>
+
+        <div class="scb-search-box">
+            <h3 class="ssb-title">群組</h3>
+            <div class="ssb-select">
+                <label class="def-select">
+                    <select id="queryUserGroupID" name="UserGroupID" url="@Url.Action("QueryByGroupID", "User")">
+                        <option value="">請選擇欲調整的群組權限</option>
+                        @foreach (var item in ListUserGroup)
+                        {
+                            <option value="@item.UserGroupID">@item.UserGroupName</option>
+                        }
+                    </select>
+                </label>
+            </div>
+            @if (GroupUser)
+            {
+                <h3 class="ssb-title">人員名稱</h3>
+                <div class="ssb-select">
+                    <label class="def-select">
+                        <select id="queryUserID" name="UserID">
+                            <option value="">請選擇欲調整的人員</option>
+                        </select>
+                    </label>
+                </div>
+            }
+            <div class="btn-box">
+                <a href="javascript:;" class="btn link-submit" title="查詢">查詢</a>
+            </div>
+        </div>
+
+    }
+</div>
+<div id="queryResult">
+</div>

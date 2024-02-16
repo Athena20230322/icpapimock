@@ -1,0 +1,67 @@
+﻿@model UserQuery
+@using ICP.Modules.Mvc.Admin.Models;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@{
+    List<UserGroupQueryResult> ListUserGroup = ViewBag.ListUserGroup;
+
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/User/Index/action.js"></script>
+}
+    <div class="sc-box no-edge">
+
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" id="btnQuery" value="query" style="display:none;" />
+            @Html.HiddenFor(t => t.CName, new { id = "queryCName" })
+            @Html.HiddenFor(t => t.UserID, new { id = "queryUserID" })
+            @Html.HiddenFor(t => t.Account, new { id = "queryAccount" })
+            <div class="scb-list-box">
+                <ul class="content-list">
+                    <li>如選單沒有要編輯的人員，請先點選「新增人員」</li>
+                    <li>如人員留職停薪，可先將該帳號狀態調整為關閉</li>
+                    <li>如人員離職，可直接點選刪除</li>
+                </ul>
+            </div>
+
+            <div class="scb-search-box">
+                <h3 class="ssb-title">群組</h3>
+
+                <div class="ssb-select">
+                    <label class="def-select">
+                        <select id="queryUserGroupID" name="UserGroupID">
+                            <option value="">請選擇欲調整的群組權限</option>
+                            @foreach (var item in ListUserGroup)
+                            {
+                                <option value="@item.UserGroupID">@string.Format("{0} ({1})", item.UserGroupName, item.UserGroupCode)</option>
+                            }
+                        </select>
+                    </label>
+                </div>
+                @*<div class="ssb-select ssb-width1">
+                    <label class="def-select">
+                        <select id="FilterType">
+                            <option value="0">查詢人員名稱</option>
+                            <option value="1">查詢人員編號</option>
+                        </select>
+                    </label>
+                </div>*@
+                <div class="scb-search ssb-width2">
+                    <span class="icon-ic-search ssr-icon"></span>
+                    <input type="text" id="FilterKeyWord" class="ssr-inp" placeholder="請輸入欲查詢人員使用者帳號" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="sc-function">
+        <div class="btn-box">
+            <a class="libs-dialog-form btn" href="@Url.Action("Add")" data-update-callback="query" title="新增帳號">
+                <span class="icon-ic-add bb-icon"></span>
+                新增帳號
+            </a>
+        </div>
+    </div>
+
+    <div id="queryResult">
+    </div>

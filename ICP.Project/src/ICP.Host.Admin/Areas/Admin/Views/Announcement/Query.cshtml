@@ -1,0 +1,94 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models.Announcement;
+@model IPagedList<ListAnnounceDbRes>
+@{
+    Layout = null;
+}
+
+<div class="sc-box scb-table st-control st-news-list">
+    @if (Model.Count > 0)
+    {
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">類別</p></li>
+                <li><p class="sth-txt">標題</p></li>
+                <li><p class="sth-txt">建立時間</p></li>
+                <li><p class="sth-txt">最後<br>修改時間</p></li>
+                <li><p class="sth-txt">開始時間</p></li>
+                <li><p class="sth-txt">是否置頂</p></li>
+                <li><p class="sth-txt">置頂<br>開始時間</p></li>
+                <li><p class="sth-txt">置頂<br>結束時間</p></li>
+                <li><p class="sth-txt">狀態</p></li>
+                <li><p class="sth-txt">建立者</p></li>
+                <li><p class="sth-txt">最後修改者</p></li>
+                <li><p class="sth-txt">審核者</p></li>
+                <li><p class="sth-txt">審核時間</p></li>
+                <li><p class="sth-txt">編輯</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.CategoryName</td>
+                    <td>@item.Title</td>
+                    <td>@Html.DisplayFor(m => item.CreateDate)<br>@item.CreateDateTime</td>
+                    <td>@Html.DisplayFor(m => item.ModifyDate)<br>@item.ModifyDateTime</td>
+                    <td>@Html.DisplayFor(m => item.StartDate)<br>@item.StartDateTime</td>
+                    <td>@(item.IsTop == 0 ? "否" : "是")</td>
+                    <td>@(item.IsTopStartDate == null ? new HtmlString("-") : Html.DisplayFor(m => item.IsTopStartDate))<br>@(item.IsTopStartDate == null ? "" : item.StartDateTime)</td>
+                    <td>@(item.IsTopEndDate == null ? new HtmlString("-") : Html.DisplayFor(m => item.IsTopEndDate))<br>@(item.IsTopEndDate == null ? "" : item.IsTopEndDateTime)</td>
+                    @if (item.AuthStatus == 0)
+                    {
+                        <td>待審核</td>
+                    }
+                    else if (item.AuthStatus == 1)
+                    {
+                        <td>審核通過</td>
+                    }
+                    else
+                    {
+                        <td>審核不通過</td>
+                    }
+                    <td>@item.CreateUser</td>
+                    <td>@item.Modifier</td>
+                    <td>@(string.IsNullOrEmpty(item.AuthUser) ? "-" : item.AuthUser)</td>
+                    <td>@(item.AuthDate == null ? new HtmlString("-") : Html.DisplayFor(m => item.AuthDate))<br>@(item.AuthDate == null ? "" : item.AuthDateTime)</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            @if (item.AuthStatus == 0)
+                            {
+                                <a class="btn btn-gray disabled" href="#" title="編輯">編輯</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("EditAnnounce", new { id = item.NID })" class="btn" title="編輯">編輯</a>
+                            }
+                            <a class="del-group btn btn-gray" href="@Url.Action("DeleteAnnounce", new { id = item.NID })" title="刪除">刪除</a>
+                            <a href="@Url.Action("AuthAnnounce", new { id = item.NID })" class="btn btn-blue-border" title="審核">審核</a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </table>
+        </div>
+    }
+</div>
+
+@{Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel));}

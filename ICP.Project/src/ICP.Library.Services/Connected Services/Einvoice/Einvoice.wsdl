@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SetBankAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:BankAccountDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BankAccountDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AccountNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardEncrypt" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RocID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserIdType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="WinnerName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="WinnerPhone" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseDTO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Timeout" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetBankAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetBankAccountResult" type="tns:BankAccountResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BankAccountResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="EnableRemit" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateAcc" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AccountNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RocID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="WinnerName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="WinnerPhone" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserIdType" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseResultDTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HashSerial" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCarrierInvTitle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CarrierInvTitleDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CarrierInvTitleDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OnlyWinningInv" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardEncrypt" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCarrierInvTitleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCarrierInvTitleResult" type="tns:CarrierInvTitleResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CarrierInvTitleResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="OnlyWinningInv" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfTilteDetail" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfTilteDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TilteDetail" nillable="true" type="tns:TilteDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TilteDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RowNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvDate" type="tns:InvDate" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvDonatable" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CardType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvPeriod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvoiceTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellerBan" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellerAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DonateMark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InvDate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Day" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Hours" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Minutes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Month" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Seconds" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Time" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimezoneOffset" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Year" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCarrierInvDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CarrierInvDetailDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CarrierInvDetailDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardEncrypt" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCarrierInvDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCarrierInvDetailResult" type="tns:CarrierInvDetailResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CarrierInvDetailResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="InvNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvPeriod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceTime" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerBan" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerAddress" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfDetail" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Detail" nillable="true" type="tns:Detail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Detail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RowNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quantity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitPrice" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ChangeCarrierPwd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ChangeCarrierPwdDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ChangeCarrierPwdDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="NewVerify" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OldVerify" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ChangeCarrierPwdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeCarrierPwdResult" type="tns:ChangeCarrierPwdResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ChangeCarrierPwdResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="NewVerify" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Timestamp" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ForgotCarrierPwd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ForgotCarrierPwdDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ForgotCarrierPwdDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PhoneNo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ForgotCarrierPwdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ForgotCarrierPwdResult" type="tns:ForgotCarrierPwdResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ForgotCarrierPwdResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCarrierUnderType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CarrierUnderTypeDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CarrierUnderTypeDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardEncrypt" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCarrierUnderTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCarrierUnderTypeResult" type="tns:CarrierUnderTypeResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CarrierUnderTypeResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Carriers" type="tns:ArrayOfCarrier" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCarrier">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Carrier" nillable="true" type="tns:Carrier" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Carrier">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CarrierType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CarrierId2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CarrierName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCarrierBarcode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CarrierBarcodeDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CarrierBarcodeDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PhoneNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VerificationCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCarrierBarcodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCarrierBarcodeResult" type="tns:CarrierBarcodeResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CarrierBarcodeResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PhoneNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VerificationCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="RegisterCarrier">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:RegisterCarrierDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RegisterCarrierDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PhoneNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Verify" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="RegisterCarrierResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterCarrierResult" type="tns:RegisterCarrierResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RegisterCarrierResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="GeneralCarrierCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TimeStamp" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetInvDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:InvDetailDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InvDetailDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="RandomNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvTerm" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Encrypt" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetInvDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvDetailResult" type="tns:InvDetailResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InvDetailResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="InvNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvPeriod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerBan" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerAddress" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceTime" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfDetail2" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfDetail2">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Detail2" nillable="true" type="tns:Detail2" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Detail2">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitPrice" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quantity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RowNum" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInvTitle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:InvTitleDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InvTitleDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="InvNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetInvTitleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvTitleResult" type="tns:InvTitleResultDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InvTitleResultDTO">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResultDTO">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="InvNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvData" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvPeriod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerBan" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SellerAddress" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="InvoiceTime" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SetBankAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:SetBankAccount" />
+  </wsdl:message>
+  <wsdl:message name="SetBankAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:SetBankAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierInvTitleSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCarrierInvTitle" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierInvTitleSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCarrierInvTitleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierInvDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCarrierInvDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierInvDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCarrierInvDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeCarrierPwdSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeCarrierPwd" />
+  </wsdl:message>
+  <wsdl:message name="ChangeCarrierPwdSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeCarrierPwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ForgotCarrierPwdSoapIn">
+    <wsdl:part name="parameters" element="tns:ForgotCarrierPwd" />
+  </wsdl:message>
+  <wsdl:message name="ForgotCarrierPwdSoapOut">
+    <wsdl:part name="parameters" element="tns:ForgotCarrierPwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierUnderTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCarrierUnderType" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierUnderTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCarrierUnderTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierBarcodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCarrierBarcode" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierBarcodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCarrierBarcodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterCarrierSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterCarrier" />
+  </wsdl:message>
+  <wsdl:message name="RegisterCarrierSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterCarrierResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetInvDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvTitleSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvTitle" />
+  </wsdl:message>
+  <wsdl:message name="GetInvTitleSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvTitleResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EinvoiceSoap">
+    <wsdl:operation name="SetBankAccount">
+      <wsdl:input message="tns:SetBankAccountSoapIn" />
+      <wsdl:output message="tns:SetBankAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierInvTitle">
+      <wsdl:input message="tns:GetCarrierInvTitleSoapIn" />
+      <wsdl:output message="tns:GetCarrierInvTitleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierInvDetail">
+      <wsdl:input message="tns:GetCarrierInvDetailSoapIn" />
+      <wsdl:output message="tns:GetCarrierInvDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCarrierPwd">
+      <wsdl:input message="tns:ChangeCarrierPwdSoapIn" />
+      <wsdl:output message="tns:ChangeCarrierPwdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ForgotCarrierPwd">
+      <wsdl:input message="tns:ForgotCarrierPwdSoapIn" />
+      <wsdl:output message="tns:ForgotCarrierPwdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierUnderType">
+      <wsdl:input message="tns:GetCarrierUnderTypeSoapIn" />
+      <wsdl:output message="tns:GetCarrierUnderTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierBarcode">
+      <wsdl:input message="tns:GetCarrierBarcodeSoapIn" />
+      <wsdl:output message="tns:GetCarrierBarcodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCarrier">
+      <wsdl:input message="tns:RegisterCarrierSoapIn" />
+      <wsdl:output message="tns:RegisterCarrierSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvDetail">
+      <wsdl:input message="tns:GetInvDetailSoapIn" />
+      <wsdl:output message="tns:GetInvDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvTitle">
+      <wsdl:input message="tns:GetInvTitleSoapIn" />
+      <wsdl:output message="tns:GetInvTitleSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EinvoiceSoap" type="tns:EinvoiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetBankAccount">
+      <soap:operation soapAction="http://tempuri.org/SetBankAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierInvTitle">
+      <soap:operation soapAction="http://tempuri.org/GetCarrierInvTitle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierInvDetail">
+      <soap:operation soapAction="http://tempuri.org/GetCarrierInvDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCarrierPwd">
+      <soap:operation soapAction="http://tempuri.org/ChangeCarrierPwd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ForgotCarrierPwd">
+      <soap:operation soapAction="http://tempuri.org/ForgotCarrierPwd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierUnderType">
+      <soap:operation soapAction="http://tempuri.org/GetCarrierUnderType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierBarcode">
+      <soap:operation soapAction="http://tempuri.org/GetCarrierBarcode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCarrier">
+      <soap:operation soapAction="http://tempuri.org/RegisterCarrier" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvDetail">
+      <soap:operation soapAction="http://tempuri.org/GetInvDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvTitle">
+      <soap:operation soapAction="http://tempuri.org/GetInvTitle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EinvoiceSoap12" type="tns:EinvoiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetBankAccount">
+      <soap12:operation soapAction="http://tempuri.org/SetBankAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierInvTitle">
+      <soap12:operation soapAction="http://tempuri.org/GetCarrierInvTitle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierInvDetail">
+      <soap12:operation soapAction="http://tempuri.org/GetCarrierInvDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCarrierPwd">
+      <soap12:operation soapAction="http://tempuri.org/ChangeCarrierPwd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ForgotCarrierPwd">
+      <soap12:operation soapAction="http://tempuri.org/ForgotCarrierPwd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierUnderType">
+      <soap12:operation soapAction="http://tempuri.org/GetCarrierUnderType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierBarcode">
+      <soap12:operation soapAction="http://tempuri.org/GetCarrierBarcode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCarrier">
+      <soap12:operation soapAction="http://tempuri.org/RegisterCarrier" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvDetail">
+      <soap12:operation soapAction="http://tempuri.org/GetInvDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvTitle">
+      <soap12:operation soapAction="http://tempuri.org/GetInvTitle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Einvoice">
+    <wsdl:port name="EinvoiceSoap" binding="tns:EinvoiceSoap">
+      <soap:address location="http://localhost:63899/Api/Einvoice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EinvoiceSoap12" binding="tns:EinvoiceSoap12">
+      <soap12:address location="http://localhost:63899/Api/Einvoice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

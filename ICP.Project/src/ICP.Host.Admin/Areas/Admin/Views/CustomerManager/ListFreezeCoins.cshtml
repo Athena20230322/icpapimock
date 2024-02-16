@@ -1,0 +1,50 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model QueryFreezeCoinsModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerManager/ListFreezeCoins/action.js"></script>
+}
+<link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+
+<div id="refreshForm" style="display:none;">
+    @using (Ajax.BeginForm("ListFreezeCoinsResult", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" />
+        <input type="hidden" name="PageSize" value="5" />
+        <input type="hidden" name="PageNo" value="1" />        
+        <input type="hidden" id="MID" name="MID" value="@ViewBag.id" />
+        <input type="hidden" id="refreshMID" name="refreshMID" value="@ViewBag.id" />
+    }
+</div>
+
+<div class="sc-back-box">
+    <a href="@Url.Action(("Detail"), new { id = @ViewBag.id })" class="icon- sbk-btn"><span class="skb-txt">返回電支使用者明細</span></a>
+</div>
+<input type="hidden" id="id" name="id" value="@ViewBag.id">
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action(("AddFreezeCoins"), new { id = @ViewBag.id })" data-update-callback="refresh" class="libs-dialog-form btn" title="新增凍結款">
+            <span class="icon-ic-add bb-icon"></span>
+            新增凍結款
+        </a>
+    </div>
+</div>
+
+
+@using (Ajax.BeginForm("ListFreezeCoinsResult", null, new AjaxOptions { UpdateTargetId = "queryResult" }, new { @id = "QueryForm" }))
+{
+    <input type="hidden" id="MID" name="MID" value="@ViewBag.id" />
+    <input type="hidden" id="queryMID" name="queryMID" value="@ViewBag.id" />
+    <input type="hidden" name="PageSize" value="5" />
+    <input type="submit" id="btnQuery" name="btnQuery" style="display:none;" />
+}
+
+<div id="queryResult">
+</div>

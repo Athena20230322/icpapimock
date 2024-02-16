@@ -1,0 +1,275 @@
+﻿@model ICP.Modules.Mvc.Payment.Models.Cashier.CashierReq
+@{
+    ViewBag.Title = "CreateOrder";
+}
+
+<h2>建立訂單</h2>
+@Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    <input id="reload" type="button" value="重新整理" />
+    <table>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.PlatformID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.PlatformID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MerchantID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MerchantID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MerchantTradeNo)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MerchantTradeNo)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MerchantTradeDate)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MerchantTradeDate)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.Amount)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.Amount)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.ItemAmt)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.ItemAmt)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.UtilityAmt)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.UtilityAmt)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.CommAmt)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.CommAmt)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.DebitPoint)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.DebitPoint)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.BonusAmt)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.BonusAmt)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.TradeType)
+            </th>
+            <td>
+                @Html.DropDownListFor(x => x.TradeType, new List<SelectListItem>()
+                                                       {
+                                                            new SelectListItem(){Text = "Other", Value = "0"},
+                                                            new SelectListItem(){Text = "EC", Value = "1"},
+                                                            new SelectListItem(){Text = "Mobile", Value = "2"},
+                                                       })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.TradeModeID)
+            </th>
+            <td>
+                @Html.DropDownListFor(x => x.TradeModeID, new List<SelectListItem>()
+                                                       {
+                                                            new SelectListItem(){Text = "交易", Value = "1"},
+                                                            new SelectListItem(){Text = "儲值", Value = "2"},
+                                                            new SelectListItem(){Text = "轉帳", Value = "3"},
+                                                            new SelectListItem(){Text = "提領", Value = "4"},
+                                                       })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.PaymentTypeID)
+            </th>
+            <td>
+                @Html.DropDownListFor(x => x.PaymentTypeID, new List<SelectListItem>()
+                                                       {
+                                                            new SelectListItem(){Text = "交易_電支帳戶", Value = "1"},
+                                                            new SelectListItem(){Text = "AccountLink", Value = "2"},
+                                                            new SelectListItem(){Text = "ATM", Value = "3"},
+                                                            new SelectListItem(){Text = "現金", Value = "4"},
+                                                            new SelectListItem(){Text = "發票", Value = "5"},
+                                                            new SelectListItem(){Text = "轉帳_電支帳戶", Value = "6"},
+                                                            new SelectListItem(){Text = "提領_電支帳戶", Value = "7"},
+                                                            new SelectListItem(){Text = "調帳_電支帳戶", Value = "8"},
+                                                            new SelectListItem(){Text = "撥款_電支帳戶", Value = "9"},
+                                                       })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.PaymentSubTypeID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.PaymentSubTypeID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.AccountID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.AccountID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.Barcode)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.Barcode)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" id="SubmitForm" value="建立訂單" />
+            </td>
+        </tr>
+    </table>
+<textarea id="textResult" style="color:red;width:600px;height:120px;max-width:1000px"></textarea>
+    @Html.HiddenFor(model => model.ItemList)
+}
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#reload').click(function () {
+            location.reload();
+        });
+
+        $("#SubmitForm").click(function () {
+            var regInt = /\d/;
+
+            if ($.trim($('#PlatformID').val()) != '') {
+                if (!regInt.test($('#PlatformID').val(), regInt)) {
+                    alert("平台商編號格式有誤");
+                    return false;
+                }
+            }
+
+            //if (!regInt.test($('#MerchantID').val(), regInt)) {
+            //    alert("廠商編號為必填或格式有誤");
+            //    return false;
+            //}
+
+            if (!regInt.test($('#MID').val(), regInt)) {
+                alert("付款會員代碼為必填或格式有誤");
+                return false;
+            }
+
+            //if ($.trim($('#MerchantTradeNo').val()) == '') {
+            //    alert("交易編號不可為空");
+            //    return false;
+            //}
+
+            //if ($.trim($('#MerchantTradeDate').val()) == '') {
+            //    alert("交易日期不可為空");
+            //    return false;
+            //}
+
+            if (!regInt.test($('#Amount').val(), regInt)) {
+                alert("交易金額為必填或格式有誤");
+                return false;
+            }
+
+            if (parseInt($('#Amount').val()) <= 0) {
+                alert("交易金額必須大於0");
+                return false;
+            }
+
+            if (!regInt.test($('#PaymentSubTypeID').val(), regInt)) {
+                alert("付款子類別(PaymentSubTypeID)為必填或格式有誤");
+                return false;
+            }
+
+            if (parseInt($('#PaymentSubTypeID').val()) <= 0) {
+                alert("付款子類別(PaymentSubTypeID)必須大於0");
+                return false;
+            }
+
+            if ($('#PaymentTypeID option:selected').val() == '2') {
+                if ($.trim($('#AccountID').val()) == '') {
+                    alert("AccountID不可為空");
+                    return false;
+                }
+            }
+
+            $.ajax({
+                type: "post",
+                url: "/Mock/CreateOrder",
+                dataType: "text",
+                data: {
+                    PlatformID: $('#PlatformID').val(),
+                    MerchantID: $('#MerchantID').val(),
+                    MID: $('#MID').val(),
+                    MerchantTradeNo: $('#MerchantTradeNo').val(),
+                    MerchantTradeDate: $('#MerchantTradeDate').val(),
+                    Amount: $('#Amount').val(),
+                    TradeType: $('#TradeType option:selected').val(),
+                    TradeModeID: $('#TradeModeID option:selected').val(),
+                    PaymentTypeID: $('#PaymentTypeID option:selected').val(),
+                    PaymentSubTypeID: $('#PaymentSubTypeID').val(),
+                    AccountID: $('#AccountID').val(),
+                    Barcode: $("#Barcode").val(),
+                    ItemList: $('#ItemList').val(),
+                    ItemAmt: $('#ItemAmt').val(),
+                    UtilityAmt: $('#UtilityAmt').val(),
+                    CommAmt: $('#CommAmt').val(),
+                    DebitPoint: $('#DebitPoint').val(),
+                    BonusAmt: $('#BonusAmt').val(),
+                },
+                success: function (data) {
+                    $('#textResult').val(data);
+                }
+            });
+        });
+    });
+</script>
+

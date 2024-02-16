@@ -1,0 +1,66 @@
+﻿@using ICP.Modules.Mvc.Admin.Enums;
+@using ICP.Modules.Mvc.Admin.Models;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<QueryIPRecordResultVM>
+@{
+    Layout = null;
+    var query = (QueryIPRecordVM)ViewBag.QueryModel;
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml");
+        return;
+    }
+}
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("ExportListIPRecord", query)" class="btn btn-blue-border bd-rdi" title="匯出 EXCEL 檔">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出 EXCEL 檔
+        </a>
+    </div>
+</div>
+<div class="sc-box scb-table st-control st-ip-rec">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">電支帳號</p></li>
+            <li><p class="sth-txt">登入帳號</p></li>
+            <li><p class="sth-txt">手機號碼</p></li>
+            <li><p class="sth-txt">登入 IP</p></li>
+            <li><p class="sth-txt">回應訊息</p></li>
+            <li><p class="sth-txt">登入時間</p></li>
+            <li><p class="sth-txt">裝置 ID</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ICPMID</td>
+                    <td>@item.Account</td>
+                    <td>@item.CellPhone</td>
+                    <td>@item.RealIP</td>
+                    <td>@item.RtnMsg</td>
+                    @if (item.LogTime == null)
+                    {
+                        <td></td>
+                    }
+                    else
+                    {
+                        <td>@(((DateTime)item.LogTime).ToString("yyyy/MM/dd"))<br>@(((DateTime)item.LogTime).ToString("HH:mm:ss"))</td>
+                    }
+                    <td>@item.DeviceID</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Areas/Member/Views/Shared/_LayoutForAnonymous.cshtml";
+    <script src="~/Areas/Member/Scripts/jquery.min.js"></script>
+    <script src="~/Areas/Member/Scripts/device.min.js"></script>
+    <script src="~/Areas/Member/Scripts/action.min.js"></script>
+}
+<div id="wrapper">
+    <header></header>
+    <section>
+        <ul class="toggle_box" id="faq">
+            <li class="br">
+                <a href="javascript:void(0);" onclick="toggle_flag(this);">無法進行儲值</a>
+                <div class="toggle_container" style="display: none;">
+                    <div class="text"><span>如您無法進行儲值，可能有以下原因： <br>1. 請先檢視儲值餘額是否達到上限 <br>2. 查詢「儲值訂單」中是否尚有有效期限內的未完成儲值交易 <br>3. 查詢「付款訂單」中是否有付款中的金額尚未過代收天期 (付款中的款項額度仍屬於付款使用者所擁有，過了代收天期，款項撥付給收款使用者後，儲值額度才會釋放) <br>4. 選擇「超商儲值」時，輸入的儲值金額超過2萬元 (超商代碼儲值限額上限為2萬元，若您輸入的金額超過2萬元將無法產生超商儲值代碼) 若您非屬上述事項而仍無法正常進行儲值，請聯絡本公司客服。</span></div>
+                </div>
+            </li>
+            <li class="br">
+                <a href="javascript:void(0);" onclick="toggle_flag(this);">已儲值完成，卻沒看到儲值款項?</a>
+                <div class="toggle_container" style="display: none;"><img src="~/Areas/Member/Content/icon_browser.png"></div>
+            </li>
+            <li class="br">
+                <a href="javascript:void(0);" onclick="toggle_flag(this);">為什麼一直儲值失敗?</a>
+                <div class="toggle_container" style="display: none;">
+                    <div class="text">
+                        <p>測試標題</p><span>測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文</span>
+                    </div><img src="~/Areas/Member/Content/icon_browser.png">
+                </div>
+            </li>
+            <li class="br">
+                <a href="javascript:void(0);" onclick="toggle_flag(this);">已儲值的款項可以退嗎?</a>
+                <div class="toggle_container" style="display: none;">
+                    <img src="~/Areas/Member/Content/icon_browser.png">
+                    <div class="text">
+                        <p>測試標題</p><span>測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文測試內文</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <footer></footer>
+</div>

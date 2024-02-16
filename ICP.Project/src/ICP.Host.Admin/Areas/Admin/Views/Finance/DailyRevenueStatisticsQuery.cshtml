@@ -1,0 +1,68 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentCenter;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models;
+@model IPagedList<DailyRevenueStatisticsModel>
+@{
+    Layout = null;
+}
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("ExportDailyRevenueStatistics", ViewBag.QueryModel)" class="btn btn-blue-border bd-rdi" title="匯出 EXCEL 檔">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出 EXCEL 檔
+        </a>
+    </div>
+</div>
+
+<div class="sc-box scb-table st-control st-daily-report">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">訂單日期</p></li>
+            <li><p class="sth-txt sth-twoline">icash Pay 帳戶<br>筆數</p></li>
+            <li><p class="sth-txt sth-twoline">icash Pay 帳戶<br>交易金額</p></li>
+            <li><p class="sth-txt sth-twoline">icash Pay 帳戶<br>手續費</p></li>
+            <li><p class="sth-txt sth-twoline">連結扣款帳戶<br>筆數</p></li>
+            <li><p class="sth-txt sth-twoline">連結扣款帳戶<br>交易金額</p></li>
+            <li><p class="sth-txt sth-twoline">連結扣款帳戶<br>手續費</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PaymentDate.ToShortDateString()</td>
+                    <td>@item.ICashCount.ToString("N0")</td>
+                    <td>@item.ICashAmount.ToString("N0")</td>
+                    <td>@item.ICashFee.ToString("N0")</td>
+                    <td>@item.ACLCount.ToString("N0")</td>
+                    <td>@item.ACLAmount.ToString("N0")</td>
+                    <td>@item.ACLFee.ToString("N0")</td>
+                </tr>
+            }
+            @if (ViewBag.IsLastPage ?? false)
+            {
+                <tr>
+                    <td>小計：共 @Model[0].TotalCount 筆</td>
+                    <td>@Model[0].ICashTotalCount.ToString("N0")</td>
+                    <td>@Model[0].ICashTotalAmount.ToString("N0")</td>
+                    <td>@Model[0].ICashTotalFee.ToString("N0")</td>
+                    <td>@Model[0].ACLTotalCount.ToString("N0")</td>
+                    <td>@Model[0].ACLTotalAmount.ToString("N0")</td>
+                    <td>@Model[0].ACLTotalFee.ToString("N0")</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("DailyRevenueStatisticsQuery", Model, ViewBag.QueryModel)); }

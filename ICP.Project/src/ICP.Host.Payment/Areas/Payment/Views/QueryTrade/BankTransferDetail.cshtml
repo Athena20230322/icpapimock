@@ -1,0 +1,109 @@
+﻿@model ICP.Modules.Mvc.Payment.Models.QueryTrade.BankTransferTradeInfo
+
+@{
+    Layout = "~/Areas/Payment/Views/Shared/_QueryTradeLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    string Status = "處理中";
+    string BankTransferAccount = Model.BankName;
+
+    switch (Model.PayStatus)
+    {
+        case 0:
+            Status = "處理中";
+            break;
+        case 1:
+            Status = "成功";
+            break;
+        case 2:
+            Status = "失敗";
+            break;
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.BankAccount))
+    {
+        if (Model.BankAccount.Length >= 5)
+        {
+            BankTransferAccount += " " + Model.BankAccount.Substring(Model.BankAccount.Length - 5);
+        }
+    }
+
+    <div id="wrapper">
+        <header></header>
+        <section>
+            <ul class="toggle_box" id="record_detial">
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>申請時間</span></div>
+                        <div class="col"><span>@Html.DisplayFor(model => model.CreateDate)</span></div>
+                    </div>
+                </li>
+                @if(Model.PayStatus == 1)
+                {
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>實際轉出時間</span></div>
+                            <div class="col"><span>@Html.DisplayFor(model => model.PaymentDate)</span></div>
+                        </div>
+                    </li>
+                }
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>類別</span></div>
+                        <div class="col"><span>提領</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>狀態</span></div>
+                        <div class="col green"><span>提領@(Status)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>icash Pay帳戶</span></div>
+                        <div class="col"><span>@(Model.IcashAccount)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>提領帳號</span></div>
+                        <div class="col green"><span>@(BankTransferAccount)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>提領金額</span></div>
+                        <div class="col green"><span>@Html.DisplayFor(model => model.Amount)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>手續費</span></div>
+                        <div class="col green"><span>@Html.DisplayFor(model => model.HandlingCharge)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>帳戶扣除金額</span></div>
+                        <div class="col green"><span>@Html.DisplayFor(model => model.ActualAmount)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>編號</span></div>
+                        <div class="col"><span>@Html.DisplayFor(model => model.TradeNo)</span></div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+}
+
+<script type="text/javascript">
+    if ('@ViewBag.errMsg' != "") {
+        alert('@ViewBag.errMsg');
+    }
+</script>

@@ -1,0 +1,51 @@
+﻿@model List<ICP.Modules.Mvc.Admin.Models.ViewModels.FrameMenuItem>
+@{
+    Layout = null;
+}<html>
+<head>
+<title>Menu</title>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Language" content="zh-TW" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand" />
+<link href="~/Areas/Admin/Content/css/frame.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/css/nav/_left_nav.css" rel="stylesheet" />
+<link href="~/Areas/Admin/CSS/Frame/Menu/action.css" rel="stylesheet" />
+</head>
+<body>
+<div class="left-nav-container">
+    <nav class="lnc-nav-box">
+        @foreach (var rootFuc in Model)
+        {
+            <div class="lnb-list-box">
+                <h4 class="lnb-title">@rootFuc.FunctionName</h4>
+                @if (rootFuc.ChildrenFunction.Count > 0)
+                {
+                    <ul class="lnb-list">
+                        @foreach (var secondFuc in rootFuc.ChildrenFunction)
+                        {
+                            <li>
+                                <a class="lnb-subtitle" href="javascript:;">@secondFuc.FunctionName</a>
+                                @if (secondFuc.ChildrenFunction.Count > 0)
+                                {
+                                    <ul class="lnb-list-sec">
+                                        @foreach (var thirdFuc in secondFuc.ChildrenFunction)
+                                        {
+                                            <li><a href="@Url.Action(thirdFuc.Method, thirdFuc.Controller)" target="content" parentName="@secondFuc.FunctionName">@thirdFuc.FunctionName</a></li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        }
+    </nav>
+</div>
+<script src="~/Areas/Admin/Scripts/jquery.min.js"></script>
+<script src="~/Areas/Admin/Scripts/Frame/Menu/action.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+﻿@using ICP.Modules.Mvc.Admin.Models;
+@model UnregisteredData
+@{ 
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+
+<div id="deledata-detail-popup" class="deledata-detail-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <div class="pp-content">
+            <h4 class="pp-title">電支使用者刪除資料明細</h4>
+            <div class="pp-msg-list">
+                <dl>
+                    <dt>刪除時間</dt>
+                    <dd>@Model.CreateDate.ToString("yyyy-MM-dd HH:mm:ss")</dd>
+                </dl>
+                <dl>
+                    <dt>姓名</dt>
+                    <dd>@Model.CName</dd>
+                </dl>
+                <dl>
+                    <dt>手機號碼</dt>
+                    <dd>@Model.CellPhone</dd>
+                </dl>
+                <dl>
+                    <dt>身分證字號</dt>
+                    <dd>
+                        @if (Model.isIDNO)
+	                    {
+		                     @:Y
+	                    }
+                        else
+                        {
+                            @:N
+                        }
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>居留證號</dt>
+                    <dd>
+                        @if (Model.isUniformID)
+	                    {
+		                     @:Y
+	                    }
+                        else
+                        {
+                            @:N
+                        }
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>E-mail</dt>
+                    <dd>
+                        @if (Model.isEmail)
+	                    {
+		                     @:Y
+	                    }
+                        else
+                        {
+                            @:N
+                        }
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>刪除方式</dt>
+                    <dd>
+                        @if (Model.Source == 0)
+                        {
+                            @:系統刪除
+                        }
+                        else
+                        {
+                            @:人工刪除
+                        }
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>刪除操作人</dt>
+                    <dd>
+                        @if (Model.Source == 0)
+                        {
+                            @:系統
+                        }
+                        else
+                        {
+                            @Model.CreateUser
+                        }
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>刪除原因</dt>
+                    <dd>@Model.Notes</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

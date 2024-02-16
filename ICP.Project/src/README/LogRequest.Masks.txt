@@ -1,0 +1,9 @@
+LOG 資料遮罩
+
+將 Log資料 帳號(UserCode), 密碼(UserPwd) 使用 * 遮罩起來
+
+[LogRequest(Masks = new string[] { "request.UserCode", "request.UserPwd" }]
+public ActionResult UserCodeLogin(UserCodeLoginRequest request)
+{
+	...
+}

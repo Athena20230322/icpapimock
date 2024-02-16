@@ -1,0 +1,28 @@
+//設定檔 DB 存取(Host, Batch, Admin 共用 config 設定)
+
+using Library.Repositories.SystemRepositories;
+
+// 注入
+ConfigKeyValueRepository _configKeyValueRepository;
+
+--------------DB 新增------------------
+EXEC ICP_Member.dbo.ausp_Member_Admin_System_AddConfigKeyValue_I
+	@Key			= 'test',
+	@Value			= '1',
+	@IsEncrypt		= 0
+
+--------------DB 更新------------------
+EXEC ICP_Member.dbo.ausp_Member_Admin_System_UpdateConfigKeyValue_U
+	@Key			= 'test',
+	@Value			= '1',
+	@IsEncrypt		= 0
+
+--------------DB 取得------------------
+DECLARE @Value NVARCHAR(MAX)
+
+EXEC ICP_Member.dbo.ausp_Member_System_GetConfigKeyValue_S
+	@Key		= 'op:ftpAccount',
+	@RtnTable	= 0,
+	@Value		= @Value OUTPUT
+
+SELECT @Value AS [Value]

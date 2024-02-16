@@ -1,0 +1,49 @@
+﻿# 推播訊息新增AppRssLibrary
+
+## Using
+using ICP.Library.Services.AppRssLibrary;
+
+## 注入
+
+AppRssService _appRssService=null;
+
+## 使用方式
+
+```
+
+        /// <summary>
+        /// 新增推播訊息
+        /// </summary>
+        /// <param name="mid">會員編號</param>
+        /// <param name="opmid">OPEN WALLET MID</param>
+        /// <param name="subject">訊息主旨，最長80個全形字</param>
+        /// <param name="notifyMessageId">通知訊息編號 Share_NotifyMessage_Detail.NotifyMessageID</param>
+        /// <param name="title">推播訊息對話方塊之標題</param>
+        /// <param name="hyperLink">點擊推播開啟指定URL頁面</param>
+        /// <param name="functionid">點擊推播開APP指定頁</param>
+        /// <param name="param">點擊推播開APP指定頁分支頁面</param>
+        /// <param name="expireTime">推播訊息失效時間</param>
+        /// <param name="priority">發送的優先順序，0為立即發送，其餘按數字由小至大順序發送</param>
+        /// <returns></returns>
+
+_appRssService.AddAppRss(
+    int mid,
+    string opmid,
+    string subject, 
+    int notifyMessageId,
+    //底下可為空
+    string title,
+    string hyperLink = "", //hyperLink與functionid擇一傳送
+    string functionid = "", //hyperLink與functionid擇一傳送
+    string param = "", 
+    DateTime? expireTime = null, 
+    int priority = 0
+)
+
+````
+
+## SP Config 列表，SP語法請參考(ConfigKeyValue.txt)新增修改
+
+//AppRssPush發送位置
+AppRss:Push:Url
+

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ICP.Batch",
+    "\\ICP.Batch\\ICP.Batch.AccountLink",
+    "\\ICP.Batch\\ICP.Batch.AccountLink\\App_Data",
+    "\\ICP.Batch\\ICP.Batch.AccountLink\\bin",
+    "\\ICP.Batch\\ICP.Batch.AccountLink\\bin\\Debug",
+    "\\ICP.Batch\\ICP.Batch.AccountLink\\Repositories",
+    "\\ICP.Batch\\ICP.Batch.AccountLink\\Services",
+    "\\ICP.Host.AccountLink",
+    "\\ICP.Host.Admin"
+  ],
+  "SelectedNode": "\\ICP.Batch\\ICP.Batch.AccountLink\\Repositories\\FirstRepository.cs",
+  "PreviewInSolutionExplorer": false
+}

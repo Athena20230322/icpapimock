@@ -1,0 +1,26 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<MemberNotifyMessageModel>
+<link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerManager/ListMemberNotifyMessage/action.js"></script>
+}
+
+<div class="sc-back-box">
+    <a href="@Url.Action(("Detail"), new { id = @ViewBag.id })" class="icon- sbk-btn"><span class="skb-txt">返回電支使用者明細</span></a>
+</div>
+
+<h4 class="sc-subtitle">電支使用者訊息公告記錄</h4>
+        
+@using (Ajax.BeginForm("ListMemberNotifyMessageResult", new AjaxOptions { UpdateTargetId = "queryResult" }))
+{ 
+    <input type="hidden" id="MID" name="MID" value="@ViewBag.id">
+    <input type="submit" id="btnQuery" value="query" style="display:none;" />
+}
+
+<div id="queryResult">
+</div>
+
+
+

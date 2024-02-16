@@ -1,0 +1,4 @@
+BeforeEncryptDir=D:\Tmp
+BeforeEncryptFile=decryptProperties.txt
+AfterEncryptFile=decryptProperties
+AfterEncryptDir=D:\Tmp

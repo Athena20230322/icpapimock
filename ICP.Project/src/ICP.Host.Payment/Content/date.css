@@ -1,0 +1,32 @@
+﻿.demo {
+        display: flex;
+        display: -webkit-flex;
+        display: -moz-flex;
+    }
+.demo >input {
+        display: block;
+        border: 0;
+        border-radius: 3px;
+        padding:3px 8px;
+        height: 100%;
+        flex: 1;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        font-size: 18px;
+    }
+    
+    .demo >button {
+        background-color: #00c599;
+        color: #fff;
+        border: 0;
+        height: 100%;
+        margin-left: 8px;
+        padding: 0 15px;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+.iptgroup{height:30px;line-height:30px;padding:5px;margin:5px;;}
+.doubledate{width:80%; height:30px; margin:15px ;font-size:18px;
+	text-align:center;	border-width:1px; 	border-style:solid;border-bottom-color: #424242;
+	border-radius:5px;border-color:#878787; 
+}

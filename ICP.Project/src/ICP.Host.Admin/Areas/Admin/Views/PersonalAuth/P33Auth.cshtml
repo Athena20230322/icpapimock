@@ -1,0 +1,51 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model P33AuthVM
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/PersonalAuth/P33Auth/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("P33AuthQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" />
+            @Html.TextBoxFor(t => t.IDNO, new { id = "refreshIDNO" })
+            @Html.TextBoxFor(t => t.UnifiedBusinessNo, new { id = "refreshUnifiedBusinessNo" })
+            @Html.Hidden("IDTypes")
+        }
+    </div>
+    @using (Ajax.BeginForm("P33AuthQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-form sf-2column">
+            <dl>
+                <dt>
+                    <label class="def-select">
+                        <select id="IDTypes" name="IDTypes" onchange="IDTypesChange(this.value)">
+                            <option value="0">身分證字號</option>
+                            <option value="1">統一編號</option>
+                        </select>
+                    </label>
+                </dt>
+                <dd id="IDNO_TextBlock">
+                    @Html.TextBoxFor(t => t.IDNO, new { id = "queryIDNO" })
+                    @Html.ValidationMessageFor(t => t.IDNO, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+                <dd id="UnifiedBusinessNo_TextBlock" style="display : none">
+                    @Html.TextBoxFor(t => t.UnifiedBusinessNo, new { id = "queryUnifiedBusinessNo" })
+                    @Html.ValidationMessageFor(t => t.UnifiedBusinessNo, null, new { @class = "input-error-txt" }, "div")
+                </dd>
+            </dl>
+        </div>
+
+        <div class="btn-box">
+            <a id="lnkQuery" href="#" class="btn" title="送出">送出</a>
+        </div>
+    }
+</div>
+<div id="queryResult">
+</div>

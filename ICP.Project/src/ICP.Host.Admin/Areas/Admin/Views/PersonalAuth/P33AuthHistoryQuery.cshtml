@@ -1,0 +1,155 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model  IPagedList<P33AuthHistoryQueryVM>
+@{
+    Layout = null;
+
+    Func<string, string> Empty2Dash = str =>
+    {
+        return !string.IsNullOrWhiteSpace(str) ? str : "-";
+    };
+
+    Func<short, string> Source2String = source =>
+    {
+        switch (source)
+        {
+            case 1:
+                return "APP";
+            case 2:
+                return "後台";
+            case 3:
+                return "排程";
+            default:
+                return "-";
+        }
+    };
+
+    Func<string, string> P33AuthDatasType2String = p33AuthDatasType =>
+    {
+        switch (p33AuthDatasType.ToUpper())
+            {
+                case "B1":
+                    return "存款類/開戶詐騙";
+                case "B2":
+                    return "存款類/存單詐騙";
+                case "BY":
+                    return "存款類/無ＩＤ";
+                case "BZ":
+                    return "存款類/其他";
+                case "E1":
+                    return "警示帳戶類(非儲值支付帳戶)/警示帳戶";
+                case "EY":
+                    return "警示帳戶類(非儲值支付帳戶)/無ＩＤ";
+                case "EZ":
+                    return "警示帳戶類(非儲值支付帳戶)/其他";
+                case "F1":
+                    return "存款儲值支付帳戶類/警示帳戶";
+                case "F2":
+                    return "存款儲值支付帳戶類/偽冒開戶";
+                case "FZ":
+                    return "存款儲值支付帳戶類/無ＩＤ";
+                case "G1":
+                    return "電子支付帳戶類/提交虛偽身分資料(加害)";
+                case "G2":
+                    return "電子支付帳戶類/提交虛偽身分資料(被害)";
+                case "G3":
+                    return "電子支付帳戶類/從事詐欺洗錢";
+                case "G4":
+                    return "其他經主管機關規定之資料";
+                case "Z1":
+                    return "其他類/身份證詐騙";
+                case "Z2":
+                    return "其他類/身份證被冒用";
+                default:
+                    return "-";
+            }
+    };
+
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+<div class="sc-box scb-table st-control st-verify-p33-rec">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">驗證日期</p></li>
+            <li><p class="sth-txt">電支帳號</p></li>
+            <li><p class="sth-txt">身分證字號/統一編號</p></li>
+            <li><p class="sth-txt">驗證狀態</p></li>
+            <li><p class="sth-txt">通報案件筆數</p></li>
+            <li><p class="sth-txt">通報案件</p></li>
+            <li><p class="sth-txt">驗證來源</p></li>
+            <li><p class="sth-txt">後台帳號</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CreateDate.ToString("yyyy/MM/dd")<br />@item.CreateDate.ToString("HH:mm:ss")
+                    </td>
+                    <td>
+                        @Empty2Dash(item.ICPMID)
+                    </td>
+                    <td>
+                        @item.IDNO
+                    </td>
+                    <td>
+                        @if (item.IsPass == 1)
+                        {
+                            <p class="st-success">驗證成功</p>
+                        }
+                        else if (item.IsPass == 0)
+                        {
+                            <p class="st-fail">驗證失敗</p>
+                        }
+                        else if (item.IsPass == 2)
+                        {
+                            <p>待審核</p>
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    </td>
+                    <td>
+                        @item.DataCount
+                    </td>
+                    <td>
+                        @if (item.DataCount > 0)
+                        {
+                            foreach (var data in item.P33AuthDatas)
+                            {
+                                <p>@data.TYPE</p>
+                            }
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    </td>
+                    <td>
+                        @Source2String(item.Source)
+                    </td>
+                    <td>
+                        @Empty2Dash(item.UserName)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("P33AuthHistoryQuery", Model, ViewBag.QueryModel)); }

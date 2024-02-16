@@ -1,0 +1,95 @@
+﻿@using ICP.Modules.Mvc.Admin.Models
+@model SuspenseMain
+@{ 
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    List<SuspenseSetting> SuspenseTypes = ViewBag.SuspenseTypes;
+    List<SuspenseSetting> ReasonTypes = ViewBag.ReasonTypes;
+    List<SuspenseSetting> MessageTypes = ViewBag.MessageTypes;
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/SuspenseMain/AddSuspenseMain/action.js"></script>
+}
+<div id="add-blacklist2-popup" class="add-blacklist2-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">新增</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>手機號碼</dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.CellPhone, new { @class = "pp-inp", @placeholder = "請填寫手機號碼" })
+                            @Html.ValidationMessageFor(m => m.CellPhone, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>原因</dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(m => m.ReasonType, ReasonTypes.Select(m => new SelectListItem { Text = m.Description, Value = m.ID.ToString() }))
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>懲處方式</dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(m => m.SuspenseType, SuspenseTypes.Select(m => new SelectListItem { Text = m.Description, Value = m.ID.ToString() }))
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>加入黑名單</dt>
+                        <dd>
+                            <label class="def-select">
+                                <select name="IsBlockIDNO">
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>備註</dt>
+                        <dd>
+                            @Html.TextAreaFor(m => m.Note, new { @class = "pp-textarea", @placeholder = "請填寫紀錄內容", @maxlength = "150" })
+                            <div class="input-tip-txt itt-r itt-er"><span>0</span>/150</div>
+                            <div class="input-error-txt">@Html.ValidationMessageFor(m => m.Note)</div>
+                        </dd>
+                    </dl>
+
+                    <div class="ppf-subcontent">
+                        <h4 class="pfs-title">傳送給會員的內容</h4>
+                        <div class="pfs-box">
+                            <dl>
+                                <dt>會員狀態</dt>
+                                <dd>
+                                    <div class="pf-regular-box">暫時停權</div>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>原因</dt>
+                                <dd>
+                                    <label class="def-select">
+                                        @Html.DropDownList("MessageTypes", MessageTypes.Select(m => new SelectListItem { Text = m.Description, Value = m.ID.ToString() }))
+                                    </label>
+                                    @Html.TextAreaFor(m => m.Reason, new { @class = "pp-textarea reason", @placeholder = "請填寫紀錄內容", @maxlength = "150", @style = "display: none" })
+                                    <div class="input-tip-txt itt-r itt-er reason" style="display: none"><span>0</span>/150</div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                <a class="btn disabled link-submit">送出</a>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Language" content="zh-TW" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <title>icash pay</title>
+    <link href="~/Areas/Admin/Content/css/frame.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/CSS/Frame/Index/action.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/Scripts/jquery.min.js"></script>
+</head>
+<body>
+    <div class="frame-header">
+        <div class="site-header sh1">
+            @{
+                Html.RenderPartial("Templates/Header");
+            }
+        </div>
+    </div>
+    <div class="frame-left">
+        <iframe src="@Url.Action("Menu")" frameborder="0" width="100%" height="100%;" scrolling="yes"></iframe>
+    </div>
+    <div class="frame-content">
+        <iframe name="content" src="@Url.Action("Content")" frameborder="0" width="100%" height="100%;" scrolling="yes"></iframe>
+    </div>
+    <script src="~/Areas/Admin/Scripts/Frame/Index/action.js"></script>
+</body>
+</html>

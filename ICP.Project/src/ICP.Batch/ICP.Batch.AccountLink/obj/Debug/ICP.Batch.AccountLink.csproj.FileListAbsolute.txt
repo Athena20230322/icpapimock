@@ -1,0 +1,2 @@
+C:\icpapimock\ICP.Project\src\ICP.Batch\ICP.Batch.AccountLink\obj\Debug\ICP.Batch.AccountLink.csproj.AssemblyReference.cache
+C:\icpapimock\ICP.Project\src\ICP.Batch\ICP.Batch.AccountLink\obj\Debug\ICP.Batch.AccountLink.csproj.CoreCompileInputs.cache

@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Areas/Payment/Views/Shared/_LayoutForWebView.cshtml";
+}
+
+<ul class="tab_btns br">
+    <li class="on"><a href="javascript:getContent(0);">未達成</a></li>
+    <li><a href="javascript:getContent(1);">已達成</a></li>
+</ul>
+
+<ul class="tab_container" id="actList">
+</ul>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            getContent(0);
+        })
+       
+        function getContent(type) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Activity")?type=" + type,
+                success: function (result) {
+                    $('#actList').html(result);
+                },
+                error: function () {
+                    alert('請稍候在試 !!');
+                }
+            });
+        }
+    </script>
+}

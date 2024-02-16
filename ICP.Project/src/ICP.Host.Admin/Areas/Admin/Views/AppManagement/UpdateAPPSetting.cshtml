@@ -1,0 +1,87 @@
+﻿@using ICP.Modules.Mvc.Admin.Models
+@model APPSetting
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header
+{
+<style type="text/css">
+    .add-app-setting {
+        width: 600px;
+    }
+    .add-app-setting textarea{
+        width:100%;
+        min-height: 90px;
+    }
+    .add-app-setting .scb-list-box{
+        margin:20px 20px 0px;
+    }
+</style>
+}
+@section scripts
+{
+<script>
+    libs.alert.validationSummary();
+</script>
+}
+<div class="add-app-setting mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">更新 XML</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>@Html.DisplayNameFor(t => t.VersionNo)</dt>
+                        <dd>
+                            @string.Format("V{0}", Model.VersionNo)
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.DisplayNameFor(t => t.XMLData)</dt>
+                        <dd>
+                            <textarea readonly>@Model.XMLData</textarea>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.DisplayNameFor(t => t.ReleaseNote)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.ReleaseNote, new { @class = "pp-inp", placeholder = "請輸入更新說明" })
+                            @Html.ValidationMessageFor(t => t.ReleaseNote, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.DisplayNameFor(t => t.TestXMLData)</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.TestXMLData, new { @class = "pp-inp", placeholder = "請輸入測試XML" })
+                            @Html.ValidationMessageFor(t => t.TestXMLData, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.DisplayNameFor(t => t.TestMID)</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.TestMID, new { @class = "pp-inp", placeholder = "請輸入測試MID" })
+                            @Html.ValidationMessageFor(t => t.TestMID, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                </div>
+
+            </div>
+
+            <div class="scb-list-box">
+                <ul class="content-list">
+                    <li>新增版號時，未設定測試MID時，會一律通用測試XML的內容。</li>
+                    <li>有設定測試MID時，若API有傳入MID但未在此名單內時，會取不到XML。</li>
+                </ul>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="#" class="btn disabled link-submit" title="儲存">儲存</a>
+            </div>
+        }
+    </div>
+</div>

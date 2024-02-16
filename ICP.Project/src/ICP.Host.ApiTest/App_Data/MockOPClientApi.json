@@ -1,0 +1,94 @@
+﻿[
+  {
+    "category": "OP Client Api",
+    "list": [
+      {
+        "name": "OP帳號取得AccessToken",
+        "url": "/SETMemberAuth_sit/AccessToken.html",
+        "json": {
+          "code": "62DEEED78C9F448080DB4307AF6CF4A1",
+          "authV": ""
+        },
+        "specs": {
+          "client_id": "廠商代碼 (程式會帶)",
+          "client_mima": "廠商密碼 (程式會帶)",
+          "request_id": "識別碼 (程式會帶)",
+          "device_id": "裝置號碼, 長度15~17之間, 若有限定單一裝置登入，需輸入，有值會檢查格式",
+          "code": "AuthV 會員資料授權碼",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+      {
+        "name": "OP帳號取得mid",
+        "url": "/SETMemberAuth_sit/QueryMemberMID.html",
+        "json": {
+          "access_token": ""
+        },
+        "specs": {
+          "client_id": "廠商代碼 (程式會帶)",
+          "client_mima": "廠商密碼 (程式會帶)",
+          "request_id": "識別碼 (程式會帶)",
+          "device_id": "裝置號碼, 長度15~17之間, 若有限定單一裝置登入，需輸入，有值會檢查格式",
+          "access_token": "access_token",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+      {
+        "name": "取得會員個資",
+        "url": "/SETMemberAuth_sit/QueryMemberInfo.html",
+        "json": {
+          "access_token": "",
+          "mid": ""
+        },
+        "specs": {
+          "client_id": "廠商代碼 (程式會帶)",
+          "client_mima": "廠商密碼 (程式會帶)",
+          "request_id": "識別碼 (程式會帶)",
+          "device_id": "裝置號碼, 長度15~17之間, 若有限定單一裝置登入，需輸入，有值會檢查格式",
+          "access_token": "access_token",
+          "mid": "會員mid (OPMID)",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+      {
+        "name": "OP帳號依舊AccessToken換發新Token",
+        "url": "/SETMemberAuth_sit/RefreshAccessToken.html",
+        "json": {
+          "access_token": "",
+          "mid": ""
+        },
+        "specs": {
+          "client_id": "廠商代碼 (程式會帶)",
+          "client_mima": "廠商密碼 (程式會帶)",
+          "request_id": "識別碼 (程式會帶)",
+          "device_id": "裝置號碼, 長度15~17之間, 若有限定單一裝置登入，需輸入，有值會檢查格式",
+          "access_token": "access_token",
+          "mid": "會員mid (OPMID)",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+      {
+        "name": "OP帳號取得手機條碼載具",
+        "url": "/SETMemberAPP_sit/QueryMobileBarcode.html",
+        "json": {
+          "access_token": "",
+          "mid": ""
+        },
+        "specs": {
+          "client_id": "廠商代碼 (程式會帶)",
+          "client_mima": "廠商密碼 (程式會帶)",
+          "request_id": "識別碼 (程式會帶)",
+          "device_id": "裝置號碼, 長度15~17之間, 若有限定單一裝置登入，需輸入，有值會檢查格式",
+          "access_token": "access_token",
+          "mid": "會員mid (OPMID)",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,3 @@
+C:\icashenduranceold\前台查詢\ICP.Project\src\ICP.Host.ApiTest\obj\Release\ICP.Host.ApiTest.csproj.CoreCompileInputs.cache
+C:\icpapimock\ICP.Project\src\ICP.Host.ApiTest\obj\Release\ICP.Host.ApiTest.csproj.CoreCompileInputs.cache
+C:\icpapimock\ICP.Project\src\ICP.Host.ApiTest\obj\Release\ICP.Host.ApiTest.csproj.AssemblyReference.cache

@@ -1,0 +1,110 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerSecurityManage;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<TakeCashLimitListLogModel>
+@{
+
+    Layout = null;
+}
+
+@{
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+
+<div class="sc-box scb-table st-control st-blacklist-limit">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">序號</p></li>
+            <li><p class="sth-txt">電支帳號</p></li>
+            <li><p class="sth-txt">姓名</p></li>
+            <li><p class="sth-txt">手機號碼</p></li>
+            <li><p class="sth-txt">身分證字號</p></li>
+            <li><p class="sth-txt">E-mail</p></li>
+            <li><p class="sth-txt">最近封鎖時間</p></li>
+            <li><p class="sth-txt">建立人員</p></li>
+            <li><p class="sth-txt">最新解除時間</p></li>
+            <li><p class="sth-txt">解除人員</p></li>
+            <li><p class="sth-txt">鎖定原因</p></li>
+            <li><p class="sth-txt">解鎖原因</p></li>
+            <li><p class="sth-txt">黑名單狀態</p></li>
+            <li><p class="sth-txt">操作</p></li>
+            <li><p class="sth-txt">異動紀錄</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.RowNo</td>
+                    <td>@item.ICPMID</td>
+                    <td>@item.CName</td>
+                    <td>@item.CellPhone</td>
+                    <td>@item.IDNO</td>
+                    <td>@item.Email</td>
+                    <td>
+                        @if (item.LockDate != null)
+                        {
+                            <span>@item.LockDate.ToString("yyyy/MM/dd")<br />@item.LockDate.ToString("HH:mm:ss")</span>
+                        }
+                    </td>
+                    <td>@item.LockUser</td>
+                    <td>
+                        @if (item.UnLockDate != null)
+                        {
+                            <span>@string.Format("{0:yyyy/MM/dd}", item.UnLockDate)<br />@string.Format("{0:HH:mm:ss}", item.UnLockDate)</span>
+                        }
+                        else
+                        {
+                            @:-
+                        }
+                    </td>
+                    <td>@( (item.UnLockUser == null) ? "-" : item.UnLockUser )</td>
+                    <td>@item.LockMemo</td>
+                    <td>@item.UnLockMemo</td>
+                    <td>@( (item.Status == 0) ? "已解除" : "封鎖" )</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            @if (item.Status == 1)
+                            {
+                                <a href="@Url.Action("TakeCashLimitUpdate", new { ICPMID = item.ICPMID, Status = 0 })" data-effect="mfp-zoom-in" data-update-callback="query" class="libs-dialog-form btn btn-blue-border" title="解鎖">解鎖</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("TakeCashLimitUpdate", new { ICPMID = item.ICPMID, Status = 1 })" data-effect="mfp-zoom-in" data-update-callback="query" class="libs-dialog-form btn" title="鎖定">鎖定</a>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("ListTakeCashLimitListLog", new { MID = item.MID })" class="libs-dialog-form btn" title="歷程">歷程</a>
+                            @*<a href="#blacklist-history-popup" data-effect="mfp-zoom-in" class="open-popup-link2 btn" title="歷程">歷程</a>*@
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("TakeCashLimitQuery", Model, ViewBag.QueryModel)); }

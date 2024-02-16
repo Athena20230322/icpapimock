@@ -1,0 +1,216 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentStatistics.TimingMonitor;
+@model QryTimingMonitorVM
+@{
+    Model.StartDate = DateTime.Now.AddDays(-1);
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/laundering.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/PaymentStatistics/TimingMonitor/action.js?t=2"></script>
+    <script src="~/Areas/Admin/Scripts/PaymentStatistics/ListTimingMonitor/action.js?t=2"></script>
+}
+
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("ListTimingMonitorResult", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" />
+            <input type="hidden" name="PageSize" value="10" />
+            <input type="hidden" name="PageNo" value="1" />
+            @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new { id = "refreshStartDate" })
+            @Html.TextBoxFor(t => t.ICPMID, new { id = "refreshICPMID" })
+            @Html.TextBoxFor(t => t.MerchantName, new { id = "refreshMerchantName" })
+            @Html.TextBoxFor(t => t.Day1Waring, new { id = "refreshDay1Waring" })
+            @Html.TextBoxFor(t => t.Day10Waring, new { id = "refreshDay10Waring" })
+            @Html.TextBoxFor(t => t.Day30Waring, new { id = "refreshDay30Waring" })
+            @Html.TextBoxFor(t => t.Day1Amount, new { id = "refreshDay1Amount" })
+            @Html.TextBoxFor(t => t.Day1Amount, new { id = "refreshDay10Amount" })
+            @Html.TextBoxFor(t => t.Day1Amount, new { id = "refreshDay30Amount" })
+            @Html.TextBoxFor(t => t.TradeContent, new { id = "refreshTradeContent" })
+            @Html.HiddenFor(t => t.SortSet, new { id = "refreshSortSet" })
+            @Html.HiddenFor(t => t.SortType, new { id = "refreshSortType" })
+            @Html.HiddenFor(t => t.SelectMode, new { id = "refreshSelectMode" })
+            @Html.HiddenFor(t => t.MonitorStatus, new { id = "refreshMonitorStatus" })
+            @Html.HiddenFor(t => t.WithdrawStatus, new { id = "refreshWithdrawStatus" })
+            @Html.HiddenFor(t => t.RuleMode, new { id = "refreshTradeType" })
+            @Html.HiddenFor(t => t.TradeType, new { id = "refreshTradeType" })
+            @Html.HiddenFor(t => t.TradeMode, new { id = "refreshTradeMode" })
+        }
+    </div>
+
+    @using (Ajax.BeginForm("ListTimingMonitorResult", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <input type="hidden" name="PageSize" value="10" />
+        <div class="scb-form sf-2column">
+
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">查詢日期</dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date sdb-single">
+                        @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryStartDate" },
+                            { "class", "flatpickr flatpickr-input active normalD" },
+                            { "placeholder", "查詢日期" },
+                            { "readonly", "readonly" },
+                        })
+
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">電支帳號</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.ICPMID, new { placeholder = "請輸入電支帳號", maxlength = 16 })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">商戶名稱</dt>
+                <dd>
+                    @Html.TextBoxFor(t => t.MerchantName, new { placeholder = "請輸入商戶名稱" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">排序方式</dt>
+                <dd>
+                    <label class="def-select">
+                        <select id="SortSet" name="SortSet">
+                            <option value="1">選擇日期之交易總額</option>
+                            <option value="2">連續10天交易金額</option>
+                            <option value="3">連續30天交易金額</option>
+                            <option value="4">選擇日期與前10天交易平均額比率</option>
+                            <option value="5">連續10天交易金額與過去30天交易總金額比率</option>
+                            <option value="6">連續30天交易金額與過去90天交易總金額比率</option>
+                        </select>
+                        @Html.HiddenFor(x => x.SortSet)
+                    </label>
+                    <div class="sf-radio-box lad-radio">
+                        <div class="sf-radio-box lad-radio">
+                            <div class="def-radio">
+                                <input type="radio" value="1" id="SortType_1" name="qrySortType">
+                                <label for="SortType_1" class="radio">遞減</label>
+                            </div>
+                            <div class="def-radio">
+                                <input type="radio" value="2" id="SortType_2" name="qrySortType">
+                                <label for="SortType_2" class="radio">遞增</label>
+                            </div>
+                        </div>
+                        @Html.HiddenFor(x => x.SortType)
+                    </div>
+                </dd>
+            </dl>
+            <dl class="lad-check">
+                <dd class="sf-check-box lc-width">
+                    <div class="def-check">
+                        <input type="checkbox" value="" id="qrySelectMode" name="qrySelectMode">
+                        <label for="qrySelectMode" class="checkbox">顯示全部商戶(120天來帳)</label>
+                        @Html.HiddenFor(x => x.SelectMode)
+                    </div>
+                    <div class="def-check">
+                        <input type="checkbox" value="" id="qryMonitorStatus" name="qryMonitorStatus">
+                        <label for="qryMonitorStatus" class="checkbox">僅顯示觀察商戶</label>
+                        @Html.HiddenFor(x => x.MonitorStatus)
+                    </div>
+                    <div class="def-check">
+                        <input type="checkbox" value="" id="qryWithdrawStatus" name="qryWithdrawStatus">
+                        <label for="qryWithdrawStatus" class="checkbox">提領限制商戶</label>
+                        @Html.HiddenFor(x => x.WithdrawStatus)
+                    </div>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="tab-wrap sc-tab-wrap2 stw-ltm">
+            <ul class="tabs sc-tabs">
+                <li data-tab=".ltw-rule1" onclick="SetRuleMode(1);">規則一</li>
+                <li data-tab=".ltw-rule2" onclick="SetRuleMode(2);">規則二</li>
+                @Html.HiddenFor(x => x.RuleMode)
+            </ul>
+            <div class="sc-tab-content scb-form">
+                <div class="st-box ltw-rule1">
+                    <dl>
+                        <dt class="oneline-inp">1天監控條件(%)</dt>
+                        <dd>
+                            @Html.TextBoxFor(x => x.Day1Waring)
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="oneline-inp">10天監控條件(%)</dt>
+                        <dd>
+                            @Html.TextBoxFor(x => x.Day10Waring)
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="oneline-inp">30天監控條件(%)</dt>
+                        <dd>
+                            @Html.TextBoxFor(x => x.Day30Waring)
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="oneline-inp">1天監控條件(元)</dt>
+                        <dd>
+                            @Html.TextBoxFor(x => x.Day1Amount)
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="oneline-inp">10天監控條件(元)</dt>
+                        <dd>
+                            @Html.TextBoxFor(x => x.Day10Amount)
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="oneline-inp">30天監控條件(元)</dt>
+                        <dd>
+                            @Html.TextBoxFor(x => x.Day30Amount)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="st-box ltw-rule2">
+                    <dl class="monitor-condition">
+                        <dt class="oneline-inp">監控條件</dt>
+                        <dd>
+                            <label class="def-select">
+                                <select id="TradeType" name="TradeType">
+                                    <option value="1">1天</option>
+                                    <option value="2">10天</option>
+                                    <option value="3">30天</option>
+                                    <option value="4">交易退款</option>
+                                </select>
+                            </label>
+                        </dd>
+                        <dd>
+                            <label class="def-select">
+                                <select id="TradeMode" name="TradeMode">
+                                    <option value="1">金額</option>
+                                    <option value="2">筆數</option>
+                                    <option value="3">比例</option>
+                                </select>
+                            </label>
+                        </dd>
+                        <dd>
+                            @Html.TextBoxFor(t => t.TradeContent)
+                        </dd>
+                        <dd>以上</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-box">
+            <a id="lnkQuery" href="#" class="btn" title="查詢">查詢</a>
+            <a id="lnkReset" href="#" class="btn btn-blue-border" title="清除條件">清除條件</a>
+
+        </div>
+
+    }
+</div>
+
+<div id="queryResult">
+</div>
+
+
+
+

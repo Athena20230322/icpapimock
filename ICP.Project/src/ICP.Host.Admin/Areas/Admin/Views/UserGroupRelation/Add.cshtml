@@ -1,0 +1,56 @@
+﻿@model UserGroupRelation
+@using ICP.Modules.Mvc.Admin.Models
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+    int UserGroupID = ViewBag.UserGroupID;
+    List<Department> ListDepartment = ViewBag.ListDepartment;
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/UserGroupRelation/Add/action.js"></script>
+}
+<div class="add-member-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">新增成員</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>部門</dt>
+                        <dd>
+                            <label class="def-select">
+                                <select id="queryDeptID" url="@Url.Action("QueryNotJoinUsers", new { id = UserGroupID })">
+                                    <option value="">請選擇欲設定的人員所在部門</option>
+                                    @foreach (var item in ListDepartment)
+                                    {
+                                        <option value="@item.DeptID">@item.DeptName</option>
+                                    }
+                                </select>
+                            </label>
+                            <div class="input-tip-txt">請先選擇欲設定人員的部門後選擇性名</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>姓名</dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(t => t.UserID, new SelectListItem[] { }, "請選擇欲設定的人員", new { disabled = "disabled" })
+                            </label>
+                            @Html.ValidationMessageFor(t => t.UserID, "請選擇欲設定的人員", new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                </div>
+
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="#" class="btn disabled link-submit" title="新增">新增</a>
+            </div>
+        }
+    </div>
+</div>

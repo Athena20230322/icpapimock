@@ -1,0 +1,54 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels.MemberIdentityVerificationCount;
+@model List<QueryResultVM>
+@{
+    Layout = null;
+    var query = (QueryVM)ViewBag.QueryModel;
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml");
+        return;
+    }
+    decimal Total = Model.Sum(i=>i.Price);
+}
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("ExportExcel", query)" class="btn btn-blue-border bd-rdi" title="匯出 Excel">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出 Excel
+        </a>
+    </div>
+</div>
+<div class="sb-multi">
+    <div class="sc-box scb-table st-verify-search">
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">項目</p></li>
+                <li><p class="sth-txt">年月</p></li>
+                <li><p class="sth-txt">筆數</p></li>
+                <li><p class="sth-txt">金額</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+            <table>
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.AuthType</td>
+                        <td>@item.CreateDate.ToString("yyyy/MM")</td>
+                        <td>@item.AuthCount</td>
+                        <td>@item.Price.ToString("N0")</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4" class="svs-sum">合計：@Total.ToString("N0")</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

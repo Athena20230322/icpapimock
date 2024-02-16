@@ -1,0 +1,88 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@using ICP.Library.Models.MemberModels
+@model EditBankAccountVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    long AccountID = ViewBag.AccountID;
+
+    var BankDetails = (List<MemberBankDetail>)ViewBag.BankDetails;
+    var BankCodes = (List<MemberBankCode>)ViewBag.BankCodes;
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/MemberBankAccount/EditBankAccount/action.js"></script>
+}
+<div id="verifydata-modify-popup" class="verifydata-modify-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm("EditBankAccount", "MemberBank", new { AccountID = AccountID }, FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">修改資料</h4>
+                <div id="divBankAccountFiles" class="vmp-id-photo">
+                    <div class="vip-box">
+                        <div class="vip-txt">封面</div>
+                        @if (Model.MemberBankAccount.FilePath1 != null)
+                        {
+                            <div class="vip-img">
+                                <img src="@Model.MemberBankAccount.FilePath1" alt="存摺封面" id="fileImg1">
+                            </div>
+                            <div class="mp-btn-block2 mb2-min">
+                                <a href="@Model.MemberBankAccount.FilePath1" class="btn btn-blue-border" title="放大" target="_blank">放大</a>
+                                <a href="javascript:;" class="btn" title="修改" file="#fileUpload1">修改</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="vip-img">
+                                <img src="#" alt="存摺封面" id="fileImg1" style="display: none;">
+                            </div>
+                            <div class="mp-btn-block2 mb2-min">
+                                <a href="javascript:;" class="btn" title="瀏覽" file="#fileUpload1">瀏覽</a>
+                            </div>
+                        }
+                        <input type="file" name="FileUpload1" id="fileUpload1" img="#fileImg1" style="display: none;" />
+                    </div>
+                </div>
+                <div class="pp-form">
+                    <dl>
+                        <dt>銀行代號<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(t => @t.MemberBankAccount.BankCode, BankDetails.Select(t => new SelectListItem { Text = @t.BankName, Value = @t.BankCode.ToString() }), new { @href = Url.Action("ListBankCode") })
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>分行名稱<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(t => @t.MemberBankAccount.BankBranchCode, BankCodes.Select(t => new SelectListItem { Text = @t.BankName, Value = @t.BankBranchCode.ToString() }))
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>銀行帳號<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            @Html.TextBoxFor(t => @t.MemberBankAccount.BankAccount, new { @class = "pp-inp", @placeholder = "請輸入銀行帳號" })
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>備註</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => @t.MemberBankAccount.AuthMsg, new { @class = "pp-textarea", placeholder = "請輸入備註說明", @maxlength = "20" })
+                            <div class="input-tip-txt itt-r itt-er"><span>0</span>/20</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                <a href="javascript:;" class="btn link-submit" title="更改" id="lnkEditBankAccount">更改</a>
+                <a href="javascript:;" class="btn btn-gray popup-close" title="取消">取消</a>
+            </div>
+        }
+    </div>
+</div>

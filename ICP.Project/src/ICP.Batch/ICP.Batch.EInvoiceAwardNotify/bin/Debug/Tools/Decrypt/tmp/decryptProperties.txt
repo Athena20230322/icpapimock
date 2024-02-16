@@ -1,0 +1,4 @@
+BeforeDecryptDir=C:\Users\User\Desktop
+BeforeDecryptFile=Z_23525871_10312_20150127235410.bin
+AfterDecryptFile=Z_23525871_10312_20150127235410.txt
+AfterDecryptDir=C:\Users\User\Desktop

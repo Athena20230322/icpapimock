@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AE9AC60B-7578-4EBC-B018-19CFD2F57832}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICP.Modules.Api.Member</RootNamespace>
+    <AssemblyName>ICP.Modules.Api.Member</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Beta|AnyCPU'">
+    <OutputPath>bin\Beta\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Extras.DynamicProxy, Version=4.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Extras.DynamicProxy.4.5.0\lib\net45\Autofac.Extras.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\MemberApiModule.cs" />
+    <Compile Include="App_Start\MemberApiAreaRegistration.cs" />
+    <Compile Include="App_Start\Profiles\ACLinkProfile.cs" />
+    <Compile Include="App_Start\Profiles\MemberInfoProfile.cs" />
+    <Compile Include="Commands\ACLinkApiCommand.cs" />
+    <Compile Include="Commands\AdminCommand.cs" />
+    <Compile Include="Commands\CertificateCommand.cs" />
+    <Compile Include="Commands\CommonCommand.cs" />
+    <Compile Include="Commands\MemberBankCommand.cs" />
+    <Compile Include="Commands\MemberInfoCommand.cs" />
+    <Compile Include="Commands\OPCustomCommand.cs" />
+    <Compile Include="Commands\OPWebUICommand.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CertificateController.cs" />
+    <Compile Include="Controllers\MemberInfoController.cs" />
+    <Compile Include="Controllers\OPCustomController.cs" />
+    <Compile Include="Controllers\OPWebUIController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Models\ACLink\ACLinkApplyReq.cs" />
+    <Compile Include="Models\ACLink\ACLinkApplyRes.cs" />
+    <Compile Include="Models\ACLink\ACLinkBankSetting.cs" />
+    <Compile Include="Models\ACLink\ACLinkBindModel.cs" />
+    <Compile Include="Models\ACLink\ACLinkWithdrawalReq.cs" />
+    <Compile Include="Models\ACLink\ACLinkBindReq.cs" />
+    <Compile Include="Models\ACLink\ACLinkBindRes.cs" />
+    <Compile Include="Models\ACLink\ACLinkCancelBindReq.cs" />
+    <Compile Include="Models\ACLink\ACLinkCancelBindRes.cs" />
+    <Compile Include="Models\ACLink\ACLinkModel.cs" />
+    <Compile Include="Models\ACLink\GetACLinkListReq.cs" />
+    <Compile Include="Enums\CheckMIDType.cs" />
+    <Compile Include="Models\Admin\CloseMemberAccountRequest.cs" />
+    <Compile Include="Models\Certificate\AddClientAesCertDTO.cs" />
+    <Compile Include="Models\Certificate\AddClientRsaCertDTO.cs" />
+    <Compile Include="Models\Certificate\AppRedirectDeCryptoDTO.cs" />
+    <Compile Include="Models\Certificate\AppRedirectRequest.cs" />
+    <Compile Include="Models\Certificate\AppRedirectResult.cs" />
+    <Compile Include="Models\Certificate\BindMerchantCertRequest.cs" />
+    <Compile Include="Models\Certificate\BindMerchantCertResult.cs" />
+    <Compile Include="Models\Certificate\ExchangePucCertRequest.cs" />
+    <Compile Include="Models\Certificate\ExchangePucCertResult.cs" />
+    <Compile Include="Models\Certificate\GenerateAesRequest.cs" />
+    <Compile Include="Models\Certificate\GenerateAesResult.cs" />
+    <Compile Include="Models\Certificate\RsaCertDTO.cs" />
+    <Compile Include="Models\FingerPrintPasswordModel.cs" />
+    <Compile Include="Models\JsonResultModel.cs" />
+    <Compile Include="Models\MemberGraphicLock.cs" />
+    <Compile Include="Models\MemberInfo\ChangeGraphicLockRequest.cs" />
+    <Compile Include="Models\MemberInfo\ChangeGraphicLockResult.cs" />
+    <Compile Include="Models\MemberInfo\CheckFingerPrintPwdRequest.cs" />
+    <Compile Include="Models\MemberInfo\CheckFingerPrintPwdResult.cs" />
+    <Compile Include="Models\MemberInfo\CheckGraphicLockRequest.cs" />
+    <Compile Include="Models\MemberInfo\CheckGraphicLockResult.cs" />
+    <Compile Include="Models\MemberInfo\CheckPayPwdRequest.cs" />
+    <Compile Include="Models\MemberInfo\CheckPayPwdResult.cs" />
+    <Compile Include="Models\MemberInfo\ChangeLoginPwdRequest.cs" />
+    <Compile Include="Models\MemberInfo\ChangeLoginPwdResult.cs" />
+    <Compile Include="Models\MemberInfo\ChangeSecurityPwdRequest.cs" />
+    <Compile Include="Models\MemberInfo\ChangeSecurityPwdResult.cs" />
+    <Compile Include="Models\MemberInfo\EInvoice\GetEInvoiceCarrierInfoRequest.cs" />
+    <Compile Include="Models\MemberInfo\EInvoice\QueryEinvoiceDetailRequest.cs" />
+    <Compile Include="Models\MemberInfo\EInvoice\QueryEinvoiceListRequest.cs" />
+    <Compile Include="Models\MemberInfo\FingerPrintPwdStatusRequest.cs" />
+    <Compile Include="Models\MemberInfo\FirstLoginSetAccountResult.cs" />
+    <Compile Include="Models\MemberInfo\FingerPrintPwdStatusResult.cs" />
+    <Compile Include="Models\MemberInfo\FirstLoginSetAccountRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetAccountStatusInfoResult.cs" />
+    <Compile Include="Models\MemberInfo\GetAppGraphicDataLog.cs" />
+    <Compile Include="Models\MemberInfo\GetMaintainStatusRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetMaintainStatusResult.cs" />
+    <Compile Include="Models\MemberInfo\GetPasswordStatusRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetPasswordStatusResult.cs" />
+    <Compile Include="Models\MemberInfo\CellphoneCarrierModel.cs" />
+    <Compile Include="Models\MemberInfo\GetWithdrawBalanceInfoResult.cs" />
+    <Compile Include="Models\MemberInfo\ListBankBranchItem.cs" />
+    <Compile Include="Models\MemberInfo\ListBankBranchRequest.cs" />
+    <Compile Include="Models\MemberInfo\ListBankBranchResult.cs" />
+    <Compile Include="Models\MemberInfo\PrivateUserAuthResult.cs" />
+    <Compile Include="Models\MemberInfo\TeenagersLegalDetail.cs" />
+    <Compile Include="Models\MemberInfo\UpdateNickNameRequest.cs" />
+    <Compile Include="Models\MemberInfo\UserCoins.cs" />
+    <Compile Include="Models\PaymentResult.cs" />
+    <Compile Include="Models\MemberInfo\AddMemberAppToken.cs" />
+    <Compile Include="Models\MemberInfo\AddWithdrawAccountBindRequest.cs" />
+    <Compile Include="Models\MemberInfo\AddWithdrawBalanceRequest.cs" />
+    <Compile Include="Models\MemberInfo\AddWithdrawBalanceResult.cs" />
+    <Compile Include="Models\MemberInfo\BankAccountAuthRequest.cs" />
+    <Compile Include="Models\MemberInfo\BankAccountAuthResult.cs" />
+    <Compile Include="Models\MemberInfo\AuthIDNOModel.cs" />
+    <Compile Include="Models\MemberInfo\AuthIDNORequest.cs" />
+    <Compile Include="Models\MemberInfo\GetAppXmlSettingResult.cs" />
+    <Compile Include="Models\MemberInfo\GetAppXmlSettingRequest.cs" />
+    <Compile Include="Models\MemberInfo\ChangePhoneSendAuthSMSRequest.cs" />
+    <Compile Include="Models\MemberInfo\CheckAuthSMSRequest.cs" />
+    <Compile Include="Models\MemberInfo\CheckAuthSMSResult.cs" />
+    <Compile Include="Models\MemberInfo\CheckRegisterAuthSMSRequest.cs" />
+    <Compile Include="Models\MemberInfo\CheckRegisterAuthSMSResult.cs" />
+    <Compile Include="Models\MemberInfo\CheckVerifyStatusResult.cs" />
+    <Compile Include="Models\MemberInfo\DeleteNotifyMessageRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetLoginInfoResult.cs" />
+    <Compile Include="Models\MemberInfo\GetAppNotifyCountsResult.cs" />
+    <Compile Include="Models\MemberInfo\GetNotifyMessageResult.cs" />
+    <Compile Include="Models\MemberInfo\GetNotifyMessageRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetRangeNotifyMessageListRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetRangeNotifyMessageListResult.cs" />
+    <Compile Include="Models\MemberInfo\ListNotifyMessageItem.cs" />
+    <Compile Include="Models\MemberInfo\ListNotifyMessageResult.cs" />
+    <Compile Include="Models\MemberInfo\ListSynNotifyMessageRequest.cs" />
+    <Compile Include="Models\MemberInfo\ListSynNotifyMessageResult.cs" />
+    <Compile Include="Models\MemberInfo\DelAccountBindRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetBindAccountListRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetBindAccountListResult.cs" />
+    <Compile Include="Models\MemberInfo\GetListBankInfoResult.cs" />
+    <Compile Include="Models\MemberInfo\GraphicLockRerquest.cs" />
+    <Compile Include="Models\MemberInfo\GraphicLockStatusModel.cs" />
+    <Compile Include="Models\MemberInfo\GraphicLockStatusRequest.cs" />
+    <Compile Include="Models\MemberInfo\GraphicLockStatusResult.cs" />
+    <Compile Include="Models\MemberInfo\LoginPassword.cs" />
+    <Compile Include="Models\MemberInfo\LoginPasswordResult.cs" />
+    <Compile Include="Models\MemberInfo\MemberGraphicLock.cs" />
+    <Compile Include="Models\MemberInfo\GetMemberPreferencesRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetMemberPreferencesResult.cs" />
+    <Compile Include="Models\MemberInfo\LegalRepData.cs" />
+    <Compile Include="Models\MemberInfo\MemberVerifyStatus.cs" />
+    <Compile Include="Models\MemberInfo\GetCellphoneRequest.cs" />
+    <Compile Include="Models\MemberInfo\GetCellphoneResult.cs" />
+    <Compile Include="Models\MemberInfo\ResetLoginPwdRequest.cs" />
+    <Compile Include="Models\MemberInfo\ResetLoginPwdResult.cs" />
+    <Compile Include="Models\MemberInfo\SecPassword.cs" />
+    <Compile Include="Models\MemberInfo\SecPasswordResult.cs" />
+    <Compile Include="Models\MemberInfo\SendAuthSMSRequest.cs" />
+    <Compile Include="Models\MemberInfo\SendAuthSMSResult.cs" />
+    <Compile Include="Models\MemberInfo\SetMemberAgreeRequest.cs" />
+    <Compile Include="Models\MemberInfo\SetReadMessageRequest.cs" />
+    <Compile Include="Models\MemberInfo\SetRegisterInfoRequest.cs" />
+    <Compile Include="Models\MemberInfo\UpdateEmailAddressRequest.cs" />
+    <Compile Include="Models\MemberInfo\UpdateEmailAddressResult.cs" />
+    <Compile Include="Models\MemberInfo\UpdateGraphicLockStatusRequest.cs" />
+    <Compile Include="Models\MemberInfo\UpdateGraphicLockStatusResult.cs" />
+    <Compile Include="Models\MemberInfo\UpdateNickNameResult.cs" />
+    <Compile Include="Models\MemberInfo\UpdateMemberPreferencesRequest.cs" />
+    <Compile Include="Models\MemberInfo\UserCodeLoginRequest.cs" />
+    <Compile Include="Models\MemberInfo\WithdrawBalanceInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ACLinkRepository.cs" />
+    <Compile Include="Repositories\CertificateRepository.cs" />
+    <Compile Include="Repositories\CommonRepository.cs" />
+    <Compile Include="Repositories\FingerPrintPasswordRepository.cs" />
+    <Compile Include="Repositories\MemberEditRepository.cs" />
+    <Compile Include="Repositories\MemberGraphicLockRepository.cs" />
+    <Compile Include="Repositories\ConfigRepository.cs" />
+    <Compile Include="Repositories\MemberInfoRepository.cs" />
+    <Compile Include="Services\AppManagementService.cs.cs" />
+    <Compile Include="Services\ACLinkService.cs" />
+    <Compile Include="Services\CertificateService.cs" />
+    <Compile Include="Services\CommonService.cs" />
+    <Compile Include="Services\ConfigService.cs" />
+    <Compile Include="Services\MemberEditService.cs" />
+    <Compile Include="Services\MemberGraphicLockService.cs" />
+    <Compile Include="Services\MemberInfoService.cs" />
+    <Compile Include="Services\DateResult.cs" />
+    <Compile Include="Services\OPWebUIService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\BaseMember\" />
+    <Folder Include="Models\ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICP.Infrastructure.Abstractions\ICP.Infrastructure.Abstractions.csproj">
+      <Project>{49FA2325-427A-4684-9FCA-E23964F02211}</Project>
+      <Name>ICP.Infrastructure.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Infrastructure.Core.Web\ICP.Infrastructure.Core.Web.csproj">
+      <Project>{BC6A1804-4574-414B-B677-19148E4D2034}</Project>
+      <Name>ICP.Infrastructure.Core.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Infrastructure.Core\ICP.Infrastructure.Core.csproj">
+      <Project>{724872BC-C923-434D-AB6A-CA502BE46DC8}</Project>
+      <Name>ICP.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Commands\ICP.Library.Commands.csproj">
+      <Project>{0CF75D58-AD58-4A2A-902A-42F9502065DF}</Project>
+      <Name>ICP.Library.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Models\ICP.Library.Models.csproj">
+      <Project>{8F95E4BF-E15B-45EB-937B-D711E44DDF04}</Project>
+      <Name>ICP.Library.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Repositories\ICP.Library.Repositories.csproj">
+      <Project>{6D3F65C6-6F56-46BA-92C0-E584259692B1}</Project>
+      <Name>ICP.Library.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICP.Library.Services\ICP.Library.Services.csproj">
+      <Project>{c0ccc96a-c41f-4e87-bc82-15b3876b6dd0}</Project>
+      <Name>ICP.Library.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

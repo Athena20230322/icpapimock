@@ -1,0 +1,53 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models;
+@model IPagedList<HolidayWorkingDayModel>
+@{
+    Layout = null;
+}
+<div class="sc-box scb-table st-control st-calendar-rec">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">設定日期</p></li>
+            <li><p class="sth-txt">休假/補班</p></li>
+            <li><p class="sth-txt">原因</p></li>
+            <li><p class="sth-txt">建立人</p></li>
+            <li><p class="sth-txt">建立時間</p></li>
+            <li><p class="sth-txt">修改人</p></li>
+            <li><p class="sth-txt">修改時間</p></li>
+            <li><p class="sth-txt">編輯</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DayDate.ToString("yyyy/MM/dd")</td>
+                    <td>@(item.DayType.Equals(1) ? "休假" : "補班") </td>
+                    <td>@item.DayDescription</td>
+                    <td>@item.Creator</td>
+                    <td>@item.CreateDate.ToString("yyyy/MM/dd")</td>
+                    <td>@(string.IsNullOrEmpty(item.Modifier) ? "-" : item.Modifier)</td>
+                    <td>@(item.ModifyDate.HasValue ? item.ModifyDate.Value.ToString("yyyy/MM/dd") : "-")</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("Edit", new { dayID = item.DayID })" class="libs-dialog-form btn" data-update-callback="query" title="編輯">編輯</a>
+                            <a href="@Url.Action("Remove", new { dayID = item.DayID })" class="del-group btn btn-gray" title="刪除">刪除</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

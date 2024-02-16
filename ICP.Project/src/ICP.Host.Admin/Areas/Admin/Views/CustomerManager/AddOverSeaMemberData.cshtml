@@ -1,0 +1,91 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager
+@model List<UploadOverSeaResultModel>
+
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerManager/AddOverSeaMemberData/action.js"></script>
+}
+
+<div id="upload-basicdata-popup" class="upload-basicdata-popup edit-ac-popu mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm("AddOverSeaMemberData", "CustomerManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="pp-content">
+                <div class="pp-form">
+                    <h4 class="pp-title">上傳基本資料</h4>
+
+                    <div class="ubp-function">
+                        <div class="def-file uff-btn">
+                            <input type="file" id="file" name="file" class="dff-input">
+                            <div class="btn btn-blue-border dff-btn">瀏覽</div>
+                        </div>
+
+                        <p href="#" class="uf-txt fileName"></p>
+
+                        <input type="submit" name="" value="上傳" class="btn btn-uf-upload"/>
+                    </div>
+
+                    <div class="pp-data-list">
+                        <dl>
+                            <dt>檔案名稱</dt>
+                            <dd class="fileName"></dd>
+                        </dl>
+                        <dl>
+                            <dt>總共上傳</dt>
+                            <dd>@(ViewBag.TotalCounts)筆</dd>
+                        </dl>
+                        <dl>
+                            <dt>成功</dt>
+                            <dd>@(ViewBag.SuccessCounts)筆</dd>
+                        </dl>
+                        <dl class="red">
+                            <dt>失敗</dt>
+                            <dd>@(ViewBag.FailCounts)筆</dd>
+                        </dl>
+                    </div>
+
+                    <div class="pp-table pt-status-intro">
+                        <div class="pp-table-header">
+                            <ul>
+                                <li><p class="pth-txt">居留證字號</p></li>
+                                <li><p class="pth-txt">說明</p></li>
+                            </ul>
+                        </div>
+                        <div class="pp-table-body">
+                            <table>
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                </colgroup>
+
+                                @if (Model != null && Model.Count > 0) {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.UniformID</td>
+                                            <td>@item.ErrorMsg</td>
+                                        </tr>
+                                    }
+                                }                                 
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        }
+
+
+
+
+    </div>
+
+
+</div>

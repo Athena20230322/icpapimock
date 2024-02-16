@@ -1,0 +1,70 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.MailLibrary
+@model List<MailTag>
+@{
+    long MailID = ViewBag.MailID;
+
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+{
+    <script type="text/javascript">
+        libs.alert.validationSummary();
+
+        $('#lnkPreView').click(function () {
+            var $preview = $('#preview');
+            $('#lnkTest').parents('form:first').find('input[name]').each(function () {
+                $preview.find('[name="' + this.name + '"]').val(this.value);
+            });
+            $('#preview').submit();
+            return false;
+        });
+    </script>
+}
+<div class="add-group-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">測試</h4>
+                <div class="pp-form">
+                    @foreach (var item in Model)
+                    {
+                        <dl>
+                            <dt>
+                                @item.Name
+                            </dt>
+                            <dd>
+                                @Html.TextBox(item.TagKey, string.Empty, new { id = "test_" + item.TagKey, @class = "pp-inp" })
+                            </dd>
+                        </dl>
+                    }
+                    <dl>
+                        <dt>
+                            收件人
+                        </dt>
+                        <dd>
+                            @Html.TextBox("mailto", (string)ViewBag.UserEmail, new { id = "test_mailto", @class = "pp-inp" })
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a id="lnkPreView" href="#" class="btn" title="預覽">預覽</a>
+                <a id="lnkTest" href="#" class="btn link-submit" title="發送">發送</a>
+            </div>
+        }
+    </div>
+    <div style="display:none;">
+        <form id="preview" action="@Url.Action("PreViewMail", new { id = MailID })" target="_blank" method="post">
+            @foreach (var item in Model)
+            {
+                @Html.Hidden(item.TagKey, string.Empty, new { id = "view_" + item.TagKey })
+            }
+        </form>
+    </div>
+</div>

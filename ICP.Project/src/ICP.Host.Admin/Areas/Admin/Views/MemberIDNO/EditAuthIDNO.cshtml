@@ -1,0 +1,181 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@using ICP.Library.Models.MemberModels;
+@model EditAuthIDNOVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    int iMaxBirthYear = DateTime.Today.Year - 1911 - 14;
+
+    long MID = ViewBag.MID;
+
+    // 取得發證縣市
+    var IssueLocations = (List<MemberAuthIssueLocation>)ViewBag.IssueLocations;
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/MemberIDNO/EditAuthIDNO/action.js"></script>
+}
+<div id="verifydata-modify-popup" class="verifydata-modify-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm("EditAuthIDNO", "MemberIDNO", new { MID = MID }, FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">修改資料</h4>
+                <div id="divAuthIDNOFiles" class="vmp-id-photo">
+                    <div class="vip-box">
+                        <div class="vip-txt">正面</div>
+                        <div class="vip-img">
+                            <img src="@Model.AuthIDNO.FilePath1" alt="身分證" id="fileImg1">
+                        </div>
+                        <div class="mp-btn-block2 mb2-min">
+                            <a href="@Model.AuthIDNO.FilePath1" class="btn btn-blue-border" target="_blank" title="放大">放大</a>
+                            <a href="javascript:;" class="btn" title="修改" file="#fileUpload1">修改</a>
+                            <input type="file" name="FileUpload1" id="fileUpload1" img="#fileImg1" style="display: none;" />
+                        </div>
+                    </div>
+                    <div class="vip-box">
+                        <div class="vip-txt">反面</div>
+                        <div class="vip-img">
+                            <img src="@Model.AuthIDNO.FilePath2" alt="身分證" id="fileImg2">
+                        </div>
+                        <div class="mp-btn-block2 mb2-min">
+                            <a href="@Model.AuthIDNO.FilePath2" class="btn btn-blue-border" target="_blank" title="放大">放大</a>
+                            <a href="javascript:;" class="btn" title="修改" file="#fileUpload2">修改</a>
+                            <input type="file" name="FileUpload2" id="fileUpload2" img="#fileImg2" style="display: none;" />
+                        </div>
+                    </div>
+                </div>
+                <div class="pp-form">
+                    <dl>
+                        <dt>身分證字號</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => @t.AuthIDNO.IDNO, new { @class = "pp-inp", placeholder = "請輸入身分證字號" })
+                            @Html.ValidationMessageFor(t => @t.AuthIDNO.IDNO, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>領補換類別</dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(t => @t.AuthIDNO.ObtainType, new SelectListItem[]
+                                {
+                                    new SelectListItem { Text = "初發", Value = "1" },
+                                    new SelectListItem { Text = "補發", Value = "2" },
+                                    new SelectListItem { Text = "換發", Value = "3" }
+                                })
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>領補換日期</dt>
+                        <dd class="pf-date-box2">
+                            <label class="def-select pd2-block">
+                                <select data-change-for="@Html.IdFor(t => @t.AuthIDNO.IssueDate)">
+                                    @{
+                                        //資料起始日期： 94年12月21日
+                                        int iYear = 94 + 1911, iYearEnd = DateTime.Today.Year;
+                                        for (int i = iYear; i <= iYearEnd; i++)
+                                        {
+                                            <option value="@i">@(i - 1911)</option>
+                                        }
+                                    }
+                                </select>
+                            </label>
+                            <span class="pd2-txt">年</span>
+                            <label class="def-select pd2-block">
+                                <select data-change-for="@Html.IdFor(t => @t.AuthIDNO.IssueDate)">
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                        <option value="@i">@i.ToString("00")</option>
+                                    }
+                                </select>
+                            </label>
+                            <span class="pd2-txt">月</span>
+                            <label class="def-select pd2-block">
+                                <select data-change-for="@Html.IdFor(t => @t.AuthIDNO.IssueDate)">
+                                    @for (int i = 1; i <= 31; i++)
+                                    {
+                                        <option value="@i">@i.ToString("00")</option>
+                                    }
+                                </select>
+                            </label>
+                            <span class="pd2-txt">日</span>
+                            @Html.TextBoxFor(t => @t.AuthIDNO.IssueDate, "{0:yyyy-MM-dd}", new { @class = "hide2" })
+                            @Html.ValidationMessageFor(t => @t.AuthIDNO.IssueDate, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>領補換地點</dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(t => @t.AuthIDNO.IssueLocationID, IssueLocations.Select(t => new SelectListItem { Text = @t.IssueLocationName, Value = @t.IssueLocationID.ToString() }))
+                            </label>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>出生日期</dt>
+                        <dd class="pf-date-box2">
+                            <label class="def-select pd2-block">
+                                <select data-change-for="@Html.IdFor(t => @t.AuthIDNO.Birthday)">
+                                    @for (int i = iMaxBirthYear; i > 0; i--)
+                                    {
+                                        <option value="@(i + 1911)">@(i)</option>
+                                    }
+                                </select>
+                            </label>
+                            <span class="pd2-txt">年</span>
+                            <label class="def-select pd2-block">
+                                <select data-change-for="@Html.IdFor(t => @t.AuthIDNO.Birthday)">
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                        <option value="@i">@i.ToString("00")</option>
+                                    }
+                                </select>
+                            </label>
+                            <span class="pd2-txt">月</span>
+                            <label class="def-select pd2-block">
+                                <select data-change-for="@Html.IdFor(t => @t.AuthIDNO.Birthday)">
+                                    @for (int i = 1; i <= 31; i++)
+                                    {
+                                        <option value="@i">@i.ToString("00")</option>
+                                    }
+                                </select>
+                            </label>
+                            <span class="pd2-txt">日</span>
+                            @Html.TextBoxFor(t => @t.AuthIDNO.Birthday, "{0:yyyy-MM-dd}", new { @class = "hide2" })
+                            @Html.ValidationMessageFor(t => @t.AuthIDNO.Birthday, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>是否免印相片</dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(t => @t.AuthIDNO.IsPicture, new SelectListItem[]
+                                {
+                                    new SelectListItem { Value = "1", Text = "列印" },
+                                    new SelectListItem { Value = "0", Text = "免印" }
+                                })
+                            </label>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>備註</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => @t.AuthIDNO.AuthMsg, new { @class = "pp-textarea", placeholder = "請輸入備註說明", @maxlength = "20" })
+                            <div class="input-tip-txt itt-r itt-er"><span>0</span>/20</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="javascript:;" class="btn link-submit" title="更改">更改</a>
+                <a href="javascript:;" class="btn btn-gray popup-close" title="取消">取消</a>
+            </div>
+        }
+    </div>
+</div>

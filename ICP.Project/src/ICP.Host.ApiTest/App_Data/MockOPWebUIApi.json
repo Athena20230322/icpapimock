@@ -1,0 +1,79 @@
+﻿[
+  {
+    "category": "OP WebUI Api",
+    "list": [
+      {
+        "name": "ICP004 icash會員登入",
+        "url": "/api/Member/OPWebUI/Login",
+        "json": {
+          "LoginID": "johnny1983",
+          "PassWord": "Aa1234"
+        },
+        "specs": {
+          "LoginID": "登入帳號",
+          "PassWord": "登入密碼",
+          "TimeStamp": "呼叫時間 (程式會帶)",
+          "Mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+      {
+        "name": "ICP003 查詢未成年身分資料",
+        "url": "/api/Member/OPWebUI/GetUserData",
+        "json": {
+          "Token": "FB259F8ACE364100941D09D57106442D,10010084"
+        },
+        "specs": {
+          "Token": "登入Token",
+          "TimeStamp": "呼叫時間 (程式會帶)",
+          "Mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+      {
+        "name": "ICP004 同意未成年註冊",
+        "url": "/api/Member/OPWebUI/AgreeRegister",
+        "json": {
+          "Token": "FB259F8ACE364100941D09D57106442D,10010084",
+          "MID": "1681911000001376",
+          "UserID": "A157919393",
+          "IdentityCard": {
+            "ImageFile1": "/9j/4AAQSkZJRgABAQEAeAB4AAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAQACQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9KPDvhea0/wCCuXxkx4o+Ir2GjfDTSPEFhpEvjbWJdGtL68n1a3uJk09rk2gzHbQbV8rbGyb0CuSx4v8A4N7P2gfGvi79mG38CfE3xRrvi7xbaaJpXjfSdZ13U3vtR1jRdYhaVWeSQmR/s97FfW+WJwkcI4BFdp4d8UTXf/BXL4yY8L/EVLDWfhppHh+w1eXwTrEWjXd9Zz6tcXEKag1sLQ4juYNrebtkZ9iFnBUeR/D/AOE/xZ/Zu/4J3fswfEfwF4D1+++LHgvwLF4E1jwzNYyQXjW2pW8Ucf2mFwHjWz1OKxnlJTdHAt0cY3VOHk40nJK91GKXrOvy8t9FqoK+iUG+hVePPWlG9rO/zVOlzX67Oem7n0udB8LP2h/HPxf/AOC5Ud9F4r1qP4Ov4Y8TeGdD0GG8lTTNRudFudMjvdTeHd5byi9u7y1VyuQllwSHr0X9l7wbef8ABTn4cW/xm8ceMPiPpXhHxTPdSeCPCnhXxZqnhKDS9JWYxQ3N3Lps9vc3d5cLCJm86VoYVlVIolYSSSs8K/soXXwP/ba/Zt0PS9K1nVfCfgn4WeJ9D1LW3tZZreS7mn0Zt1zOQVE9y8dxLh23ORIRnBrk/wBnbTLD9i/9mq7/AGavj38LfFnjrwF4auJ7Hwvq2mfD3UPHWieMNEM5uLZbq2sLa7e1ubbekTx3cUaO0KvC0o3bKioxpQi2m4qVn0k1VqKT16tcrit1FytolaeZylKeqTcX5pOEbL0W0u7tfdn2p8JPhp/wqPwXFoSa/wCJvEVraSP9ln16/wDt97bwk/JA1yw86cRj5RJcNLMwGZJZGy1FfM3/AARm+Bdz8Dfgj8TtngW4+HPhjxd8UNc8SeE9En0tdIeDRbjyFtW+wgK9mCsbYgljjkQABo16UVcr2i3u4xbvum4ptPzT0d9bp31Jja8ktk5JW2aTaTXk1qulnpof/9k=",
+            "ImageFile2": "/9j/4AAQSkZJRgABAQEAeAB4AAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAQACQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9KPDvhea0/wCCuXxkx4o+Ir2GjfDTSPEFhpEvjbWJdGtL68n1a3uJk09rk2gzHbQbV8rbGyb0CuSx4v8A4N7P2gfGvi79mG38CfE3xRrvi7xbaaJpXjfSdZ13U3vtR1jRdYhaVWeSQmR/s97FfW+WJwkcI4BFdp4d8UTXf/BXL4yY8L/EVLDWfhppHh+w1eXwTrEWjXd9Zz6tcXEKag1sLQ4juYNrebtkZ9iFnBUeR/D/AOE/xZ/Zu/4J3fswfEfwF4D1+++LHgvwLF4E1jwzNYyQXjW2pW8Ucf2mFwHjWz1OKxnlJTdHAt0cY3VOHk40nJK91GKXrOvy8t9FqoK+iUG+hVePPWlG9rO/zVOlzX67Oem7n0udB8LP2h/HPxf/AOC5Ud9F4r1qP4Ov4Y8TeGdD0GG8lTTNRudFudMjvdTeHd5byi9u7y1VyuQllwSHr0X9l7wbef8ABTn4cW/xm8ceMPiPpXhHxTPdSeCPCnhXxZqnhKDS9JWYxQ3N3Lps9vc3d5cLCJm86VoYVlVIolYSSSs8K/soXXwP/ba/Zt0PS9K1nVfCfgn4WeJ9D1LW3tZZreS7mn0Zt1zOQVE9y8dxLh23ORIRnBrk/wBnbTLD9i/9mq7/AGavj38LfFnjrwF4auJ7Hwvq2mfD3UPHWieMNEM5uLZbq2sLa7e1ubbekTx3cUaO0KvC0o3bKioxpQi2m4qVn0k1VqKT16tcrit1FytolaeZylKeqTcX5pOEbL0W0u7tfdn2p8JPhp/wqPwXFoSa/wCJvEVraSP9ln16/wDt97bwk/JA1yw86cRj5RJcNLMwGZJZGy1FfM3/AARm+Bdz8Dfgj8TtngW4+HPhjxd8UNc8SeE9En0tdIeDRbjyFtW+wgK9mCsbYgljjkQABo16UVcr2i3u4xbvum4ptPzT0d9bp31Jja8ktk5JW2aTaTXk1qulnpof/9k="
+          },
+          "HouseholdRegistration": {
+            "ImageFile1": "/9j/4AAQSkZJRgABAQEAeAB4AAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAQACQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9KPDvhea0/wCCuXxkx4o+Ir2GjfDTSPEFhpEvjbWJdGtL68n1a3uJk09rk2gzHbQbV8rbGyb0CuSx4v8A4N7P2gfGvi79mG38CfE3xRrvi7xbaaJpXjfSdZ13U3vtR1jRdYhaVWeSQmR/s97FfW+WJwkcI4BFdp4d8UTXf/BXL4yY8L/EVLDWfhppHh+w1eXwTrEWjXd9Zz6tcXEKag1sLQ4juYNrebtkZ9iFnBUeR/D/AOE/xZ/Zu/4J3fswfEfwF4D1+++LHgvwLF4E1jwzNYyQXjW2pW8Ucf2mFwHjWz1OKxnlJTdHAt0cY3VOHk40nJK91GKXrOvy8t9FqoK+iUG+hVePPWlG9rO/zVOlzX67Oem7n0udB8LP2h/HPxf/AOC5Ud9F4r1qP4Ov4Y8TeGdD0GG8lTTNRudFudMjvdTeHd5byi9u7y1VyuQllwSHr0X9l7wbef8ABTn4cW/xm8ceMPiPpXhHxTPdSeCPCnhXxZqnhKDS9JWYxQ3N3Lps9vc3d5cLCJm86VoYVlVIolYSSSs8K/soXXwP/ba/Zt0PS9K1nVfCfgn4WeJ9D1LW3tZZreS7mn0Zt1zOQVE9y8dxLh23ORIRnBrk/wBnbTLD9i/9mq7/AGavj38LfFnjrwF4auJ7Hwvq2mfD3UPHWieMNEM5uLZbq2sLa7e1ubbekTx3cUaO0KvC0o3bKioxpQi2m4qVn0k1VqKT16tcrit1FytolaeZylKeqTcX5pOEbL0W0u7tfdn2p8JPhp/wqPwXFoSa/wCJvEVraSP9ln16/wDt97bwk/JA1yw86cRj5RJcNLMwGZJZGy1FfM3/AARm+Bdz8Dfgj8TtngW4+HPhjxd8UNc8SeE9En0tdIeDRbjyFtW+wgK9mCsbYgljjkQABo16UVcr2i3u4xbvum4ptPzT0d9bp31Jja8ktk5JW2aTaTXk1qulnpof/9k=",
+            "ImageFile2": "",
+            "ImageFile3": "",
+            "ImageFile4": "",
+            "ImageFile5": "",
+            "ImageFile6": ""
+          }
+        },
+        "specs": {
+          "Token": "登入Token",
+          "MID": "未成年註冊電支帳戶",
+          "UserID": "未成年身分証字號",
+          "IdentityCard": {
+            "name": "上傳身分証",
+            "specs": {
+              "ImageFile1": "格式BASE64",
+              "ImageFile2": "格式BASE64"
+            }
+          },
+          "HouseholdRegistration": {
+            "name": "上傳戶籍黱本/戶口名簿",
+            "specs": {
+              "ImageFile1": "格式BASE64",
+              "ImageFile2": "格式BASE64",
+              "ImageFile3": "格式BASE64",
+              "ImageFile4": "格式BASE64",
+              "ImageFile5": "格式BASE64",
+              "ImageFile6": "格式BASE64"
+            }
+          },
+          "TimeStamp": "呼叫時間 (程式會帶)",
+          "Mask": "呼叫驗證碼 (程式會帶)"
+        }
+      }
+    ]
+  }
+]

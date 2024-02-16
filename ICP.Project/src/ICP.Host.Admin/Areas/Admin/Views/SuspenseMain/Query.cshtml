@@ -1,0 +1,112 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<SuspenseMainVM>
+@{
+    Layout = null;
+
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+<div class="sc-box scb-table st-control st-blacklist-trading">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">姓名</p></li>
+            <li><p class="sth-txt">手機號碼</p></li>
+            <li><p class="sth-txt">身分證字號</p></li>
+            <li><p class="sth-txt">E-mail</p></li>
+            <li><p class="sth-txt">停權原因</p></li>
+            <li><p class="sth-txt">會員狀態</p></li>
+            <li><p class="sth-txt">建立時間</p></li>
+            <li><p class="sth-txt">建立者</p></li>
+            <li><p class="sth-txt">明細</p></li>
+            <li><p class="sth-txt">審核狀態</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CName
+                    </td>
+                    <td>
+                        @item.CellPhone
+                    </td>
+                    <td>
+                        @item.IDNO
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @item.ReasonDesc
+                    </td>
+                    <td>
+                        @if (item.Status == 1)
+                        {
+                            @(item.SuspenseDesc)
+                            if (item.SuspenseType == 1)
+                            {
+                                <div class="btn-box stb-btn-box">
+                                    <a href="@Url.Action("UnlockSuspenseMain", new { SuspenseID = item.SuspenseID })" class="btn btn-blue-border btn-unlock" title="解除">解除</a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            @(string.Format("已於 {0}，由{1}解除", item.UnlockDate.Value.ToString("yyyy-MM-dd HH:mm:ss"), item.UnlockUser))
+                        }
+                    </td>
+                    <td>
+                        @item.CreateDate.ToString("yyyy-MM-dd")<br>@item.CreateDate.ToString("HH:mm:ss")
+                    </td>
+                    <td>
+                        @item.CreateUser
+                    </td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("SuspenseDetail", new { SuspenseID = item.SuspenseID })" data-effect="mfp-zoom-in" data-update-callback="refresh" class="libs-dialog-form btn" title="明細">明細</a>
+                        </div>
+                    </td>
+                    <td>
+                        @if (item.SuspenseType == 3)
+                        {
+                            if (item.AuthStatus == 0)
+                            {
+                                @:待審核
+                            }
+                            else if (item.AuthStatus == 1)
+                            {
+                                @(string.Format("已放行 {0}", item.AuthDate.Value.ToString("yyyy-MM-dd HH:mm:ss")))
+                            }
+                            else if (item.AuthStatus == 2)
+                            {
+                                @:審核失敗
+                            }
+                        }
+                        else
+                        {
+                            @:-
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

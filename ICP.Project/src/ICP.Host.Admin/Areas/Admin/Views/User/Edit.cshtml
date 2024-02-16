@@ -1,0 +1,88 @@
+﻿@using ICP.Modules.Mvc.Admin.Models
+@model User
+@{
+    List<Department> ListDepartment = ViewBag.ListDepartment;
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/User/Edit/action.js"></script>
+}
+<div class="edit-ac-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">編輯人員</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>使用者帳號</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.Account, new { @class = "pp-inp", placeholder = "請輸入P+8碼員工編號" })
+                            @Html.ValidationMessageFor(t => t.Account, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>使用者名稱</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.CName, new { @class = "pp-inp", placeholder = "請輸入2-40字元使用者真實姓名" })
+                            @Html.ValidationMessageFor(t => t.CName, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>E-mail</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.UserEmail, new { @class = "pp-inp", placeholder = "請輸入使用者E-mail" })
+                            @Html.ValidationMessageFor(t => t.UserEmail, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>所屬部門</dt>
+                        <dd>
+                            <label class="def-select">
+                                @Html.DropDownListFor(t => t.DeptID, ListDepartment.Select(t => new SelectListItem { Value = t.DeptID.ToString(), Text = t.DeptName }), "請選擇人員所在部門")
+                            </label>
+                            @Html.ValidationMessageFor(t => t.DeptID, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl class="pf-radio-box">
+                        <dt>是否為主管</dt>
+                        <dd>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.IsManager, 1, new { id = "IsManager_1" })
+                                <label for="IsManager_1" class="radio">是</label>
+                            </div>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.IsManager, 0, new { id = "IsManager_0" })
+                                <label for="IsManager_0" class="radio">否</label>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="pf-radio-box">
+                        <dt>狀態</dt>
+                        <dd>
+                            <div class="def-radio">
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.UserStatus, 1, new { id = "UserStatus_1" })
+                                <label for="UserStatus_1" class="radio">開啟</label>
+                            </div>
+                            <div class="def-radio">
+                                @Html.RadioButtonFor(t => t.UserStatus, 0, new { id = "UserStatus_0" })
+                                <label for="UserStatus_0" class="radio">關閉</label>
+                            </div>
+                            <div class="input-tip-txt">如人員留職停薪，可先將該帳號狀態調整為關閉</div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="#" class="btn disabled link-submit" title="儲存">儲存</a>
+            </div>
+        }
+    </div>
+</div>

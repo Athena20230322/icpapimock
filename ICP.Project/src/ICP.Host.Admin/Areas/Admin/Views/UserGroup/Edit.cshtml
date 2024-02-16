@@ -1,0 +1,53 @@
+﻿@using ICP.Modules.Mvc.Admin.Models
+@model UserGroup
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts {
+<script>
+    libs.alert.validationSummary();
+</script>
+}
+<div class="add-group-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(t => t.Visible)
+            <div class="pp-content">
+                <h4 class="pp-title">新增群組</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>群組編號</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.UserGroupCode, new { @class = "pp-inp", placeholder = "請輸入2-10個字元，可英數混合" })
+                            @Html.ValidationMessageFor(t => t.UserGroupCode, null, new { @class = "input-error-txt" }, "div")
+                            <div class="input-tip-txt">方便於清單頁查詢群組使用</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>群組名稱</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.UserGroupName, new { @class = "pp-inp", placeholder = "請輸入2-40個字元，可中英混合" })
+                            @Html.ValidationMessageFor(t => t.UserGroupName, null, new { @class = "input-error-txt" }, "div")
+                            <div class="input-tip-txt">請輸入2-40個字元，可中英混合</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>備註說明<span class="pf-title-tip">(非必填)</span></dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.Remark, new { @class = "pp-textarea", placeholder = "記錄該群組需使用的項目" })
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="#" class="btn disabled link-submit" title="儲存">儲存</a>
+            </div>
+        }
+    </div>
+</div>

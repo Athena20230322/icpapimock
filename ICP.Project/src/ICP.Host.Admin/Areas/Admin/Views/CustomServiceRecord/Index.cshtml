@@ -1,0 +1,129 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels.CustomerServiceRecord;
+@model QueryCustomServiceRecordVM
+@{
+    Model.StartDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    Model.EndDate = DateTime.Today;
+    IEnumerable<SelectListItem> StatusOptions = (IEnumerable<SelectListItem>)ViewBag.StatusOptions;
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomServiceRecord/Index/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div class="scb-list-box">
+        <ul class="content-list">
+            <li>請輸入任一搜尋欄位，並點擊查詢按鈕，即可在搜尋欄位下方顯示符合的資料。</li>
+            <li>如輸入多個搜尋欄位，僅可搜尋到皆符合的資訊。</li>
+            <li>查詢時間區間，最大範圍以今天以前一個完整年度的資料為限。</li>
+        </ul>
+    </div>
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" />
+            @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}")
+            @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}")
+            @Html.TextBoxFor(m => m.CName)
+            @Html.TextBoxFor(m => m.CellPhone)
+            @Html.TextBoxFor(m => m.ICPMID)
+            @Html.TextBoxFor(m => m.Email)
+            @Html.TextBoxFor(m => m.TradeNo)
+            @Html.TextBoxFor(m => m.CaseNo)
+            @Html.Hidden("Status")
+        }
+    </div>
+    @using (Ajax.BeginForm("Query", null, new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "POST", OnBegin = "return QueryCheck()" }, new { id = "QueryForm" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-form sf-2column">
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">建立日期<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryStartDate" },
+                            { "class", "flatpickr flatpickr-input active minD" },
+                            { "placeholder", "起始日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate", DateTime.Today.AddYears(-1).ToString("yyyy-01-01") },
+                            { "flatpickr-maxDate_input", "#queryEndDate" }
+                        })
+                    </label>
+                    <span class="sdb-txt">至</span>
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "id", "queryEndDate" },
+                            { "class", "flatpickr flatpickr-input active maxD" },
+                            { "placeholder", "結束日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate_input", "#querStartDate" },
+                            { "flatpickr-maxDate", DateTime.Today.ToString("yyyy-MM-dd") }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">回報者姓名</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.CName, new { id = "queryCName", placeholder = "請輸入回報者姓名" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">手機號碼</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.CellPhone, new { id = "queryCellPhone", placeholder = "請輸入使用者手機號碼" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">電支帳號</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.ICPMID, new { id = "queryICPMID", placeholder = "請輸入使用者電支帳號" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">E-mail</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Email, new { id = "queryEmail", placeholder = "請輸入使用者E-mail" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">訂單編號</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.TradeNo, new { id = "queryTradeNo", placeholder = "請輸入訂單編號" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">案件編號</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.CaseNo, new { id = "queryCaseNo", placeholder = "請輸入案件編號" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">案件進度</dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(m => m.Status, StatusOptions, "請選擇")
+                    </label>
+                </dd>
+            </dl>
+        </div>
+        <div class="btn-box">
+            <a id="lnkQuery" href="#" class="btn link-submit" title="查詢">查詢</a>
+            <a id="lnkReset" href="#" class="btn btn-blue-border" title="清除條件">清除條件</a>
+        </div>
+    }
+</div>
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("Add")" data-effect="mfp-zoom-in" data-update-callback="refresh" class="libs-dialog-form btn" title="新增客服記錄">
+            <span class="icon-ic-add bb-icon"></span>
+            新增客服記錄
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>

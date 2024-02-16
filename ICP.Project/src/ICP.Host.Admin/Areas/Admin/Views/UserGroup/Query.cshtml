@@ -1,0 +1,40 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model IPagedList<UserGroupQueryResult>
+@{
+    Layout = null;
+}
+<div class="sc-box scb-table st-control st-1">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">群組編號</p></li>
+            <li><p class="sth-txt">群組名稱</p></li>
+            <li><p class="sth-txt">備註說明</p></li>
+            <li><p class="sth-txt">編輯</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserGroupCode</td>
+                    <td>@item.UserGroupName</td>
+                    <td>@item.Remark</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a class="libs-dialog-form btn" href="@Url.Action("Edit", new { id = item.UserGroupID })" data-update-callback="query" title="編輯">編輯</a>
+                            <a class="del-group btn btn-gray" href="@Url.Action("Remove", new { id = item.UserGroupID })" title="刪除">刪除</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

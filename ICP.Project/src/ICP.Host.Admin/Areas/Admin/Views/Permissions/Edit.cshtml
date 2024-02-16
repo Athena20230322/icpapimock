@@ -1,0 +1,140 @@
+﻿@model  List<PermissionViewModel>
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/Permissions/Edit/action.js?t=201905271727"></script>
+}
+@using (Html.BeginForm())
+{
+    <div class="sc-box scb-table st-control st-5">
+
+        <div class="scb-check-all">
+            <div class="btn-box">
+                <a id="checkAll" href="#" class="btn" title="全部勾選">全部勾選</a>
+            </div>
+        </div>
+
+        <div class="scb-table-header">
+            <ul>
+                <li><p class="sth-txt">功能名稱</p></li>
+                <li><p class="sth-txt">查詢</p></li>
+                <li><p class="sth-txt">新增</p></li>
+                <li><p class="sth-txt">修改</p></li>
+                <li><p class="sth-txt">刪除</p></li>
+                <li><p class="sth-txt">審核</p></li>
+                <li><p class="sth-txt">匯入</p></li>
+                <li><p class="sth-txt">匯出</p></li>
+            </ul>
+        </div>
+        <div class="scb-table-body">
+
+            @foreach (var rootFunc in Model)
+            {
+                foreach (var secondFuc in rootFunc.ChildrenFunction)
+                {
+                    if (secondFuc.ChildrenFunction == null || secondFuc.ChildrenFunction.Count == 0)
+                    {
+                        continue;
+                    }
+                    <h4 class="stb-title">@secondFuc.FunctionName</h4>
+                    <table FunctionID="@secondFuc.FunctionID" FunctionGroupID="@secondFuc.FunctionGroupID">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        @foreach (var thirdFuc in secondFuc.ChildrenFunction)
+                        {
+                            <tr FunctionID="@thirdFuc.FunctionID">
+                                <td>
+                                    <div class="def-check">
+                                        <input class="checkAll" type="checkbox" id="func_@thirdFuc.FunctionID">
+                                        <label for="func_@thirdFuc.FunctionID" class="checkbox">@thirdFuc.FunctionName</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if (!thirdFuc.QueryDisable)
+                                    {
+                                        <div class="def-check">
+                                            <input type="checkbox" id="action1_@thirdFuc.FunctionID" @(thirdFuc.Query ? "checked=\"checked\"" : string.Empty) value="1" />
+                                            <label for="action1_@thirdFuc.FunctionID" class="checkbox"></label>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!thirdFuc.AddDisable)
+                                    {
+                                        <div class="def-check">
+                                            <input type="checkbox" id="action2_@thirdFuc.FunctionID" @(thirdFuc.Add ? "checked=\"checked\"" : string.Empty) value="2" />
+                                            <label for="action2_@thirdFuc.FunctionID" class="checkbox"></label>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!thirdFuc.EditDisable)
+                                    {
+                                        <div class="def-check">
+                                            <input type="checkbox" id="action4_@thirdFuc.FunctionID" @(thirdFuc.Edit ? "checked=\"checked\"" : string.Empty) value="4" />
+                                            <label for="action4_@thirdFuc.FunctionID" class="checkbox"></label>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!thirdFuc.DeleteDisable)
+                                    {
+                                        <div class="def-check">
+                                            <input type="checkbox" id="action8_@thirdFuc.FunctionID" @(thirdFuc.Delete ? "checked=\"checked\"" : string.Empty) value="8" />
+                                            <label for="action8_@thirdFuc.FunctionID" class="checkbox"></label>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!thirdFuc.CheckDisable)
+                                    {
+                                        <div class="def-check">
+                                            <input type="checkbox" id="action16_@thirdFuc.FunctionID" @(thirdFuc.Check ? "checked=\"checked\"" : string.Empty) value="16" />
+                                            <label for="action16_@thirdFuc.FunctionID" class="checkbox"></label>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!thirdFuc.ImportDisable)
+                                    {
+                                        <div class="def-check">
+                                            <input type="checkbox" id="action32_@thirdFuc.FunctionID" @(thirdFuc.Import ? "checked=\"checked\"" : string.Empty) value="32" />
+                                            <label for="action32_@thirdFuc.FunctionID" class="checkbox"></label>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!thirdFuc.ExportDisable)
+                                    {
+                                        <div class="def-check">
+                                            <input type="checkbox" id="action64_@thirdFuc.FunctionID" @(thirdFuc.Export ? "checked=\"checked\"" : string.Empty) value="64" />
+                                            <label for="action64_@thirdFuc.FunctionID" class="checkbox"></label>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="scb-bottom-btn sbb-control">
+        <a href="#" id="lnkSave" class="btn" title="儲存設定">儲存設定</a>
+    </div>
+}

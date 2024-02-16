@@ -1,0 +1,248 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentStatistics.TimingMonitor;
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model  IPagedList<TimingMonitorRes>
+@{
+    Layout = null;
+
+    Func<string, string> empty2Dash = str =>
+    {
+        return !string.IsNullOrWhiteSpace(str) ? str : "-";
+    };
+
+    Func<DateTime?, string, string, string> emptyDT2Str = (dt, format, replace) =>
+    {
+        return dt != null ? dt.Value.ToString(format) : replace;
+    };
+
+    string startDate = Convert.ToString(ViewBag.StartDate);
+
+    QryTimingMonitorVM qryTimingMonitorVM = null;
+
+    if (ViewBag.QueryModel != null)
+    {
+        qryTimingMonitorVM = (QryTimingMonitorVM)ViewBag.QueryModel;
+    }
+
+    DateTime eDt = DateTime.Now;
+
+    DateTime.TryParse(startDate, out eDt);
+
+    DateTime sDt = eDt.AddMonths(-1);
+}
+
+@{
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="#" class="btn btn-blue-border bd-rdi bb-min" title="匯出 EXCEL 檔" onclick="window.location='@Url.Action("ExportTimingMonitorExcel", "PaymentStatistics", new {
+                                                                                                                                            StartDate = qryTimingMonitorVM.StartDate,
+                                                                                                                                            ICPMID = qryTimingMonitorVM.ICPMID,
+                                                                                                                                            MerchantName = qryTimingMonitorVM.MerchantName,
+                                                                                                                                            MonitorStatus = qryTimingMonitorVM.MonitorStatus,
+                                                                                                                                            RuleMode = qryTimingMonitorVM.RuleMode,
+                                                                                                                                            Day1Waring = qryTimingMonitorVM.Day1Waring,
+                                                                                                                                            Day10Waring = qryTimingMonitorVM.Day10Waring,
+                                                                                                                                            Day30Waring = qryTimingMonitorVM.Day30Waring,
+                                                                                                                                            SortType = qryTimingMonitorVM.SortType,
+                                                                                                                                            SortSet = qryTimingMonitorVM.SortSet,
+                                                                                                                                            Day1Amount = qryTimingMonitorVM.Day1Amount,
+                                                                                                                                            Day10Amount = qryTimingMonitorVM.Day10Amount,
+                                                                                                                                            Day30Amount = qryTimingMonitorVM.Day30Amount,
+                                                                                                                                            WithdrawStatus = qryTimingMonitorVM.WithdrawStatus,
+                                                                                                                                            TradeType = qryTimingMonitorVM.TradeType,
+                                                                                                                                            TradeMode = qryTimingMonitorVM.TradeMode,
+                                                                                                                                            TradeContent = qryTimingMonitorVM.TradeContent,
+                                                                                                                                            SelectMode = qryTimingMonitorVM.SelectMode,
+                                                                                                                                            PageNo = 1,
+                                                                                                                                            PageSize = 65536
+                                                                                                                                        })'">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出 Excel
+        </a>
+    </div>
+</div>
+<div class="st-scroll-tip">
+    <span class="sst-txt">往右滾動看更多</span>
+</div>
+
+<div class="sc-box scb-attach">
+    <div class="scb-function">
+        <div class="sbf-txt">選擇日期：@startDate</div>
+        @Html.Hidden("StartDate", startDate)
+        <div class="btn-box">
+            <a href="javascript:;" class="btn" title="勾選送出" id="selectSubmit">勾選送出</a>
+            <a href="javascript:;" class="btn" title="全部勾選" id="clickAll">全部勾選</a>
+            <a href="javascript:;" class="btn" title="全部取消" id="cancelAll" style="display:none">全部取消</a>
+        </div>
+    </div>
+</div>
+
+<div class="sc-box scb-table st-control stb-oneline st-laundering-timing">
+
+    <div class="scb-table-body stb-thbg">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>電支帳號</th>
+                    <th>名稱</th>
+                    <th>商店名稱</th>
+                    <th>註冊時間</th>
+                    <th>MCC Code</th>
+                    <th>選擇日期</th>
+                    <th>選擇日期與前10天平均額</th>
+                    <th>連續10天交易金額與過去30天總金額</th>
+                    <th>連續30天交易金額與過去90天總金額</th>
+                    <th>前7天退款金額與筆數</th>
+                    <th>備註</th>
+                    <th>觀察名單</th>
+                    <th>提領限制名單</th>
+                    <th>記錄</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                    string cls = "";
+                }
+                @foreach (var item in Model)
+                {
+                    if (item.MonitorStatus == 1)
+                    {
+                        cls = "stb-highlight";
+                    }
+                    else
+                    {
+                        cls = "";
+                    }
+
+                    <tr class="@cls">
+                        <td>
+                            <a href=@(item.LevelID == 31 ? "#" : "/Admin/CustomerManager/Detail/" + item.MID) target="_blank">@item.ICPMID</a>
+                        </td>
+                        <td>
+                            @Html.ActionLink(item.MerchantName, "TimingMonitorTradeDetail", "PaymentStatistics", new { icpMID = item.ICPMID, startDate = sDt.ToString("yyyy-MM-dd"), endDate = eDt.ToString("yyyy-MM-dd") },new { @target = "_blank" })
+                        </td>
+                        <td>
+                            @if (string.IsNullOrWhiteSpace(item.WebSiteURL))
+                            {
+                                @item.WebSiteName
+                            }
+                            else
+                            {
+                                <a href="@item.WebSiteURL" target="_blank">@item.WebSiteName</a>
+                            }
+                        </td>
+                        <td>
+                            @item.RegisterDate.ToString("yyyy/MM/dd")
+                            <br />
+                            @item.RegisterDate.ToString("HH:mm:ss")
+
+                        </td>
+                        <td>
+                            @if (item.MCCCode != "0")
+                            {
+                                @item.MCCCode
+                            }
+                        </td>
+                        <td>
+                            @item.Day1Amount.ToString("N0")
+                            <br />
+                            @item.Day1Count.ToString("N0")
+                        </td>
+                        <td>
+                            @item.Day1Amount.ToString("N0")/@Html.Raw(item.Day2To11Amount > 0 ? item.Day2To11Amount.ToString("N0") : "1")<br />
+
+                            @Html.Raw(item.Day1Percent + "%")
+                        </td>
+                        <td>
+                            @item.Day1To10Amount.ToString("N0")/@Html.Raw(item.Day11To40Amount > 0 ? item.Day11To40Amount.ToString("N0") : "1")<br />
+                            @Html.Raw(item.Day10Percent + "%")
+                        </td>
+                        <td>
+                            @item.Day1To30Amount.ToString("N0")/@Html.Raw(item.Day31To120Amount > 0 ? item.Day31To120Amount.ToString("N0") : "1")<br />
+                            @Html.Raw(item.Day30Percent + "%")
+
+                        </td>
+                        <td>
+                            @{
+                                int refundDay1To7Amount = item.RefundDay1To7Amount;
+                                if (item.RefundDay1To7Amount < 0)
+                                {
+                                    refundDay1To7Amount = -refundDay1To7Amount;
+                                }
+                            }
+                            @refundDay1To7Amount.ToString("N0")/@item.RefundDay7Count.ToString("N0")
+                        </td>
+                        <td>
+                            @if (item.ModifyDate.HasValue)
+                            {
+                                @item.ModifyDate.Value.ToString("yyyy/MM/dd")
+                                <br />
+                            }
+
+                            <a href="@Url.Action("ListTimingMonitorLog", new { icpMID = item.ICPMID, merchantid = item.MID, merchantName = item.MerchantName, status = item.MonitorStatus })" data-effect="mfp-zoom-in" class="libs-dialog-form btn btn-blue-border" title="歷程" data-update-callback="query">歷程</a>
+                        </td>
+                        <td>
+                            @if (item.MonitorStatus == 1)
+                            {
+                                <div class="dot dot-red"></div>
+                            }
+                        </td>
+                        <td>
+                            @if (item.WithdrawStatus == 1)
+                            {
+                                <div class="dot dot-green"></div>
+                            }
+                        </td>
+                        <td>
+                            @if (item.InspectStatus == 1)
+                            {
+                                if (item.InspectDate.HasValue)
+                                {
+                                    @item.InspectDate.Value.ToString("yyyy/MM/dd")
+                                }
+                            }
+                            else
+                            {
+                                <div class="st-function-group">
+                                    <div class="def-check">
+                                        <input type="checkbox" id="sc_@i" name="sld_check" value="@item.MID">
+                                        <label for="sc_@i" class="checkbox"></label>
+                                    </div>
+                                </div>
+                                @:已檢視
+                            }
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("ListTimingMonitorResult", Model, ViewBag.QueryModel)); }

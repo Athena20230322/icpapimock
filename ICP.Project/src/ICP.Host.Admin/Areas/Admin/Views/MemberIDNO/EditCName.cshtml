@@ -1,0 +1,33 @@
+﻿@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/MemberIDNO/EditCName/action.js"></script>
+}
+<div id="name-modify-popup" class="add-blacklist-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm("EditCNameResult", "MemberIDNO"))
+        {
+            <input type="hidden" name="MID" value="@ViewBag.MID" />
+            <div class="pp-content">
+                <h4 class="pp-title">修改姓名</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>個人姓名</dt>
+                        <dd>
+                            <input type="text" name="CName" class="pp-inp" placeholder="請輸入個人姓名" id="CName" value="@ViewBag.CName">
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                <a href="javascript:;" class="btn link-submit" title="更改" id="lnkEditCName">更改</a>
+                <a href="javascript:;" class="btn btn-gray popup-close" title="取消">取消</a>
+            </div>
+        }
+    </div>
+</div>

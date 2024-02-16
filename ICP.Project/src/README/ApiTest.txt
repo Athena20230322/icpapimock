@@ -1,0 +1,18 @@
+// API 測試工具
+http://localhost:50061/
+
+環境 設定檔
+ICP.Host.ApiTest/App_Data/EnvHost.json
+
+API 設定檔
+ICP.Host.ApiTest/App_Data/MockApi.json
+
+故障排除
+移除 金鑰檔
+媒體櫃\文件\ICP.Host.ApiTest.json
+
+註冊流程
+M0001 取得手機號碼: AuthV 自產一組32碼不重覆(SELECT REPLACE (NEWID(), '-', ''))
+M0003 設定註冊資料
+M0007 發送簡訊驗證_共用
+M0010 檢查簡訊驗證碼_註冊

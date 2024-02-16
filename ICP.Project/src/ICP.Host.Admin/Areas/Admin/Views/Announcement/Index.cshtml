@@ -1,0 +1,30 @@
+﻿@section header{
+    <link href="~/Areas/Admin/Content/css/news.css" rel="stylesheet" />
+}
+
+<div class="sc-box">
+    @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-search">
+            <span class="icon-ic-search ssr-icon"></span>
+            <input type="text" id="queryTitle" name="Title" class="ssr-inp" placeholder="輸入欲查詢公告名稱">
+        </div>
+    }
+</div>
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("AddAnnounce")" class="btn bd-rdi" title="新增訊息公告">
+            <span class="icon-ic-add bb-icon"></span>
+            新增訊息公告
+        </a>
+    </div>
+</div>
+
+<div id="queryResult">
+</div>
+
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/Announcement/Index/action.js"></script>
+}

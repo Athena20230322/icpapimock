@@ -1,0 +1,203 @@
+﻿@model ICP.Modules.Mvc.Payment.Models.ChargeBack.ChargeBackReq
+@{
+    ViewBag.Title = "ChargeBack";
+}
+
+<h2>退款</h2>
+@Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    <input id="reload" type="button" value="重新整理" />
+    <table>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.PlatformID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.PlatformID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MerchantID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MerchantID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.TransactionID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.TransactionID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MerchantTradeNo)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MerchantTradeNo)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MerchantTradeDate)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MerchantTradeDate)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.Amount)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.Amount)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.BonusAmt)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.BonusAmt)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.DebitPoint)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.DebitPoint)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.StoreID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.StoreID)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.StoreName)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.StoreName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.PosRefNo)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.PosRefNo)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.MerchantTID)
+            </th>
+            <td>
+                @Html.TextBoxFor(model => model.MerchantTID)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" id="SubmitForm" value="退款" />
+            </td>
+        </tr>
+    </table>
+<textarea id="textResult" style="color:red;width:600px;height:120px;max-width:1000px"></textarea>
+}
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#reload').click(function () {
+            location.reload();
+        });
+
+        $("#SubmitForm").click(function () {
+            var regInt = /\d/;
+
+            if ($.trim($('#PlatformID').val()) != '') {
+                if (!regInt.test($('#PlatformID').val(), regInt)) {
+                    alert("平台商編號格式有誤");
+                    return false;
+                }
+            }
+
+            //if (!regInt.test($('#MerchantID').val(), regInt)) {
+            //    alert("廠商編號為必填或格式有誤");
+            //    return false;
+            //}
+
+            if (!regInt.test($('#MID').val(), regInt)) {
+                alert("付款會員代碼為必填或格式有誤");
+                return false;
+            }
+
+            if ($.trim($('#TransactionID').val()) == '') {
+                alert("愛金卡交易序號不可為空");
+                return false;
+            }
+
+            if ($.trim($('#MerchantTradeNo').val()) == '') {
+                alert("交易編號不可為空");
+                return false;
+            }
+
+            if ($.trim($('#MerchantTradeDate').val()) == '') {
+                alert("交易日期不可為空");
+                return false;
+            }
+
+            if (!regInt.test($('#Amount').val(), regInt)) {
+                alert("交易金額為必填或格式有誤");
+                return false;
+            }
+
+            if (parseInt($('#Amount').val()) <= 0) {
+                alert("交易金額必須大於0");
+                return false;
+            }            
+
+            $.ajax({
+                type: "post",
+                url: "/Mock/ChargeBack",
+                dataType: "text",
+                data: {
+                    PlatformID: $('#PlatformID').val(),
+                    MerchantID: $('#MerchantID').val(),
+                    MID: $('#MID').val(),
+                    MerchantTradeNo: $('#MerchantTradeNo').val(),
+                    MerchantTradeDate: $('#MerchantTradeDate').val(),
+                    Amount: $('#Amount').val(),
+                    TransactionID: $('#TransactionID').val(),
+                    StoreID: $('#StoreID').val(),
+                    StoreName: $('#StoreName').val(),
+                    PosRefNo: $('#PosRefNo').val(),
+                    MerchantTID: $('#MerchantTID').val(),
+                    DebitPoint: $('#DebitPoint').val(),
+                    BonusAmt: $('#BonusAmt').val(),
+                },
+                success: function (data) {
+                    $('#textResult').val(data);
+                }
+            });
+        });
+    });
+</script>
+

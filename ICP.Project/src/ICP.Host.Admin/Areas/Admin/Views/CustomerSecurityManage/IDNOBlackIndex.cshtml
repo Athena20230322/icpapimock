@@ -1,0 +1,61 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerSecurityManage
+@model IDNOBlackQryModel
+
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerSecurityManage/IDNOBlackIndex/action.js"></script>
+    
+}
+
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("IDNOBlackQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" id="btnQuery" value="query" style="display:none;"/>
+            <input type="hidden" name="PageSize" value="20" />
+            <input type="hidden" name="PageNo" value="1" />
+            @Html.TextBoxFor(t => t.IDNO, new { id = "refreshIDNO" })
+        }
+    </div>
+    @using (Ajax.BeginForm("IDNOBlackQuery", null, new AjaxOptions { UpdateTargetId = "queryResult", HttpMethod = "POST" }, new { @id = "QueryForm" }))
+    {
+        <form>
+            <div class="scb-search-box">
+                <h3 class="ssb-title">查詢黑名單</h3>
+                <div class="scb-search">
+                    @Html.TextBoxFor(t => t.IDNO, new { id = "queryIDNO", @class = "ssr-inp sri-2", placeholder = "請輸入身分證字號/居留證號" })
+
+                </div>
+
+                <div class="btn-box">
+                    <a href="javascript:;" id="lnkQuery" class="btn link-submit" title="查詢">查詢</a>
+                </div>
+            </div>
+        </form>
+    }
+</div>
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("IDNOBlackAdd")" class="libs-dialog-form btn" data-update-callback="trigger" title="新增">
+            <span class="icon-ic-add bb-icon"></span>
+            新增
+        </a>
+        <a href="javascript:;" id="ExportCSV" class="btn btn-blue-border bd-rdi" title="匯出EXCEL">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出EXCEL
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>

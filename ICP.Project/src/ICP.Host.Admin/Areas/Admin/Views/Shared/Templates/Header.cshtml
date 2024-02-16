@@ -1,0 +1,45 @@
+﻿@{ 
+    string Title = ViewBag.Title != null ? (string)ViewBag.Title : string.Empty;
+    string SubNav = ViewBag.SubNav != null ? (string)ViewBag.SubNav : string.Empty;
+}
+@if (User.Identity.IsAuthenticated)
+{
+<script>
+function setTitle(parentName, functionName) {
+    var $header = $('header:first');
+    if (parentName == '' && functionName == '') {
+        $header.find('.sht-topic:first').text(parentName);
+        $header.find('.stm-txt:first').text(functionName).hide();
+        return;
+    }
+    $header.find('.sht-topic:first').text(parentName);
+    $header.find('.stm-txt:first').text(functionName).show();
+}
+</script>
+<div class="sh-container">
+
+    <div class="nav-mobile-icon">
+        <span class="nmi-icon"></span>
+    </div>
+
+    <div class="sh-logo">
+        <a href="@Url.Action("Index", "Frame")" title="回首頁"><img src="~/Areas/Admin/Content/images/frame/logo_icashpay.png" alt="icash pay"></a>
+    </div>
+
+    <header class="sh-title">
+        <h1 class="sht sht-topic">@Title</h1>
+        <h2 class="sht sht-main"><span class="stm-txt" style="display:none;">@SubNav</span></h2>
+    </header>
+
+    <aside class="member-function">
+        <ul>
+            <li>@User.Identity.Name</li>
+
+            <li>
+                <a href="@Url.Action("Logout", "Account")" class="mf-btn" title="登出">登出</a>
+            </li>
+        </ul>
+    </aside>
+
+</div>
+}

@@ -1,0 +1,23 @@
+// MAIL 內容管理 - 內部後台
+http://localhost:3310/Admin/MailLibraryManage
+
+using ICP.Infrastructure.Abstractions.EmailSender;
+using ICP.Library.Services.MailLibrary;
+
+// 注入
+IEmailSender _emailSender = null;
+MailManageService _mailManageService = null;
+
+// 代碼 {Host}_{事件描述}
+string mailKey = "admin_user_create";
+
+// 參數 (string)
+var args = new {
+	token = "123abc456def"
+};
+
+// 產生內容
+var content = _mailManageService.Generate(mailKey, args);
+
+// 寄信
+_emailSender.SendMail(to, content.Title, content.Body);

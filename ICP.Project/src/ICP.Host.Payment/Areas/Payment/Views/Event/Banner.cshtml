@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Areas/Payment/Views/Shared/_LayoutForWebView.cshtml";
+}
+
+<ul id="offer_list"></ul>
+
+@section scripts {
+    <script type="text/javascript">
+    $.ajax({
+        type: "POST",
+        url: "@Url.Action("Banner", new { id = ViewBag.SiteID })",
+        success: function (result) {
+            $('#offer_list').html(result);
+        },
+        error: function () {
+            alert('請稍候在試 !!');
+        }
+    });
+    </script>
+}

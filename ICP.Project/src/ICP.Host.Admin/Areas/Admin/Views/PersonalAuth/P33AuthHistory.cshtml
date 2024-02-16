@@ -1,0 +1,94 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels
+@model P33AuthHistoryVM
+@{
+    //設定顯示上的預設日
+    DateTime Today = DateTime.Today;
+    Model.StartDate = new DateTime(Today.Year, Today.Month, 1);
+    Model.EndDate = Today;
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/PersonalAuth/P33AuthHistory/action.js"></script>
+}
+<div class="sc-box no-edge">
+    <div id="refreshForm" style="display:none;">
+        @using (Ajax.BeginForm("P33AuthHistoryQuery", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" />
+            <input type="hidden" name="PageSize" value="20" />
+            <input type="hidden" name="PageNo" value="1" />
+            @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new { id = "refreshStartDate" })
+            @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new { id = "refreshEndDate" })
+            @Html.TextBoxFor(t => t.ICPMID, new { id = "refreshICPMID" })
+            @Html.TextBoxFor(t => t.IDNO, new { id = "refreshIDNO" })
+            @Html.TextBoxFor(t => t.UnifiedBusinessNo, new { id = "refreshUnifiedBusinessNo" })
+            @Html.Hidden("IsPass")
+            @Html.Hidden("IDTypes")
+        }
+    </div>
+    @using (Ajax.BeginForm("P33AuthHistoryQuery", null, new AjaxOptions { UpdateTargetId = "queryResult" , HttpMethod = "POST" }, new { id = "QueryForm" }))
+    {
+        <input type="submit" id="btnQuery" value="query" style="display:none;" />
+        <div class="scb-form sf-2column">
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">驗證日期<sup class="inp-required">*</sup></dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new { @class = "flatpickr flatpickr-input active minD", @placeholder = "起始日期", @readonly = "readonly", @flatpickr_minDate = new DateTime(Today.Year - 1, 1, 1).ToString("yyyy-MM-dd") })
+                    </label>
+
+                    <span class="sdb-txt">至</span>
+
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", new { @class = "flatpickr flatpickr-input active maxD", @placeholder = "結束日期", @readonly = "readonly", @flatpickr_maxDate = Today.ToString("yyyy-MM-dd") })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">電支帳號</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.ICPMID, new { @placeholder = "請輸入電支帳號", @id = "queryICPMID" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">驗證狀態</dt>
+                <dd>
+                    <label class="def-select">
+                        <select name="IsPass">
+                            <option value="">全部</option>
+                            <option value="1">驗證成功</option>
+                            <option value="0">驗證失敗</option>
+                        </select>
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <label class="def-select">
+                        <select id="IDTypes" name="IDTypes" onchange="IDTypesChange(this.value)">
+                            <option value="0">身分證字號</option>
+                            <option value="1">統一編號</option>
+                        </select>
+                    </label>
+                </dt>
+                <dd id="IDNO_TextBlock">
+                    @Html.TextBoxFor(t => t.IDNO, new { id = "queryIDNO" })
+                </dd>
+                <dd id="UnifiedBusinessNo_TextBlock" style="display : none">
+                    @Html.TextBoxFor(t => t.UnifiedBusinessNo, new { id = "queryUnifiedBusinessNo" })
+                </dd>
+            </dl>
+        </div>
+
+        <div class="btn-box">
+            <a href="#" class="btn" title="查詢" id="lnkQuery">查詢</a>
+            <a href="#" class="btn btn-blue-border clear-form" title="清除條件" id="lnkReset">清除條件</a>
+        </div>
+    }
+</div>
+<div id="queryResult">
+</div>

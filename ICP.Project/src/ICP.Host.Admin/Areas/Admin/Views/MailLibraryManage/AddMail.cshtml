@@ -1,0 +1,100 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.MailLibrary
+@model MailContentModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header{
+<style type="text/css">
+    .edit-ac-popup{
+        width:1176px;
+    }
+</style>
+}
+@section scripts
+{
+    @*<script src="~/Areas/Admin/Scripts/MailLibraryManage/AddMail/action.js"></script>*@
+    <script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        libs.alert.validationSummary();
+        (function () {
+            var config = {
+                height: 400,
+                width: 923,
+                enterMode: CKEDITOR.ENTER_BR,
+                allowedContent: true, //允許所有內容
+                //extraAllowedContent: extraAllowedContent //額外允許自訂內容
+                fullPage: '@((bool)ViewBag.layout)' == 'True'
+            };
+
+            $('#Body')
+            .ckeditor(config)
+            .editor.on('change', function () {
+                $(this.element.$).trigger('change');
+            });
+        })();
+    </script>
+@if (ViewBag.NotifyID != 0)
+{
+    <script type="text/javascript">
+        (function () {
+            $('#MailKey').attr('readonly', 'readonly');
+        })();
+    </script>
+}
+}
+<div class="edit-ac-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <div class="pp-content">
+                <h4 class="pp-title">新增</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.MailKey)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.MailKey, new { @class = "pp-inp", placeholder = "請輸入50字元代碼" })
+                            @Html.ValidationMessageFor(model => model.MailKey, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.LayoutKey)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.LayoutKey, new { @class = "pp-inp", placeholder = "請輸入版型代碼" })
+                            @Html.ValidationMessageFor(t => t.LayoutKey, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.Description)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.Description, new { @class = "pp-inp", placeholder = "請輸入描述" })
+                            @Html.ValidationMessageFor(t => t.Description, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.Title)</dt>
+                        <dd>
+                            @Html.TextBoxFor(t => t.Title, new { @class = "pp-inp", placeholder = "請輸入標題" })
+                            @Html.ValidationMessageFor(t => t.Title, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>@Html.LabelFor(t => t.Body)</dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.Body, new { @class = "pp-inp", placeholder = "請輸入內容" })
+                            @Html.ValidationMessageFor(t => t.Body, null, new { @class = "input-error-txt" }, "div")
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mp-btn-block2">
+                <a href="#" class="btn disabled link-submit" title="儲存">儲存</a>
+            </div>
+        }
+    </div>
+</div>

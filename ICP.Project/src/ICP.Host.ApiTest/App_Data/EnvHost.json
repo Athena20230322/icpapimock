@@ -1,0 +1,36 @@
+{
+  "dev": {
+    "member": "https://icp-member-stage.icashpay.com.tw",
+    "payment": "http://localhost:3312"
+  },
+
+  "beta": {
+    "member": "https://icp-member-stage.icashpay.com.tw",
+    "payment": "https://icp-plus-stage.icashpay.com.tw"
+  },
+
+  "stage": {
+    "member": "https://icp-member-stage.icashpay.com.tw",
+    "payment": "https://icp-payment-stage.icashpay.com.tw",
+    "websocket": "https://icp-socket-stage.icashpay.com.tw"
+  },
+  "uat": {
+    "member": "https://icp-member-preprod.icashpay.com.tw",
+    "payment": "https://icp-payment-preprod.icashpay.com.tw"
+
+  },
+
+  "plusproprod": {
+    "member": "https://icp-member-preprod.icashpay.com.tw",
+    "payment": "https://icp-payment-preprod.icashpay.com.tw"
+
+  },
+
+  "prod": {
+    "member": "https://member.icashpay.com.tw",
+    "payment": "https://payment.icashpay.com.tw"
+
+  }
+
+
+}

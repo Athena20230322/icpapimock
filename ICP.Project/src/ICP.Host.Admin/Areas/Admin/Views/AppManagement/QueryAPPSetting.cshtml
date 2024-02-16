@@ -1,0 +1,87 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@model List<APPSettingQueryResult>
+@{
+    Layout = null;
+    string timeFormat = "yyyy/MM/dd HH:mm:ss";
+}
+<div id="divQueryAPPSetting" class="sc-box scb-table st-control st-2">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">XML版號</p></li>
+            <li><p class="sth-txt">上線時間</li>
+            <li><p class="sth-txt">更新說明</p></li>
+            <li><p class="sth-txt">最後修改人</p></li>
+            <li><p class="sth-txt">最後修改時間</p></li>
+            <li><p class="sth-txt">測試MID</p></li>
+            <li><p class="sth-txt">設定</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table id="tbSettings">
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @string.Format("V{0}", item.VersionNo)
+                    </td>
+                    <td>
+                        @(item.ReleaseTime == null ? string.Empty : item.ReleaseTime.Value.ToString(timeFormat))
+                    </td>
+                    <td>
+                        @item.ReleaseNote
+                    </td>
+                    <td>
+                        @item.Modifier
+                    </td>
+                    <td>
+                        @item.ModifyDate.ToString(timeFormat)
+                    </td>
+                    <td>
+                        @((!string.IsNullOrWhiteSpace(item.TestMID) && item.TestMID.Length > 20) ? item.TestMID.Substring(0, 20) + "..." : item.TestMID)
+                    </td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a class="libs-dialog-form btn" href="@Url.Action("UpdateAPPSetting", new { id = item.VersionNo })">修改</a>
+                            <a class="libs-dialog-form btn" href="@Url.Action("ListAPPXMLSettingLog", new { id = item.VersionNo })">修改歷程</a>
+                            <a class="publish btn" url="@Url.Action("PublishAPPSetting", new { id = item.VersionNo })">發佈</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script>
+    (function () {
+        //發佈
+        $('#tbSettings a.publish').click(function () {
+            $.ajax({
+                url: $(this).attr('url'),
+                method: 'POST',
+                success: function (result) {
+                    if (result.RtnCode != 1) {
+                        libs.alert.popup(result.RtnMsg);
+                        return;
+                    }
+                    //更新內容
+                    $.ajax({
+                        url: '@Url.Action("QueryAPPSetting")',
+                        success: function (result) {
+                            var $container = $('#divQueryAPPSetting').parent();
+                            $container.html(result);
+                        }
+                    });
+                }
+            });
+        });
+    })();
+</script>

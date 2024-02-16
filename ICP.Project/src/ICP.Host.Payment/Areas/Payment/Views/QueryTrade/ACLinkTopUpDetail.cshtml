@@ -1,0 +1,122 @@
+﻿@model ICP.Modules.Mvc.Payment.Models.QueryTrade.TopUpTradeInfo
+
+@{
+    Layout = "~/Areas/Payment/Views/Shared/_QueryTradeLayout.cshtml";
+}
+@if (Model != null)
+{
+    <div id="wrapper">
+        <header></header>
+        <section id="record_detial_box">
+            <ul class="toggle_box" id="record_detial">
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>執行時間</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.CreateDate)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                @if (Model.TradeStatus == 1)
+                {
+                    <li>
+                        <div class="flex">
+                            <div class="col"><span>儲值時間</span></div>
+                            <div class="col">
+                                <span>
+                                    @Html.DisplayFor(model => model.PaymentDate)
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                }
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>類別</span></div>
+                        <div class="col"><span>儲值</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>狀態</span></div>
+                        <div class="col green">
+                            <span>
+                                @if (Model.TradeStatus == 0)
+                                {
+                                    @Html.Raw("未完成")
+                                }
+                                else if (Model.TradeStatus == 1)
+                                {
+                                    @Html.Raw("儲值成功")
+                                }
+                                else
+                                {
+                                    @Html.Raw("儲值失敗")
+                                }
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>儲值方式</span></div>
+                        <div class="col"><span>連結帳戶儲值</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>儲值金額</span></div>
+                        <div class="col green">
+                            <span>
+                                @Html.DisplayFor(model => model.Amount)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>編號</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.TradeNo)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="sep">
+                <p class="br green">儲值資訊</p>
+            </div>
+            <ul class="toggle_box" id="record_detial">
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>轉出銀行</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.BankName)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>轉出帳號</span></div>
+                        <div class="col">
+                            <span>
+                                @Html.DisplayFor(model => model.BankAccountShowName)
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+}
+
+<script type="text/javascript">
+    if ('@ViewBag.errMsg' != "") {
+        alert('@ViewBag.errMsg');
+    }
+</script>

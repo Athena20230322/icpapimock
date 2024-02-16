@@ -1,0 +1,27 @@
+﻿@{
+    //Layout = null;
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/calendar.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/Calendar/Index/action.js"></script>
+}
+
+<div class="site-content">
+    <div class="sc-function">
+        <div class="btn-box">
+            <a href="@Url.Action("Add")" class="libs-dialog-form btn" data-update-callback="query" title="新增">
+                <span class="icon-ic-add bb-icon"></span>
+                新增
+            </a>
+        </div>
+    </div>
+
+    @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+    {
+        <input type="hidden" name="DayYear" value="@DateTime.Now.Year" />
+    }
+    <div id="queryResult"></div>
+</div>
+

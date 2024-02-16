@@ -1,0 +1,49 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager
+@model ReleaseFreezeCoinsModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerManager/AddFreezeCoins/action.js"></script>
+}
+<div id="back-amount-popup" class="back-amount-popup edit-ac-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @Html.ValidationSummary()
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" value="@ViewBag.id" name="MID" />
+            <input type="hidden" value="@ViewBag.FreezeCash" name="FreezeCash" />
+            <div class="pp-content">
+                <h4 class="pp-title">解除金額</h4>
+                <div class="pp-form">
+                    <dl>
+                        <dt>解除此筆凍結金額</dt>
+                        <dd>
+                            @string.Format("{0:N0}", ViewBag.FreezeCash)
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>原因備註<sup class="inp-required">*</sup></dt>
+                        <dd>
+                            @Html.TextAreaFor(t => t.Remark, new { @class = "pp-textarea", placeholder = "請輸入備註", @maxLength = 200 })
+                            <div class="input-tip-txt itt-r itt-er" id="input-tip-txt">0/200</div>
+                            @Html.ValidationMessageFor(t => t.Remark, null, new { @class = "input-error-txt" }, "div")                           
+                        </dd>
+                    </dl>
+                                        
+                </div>
+
+                <div class="mp-btn-block2">
+                    <a href="#" class="btn disabled link-submit" title="確認送出">確認送出</a>
+                </div>
+
+            </div>
+
+
+        }
+    </div>
+</div>

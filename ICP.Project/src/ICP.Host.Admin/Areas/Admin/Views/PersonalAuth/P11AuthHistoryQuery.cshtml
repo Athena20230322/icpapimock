@@ -1,0 +1,200 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Library.Models.MemberModels;
+@model  IPagedList<P11AuthHistoryQueryVM>
+@{
+    Layout = null;
+
+    Func<string, string> Empty2Dash = str =>
+    {
+        return !string.IsNullOrWhiteSpace(str) ? str : "-";
+    };
+
+    Func<short, string> IssueType2String = issueType =>
+    {
+        switch (issueType)
+        {
+            case 1:
+                return "初領";
+            case 2:
+                return "補領";
+            case 3:
+                return "換領";
+            default:
+                return "-";
+        }
+    };
+
+    Func<string, string> DateString2SlashDateString = dateString =>
+    {
+        if (dateString.Length != 7)
+            return "-";
+
+        string year = dateString.Substring(0, 3);
+        string month = dateString.Substring(3, 2);
+        string day = dateString.Substring(5, 2);
+        return string.Format("{0}/{1}/{2}", year, month, day);
+    };
+
+    Func<short, string> PicFree2String = picFree =>
+    {
+        switch (picFree)
+        {
+            case 0:
+                return "印";
+            case 1:
+                return "不印";
+            default:
+                return "-";
+        }
+    };
+
+    Func<short, string> Source2String = source =>
+    {
+        switch (source)
+        {
+            case 1:
+                return "APP";
+            case 2:
+                return "後台";
+            case 3:
+                return "排程";
+            default:
+                return "-";
+        }
+    };
+
+    Func<string, string> Answer2String = answer =>
+    {
+        if (!string.IsNullOrWhiteSpace(answer))
+            return "(" + answer + ")";
+        else
+            return string.Empty;
+    };
+
+    @*取得發證縣市*@
+    var IssueLocations = (List<MemberAuthIssueLocation>)ViewBag.IssueLocations;
+    Func<string, string> GetIssueLocationName = issueLocationID =>
+    {
+        var item = IssueLocations.FirstOrDefault(t => t.IssueLocationID == issueLocationID);
+
+        if (item == null)
+            return "-";
+
+        return item.IssueLocationName;
+    };
+
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+<div class="sc-box scb-table st-control st-verify-p11-rec">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">驗證日期</p></li>
+            <li><p class="sth-txt">電支帳號</p></li>
+            <li><p class="sth-txt">身分證字號</p></li>
+            <li><p class="sth-txt">領補換類別</p></li>
+            <li><p class="sth-txt">領補換日期</p></li>
+            <li><p class="sth-txt">領補換地點</p></li>
+            <li><p class="sth-txt">出生日期</p></li>
+            <li><p class="sth-txt sth-twoline">是否免列印<br>相片</p></li>
+            <li><p class="sth-txt">驗證狀態</p></li>
+            <li><p class="sth-txt">驗證結果</p></li>
+            <li><p class="sth-txt">驗證來源</p></li>
+            <li><p class="sth-txt">後台帳號</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CreateDate.ToString("yyyy/MM/dd")<br />@item.CreateDate.ToString("HH:mm:ss")
+                    </td>
+                    <td>
+                        @Empty2Dash(item.ICPMID)
+                    </td>
+                    <td>
+                        @item.IDNO
+                    </td>
+                    <td>
+                        @IssueType2String(item.IssueType)
+                    </td>
+                    <td>
+                        @DateString2SlashDateString(item.IssueDate)
+                    </td>
+                    <td>
+                        @GetIssueLocationName(item.IssueLoc)
+                    </td>
+                    <td>
+                        @DateString2SlashDateString(item.BirthDate)
+                    </td>
+                    <td>
+                        @PicFree2String(item.PicFree)
+                    </td>
+                    <td>
+                        @if (item.IsPass == 1)
+                        {
+                            <p class="st-success">驗證成功</p>
+                        }
+                        else if (item.IsPass == 0)
+                        {
+                            <p class="st-fail">驗證失敗</p>
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrWhiteSpace(item.Result))
+                        {
+                            var answer = Answer2String(item.Answer);
+                            <p>@item.Result</p>
+                            if (!string.IsNullOrWhiteSpace(answer))
+                            {
+                                <p>@answer</p>
+                            }
+                        }
+                        else
+                        {
+                            var answer = Answer2String(item.Answer);
+                            if (!string.IsNullOrWhiteSpace(answer))
+                            {
+                                <p>@answer</p>
+                            }
+                            else
+                            {
+                                <p>-</p>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Source2String(item.Source)
+                    </td>
+                    <td>
+                        @Empty2Dash(item.UserName)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("P11AuthHistoryQuery", Model, ViewBag.QueryModel)); }

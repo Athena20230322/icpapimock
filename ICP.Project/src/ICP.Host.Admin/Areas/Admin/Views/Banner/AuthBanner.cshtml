@@ -1,0 +1,153 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.Banner
+@model ModifyBannerVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/reward.css" rel="stylesheet" />
+}
+
+@Html.ValidationSummary()
+
+@using (Html.BeginForm("AuthBanner", "Banner", FormMethod.Post))
+{
+    <div class="sc-box scb-padding">
+        <h4 class="content-title ct-inside">廣告基本設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.BannerSiteList)</dt>
+                <dd>
+                    @{
+                        string siteList = string.Empty;
+                        foreach (var item in Model.BannerSiteList)
+                        {
+                            if (item.IsSelected)
+                            {
+                                siteList += item.SiteName + "、";
+                            }
+                        }
+                        <div class="dff-regular-box">@siteList.Substring(0, siteList.Length - 1)</div>
+                    }
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.StartDate)</dt>
+                <dd>
+                    <div class="dff-regular-box">@Model.StartDate @Model.StartDateTime ~ @Model.EndDate  @Model.EndDateTime</div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="sc-box scb-padding">
+        <h4 class="content-title ct-inside">廣告內容設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.IsUseContent)</dt>
+                <dd>
+                    <div class="dff-regular-box" id="IsUseContent">@(Model.IsUseContent == 1 ? "是" : "否")</div>
+                </dd>
+            </dl>
+            <dl style='@(Model.IsUseContent == 1 ? "display:none;" : "")'>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.UrlLink1)<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <div class="dff-regular-box">@Model.UrlLink1</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.ImagePath)</dt>
+                <dd>
+                    <div class="dff-photo dp-nomargin">
+                        <ul>
+                            <li>
+                                <div class="dfp-holder">
+                                    <img src="@Model.ImagePath">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.OrderID)</dt>
+                <dd>
+                    <div class="dff-regular-box">@Model.OrderID</div>
+                </dd>
+            </dl>
+            <dl style='@(Model.IsUseContent == 1 ? "display:none;" : "")'>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.OpenNewWindow1)</dt>
+                <dd>
+                    <div class="dff-regular-box">@(Model.OpenNewWindow1 == 1 ? "外開" : "內開")</div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="sc-box scb-padding" id="secondPart" style='@(Model.IsUseContent == 0 ? "display:none;" : "")'>
+        <h4 class="content-title ct-inside">廣告專區第二層內容設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.Title)</dt>
+                <dd>
+                    <div class="dff-regular-box">@Model.Title</div>
+                </dd>
+            </dl>
+            @if (!string.IsNullOrEmpty(Model.ImagePath2))
+            {
+                <dl>
+                    <dt class="oneline-inp">@Html.DisplayNameFor(m => m.ImagePath2)</dt>
+                    <dd>
+                        <div class="dff-photo dp-nomargin">
+                            <ul>
+                                <li>
+                                    <div class="dfp-holder">
+                                        <img src="@Model.ImagePath2">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </dd>
+                </dl>
+            }
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.UrlLink2)</dt>
+                <dd>
+                    <div class="dff-regular-box">@Model.UrlLink2</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.OpenNewWindow2)</dt>
+                <dd>
+                    <div class="dff-regular-box">@(Model.OpenNewWindow2 != null ? (Model.OpenNewWindow2.Value == 1 ? "外開" : "內開") : "")</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.BannerContent)</dt>
+                <dd>
+                    <div class="dff-regular-box">@Html.Raw(Model.BannerContent)</div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.BannerID);
+    @Html.HiddenFor(m => m.AuthStatus);
+    <div class="scb-bottom-btn sbb-center">
+        <a href="javascript:setAuthStatus(1);" class="btn" title="放行">放行</a>
+        <a href="javascript:setAuthStatus(2);" class="btn btn-gray" title="退件">退件</a>
+        <input type="submit" id="btnSubmit" value="query" style="display:none;" />
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        libs.alert.validationSummary();
+
+        function setAuthStatus(s) {
+            $('#AuthStatus').val(s);
+            $('#btnSubmit').click();
+        }
+    </script>
+}

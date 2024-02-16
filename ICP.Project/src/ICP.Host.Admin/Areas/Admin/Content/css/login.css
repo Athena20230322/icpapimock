@@ -1,0 +1,50 @@
+@charset "UTF-8";
+@import url(page.css);
+/*-- 登入 --*/
+.login-box {
+  padding: 40px 25px;
+  -webkit-box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.1); }
+  .login-box .login-title {
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #514f4e;
+    margin-bottom: 25px; }
+  .login-box .login-form {
+    width: 100%; }
+    .login-box .login-form dl {
+      width: 100%;
+      height: 85px;
+      margin-bottom: 10px;
+      text-align: left; }
+      .login-box .login-form dl:last-child {
+        margin-bottom: 0px; }
+    .login-box .login-form dt, .login-box .login-form dd {
+      width: 100%;
+      display: block;
+      position: relative; }
+    .login-box .login-form dt {
+      font-size: 14px;
+      color: #6e6c6e; }
+    .login-box .login-form input {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-bottom: 1px solid #dbdbdb;
+      padding: 0 0; }
+      .login-box .login-form input:focus, .login-box .login-form input:hover {
+        border-color: #26b7bc; }
+    .login-box .login-form .input-error {
+      border-bottom: 1px solid #F16161; }
+  .login-box .btn-box {
+    margin-top: 25px; }
+    .login-box .btn-box .btn {
+      min-width: 140px;
+      -webkit-background-clip: padding-box;
+      -moz-background-clip: padding;
+      background-clip: padding-box;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px; }

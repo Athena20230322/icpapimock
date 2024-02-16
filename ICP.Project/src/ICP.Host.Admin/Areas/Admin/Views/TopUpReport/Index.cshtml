@@ -1,0 +1,109 @@
+﻿@{
+    //Layout = null;
+
+    var todayDate = DateTime.Today.ToString("yyyy-MM-dd");
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/finance.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/TopUpReport/Index/action.js?t=@DateTime.Now.ToString("yyyyMMddHHmmss")"></script>
+}
+<div class="site-content">
+    <div class="sc-box no-edge">
+        @Html.ValidationSummary()
+        @using (Ajax.BeginForm("Query", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            @Html.Hidden("PageSize", "10")
+            <div class="scb-form sf-2column">
+
+                <dl class="sbf-date-single">
+                    <dt>
+                        <label class="def-select">
+                            <select name="DateType">
+                                <option value="1">訂單日期</option>
+                                <option value="2">收款日期</option>
+                                <option value="3">傳輸日期</option>
+                            </select>
+                        </label>
+                    </dt>
+                    <dd class="sbf-date-box">
+                        <label class="sdb-item sdb-date">
+                            <input class="flatpickr flatpickr-input active minD" name="StartDate" id="StartDate" type="text" placeholder="起始日期" readonly="readonly" value="@todayDate">
+                        </label>
+
+                        <span class="sdb-txt">至</span>
+
+                        <label class="sdb-item sdb-date">
+                            <input class="flatpickr flatpickr-input active maxD" name="EndDate" id="EndDate" type="text" placeholder="結束日期" readonly="readonly" value="@todayDate">
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">儲值方式</dt>
+                    <dd>
+                        <label class="def-select">
+                            <select name="TopUpType">
+                                <option value="0">全部</option>
+                                <option value="1">特店</option>
+                                <option value="2">虛擬帳號</option>
+                                <option value="3">連結扣款帳戶</option>
+                                <option value="4">中獎發票</option>
+                            </select>
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label class="def-select">
+                            <select name="MemberDataType" id="MemberDataType">
+                                <option value="1">電支會員帳號</option>
+                                <option value="2">電支會員姓名</option>
+                                <option value="3">電支會員手機</option>
+                            </select>
+                        </label>
+                    </dt>
+                    <dd>
+                        <input type="text" name="MemberDataContent" id="MemberDataContent" placeholder="請輸入查詢資料" maxlength="20">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">撥款狀態</dt>
+                    <dd>
+                        <label class="def-select">
+                            <select name="TopUpStatus">
+                                <option value="0">全部</option>
+                                <option value="1">儲值成功</option>
+                                <option value="2">儲值失敗</option>
+                                <option value="3">取消儲值</option>
+                                <option value="4">儲值待繳費</option>
+                            </select>
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label class="def-select">
+                            <select name="QueryDataType" id="QueryDataType">
+                                <option value="0">訂單類別-全部</option>
+                                <option value="1">icash pay 訂單編號</option>
+                                <option value="2">銀行轉帳虛擬帳號</option>
+                                <option value="3">超商店號</option>
+                            </select>
+                        </label>
+                    </dt>
+                    <dd>
+                        <input type="text" name="QueryDataContent" id="QueryDataContent" placeholder="請輸入查詢資料" maxlength="20">
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="btn-box">
+                <a href="javascript:checkFields()" class="btn" title="查詢">查詢</a>
+                <a href="javascript:resetFields()" class="btn btn-blue-border" title="清除條件">清除條件</a>
+            </div>
+        }
+    </div>
+
+    <div id="queryResult"></div>
+</div>

@@ -1,0 +1,129 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Library.Models.MemberModels;
+@model EditAuthIDNOVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    // 取得發證縣市
+    var IssueLocations = (List<MemberAuthIssueLocation>)ViewBag.IssueLocations;
+    Func<string, string> getIssueLocationName = IssueLocationID =>
+    {
+        var item = IssueLocations.FirstOrDefault(t => t.IssueLocationID == IssueLocationID);
+
+        if (item == null) return string.Empty;
+
+        return item.IssueLocationName;
+    };
+
+    Func<DateTime?, Func<DateTime, int>, int, string> emptyDT2IntPad = (dt, func, padLength) =>
+    {
+        return dt != null ? func(dt.Value).ToString().PadLeft(padLength, '0') : string.Empty;
+    };
+}
+<div id="id-verify-popup" class="id-verify-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(m => m.AuthIDNO.IDNO)
+            @Html.HiddenFor(m => m.AuthIDNO.ObtainType)
+            @Html.HiddenFor(m => m.AuthIDNO.IssueDate)
+            @Html.HiddenFor(m => m.AuthIDNO.IssueLocationID)
+            @Html.HiddenFor(m => m.AuthIDNO.Birthday)
+            @Html.HiddenFor(m => m.AuthIDNO.IsPicture)
+            <div class="pp-content">
+                <h4 class="pp-title">身分驗證</h4>
+                <div class="mp-tip red">請確認身分資料是否正確</div>
+                <div class="pp-form">
+                    <dl>
+                        <dt>身分證字號</dt>
+                        <dd>
+                            <div class="pf-regular-box">@Model.AuthIDNO.IDNO</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>領補換類別</dt>
+                        <dd>
+                            <div class="pf-regular-box">
+                                @switch (Model.AuthIDNO.ObtainType)
+                                {
+                                    case 1:
+                                        @("初發")
+                                        break;
+                                    case 2:
+                                        @("補發")
+                                        break;
+                                    case 3:
+                                        @("換發")
+                                        break;
+                                }
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>領補換日期</dt>
+                        <dd class="pf-date-box2">
+                            <div class="pf-regular-box pd2-block">
+                                @emptyDT2IntPad(Model.AuthIDNO.IssueDate, t => t.Year - 1911, 3)
+                            </div>
+                            <span class="pd2-txt">年</span>
+                            <div class="pf-regular-box pd2-block">
+                                @emptyDT2IntPad(Model.AuthIDNO.IssueDate, t => t.Month, 2)
+                            </div>
+                            <span class="pd2-txt">月</span>
+                            <div class="pf-regular-box pd2-block">
+                                @emptyDT2IntPad(Model.AuthIDNO.IssueDate, t => t.Day, 2)
+                            </div>
+                            <span class="pd2-txt">日</span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>領補換地點</dt>
+                        <dd>
+                            <div class="pf-regular-box">
+                                @getIssueLocationName(Model.AuthIDNO.IssueLocationID)
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>出生日期</dt>
+                        <dd class="pf-date-box2">
+                            <div class="pf-regular-box pd2-block">
+                                @emptyDT2IntPad(Model.AuthIDNO.Birthday, t => t.Year - 1911, 3)
+                            </div>
+                            <span class="pd2-txt">年</span>
+                            <div class="pf-regular-box pd2-block">
+                                @emptyDT2IntPad(Model.AuthIDNO.Birthday, t => t.Month, 2)
+                            </div>
+                            <span class="pd2-txt">月</span>
+                            <div class="pf-regular-box pd2-block">
+                                @emptyDT2IntPad(Model.AuthIDNO.Birthday, t => t.Day, 2)
+                            </div>
+                            <span class="pd2-txt">日</span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>是否免印相片</dt>
+                        <dd>
+                            <div class="pf-regular-box">
+                                @if (Model.AuthIDNO.IsPicture == 1)
+                                {
+                                    @("列印")
+                                }
+                                else
+                                {
+                                    @("免印")
+                                }
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="mp-btn-block2">
+                <a href="#" class="btn link-submit" title="送出">送出</a>
+            </div>
+        }
+    </div>
+</div>

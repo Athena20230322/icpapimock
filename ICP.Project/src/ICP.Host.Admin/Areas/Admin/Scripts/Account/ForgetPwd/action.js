@@ -1,0 +1,3 @@
+﻿(function () {
+    libs.alert.validationSummary();
+})();

@@ -1,0 +1,65 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.PaymentCenter;
+@model IPagedList<TradeStatisticsDetailModel> 
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/finance.css" rel="stylesheet" />
+}
+<div id="center-statistics-popup" class="center-statistics-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <div class="pp-content">
+            <h4 class="pp-title">詳細資料</h4>
+
+            <div class="pp-function">
+                <div class="btn-box">
+                    <a href="@Url.Action("ExportTradeStatisticsDetail", ViewBag.QueryModel)" class="btn btn-blue-border bd-rdi" title="匯出">
+                        <span class="icon-ic-exprot bb-icon"></span>
+                        匯出 Excel
+                    </a>
+                </div>
+            </div>
+
+            <div class="pp-table pt-center-statistics">
+                <div class="pp-table-header">
+                    <ul>
+                        <li><p class="sth-txt">電支帳號</p></li>
+                        <li><p class="sth-txt">名稱</p></li>
+                        <li><p class="sth-txt">筆數</p></li>
+                        <li><p class="sth-txt">金額</p></li>
+                    </ul>
+                </div>
+                <div class="pp-table-body">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MID</td>
+                                <td>@item.Name</td>
+                                <td>@item.Count</td>
+                                <td>@item.Amount.ToString("N0")</td>
+                            </tr>
+                        }
+                            <tr class="ptf-sum">
+                                <td>小計：共 @Model.Count.ToString("N0") 筆</td>
+                                <td>-</td>
+                                <td>@Model.Sum(x=>x.Count).ToString("N0")</td>
+                                <td>@Model.Sum(x => x.Amount).ToString("N0")</td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

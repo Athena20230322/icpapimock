@@ -1,0 +1,103 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerManager;
+@model ListOverSeaUserQryVM
+@{
+    Model.StartDate = DateTime.Now.AddDays(-DateTime.Now.Day + 1);
+    Model.EndDate = DateTime.Now;
+}
+@section header
+{
+    <link href="~/Areas/Admin/Content/css/member.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Areas/Admin/Scripts/CustomerManager/ListOverSeaUser/action.js"></script>
+
+}
+
+    <div class="sc-box no-edge">
+        <div id="refreshForm" style="display:none;">
+            @using (Ajax.BeginForm("ListOverSeaUserResult", new AjaxOptions { UpdateTargetId = "queryResult" }))
+            {
+                <input type="submit" />
+                <input type="hidden" name="PageSize" id="PageSize" value="50" />
+                <input type="hidden" name="PageNo" id="PageNo" value="1" />
+                @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new { id = "refreshStartDate" })
+                @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new { id = "refreshEndDate" })
+                @Html.TextBoxFor(t => t.CellPhone, new { id = "refreshCellPhone" })
+                @Html.TextBoxFor(t => t.CName, new { id = "refreshCName" })
+                @Html.TextBoxFor(t => t.UniformID, new { id = "refreshUniformID" })
+                @*@Html.Hidden("queryAuthStatus")*@
+            }
+        </div>
+        @*@Html.ValidationSummary()*@
+        @using (Ajax.BeginForm("ListOverSeaUserResult", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            <input type="submit" id="btnQuery" value="query" style="display:none;" />
+            <input type="hidden" name="PageSize" value="50" />
+            <div class="scb-form sf-2column">
+
+                <dl class="sbf-date-single">
+                    <dt class="oneline-inp">建立日期<sup class="inp-required">*</sup></dt>
+                    <dd class="sbf-date-box">
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(t => t.StartDate, "{0:yyyy-MM-dd}", new { id = "queryStartDate", @class = "flatpickr flatpickr-input active minD", placeholder = "起始日期", @readonly = "readonly", @flatpickr_minDate = DateTime.Today.AddYears(-1).ToString("yyyy-01-01") })
+                        </label>
+
+                        <span class="sdb-txt">至</span>
+
+                        <label class="sdb-item sdb-date">
+                            @Html.TextBoxFor(t => t.EndDate, "{0:yyyy-MM-dd}", new { id = "queryEndDate", @class = "flatpickr flatpickr-input active maxD", placeholder = "結束日期", @readonly = "readonly", @flatpickr_maxDate = DateTime.Today.ToString("yyyy-MM-dd") })
+
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">手機號碼</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.CellPhone, new { id = "queryCellPhone", @class = "pp-inp", placeholder = "請輸入使用者手機號碼", @maxlength = 10 })
+                        @Html.ValidationMessageFor(t => t.CellPhone, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">居留證字號</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.UniformID, new { id = "queryUniformID", @class = "pp-inp", placeholder = "請輸入居留證字號", @maxlength = 10 })
+                        @Html.ValidationMessageFor(t => t.UniformID, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="oneline-inp">個人姓名</dt>
+                    <dd>
+                        @Html.TextBoxFor(t => t.CName, new { id = "queryCName", @class = "pp-inp", placeholder = "請輸入會員姓名" })
+                        @Html.ValidationMessageFor(t => t.CName, null, new { @class = "input-error-txt" }, "div")
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="btn-box">
+                <a id="lnkQuery" href="#" class="btn" title="查詢">查詢</a>
+                <a id="lnkReset" href="#" class="btn btn-blue-border" title="清除條件">清除條件</a>
+
+            </div>
+
+        }
+    </div>
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="@Url.Action("AddOverSeaMemberData")" class="libs-dialog-form btn" title="上傳基本資料">
+            <span class="icon-ic-add bb-icon"></span>
+            上傳基本資料
+        </a>
+        <a href="@Url.Action("UploadOverSeaFile")" class="libs-dialog-form btn" title="批次證件照片上傳">
+            <span class="icon-ic-add bb-icon"></span>
+            批次證件照片上傳
+        </a>
+    </div>
+</div>
+<div id="queryResult">
+</div>
+
+
+
+

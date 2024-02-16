@@ -1,0 +1,89 @@
+﻿@model QrySystemErrorReq
+@using ICP.Modules.Mvc.Admin.Models.SystemLog.SystemError;
+@{
+    Model.StartDate = DateTime.Today;
+    Model.EndDate = DateTime.Today;
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/system.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/SystemLog/SystemErrorLog/action.js"></script>
+}
+<div class="site-content">
+    <div class="sc-box no-edge">
+
+        @using (Ajax.BeginForm("SystemErrorLogResult", "SystemLog", new AjaxOptions { UpdateTargetId = "queryResult" }))
+        {
+            @Html.Hidden("PageSize", "10")
+
+        <div class="scb-form sf-2column">
+            <dl class="sbf-date-single">
+                <dt class="oneline-inp">查詢日期</dt>
+
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "class", "flatpickr flatpickr-input active minD" },
+                            { "placeholder", "起始日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-maxDate_input", "#EndDate" }
+                        })
+                    </label>
+
+                    <span class="sdb-txt">至</span>
+
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", new Dictionary<string, object> {
+                            { "class", "flatpickr flatpickr-input active maxD" },
+                            { "placeholder", "結束日期" },
+                            { "readonly", "readonly" },
+                            { "flatpickr-minDate_input", "#StartDate" }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">站台名稱</dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(m => m.SiteType, new List<SelectListItem>()
+                        {
+                            new SelectListItem(){Value = "0", Text = "全部" },
+                            new SelectListItem(){Value = "1", Text = "會員系統" },
+                            new SelectListItem(){Value = "2", Text = "交易系統" },
+                            new SelectListItem(){Value = "3", Text = "金流系統" },
+                            new SelectListItem(){Value = "4", Text = "後台系統" },
+                            new SelectListItem(){Value = "5", Text = "系統排程" }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">錯誤類型</dt>
+                <dd>
+                    <label class="def-select">
+                        @Html.DropDownListFor(m => m.ErrorType, new List<SelectListItem>()
+                        {
+                            new SelectListItem(){Value = "99", Text = "全部" },
+                            new SelectListItem(){Value = "1", Text = "DB 錯誤" },
+                            new SelectListItem(){Value = "0", Text = "程式錯誤" }
+                        })
+                    </label>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">伺服器名稱</dt>
+                <dd>                    
+                    @Html.TextBoxFor(m => m.MachineName, new { placeholder = "請輸入伺服器名稱" })
+                </dd>
+            </dl>
+        </div>
+            <div class="btn-box">
+                <a href="javascript:checkFields()" class="btn" title="查詢">查詢</a>
+                <a href="javascript:resetFields()" class="btn btn-blue-border" title="清除條件">清除條件</a>
+            </div>
+        }
+    </div>
+    <div id="queryResult"></div>
+</div>

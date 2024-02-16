@@ -1,0 +1,70 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models;
+@model IPagedList<UserQueryResult>
+@{
+    Layout = null;
+
+    List<Department> ListDepartment = ViewBag.ListDepartment;
+
+    Func<int?, string> GetDepartmentName = DeptID =>
+    {
+        if (DeptID == null) return string.Empty;
+
+        var item = ListDepartment.FirstOrDefault(T => T.DeptID == DeptID.Value);
+
+        if (item == null) return string.Empty;
+
+        return item.DeptName ?? string.Empty;
+    };
+}
+@{
+    if (Model.Count == 0)
+    {
+        Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/NoData.cshtml", (object)ViewBag.QueryModel);
+        return;
+    }
+}
+<div class="sc-box scb-table st-control st-2">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">使用者帳號</p></li>
+            <li><p class="sth-txt">使用者名稱</p></li>
+            <li><p class="sth-txt">所屬部門/編號</p></li>
+            <li><p class="sth-txt">是否為主管</p></li>
+            <li><p class="sth-txt">E-mail</p></li>
+            <li><p class="sth-txt">狀態</p></li>
+            <li><p class="sth-txt">編輯</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Account</td>
+                    <td>@item.CName</td>
+                    <td>@string.Format("{0}/{1}", GetDepartmentName(item.DeptID), item.UserID)</td>
+                    <td>@(item.IsManager == 1 ? "是" : "否")</td>
+                    <td>@item.UserEmail</td>
+                    <td>@(item.UserStatus == 1 ? "啟用" : "關閉")</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("Edit", new { id = item.UserID })" data-update-callback="query" class="libs-dialog-form btn" title="編輯">編輯</a>
+                            <a href="@Url.Action("Remove", new { id = item.UserID })" class="btn btn-gray del-user" title="刪除">刪除</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("Query", Model, ViewBag.QueryModel)); }

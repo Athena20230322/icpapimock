@@ -1,0 +1,82 @@
+﻿@using ICP.Library.Services.MemberServices
+@model ICP.Modules.Mvc.Payment.Models.QueryTrade.TransferTradeInfo
+
+@{
+    Layout = "~/Areas/Payment/Views/Shared/_QueryTradeLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    int ReceiveTransfer = 0;
+    int.TryParse(Request.Form["ReceiveTransfer"], out ReceiveTransfer);
+    string TransferType = "轉出";
+    string RTransferType = "轉入";
+    string Status = "失敗";
+    LibMemberInfoCommonService libMemberInfoCommonService = new LibMemberInfoCommonService();
+
+    if (ReceiveTransfer == 1)
+    {
+        TransferType = "轉入";
+        RTransferType = "轉出";
+    }
+    if(Model.TradeStatus == 1)
+    {
+        Status = "成功";
+    }
+
+    <div id="wrapper">
+        <header></header>
+        <section>
+            <ul class="style2 toggle_box" id="record_detial">
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>時間</span></div>
+                        <div class="col"><span>@Html.DisplayFor(model => model.CreateDate)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>類別</span></div>
+                        <div class="col"><span>轉帳<span class="green">(@TransferType)</span></span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>狀態</span></div>
+                        <div class="col green"><span>@(TransferType + Status)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>@(RTransferType)帳號</span><br><span>&nbsp;</span></div>
+                        <div class="col"><span>@(libMemberInfoCommonService.ConcealPartialCName(Model.CName, 'Ｏ'))</span><br><span> icash Pay帳戶<span>(@Model.IcashAccount)</span></span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>交易金額</span></div>
+                        <div class="col green"><span>@Html.DisplayFor(model => model.Amount)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="col"><span>編號</span></div>
+                        <div class="col"><span>@Html.DisplayFor(model => model.TradeNo)</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div><span class="gray">轉帳說明</span></div>
+                    <div style="border-bottom: 0.5px solid #D9D9D9;">
+                        <span>@Html.DisplayFor(model => model.Remark)</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+}
+
+<script type="text/javascript">
+    if ('@ViewBag.errMsg' != "") {
+        alert('@ViewBag.errMsg');
+    }
+</script>

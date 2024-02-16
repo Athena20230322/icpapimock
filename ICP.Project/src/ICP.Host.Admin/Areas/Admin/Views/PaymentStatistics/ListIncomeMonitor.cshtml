@@ -1,0 +1,143 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@using ICP.Modules.Mvc.Admin.Models.PaymentStatistics.IncomeMonitor;
+@model IPagedList<QryIncomeMonitorRes>
+@{
+    Layout = null;
+}
+
+<div class="sc-function">
+    <div class="btn-box">
+        <a href="javascript:;" onclick="Export()" class="btn btn-blue-border bd-rdi bb-min" title="匯出Excel">
+            <span class="icon-ic-exprot bb-icon"></span>
+            匯出Excel
+        </a>
+    </div>
+</div>
+<div class="st-scroll-tip">
+    <span class="sst-txt">往右滾動看更多</span>
+</div>
+<div class="sc-box scb-attach">
+    <div class="scb-function">
+        <div class="sbf-txt">選擇日期：<span id="SelectDate">@ViewBag.SelectDate</span></div>
+        <div class="btn-box">
+            <a id="UpdateStatus" href="javascript:;" class="btn" title="勾選送出" onclick="UpdateStatus()">勾選送出</a>
+            <a id="SelectAll" href="javascript:;" class="btn" title="全部勾選" onclick="SelectAll()">全部勾選</a>
+        </div>
+    </div>
+</div>
+<div class="sc-box scb-table st-control stb-oneline st-daily-monitor">
+    <div class="scb-table-body stb-thbg">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>電支帳號</th>
+                    <th>收款觀察名單</th>
+                    <th>付款觀察名單</th>
+                    <th>商戶名稱</th>
+                    <th>商店名稱</th>
+                    <th>註冊時間</th>
+                    <th>MCC Code</th>
+                    <th>商品類別</th>
+                    <th>個人/法人</th>
+                    <th>帳戶餘額</th>
+                    <th>連結銀行帳戶</th>
+                    <th>1天總收款額</th>
+                    <th>10天帳戶餘額收款</th>
+                    <th>30天帳戶餘額收款</th>
+                    <th>備註</th>
+                    <th>記錄</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr class=@(item.IncomeStaus ? "stb-highlight" : "")>
+                    <td>
+                        <a href=@(item.LevelID == 31 ? item.CustomerID.ToString() : "/Admin/CustomerManager/Detail/" + item.MID) target="_blank">@item.ICPMID</a>@(item.LevelID == 31 ? "(還沒有商戶明細)" : "")
+                    </td>
+                    <td>
+                        @if (item.IncomeStaus)
+                        {<div class="dot dot-red"></div>}
+                        else
+                        {<text>-</text>}
+                    </td>
+                    <td>
+                        @if (item.PaymentStatus)
+                        {<div class="dot dot-green"></div>}
+                        else
+                        {<text>-</text>}
+                    </td>
+                    <td>
+                        <a href="/Admin/Finance/TradeDetail/@(item.ICPMID)?date=@(ViewBag.SelectDate)" target="_blank">@item.MerchantName</a>
+                        <br />
+                    </td>
+                    <td>
+                        @if (string.IsNullOrWhiteSpace(item.WebSiteURL))
+                        {@item.WebSiteName}
+                    else
+                    {<a href="@item.WebSiteURL" target="_blank">@item.WebSiteName</a>}
+                    </td>
+                    <td>@item.RegDate.ToString("yyyy/MM/dd")<br />@item.RegDate.ToString("HH:mm:ss")</td>
+                    <td>@(item.MCCCode == 0 ? "-" : item.MCCCode.ToString())</td>
+                    <td>@item.CommoditiyTypeName</td>
+                    <td>@item.MerchantTypeName</td>
+                    <td>@item.ICashAmt.ToString("N0")<br>@item.ICashCount</td>
+                    <td>@item.ACLinkAmt.ToString("N0")<br>@item.ACLinkCount</td>
+                    <td>@item.Total1DayAmt.ToString("N0")<br>@item.Total1DayCount</td>
+                    <td>@item.ICash10DaysAmt.ToString("N0")<br>@item.ICash10DaysCount</td>
+                    <td>@item.ICash30DaysAmt.ToString("N0")<br>@item.ICash30DaysCount</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="@Url.Action("IncomeMonitorLog", new { id = item.MID, icpMid = item.ICPMID, merchantName = item.MerchantName })" data-effect="mfp-zoom-in" class="libs-dialog-form btn btn-blue-border" title="歷程" data-update-callback="query">歷程</a>
+                        </div>
+                    </td>
+                    <td>
+                        @if (item.InspectStatus)
+                        {
+                            @item.InspectDate.Value.ToString("yyyy/MM/dd")
+                        }
+                        else
+                        {
+                            <div class="st-function-group">
+                                <div class="def-check">
+                                    @Html.CheckBox("inspectStatus", new { @class = "inspectStatus", value = @item.MID, id = "sdc_" + @item.MID })
+                                    <label for="sdc_@item.MID" class="checkbox"></label>
+                                </div>
+                            </div>
+                            @:已檢視
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@{Html.RenderPartial("~/Areas/Admin/Views/Shared/Templates/Pager.cshtml", new PagerModel("ListIncomeMonitor", Model, ViewBag.QueryModel));}
+
+@*@if (Model.Count == 0)
+{
+    <script type="text/javascript">
+        alert("查無資料");
+    </script>
+}*@

@@ -1,0 +1,77 @@
+﻿@using ICP.Modules.Mvc.Admin.Models
+@model List<FunctionCategoryLog>
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+
+    string FunctionName = ViewBag.FunctionName;
+}
+<div id="rec-check-popup" class="rec-check-popup mg-popup mfp-with-anim">
+    <div class="pp-container">
+        <div class="pp-content">
+            <h4 class="pp-title">[@FunctionName] - 查看歷程</h4>
+            <div class="pp-table pt-rec-check">
+                <div class="pp-table-header">
+                    <ul>
+                        <li><p class="pth-txt">原狀態</p></li>
+                        <li><p class="pth-txt">調整後狀態</p></li>
+                        <li><p class="pth-txt">修改時間</p></li>
+                        <li><p class="pth-txt">修改人</p></li>
+                    </ul>
+                </div>
+                <div class="pp-table-body">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        @if (Model == null || !Model.Any())
+                        {
+                            <tr>
+                                <td colspan="4">暫無資料</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (item.Status == 0)
+                                        {
+                                            @:開
+                                        }
+                                        else
+                                        {
+                                            @:關
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Status == 0)
+                                        {
+                                            @:關
+                                        }
+                                        else
+                                        {
+                                            @:開
+                                        }
+                                    </td>
+                                    <td>
+                                        @item.CreateDate.ToString("yyyy-MM-dd HH:mm")
+                                    </td>
+                                    <td>
+                                        @item.CreateUser
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

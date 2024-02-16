@@ -1,0 +1,84 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.CustomerSecurityManage
+@model TakeCashLimitAddOrUpdateModel
+@{
+    if (Request.IsAjaxRequest())
+    {        
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section scripts
+    {
+    <script src="~/Areas/Admin/Scripts/CustomerSecurityManage/UpdateTakeCashLimit/action.js"></script>
+}
+
+
+
+@if (ViewBag.Status == 1)
+{
+    <div id="locking-blacklist-popup" class="locking-blacklist-popup mg-popup mfp-with-anim">
+        <div class="pp-container">
+            @Html.ValidationSummary()
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" value="@ViewBag.Status" name="Status" />
+                <input type="hidden" value="@ViewBag.ICPMID" name="ICPMID" />
+
+                <div class="pp-content">
+                    <h4 class="pp-title">進行鎖定</h4>
+                    <div class="pp-form">
+                        <dl>
+                            <dt>原因</dt>
+                            <dd>
+                                @Html.TextAreaFor(t => t.ModifyMemo, new { @class = "pp-textarea", placeholder = "請輸入原因", @maxLength = 150 })
+                                <div class="input-tip-txt itt-r itt-er" id="input-tip-txt"><span>0</span>/150</div>
+                                @Html.ValidationMessageFor(t => t.ModifyMemo, null, new { @class = "input-error-txt" }, "div")
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="mp-btn-block2">
+                    <a href="#" class="btn disabled link-submit" title="確認">確認</a>
+                </div>
+            }
+
+        </div>
+    </div>
+}
+else
+{
+    <div id="unlocking-blacklist-popup" class="unlocking-blacklist-popup mg-popup mfp-with-anim">
+        <div class="pp-container">
+            @Html.ValidationSummary()
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" value="@ViewBag.Status" name="Status" />
+                <input type="hidden" value="@ViewBag.ICPMID" name="ICPMID" />
+
+                <div class="pp-content">
+                    <h4 class="pp-title">解除鎖定</h4>
+                    <div class="pp-form">
+                        <dl>
+                            <dt>原因</dt>
+                            <dd>
+                                @Html.TextAreaFor(t => t.ModifyMemo, new { @class = "pp-textarea", placeholder = "請輸入原因", @maxLength = 150 })
+                                <div class="input-tip-txt itt-r itt-er" id="input-tip-txt"><span>0</span>/150</div>
+                                @Html.ValidationMessageFor(t => t.ModifyMemo, null, new { @class = "input-error-txt" }, "div")
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="mp-btn-block2">
+                    <a href="#" class="btn disabled link-submit" title="確認">確認</a>
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
+
+
+
+

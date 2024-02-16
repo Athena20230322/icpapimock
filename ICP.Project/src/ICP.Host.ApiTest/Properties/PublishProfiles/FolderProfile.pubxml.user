@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <History>False|2023-06-06T05:20:41.0001448Z;False|2023-05-19T15:33:52.8947553+08:00;False|2023-05-19T15:32:17.2720210+08:00;</History>
+    <_PublishTargetUrl>C:\icpapimock</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="App_Data/MockApi.json">
+      <publishTime>11/27/2023 13:06:04</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

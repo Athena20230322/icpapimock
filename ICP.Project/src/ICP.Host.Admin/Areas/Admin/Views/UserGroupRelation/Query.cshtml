@@ -1,0 +1,35 @@
+﻿@model List<UserGroupQueryResult>
+@using ICP.Modules.Mvc.Admin.Models.ViewModels;
+@{
+    Layout = null;
+}
+<div class="sc-box scb-table st-3">
+    <div class="scb-table-header">
+        <ul>
+            <li><p class="sth-txt">群組編號</p></li>
+            <li><p class="sth-txt">群組名稱</p></li>
+            <li><p class="sth-txt">編輯</p></li>
+        </ul>
+    </div>
+    <div class="scb-table-body">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserGroupCode</td>
+                    <td>@item.UserGroupName</td>
+                    <td>
+                        <div class="btn-box stb-btn-box">
+                            <a href="javascript:;" url="@Url.Action("QueryUsers", new { id = item.UserGroupID })" class="btn query-users" title="群組成員">群組成員</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

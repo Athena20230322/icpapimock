@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetValueResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TripleDESEncrypt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rawData" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyLabel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TripleDESEncryptResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TripleDESEncryptResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TripleDESDecrypt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="encryptedHex" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyLabel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TripleDESDecryptResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TripleDESDecryptResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TripleDESEncryptByKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rawData" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyHex" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TripleDESEncryptByKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TripleDESEncryptByKeyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TripleDESDecryptByKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="encryptedHex" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyHex" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TripleDESDecryptByKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TripleDESDecryptByKeyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Sign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyLabel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="encodeFlag" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SignResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SignResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="signData" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyLabel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySignResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VerifySignResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SignTest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bankCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="encodeFlag" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SignTestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SignTestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySignTest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bankCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySignTestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VerifySignTestResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetValueSoapIn">
+    <wsdl:part name="parameters" element="tns:GetValue" />
+  </wsdl:message>
+  <wsdl:message name="GetValueSoapOut">
+    <wsdl:part name="parameters" element="tns:GetValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="TripleDESEncryptSoapIn">
+    <wsdl:part name="parameters" element="tns:TripleDESEncrypt" />
+  </wsdl:message>
+  <wsdl:message name="TripleDESEncryptSoapOut">
+    <wsdl:part name="parameters" element="tns:TripleDESEncryptResponse" />
+  </wsdl:message>
+  <wsdl:message name="TripleDESDecryptSoapIn">
+    <wsdl:part name="parameters" element="tns:TripleDESDecrypt" />
+  </wsdl:message>
+  <wsdl:message name="TripleDESDecryptSoapOut">
+    <wsdl:part name="parameters" element="tns:TripleDESDecryptResponse" />
+  </wsdl:message>
+  <wsdl:message name="TripleDESEncryptByKeySoapIn">
+    <wsdl:part name="parameters" element="tns:TripleDESEncryptByKey" />
+  </wsdl:message>
+  <wsdl:message name="TripleDESEncryptByKeySoapOut">
+    <wsdl:part name="parameters" element="tns:TripleDESEncryptByKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="TripleDESDecryptByKeySoapIn">
+    <wsdl:part name="parameters" element="tns:TripleDESDecryptByKey" />
+  </wsdl:message>
+  <wsdl:message name="TripleDESDecryptByKeySoapOut">
+    <wsdl:part name="parameters" element="tns:TripleDESDecryptByKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="SignSoapIn">
+    <wsdl:part name="parameters" element="tns:Sign" />
+  </wsdl:message>
+  <wsdl:message name="SignSoapOut">
+    <wsdl:part name="parameters" element="tns:SignResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifySignSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifySign" />
+  </wsdl:message>
+  <wsdl:message name="VerifySignSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifySignResponse" />
+  </wsdl:message>
+  <wsdl:message name="SignTestSoapIn">
+    <wsdl:part name="parameters" element="tns:SignTest" />
+  </wsdl:message>
+  <wsdl:message name="SignTestSoapOut">
+    <wsdl:part name="parameters" element="tns:SignTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifySignTestSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifySignTest" />
+  </wsdl:message>
+  <wsdl:message name="VerifySignTestSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifySignTestResponse" />
+  </wsdl:message>
+  <wsdl:portType name="KeyApiSoap">
+    <wsdl:operation name="GetValue">
+      <wsdl:input message="tns:GetValueSoapIn" />
+      <wsdl:output message="tns:GetValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESEncrypt">
+      <wsdl:input message="tns:TripleDESEncryptSoapIn" />
+      <wsdl:output message="tns:TripleDESEncryptSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESDecrypt">
+      <wsdl:input message="tns:TripleDESDecryptSoapIn" />
+      <wsdl:output message="tns:TripleDESDecryptSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESEncryptByKey">
+      <wsdl:input message="tns:TripleDESEncryptByKeySoapIn" />
+      <wsdl:output message="tns:TripleDESEncryptByKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESDecryptByKey">
+      <wsdl:input message="tns:TripleDESDecryptByKeySoapIn" />
+      <wsdl:output message="tns:TripleDESDecryptByKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Sign">
+      <wsdl:input message="tns:SignSoapIn" />
+      <wsdl:output message="tns:SignSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySign">
+      <wsdl:input message="tns:VerifySignSoapIn" />
+      <wsdl:output message="tns:VerifySignSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SignTest">
+      <wsdl:input message="tns:SignTestSoapIn" />
+      <wsdl:output message="tns:SignTestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySignTest">
+      <wsdl:input message="tns:VerifySignTestSoapIn" />
+      <wsdl:output message="tns:VerifySignTestSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KeyApiSoap" type="tns:KeyApiSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetValue">
+      <soap:operation soapAction="http://tempuri.org/GetValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESEncrypt">
+      <soap:operation soapAction="http://tempuri.org/TripleDESEncrypt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESDecrypt">
+      <soap:operation soapAction="http://tempuri.org/TripleDESDecrypt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESEncryptByKey">
+      <soap:operation soapAction="http://tempuri.org/TripleDESEncryptByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESDecryptByKey">
+      <soap:operation soapAction="http://tempuri.org/TripleDESDecryptByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sign">
+      <soap:operation soapAction="http://tempuri.org/Sign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySign">
+      <soap:operation soapAction="http://tempuri.org/VerifySign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SignTest">
+      <soap:operation soapAction="http://tempuri.org/SignTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySignTest">
+      <soap:operation soapAction="http://tempuri.org/VerifySignTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KeyApiSoap12" type="tns:KeyApiSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetValue">
+      <soap12:operation soapAction="http://tempuri.org/GetValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESEncrypt">
+      <soap12:operation soapAction="http://tempuri.org/TripleDESEncrypt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESDecrypt">
+      <soap12:operation soapAction="http://tempuri.org/TripleDESDecrypt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESEncryptByKey">
+      <soap12:operation soapAction="http://tempuri.org/TripleDESEncryptByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TripleDESDecryptByKey">
+      <soap12:operation soapAction="http://tempuri.org/TripleDESDecryptByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sign">
+      <soap12:operation soapAction="http://tempuri.org/Sign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySign">
+      <soap12:operation soapAction="http://tempuri.org/VerifySign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SignTest">
+      <soap12:operation soapAction="http://tempuri.org/SignTest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySignTest">
+      <soap12:operation soapAction="http://tempuri.org/VerifySignTest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KeyApi">
+    <wsdl:port name="KeyApiSoap" binding="tns:KeyApiSoap">
+      <soap:address location="http://localhost:2063/KeyApi.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KeyApiSoap12" binding="tns:KeyApiSoap12">
+      <soap12:address location="http://localhost:2063/KeyApi.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

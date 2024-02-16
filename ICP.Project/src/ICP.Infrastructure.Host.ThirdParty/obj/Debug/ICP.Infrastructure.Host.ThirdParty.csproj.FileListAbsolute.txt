@@ -1,0 +1,6 @@
+D:\ICP\ICP.Project\src\ICP.Infrastructure.Host.ThirdParty\bin\ICP.Infrastructure.Host.ThirdParty.dll.config
+D:\ICP\ICP.Project\src\ICP.Infrastructure.Host.ThirdParty\bin\ICP.Infrastructure.Host.ThirdParty.dll
+D:\ICP\ICP.Project\src\ICP.Infrastructure.Host.ThirdParty\bin\ICP.Infrastructure.Host.ThirdParty.pdb
+D:\ICP\ICP.Project\src\ICP.Infrastructure.Host.ThirdParty\obj\Debug\ICP.Infrastructure.Host.ThirdParty.csproj.CoreCompileInputs.cache
+D:\ICP\ICP.Project\src\ICP.Infrastructure.Host.ThirdParty\obj\Debug\ICP.Infrastructure.Host.ThirdParty.dll
+D:\ICP\ICP.Project\src\ICP.Infrastructure.Host.ThirdParty\obj\Debug\ICP.Infrastructure.Host.ThirdParty.pdb

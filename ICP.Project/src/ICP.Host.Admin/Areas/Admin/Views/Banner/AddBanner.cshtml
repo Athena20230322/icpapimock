@@ -1,0 +1,241 @@
+﻿@using ICP.Modules.Mvc.Admin.Models.Banner
+@model ModifyBannerVM
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutForAjax.cshtml";
+    }
+}
+@section header{
+    <link href="~/Areas/Admin/Content/css/reward.css" rel="stylesheet" />
+}
+
+@Html.ValidationSummary()
+@using (Html.BeginForm("AddBanner", "Banner", FormMethod.Post, new { onsubmit = "return submitConfirm()" }))
+{
+    <div class="sc-box scb-padding">
+        <h4 class="content-title ct-inside">廣告基本設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.BannerSiteList)</dt>
+                <dd class="sf-check-box">
+                    @for (int i = 0; i < Model.BannerSiteList.Count; i++)
+                    {
+                        @Html.HiddenFor(m => m.BannerSiteList[i].SiteID)
+                        @Html.HiddenFor(m => m.BannerSiteList[i].SiteName)
+                        <div class="def-check">
+                            @Html.CheckBoxFor(m => m.BannerSiteList[i].IsSelected, new { id = "adp_" + Model.BannerSiteList[i].SiteID, @class = "bannerSiteList" })
+                            <label for="adp_@Model.BannerSiteList[i].SiteID" class="checkbox">@Model.BannerSiteList[i].SiteName</label>
+                        </div>
+                    }
+                    <div class="input-error-txt" id="bannerSiteListError" style="display: none;">請選擇廣告對外顯示位置</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.StartDate)</dt>
+                <dd class="sbf-date-box">
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.StartDate, new { @class = "flatpickr flatpickr-input active minD", placeholder = "起始日期", @readonly = "readonly" })
+                    </label>
+                    <label class="sdb-item sdb-time">
+                        @Html.TextBoxFor(m => m.StartDateTime, new { @class = "flatpickr flatpickr-input active time", placeholder = "起始時間", @readonly = "readonly" })
+                    </label>
+                    <span class="sdb-txt">至</span>
+                    <label class="sdb-item sdb-date">
+                        @Html.TextBoxFor(m => m.EndDate, new { @class = "flatpickr flatpickr-input active maxD", placeholder = "結束日期", @readonly = "readonly" })
+                    </label>
+                    <label class="sdb-item sdb-time">
+                        @Html.TextBoxFor(m => m.EndDateTime, new { @class = "flatpickr flatpickr-input active time", placeholder = "結束時間", @readonly = "readonly" })
+                    </label>
+                    <div class="input-error-txt" id="timeError" style="display: none;">請設定廣告上下架時間</div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="sc-box scb-padding">
+        <h4 class="content-title ct-inside">廣告內容設定</h4>
+        <div class="scb-form">
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.IsUseContent)</dt>
+                <dd class="sf-radio-box">
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.IsUseContent, 1, new { id = "aas_1", @onclick = "isUseContentSetting();" })
+                        <label for="aas_1" class="radio">是</label>
+                    </div>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.IsUseContent, 0, new { id = "aas_2", @onclick = "isUseContentSetting();" })
+                        <label for="aas_2" class="radio">否</label>
+                    </div>
+                </dd>
+            </dl>
+            <dl id="urlPart">
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.UrlLink1)</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.UrlLink1, new { @class = "input-error", placeholder = "請輸入 Banner 點選欲連結至的網址", @maxlength = "500" })
+                    <div class="input-error-txt" id="urlLink1Error" style="display: none;">請設定外層 BANNER 點選欲連結網址</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.ImagePath)<sup class="inp-required">*</sup></dt>
+                <dd>
+                    <div class="def-file">
+                        @Html.TextBox("ImageFile1", null, new { type = "file", accept = "image/*", @class = "dff-input" })
+                        <div class="btn btn-blue-border dff-btn">上傳檔案</div>
+                        <div class="dff-no-file" id="ImageFileUrl1">未選擇任何檔案</div>
+                    </div>
+                    <div class="input-error-txt" id="imageFile1Error" style="display: none;">請上傳外層BANNER圖片</div>
+                    @if (Model.ImagePath == null)
+                    {
+                        <div class="dff-photo" id="ImagePathList1">
+                            <ul id="preViewImagePath"></ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dff-photo" id="ImagePathList1">
+                            <ul id="preViewImagePath">
+                                @if (Model.ImagePath.Length > 0)
+                                {
+                                    <li>
+                                        <div class="dfp-holder">
+                                            <img src="@Model.ImagePath" alt="@Model.ImagePath">
+                                        </div>
+                                        <div class="dfp-close">
+                                            <span class="icon-ic_fail_svg dpc-ic del"></span>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                            @if (Model.ImagePath.Length > 0)
+                            {
+                                @Html.HiddenFor(m => m.ImagePath)
+                            }
+                        </div>
+                    }
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.OrderID)</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.OrderID, new { @class = "input-error", placeholder = "請輸入排序數字，最上方為 1，如排序數字重複，原本排序會自動遞延" })
+                    <div class="input-error-txt" id="orderIDError" style="display: none;">請輸入外層BANNER顯示排序</div>
+                </dd>
+            </dl>
+            <dl id="openNewWindowPart">
+                <dt>@Html.DisplayNameFor(m => m.OpenNewWindow1)</dt>
+                <dd class="sf-radio-box">
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.OpenNewWindow1, 0, new { id = "aot_1" })
+                        <label for="aot_1" class="radio">內開</label>
+                    </div>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.OpenNewWindow1, 1, new { id = "aot_2" })
+                        <label for="aot_2" class="radio">外開</label>
+                    </div>
+                    <div class="input-error-txt" id="openNewWindow1Error" style="display: none;">請選擇內層連結設定之頁面開啟方式</div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="sc-box scb-padding" id="secondPart" style="display: none;">
+        <h4 class="content-title ct-inside">廣告專區第二層內容設定(非必填)</h4>
+        <div class="scb-form">
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.Title)</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Title, new { @class = "input-error", placeholder = "請輸入2-20字活動名稱", @maxlength = "20" })
+                    <div class="input-error-txt" id="titleError" style="display: none;">請輸入2-20字活動名稱</div>
+                    <div class="input-tip-txt itt-r itt-er"><p id="titleLength">0/20</p></div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="oneline-inp">@Html.DisplayNameFor(m => m.UrlLink2)</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.UrlLink2, new { @class = "input-error", placeholder = "請輸入 Banner 點選欲連結至的網址", @maxlength = "500" })
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.ImagePathList)</dt>
+                <dd>
+                    <div class="def-file">
+                        @Html.TextBox("ImageFile2", null, new { type = "file", accept = "image/*", @class = "dff-input" })
+                        <div class="btn btn-blue-border dff-btn">上傳檔案</div>
+                        <div class="dff-no-file" id="ImageFileUrl2">未選擇任何檔案</div>
+                    </div>
+                    @if (Model.ImagePathList == null)
+                    {
+                        <div class="dff-photo" id="ImagePathList2">
+                            <ul id="preViewImageList"></ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dff-photo" id="ImagePathList2">
+                            <ul id="preViewImageList">
+                                @if (Model.ImagePathList.Count > 0)
+                                {
+                                    foreach (var item in Model.ImagePathList)
+                                    {
+                                        <li>
+                                            <div class="dfp-holder">
+                                                <img src="@item" alt="@item">
+                                            </div>
+                                            <div class="dfp-close">
+                                                <span class="icon-ic_fail_svg dpc-ic del"></span>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                            @if (Model.ImagePathList.Count > 0)
+                            {
+                                foreach (var item in Model.ImagePathList)
+                                {
+                                    <input type="hidden" name="ImagePathList[@Model.ImagePathList.IndexOf(item)]" />
+                                }
+                            }
+                        </div>
+                    }
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.OpenNewWindow2)</dt>
+                <dd class="sf-radio-box">
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.OpenNewWindow2, 0, new { id = "aot2_1" })
+                        <label for="aot2_1" class="radio">內開</label>
+                    </div>
+                    <div class="def-radio">
+                        @Html.RadioButtonFor(m => m.OpenNewWindow2, 1, new { id = "aot2_2" })
+                        <label for="aot2_2" class="radio">外開</label>
+                    </div>
+                    <div class="input-error-txt" id="openNewWindow2Error" style="display: none;">請選擇內層連結設定之頁面開啟方式</div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.BannerContent)</dt>
+                <dd>
+                    @Html.TextAreaFor(m => m.BannerContent, new { @class = "txa-mini", placeholder = "請輸入 10 - 1000 字廣告說明" })
+                    <div class="input-error-txt" id="contentError" style="display: none;">請輸入 10 - 1000 字廣告說明</div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="scb-bottom-btn sbb-center">
+        <input type="submit" id="btnSubmit" value="query" style="display:none;" />
+        <a data-effect="mfp-zoom-in" class="btn" title="新增" onclick="chkOrderID();">新增</a>
+    </div>
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Admin/Scripts/clipboard.min.js")"></script>
+    <script src="@Url.Content("~/Areas/Admin/Scripts/Banner/Modify/action.js?v=1")"></script>
+    <script type="text/javascript">
+        libs.alert.validationSummary();
+    </script>
+}
