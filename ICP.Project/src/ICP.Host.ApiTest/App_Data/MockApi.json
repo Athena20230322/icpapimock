@@ -2896,14 +2896,11 @@
         }
       },
 
-
-
       {
         "host": "member",
         "name": "MOP201-檢查該會員是否為OP會員",
-        "url": "/MemberInfo/IsOpenPointMember",
+        "url": "/MemberInfo/BindOpenPointMember",
         "json": {
-
 
           "Vers": "3.0.1.0",
           "DeviceInfo": "Pixel 7bb",
@@ -2921,58 +2918,9 @@
 
           "Token": "識別使用者呼叫API權限",
           "Password": "限制6~20英數混合字元，使用者輸入的密碼"
-        }
-      },
-      {
-        "host": "member",
-        "name": "MOP202-取得OP登入連結",
-        "url": "/MemberInfo/GetAuthOpenPointUrl",
-        "json": {
-
-
-          "Vers": "3.0.1.0",
-          "DeviceInfo": "Pixel 7bb",
-          "DeviceID": "b4f194a32647b4f5",
-          "IsSimulator": "0",
-          "OS": "2",
-          "OSVersion": "13",
-          "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
-          "Token": ""
-        },
-        "specs": {
-
-
-          "Token": "識別使用者呼叫API權限",
-          "Password": "限制6~20英數混合字元，使用者輸入的密碼"
-        }
-      },
-      {
-        "host": "member",
-        "name": "MOP203-註冊OP會員",
-        "url": "/MemberInfo/RegisterOpenPointMember",
-        "json": {
-
-
-          "Vers": "3.0.1.0",
-          "DeviceInfo": "Pixel 7bb",
-          "DeviceID": "b4f194a32647b4f5",
-          "IsSimulator": "0",
-          "OS": "2",
-          "OSVersion": "13",
-          "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
-          "Token": ""
-        },
-        "specs": {
-
-
-          "Token": "識別使用者呼叫API權限"
-
         }
       }
+   
 
 
     ]
