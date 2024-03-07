@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0910000367"
+          "CellPhone": "0908095183"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -111,8 +111,8 @@
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "icp10655238",
-          "UserPwd": "Aa123456",
+          "UserCode": "tbot01",
+          "UserPwd": "1qaz2wsx",
           "SMSAuthCode": ""
 
         },
@@ -136,8 +136,8 @@
         "url": "/app/MemberInfo/SendAuthSMS",
         "json": {
           "LoginTokenID": "7933292712F6468382D561B24868E118",
-          "UserCode": "icp10655271",
-          "CellPhone": "0910000371",
+          "UserCode": "tbot01",
+          "CellPhone": "0908095183",
           "SMSAuthType": 1
         },
         "specs": {
@@ -236,8 +236,8 @@
         "name": "M0012 變更安全密碼",
         "url": "/app/MemberInfo/ChangeSecurityPwd",
         "json": {
-          "NewSecPwd": "123456",
-          "ConfirmSecPwd": "123456"
+          "NewSecPwd": "135790",
+          "ConfirmSecPwd": "135790"
         },
         "specs": {
           "NewSecPwd": "新的安全密碼",
@@ -1181,7 +1181,7 @@
         "name": "M0098 檢查是否需要更新APP",
         "url": "/app/MemberInfo/CheckIsUpdate",
         "json": {
-          "VersionCode": "2.0.6"
+          "VersionCode": "2.0.56"
 
         },
         "specs": {
@@ -1228,9 +1228,22 @@
         "url": "/app/MemberInfo/QueryMemberOpPoint",
         "json": {
 
+
         },
         "specs": {
           "": "取得會員OP點數"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0102 更新推播token",
+        "url": "/app/MemberInfo/UpdatePushToken",
+        "json": {
+          "PushToken": "cV18ClVPB_IAtkrNBheHNc:APA91bFT-nhH-faribP42Fz8o7qsmS9Cc_N3RGJXL3twkjnMUlQxlT7COgBAlBk4Pf3IbG6gIZ6A6LC-6YUpZK5Rk-5js4SayiV_2ohOBCRFAPF4mE51izrkPypgy8eioZVFziU5wFI9"
+
+        },
+        "specs": {
+          "": "更新推播token"
         }
       },
 
@@ -2018,7 +2031,7 @@
         "json": {
 
 
-          "CellPhone": "0976100003",
+          "CellPhone": "0911111113",
           "SMSAuthType": 1,
           "Token": "",
           "Vers": "3.0.1.155",
@@ -2045,7 +2058,7 @@
         "json": {
 
 
-          "CellPhone": "0976100003",
+          "CellPhone": "0911111113",
           "SMSAuthType": 1,
           "AuthCode": "123456",
           "Vers": "3.0.1.155",
@@ -2082,7 +2095,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "Account": "tester184"
+          "Account": "icppost3"
 
         },
         "specs": {
@@ -2274,9 +2287,9 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "Account": "icp09090",
-          "IDNumber": "Y236171714",
-          "PhoneNumber": "0928200816"
+          "Account": "icp10655279",
+          "IDNumber": "B185952970",
+          "PhoneNumber": "0910000377"
 
         },
         "specs": {
@@ -2330,10 +2343,8 @@
           "OS": "2",
           "OSVersion": "13",
           "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
           "Token": "",
-          "IDNumber": "Z102475042"
+          "IDNumber": "B185952970"
 
 
         },
@@ -2362,7 +2373,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "PhoneNumber": ""
+          "PhoneNumber": "0910000387"
 
 
         },
@@ -2379,7 +2390,7 @@
         "url": "/MemberInfo/SetAccount",
         "json": {
 
-          "Account": "icp10655269",
+          "Account": "icp10655289",
           "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
@@ -2411,8 +2422,8 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "CodeType": 1,
-          "SecurityCode": ""
+          "CodeType": 0,
+          "SecurityCode": "135790"
         },
         "specs": {
 
@@ -2438,7 +2449,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "IDNumber": "X224472705"
+          "IDNumber": "C812576525"
         },
         "specs": {
 
@@ -2622,11 +2633,11 @@
           "AppName": "icashpay2023",
           "Token": "",
           "CName": "測試一",
-          "Birthday": "1973/05/05",
+          "Birthday": "1990/01/01",
           "AreaID": "1001",
           "Address": "台北市內湖區瑞光路200號",
-          "IDNO": "B146064664",
-          "IssueDate": "1996/05/05",
+          "IDNO": "E184337598",
+          "IssueDate": "2024/02/19",
           "IssueLocation": "10001",
           "IssueType": "3",
           "fileCols": "img1,img2"
@@ -2898,7 +2909,7 @@
 
       {
         "host": "member",
-        "name": "MOP201-檢查該會員是否為OP會員",
+        "name": "MOP201-綁定OP會員",
         "url": "/MemberInfo/BindOpenPointMember",
         "json": {
 
@@ -2909,8 +2920,6 @@
           "OS": "2",
           "OSVersion": "13",
           "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
           "Token": ""
         },
         "specs": {
@@ -2920,7 +2929,7 @@
           "Password": "限制6~20英數混合字元，使用者輸入的密碼"
         }
       }
-   
+
 
 
     ]
@@ -3135,7 +3144,7 @@
         "url": "/app/Payment/QueryQRInfo",
         "json": {
 
-          "MerchantQRcode": "iikipS2y+kWFlOKhPs4Q+auZT1SMxc+SVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ+w56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW+G8shNS+20qKszoGrCTFcy2u7WNdD0qg2lupJI28V+s6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3uiMya4ukJnFuHHejQlc50pUNBfITS4akbyZ7UxwZXTBUj/Yj1EVyZ/G5kOPL7xMpabK0NqNrO1dQ8/BGhEJAuMnPX1zsJkbSr4d2a55TL5hYI8TNGBI7LgmSTg//Xh/eNXXHs3Ai2n85SPIWbMYDh+3gQBPsscquzDc6djP5CRZnFg0RAd19JuMVOQEf4AJgc+jXGC1D+rCGjxOusIEXmTVa77nKn+OpQ63td7Lre8D69+xRc8ivX27lelzlNcRUlpogGcv17jilzZSj+d6A330/9eKgiVLi2+ybM18CbkPdMS1MCTkj6KQau55ANO8RziNz+/zJZNzkJeVSFindhfLrGldE3UncsQjaUfZPMkp/S88ccDMB90HHyuDV0sKzqdsMD61AGtPE8XS8tcGQChk0uhGg+tp36i0cCAIeUDLugyfOOjgTZTi6IyzbpgI1amSaUUfoZhW4OQvTyyAZmg=="
+          "MerchantQRcode": "iikipS2y%2BkWFlOKhPs4Q%2BauZT1SMxc%2BSVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ%2Bw56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW%2BG8shNS%2B20qKszoGrCTFcy2u7WNdD0qg2lupJI28V%2Bs6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3b0EO%2FVG0jkOK5nVSEfpym85D5oivkxjhsvRQrPUKwoSeULZPo7Ip5RA0xTLspzeFBT44t%2BFuUvc%2BWTtOBICYVHYgOdgTgR5ZDe4rQsUZroYnIhS9uYhK9PiQj4iF1eBN5MHOtfsD3QJHbEpfjuDf8h2ST1Yo68yCRkg9fvzsgnbnoHmJVXD0d%2B93T%2FWAr6Sdehs7Js7NqYo3WITZfHVu8orjK6Jlm8Ow%2BSL4qgK8PwB0%2BjUenmZbO6L0iwQkD6fT9r1baoTMPz50qdrYpyyUXWlKtBhC%2Bd1HDPk8nNu5SBnSCy81aENPJ%2F0UYHvl%2FTHnJJuVXW8lwpfkrOZK05FzLDOZcRt%2B8TlUnqiRRaj4LDqqq2FleBpmig%2BrwseOUpTRX7%2F5Agv%2FNvc%2FTGRqkCJsg5AuyOJ4kRJv%2BiKQdUyxYpez9mz94KHEBwnucbfek5VcjffrGKUopicYJ0alRIW%2BvtniTYRxPXYE3BGPT4Jgn80%3D"
         },
         "specs": {
           "MerchantQRcode": "QRCode URL"
