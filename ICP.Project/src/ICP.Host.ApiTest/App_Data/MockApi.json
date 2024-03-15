@@ -913,6 +913,21 @@
           "PageSize": "分頁筆數"
         }
       },
+
+      {
+        "host": "member",
+        "name": "M0067 刪除好友",
+        "url": "/app/ChatMember/RemoveFriends",
+        "json": {
+          "ArrayFriendMemberID": [-291]
+         
+
+        },
+        "specs": {
+          "ArrayFriendMemberID": "要刪除的聊天會員編號"
+
+        }
+      },
       {
         "host": "member",
         "name": "M0075 取得分行代碼清單",
@@ -2031,7 +2046,7 @@
         "json": {
 
 
-          "CellPhone": "0919541317",
+          "CellPhone": "0911111113",
           "SMSAuthType": 1,
           "Token": "",
           "Vers": "3.0.1.155",
@@ -2058,7 +2073,7 @@
         "json": {
 
 
-          "CellPhone": "0919541317",
+          "CellPhone": "0911111113",
           "SMSAuthType": 1,
           "AuthCode": "",
           "Vers": "3.0.1.155",
@@ -2095,7 +2110,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "Account": "adan0109"
+          "Account": "icppost3"
 
         },
         "specs": {
@@ -2449,7 +2464,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "IDNumber": "P122680069"
+          "IDNumber": "C812576525"
         },
         "specs": {
 
