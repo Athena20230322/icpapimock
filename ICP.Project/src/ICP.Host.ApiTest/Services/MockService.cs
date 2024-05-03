@@ -148,7 +148,9 @@ namespace ICP.Host.ApiTest.Services
             }
 
             _rsaCryptoHelper.ImportPemPublicKey(_setting.ServerPubCert);
- bool isValid = _rsaCryptoHelper.VerifySignDataWithSha256(stringResult, resultSignature);
+            
+            bool isValid = _rsaCryptoHelper.VerifySignDataWithSha256(stringResult, resultSignature);
+           
             if (!isValid)
             {
                 throw new Exception("簽章驗證失敗");

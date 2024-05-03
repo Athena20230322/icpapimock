@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+@using (Html.BeginForm())
+{
+    <span>
+        Environment:
+    </span>
+    <select name="env">
+        <option value="beta">BETA</option>
+        <option value="stage">STAGE</option>
+        <option value="uat">UAT</option>
+        <option value="prod">PROD</option>
+    </select>
+    <span>
+        Url:
+    </span>
+    <input type="text" name="url" style="width:400px;" value="http://localhost:3311/Member/Test/TestView" />
+    <br />
+    <br />
+    <input type="submit" value="Redirect" />
+}

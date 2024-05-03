@@ -4,12 +4,282 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <History>False|2023-06-06T05:20:41.0001448Z;False|2023-05-19T15:33:52.8947553+08:00;False|2023-05-19T15:32:17.2720210+08:00;</History>
+    <History>True|2024-04-01T08:01:18.8543013Z;False|2024-04-01T16:01:10.5693919+08:00;False|2023-06-06T13:20:41.0001448+08:00;False|2023-05-19T15:33:52.8947553+08:00;False|2023-05-19T15:32:17.2720210+08:00;</History>
     <_PublishTargetUrl>C:\icpapimock</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="App_Data/appSettings.Beta.config">
+      <publishTime>07/20/2023 11:57:36</publishTime>
+    </File>
+    <File Include="App_Data/appSettings.config">
+      <publishTime>07/20/2023 11:57:36</publishTime>
+    </File>
+    <File Include="App_Data/appSettings.Release.config">
+      <publishTime>07/20/2023 11:57:36</publishTime>
+    </File>
+    <File Include="App_Data/connectionStrings.Beta.config">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="App_Data/connectionStrings.config">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="App_Data/connectionStrings.Release.config">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="App_Data/EnvHost.json">
+      <publishTime>09/05/2023 14:24:17</publishTime>
+    </File>
+    <File Include="App_Data/EnvOPCustomReceiveHost.json">
+      <publishTime>05/19/2023 10:26:02</publishTime>
+    </File>
+    <File Include="App_Data/EnvOPWebUIHost.json">
+      <publishTime>05/19/2023 10:36:46</publishTime>
+    </File>
     <File Include="App_Data/MockApi.json">
-      <publishTime>11/27/2023 13:06:04</publishTime>
+      <publishTime>04/01/2024 12:01:56</publishTime>
+    </File>
+    <File Include="App_Data/MockOPClientApi.json">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="App_Data/MockOPCustomReceiveApi.json">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="App_Data/MockOPCustomSendApi.json">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="App_Data/MockOPWebUIApi.json">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/Autofac.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/Autofac.Extras.DynamicProxy.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/Autofac.Extras.DynamicProxy.pdb">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.Mvc.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/AutoMapper.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/AutoMapper.pdb">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/Castle.Core.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/Dapper.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/ICP.Host.ApiTest.dll">
+      <publishTime>01/19/2024 16:04:29</publishTime>
+    </File>
+    <File Include="bin/ICP.Host.ApiTest.pdb">
+      <publishTime>01/19/2024 16:04:29</publishTime>
+    </File>
+    <File Include="bin/ICP.Infrastructure.Abstractions.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/ICP.Infrastructure.Abstractions.pdb">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/ICP.Infrastructure.Core.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/ICP.Infrastructure.Core.dll.config">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/ICP.Infrastructure.Core.pdb">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/ICP.Infrastructure.Core.Web.dll">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="bin/ICP.Library.Models.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/ICP.Library.Repositories.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/ICP.Library.Services.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/ICP.Modules.Api.Authorization.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/ICP.Modules.Api.Member.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/08/2023 15:09:56</publishTime>
+    </File>
+    <File Include="bin/NLog.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/System.ValueTuple.dll">
+      <publishTime>03/27/2023 12:45:31</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.Mvc.resources.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.Razor.resources.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.WebPages.Deployment.resources.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.WebPages.Razor.resources.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.WebPages.resources.dll">
+      <publishTime>02/22/2023 10:33:48</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.3.1.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.3.1.min.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.3.1.min.map">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.3.1.slim.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.3.1.slim.min.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.3.1.slim.min.map">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.cookie-1.4.1.min.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.cookie.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.form.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.form.min.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.form.min.js.map">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/mock.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/mockOPClient.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/mockOPCustomReceive.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/mockOPCustomSend.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/mockOPWebUI.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.8.3.js">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Views/Mock/AppRedirect.cshtml">
+      <publishTime>06/21/2023 09:02:19</publishTime>
+    </File>
+    <File Include="Views/Mock/Index.cshtml">
+      <publishTime>06/21/2023 09:02:19</publishTime>
+    </File>
+    <File Include="Views/MockOPClient/Index.cshtml">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Views/MockOPCustomReceive/Index.cshtml">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Views/MockOPCustomSend/Index.cshtml">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Views/MockOPWebUI/Index.cshtml">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>02/22/2023 10:33:47</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/01/2024 16:01:17</publishTime>
     </File>
   </ItemGroup>
 </Project>

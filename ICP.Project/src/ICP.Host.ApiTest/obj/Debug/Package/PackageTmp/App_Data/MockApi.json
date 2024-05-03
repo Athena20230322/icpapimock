@@ -1,0 +1,3785 @@
+﻿[
+  {
+    "category": "Member Api",
+    "list": [
+
+
+      {
+        "host": "member",
+        "name": "M0001_1 刷新AppToken(2022)",
+        "url": "/app/MemberInfo/RefreshLoginToken",
+        "json": {
+          "CellPhone": "0908095183"
+        },
+        "specs": {
+          "CellPhone": "手機號碼，格式：09開頭，共10碼"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0001_1 刷新AppToken(2023)",
+        "url": "/app/MemberInfo/RefreshLoginToken2023",
+        "json": {
+          "IDNo": "F126507126"
+        },
+        "specs": {
+          "IDNo": "身分證字號"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0001 取得手機號碼",
+        "url": "/app/MemberInfo/getCellphone",
+        "json": {
+          "AuthV": ""
+        },
+        "specs": {
+          "AuthV": "OPEN WALLET 提供的AuthV"
+        }
+      },
+
+
+      {
+        "host": "member",
+        "name": "M0002 檢查會員驗證狀態",
+        "url": "/app/MemberInfo/CheckVerifyStatus",
+        "json": {},
+        "specs": {}
+      },
+      {
+        "host": "member",
+        "name": "M0003_1 設定註冊資料(2022)",
+        "url": "/app/MemberInfo/SetRegisterInfo2022",
+        "json": {
+          "CellPhone": "0910000369",
+          "UserCode": "icp10655271",
+          "UserPwd": "Aa123456"
+        },
+        "specs": {
+
+          "CellPhone": "手機號碼，格式：09開頭，共10碼",
+          "UserCode": "登入帳號，格式：6-12碼半形英數混合",
+          "UserPwd": "登入密碼，格式：6-12碼半形英數混合",
+          "RCCode": "推薦碼"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0004 會員資料填寫及驗證",
+        "url": "/app/MemberInfo/AuthIDNO",
+        "json": {
+          "CName": "測試一",
+          "BirthDay": "2000-01-01",
+          "NationalityID": "1206",
+          "AreaID": "1001",
+          "Address": "123",
+          "Email": "autoicash20230207@gmail.com",
+          "Idno": "B142692546",
+          "IssueDate": "2024-01-01",
+          "IssueLoc": "12345",
+          "IssueType": "3",
+          "LegalRepData": [
+            {
+              "LegalRepType": "1",
+              "LegalRepName": "孩子的爸",
+              "LegalRepIcpMID": "1681911000000221"
+            },
+            {
+              "LegalRepType": "1",
+              "LegalRepName": "孩子的媽",
+              "LegalRepIcpMID": "1681911000000236"
+            }
+          ],
+          "fileCols": "img1,img2"
+        },
+        "specs": {
+          "CName": "姓名",
+          "BirthDay": "生日，格式：yyyy-MM-dd",
+          "NationalityID": "國籍編號",
+          "AreaID": "縣市+鄉鎮市區",
+          "Address": "地址(巷弄路段號)",
+          "Email": "電子郵件帳號",
+          "Idno": "身份證字號",
+          "IssueDate": "發證日期，格式：yyyy-MM-dd",
+          "IssueLoc": "發證地點 (ex.10017)",
+          "IssueType": "換證類別 1：初發, 2：補發, 3：換發",
+          "LegalRepData": {
+            "name": "法定代理人資料",
+            "specs": {
+              "LegalRepType": "1",
+              "LegalRepName": "孩子的媽",
+              "LegalRepIcpMID": "1681911000000236"
+            }
+          },
+          "fileCols": "身份證正反面圖片"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0005_1會員登入",
+        "url": "/app/MemberInfo/UserCodeLogin2022",
+        "json": {
+          "LoginType": 1,
+          "UserCode": "tbot01",
+          "UserPwd": "1qaz2wsx",
+          "SMSAuthCode": ""
+
+        },
+        "specs": {
+          "LoginType": "登入方式 1：一般登入(預設) 2：圖形密碼",
+          "UserCode": "Clare123",
+          "UserPwd": "Aa123456",
+          "SMSAuthCode": "簡訊驗證碼 (提供換機驗證)"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0006 取得登入回傳資訊",
+        "url": "/app/MemberInfo/GetLoginInfo",
+        "json": {},
+        "specs": {}
+      },
+      {
+        "host": "member",
+        "name": "M0007 發送簡訊驗證_共用",
+        "url": "/app/MemberInfo/SendAuthSMS",
+        "json": {
+          "LoginTokenID": "7933292712F6468382D561B24868E118",
+          "UserCode": "tbot01",
+          "CellPhone": "0908095183",
+          "SMSAuthType": 1
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1~5需傳)",
+          "UserCode": "登入帳號，格式：6-12碼半形英數混合※當SMSAuthType=2時必需帶入",
+          "CellPhone": "手機號碼檢查帶入的手機號碼與系統紀錄要發送的手機號碼是否一致",
+          "SMSAuthType": "驗證類別 1：註冊時發送簡訊 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 5：換機驗證發送簡訊 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8：修改手機號碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0007_1 發送簡訊驗證_共用",
+        "url": "/app/MemberInfo/SendAuthSMS2023",
+        "json": {
+          "LoginTokenID": "",
+          "UserCode": "icp10655271",
+          "CellPhone": "0910000369",
+          "IDNo": "D173092541",
+          "SMSAuthType": 1,
+          "MID": "10526282"
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1,2,3,5需傳)",
+          "UserCode": "登入帳號，格式：6-12碼半形英數混合※當SMSAuthType=2時必需帶入",
+          "CellPhone": "手機號碼檢查帶入的手機號碼與系統紀錄要發送的手機號碼是否一致",
+          "IDNo": "身份證字號 或 居留證號碼",
+          "SMSAuthType": "驗證類別 1：註冊時發送簡訊 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 5：換機驗證發送簡訊 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入)"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0008 發送簡訊驗證_修改手機號碼",
+        "url": "/app/MemberInfo/ChangePhoneSendAuthSMS",
+        "json": {
+          "CellPhone": "0908009004"
+        },
+        "specs": {
+          "CellPhone": "手機號碼依帶入的手機號碼發送簡訊驗證"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0009 檢查簡訊驗證碼_共用",
+        "url": "/app/MemberInfo/CheckAuthSMS",
+        "json": {
+          "LoginTokenID": "",
+          "CellPhone": "0912334472",
+          "SMSAuthType": 2,
+          "AuthCode": "",
+          "Idno": "C106302033"
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID(SMSAuthType=1,2需傳)",
+          "CellPhone": "手機號碼",
+          "SMSAuthType": "驗證類別 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8：修改手機號碼發送簡訊(已登入)(當SMSAuthType=8，驗證通過時需一併更新手機號碼) ===========(1)：註冊時發送簡訊 (請使用 M0010 檢查簡訊驗證碼_註冊 驗證) (5)：換機驗證發送簡訊(請使用 M0005 會員登入 驗證)",
+          "AuthCode": "簡訊驗證碼"
+        }
+      },
+
+
+
+      {
+        "host": "member",
+        "name": "M0010 檢查簡訊驗證碼_註冊",
+        "url": "/app/MemberInfo/CheckRegisterAuthSMS",
+        "json": {
+          "LoginTokenID": "",
+          "CellPhone": "0910000369",
+          "AuthCode": ""
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID",
+          "CellPhone": "手機號碼",
+          "AuthCode": "簡訊驗證碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0011 變更登入密碼",
+        "url": "/app/MemberInfo/ChangeLoginPwd",
+        "json": {
+          "ChangeType": "1",
+          "OriginalLoginPwd": "Aa123456",
+          "NewLoginPwd": "Aa678910",
+          "ConfirmLoginPwd": "Aa678910"
+        },
+        "specs": {
+          "OriginalLoginPwd": "原登入密碼※當ChangeType=1時必填",
+          "NewLoginPwd": "新的登入密碼",
+          "ConfirmLoginPwd": "再次確認登入密碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0012 變更安全密碼",
+        "url": "/app/MemberInfo/ChangeSecurityPwd",
+        "json": {
+          "NewSecPwd": "135790",
+          "ConfirmSecPwd": "135790"
+        },
+        "specs": {
+          "NewSecPwd": "新的安全密碼",
+          "ConfirmSecPwd": "再次確認安全密碼"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0013 檢查安全密碼",
+        "url": "/app/MemberInfo/CheckSecurityPwd",
+        "json": {
+          "SecPwd": "123456"
+        },
+        "specs": {
+          "SecPwd": "安全密碼"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0014 變更圖形密碼",
+        "url": "/app/MemberInfo/ChangeGraphicLock",
+        "json": {
+          "NewGraphicPwd": "12345",
+          "ConfirmGraphicPwd": "12345"
+        },
+        "specs": {
+          "NewGraphicPwd": "新的圖形密碼",
+          "ConfirmGraphicPwd": "再次確認圖形密碼"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0015 檢查圖形密碼",
+        "url": "/app/MemberInfo/CheckGraphicLock",
+        "json": {
+          "GraphicPwd": "12345"
+        },
+        "specs": {
+          "GraphicPwd": "圖形密碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0016 設定指紋辨識及FaceID開關",
+        "url": "/app/MemberInfo/UpdateFingerPrintPwdStatus",
+        "json": {
+          "Status": "True"
+        },
+        "specs": {
+          "FingerPrintPwd": "狀態False：停用, True：啟用"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0017 驗證指紋辨識及FaceID",
+        "url": "/app/MemberInfo/CheckFingerPrintPwd",
+        "json": {
+          "FingerPrintPwd": "1d81fbe2-8352-43ec-81d8-87f78f4d3be0"
+        },
+        "specs": {
+          "FingerPrintPwd": "指紋/FaceID密碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0018 設定圖形密碼開關",
+        "url": "/app/MemberInfo/UpdateGraphicLockStatus",
+        "json": {
+          "Status": "False"
+        },
+        "specs": {
+          "Status": "狀態 False：停用, True：啟用"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0019 取得密碼設定開關狀態",
+        "url": "/app/MemberInfo/GetPasswordStatus",
+        "json": {
+        },
+        "specs": {
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0020 會員偏好設定",
+        "url": "/app/MemberInfo/UpdateMemberPreferences",
+        "json": {
+          "Options": [
+            {
+              "OptionName": "test1",
+              "OptionValue": "value1"
+            },
+            {
+              "OptionName": "test2",
+              "OptionValue": "value2"
+            }
+          ]
+        },
+        "specs": {
+          "Options": {
+            "name": "選項清單",
+            "specs": {
+              "OptionName": "設定名稱",
+              "OptionValue": "選項設定值"
+            }
+          }
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0021 取得會員偏好設定",
+        "url": "/app/MemberInfo/GetMemberPreferences",
+        "json": {
+          "OptionName": "test1"
+        },
+        "specs": {
+          "OptionName": "選項名稱"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0022 修改暱稱",
+        "url": "/app/MemberInfo/UpdateNickName",
+        "json": {
+          "NickName": "暱稱Test"
+        },
+        "specs": {
+          "NickName": "暱稱"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0023 修改Email",
+        "url": "/app/MemberInfo/UpdateEmailAddress",
+        "json": {
+          "Email": "test@icp.com.tw"
+        },
+        "specs": {
+          "Email": "電子郵件帳號"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0024 重設登入密碼",
+        "url": "/app/MemberInfo/ResetLoginPwd",
+        "json": {
+          "LoginTokenID": "",
+          "NewLoginPwd": "123456",
+          "ConfirmLoginPwd": "123456"
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID (帶入M0001回傳LoginTokenID)",
+          "NewLoginPwd": "新的登入密碼",
+          "ConfirmLoginPwd": "再次確認登入密碼"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0025 會員登出",
+        "url": "/app/MemberInfo/UserCodeLogout",
+        "json": {
+
+        },
+        "specs": {
+
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0026 取得銀行清單",
+        "url": "/app/MemberInfo/GetListBankInfo",
+        "json": {
+          "BankInfoType": "1"
+
+        },
+        "specs": {
+          "BankInfoType": "銀行資訊種類,1.提領銀行,2.轉帳銀行"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0027 銀行帳戶驗證",
+        "url": "/app/MemberInfo/BankAccountAuth",
+        "json": {
+          "BankCode": "009",
+          "BankType": "1"
+        },
+        "specs": {
+          "BankType": "銀行類別 1：合作銀行 2：非合作銀行",
+          "BankCode": "銀行代碼",
+          "BankAccount": "銀行帳號",
+          "BranchCode": "分行代碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0028 取得提領資訊",
+        "url": "/app/MemberInfo/GetWithdrawBalanceInfo",
+        "json": {},
+        "specs": {}
+      },
+
+      {
+        "host": "member",
+        "name": "M0029 更新會員同意項目",
+        "url": "/app/MemberInfo/SetMemberAgree",
+        "json": {
+          "AgreeItems": [
+
+            {
+              "AgreeType": 4,
+              "AgreeStatus": 1
+            }
+          ]
+        },
+
+        "specs": {
+          "AgreeItems": "同意項目",
+          "AgreeType": "同意項目1：個資聲明2：電子支付機構業務定型化契約3：隱私權政策與條款4：交易限額說明",
+          "AgreeStatus": "同意狀態0：尚未同意1：同意2：不同意"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0030 取得指定範圍訊息中心清單",
+        "url": "/app/MemberInfo/GetRangeNotifyMessageList",
+        "json": {
+          "MsgID": 0,
+          "Type": 1,
+          "Count": 100
+        },
+        "specs": {
+          "MsgID": "指定取得的ID(包含此ID)",
+          "Type": "取得指定取得ID的較新或較舊訊息 0：較舊 1：較新",
+          "Count": "撈取筆數"
+        }
+      },
+
+
+      {
+        "host": "member",
+        "name": "M0031 MID搜尋會員資料",
+        "url": "/app/ChatMember/QueryChatMemberByMID",
+        "json": {
+          "ChatMemberID": 14136,
+          "ArrayMID": [
+            {
+              "FriendsList": 0
+            }
+          ]
+        },
+        "specs": {
+          "ChatMemberID": "聊天會員編號",
+          "ArrayMID": "用來查詢的MID，限制100筆"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0032 設定訊息已讀",
+        "url": "/app/MemberInfo/SetReadMessage",
+        "json": {
+          "ReadAll": false,
+          "Params": [
+            {
+              "MsgID": 0
+            }
+          ]
+        },
+        "specs": {
+          "ReadAll": "是否已讀全部訊息 False：否(預設值) True：是",
+          "Params": {
+            "name": "額外參數 ※當ReadAll=False時，此欄位必填",
+            "specs": {
+              "MsgID": "訊息編號"
+            }
+          }
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0033 刪除訊息",
+        "url": "/app/MemberInfo/DeleteNotifyMessage",
+        "json": {
+          "DeleteAll": false,
+          "Params": [
+            {
+              "MsgID": 0
+            }
+          ]
+        },
+        "specs": {
+          "DeleteAll": "是否刪除全部訊息 False：否(預設值) True：是",
+          "Params": {
+            "name": "額外參數 ※當DeleteAll=False時，此欄位必填",
+            "specs": {
+              "MsgID": "訊息編號"
+            }
+          }
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0034 設定大頭貼",
+        "url": "/app/MemberInfo/SetProPic",
+        "json": {
+
+
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0035  刪除綁定銀行帳戶",
+        "url": "/app/MemberInfo/DelAccountBind",
+        "json": {
+          "AccountType": 1,
+          "BankCode": "004",
+          "AccountID": ""
+
+
+        },
+        "specs": {
+          "AccountType": "刪除帳戶類別 1：連結扣款帳戶 2：提領轉入帳戶",
+          "BankCode": "銀行代碼",
+          "AccountID": "銀行帳戶編號(系統定義流水號)"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0036 取得綁定銀行帳號",
+        "url": "/app/MemberInfo/GetBindAccountList",
+        "json": {
+          "AccountType": 1
+        },
+        "specs": {
+          "AccountType": "綁定帳戶類別 1：連結扣款 2：餘額提領轉入"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0037 首次登入設定帳密",
+        "url": "/app/MemberInfo/FirstLoginSetAccount",
+        "json": {
+          "UserCode": "Aa1234",
+          "LoginPwd": "Aa1234",
+          "ConfirmLoginPwd": "Aa1234"
+        },
+        "specs": {
+          "UserCode": "登入帳號，格式：6-12碼半形英數混合",
+          "LoginPwd": "登入密碼，格式：6-12碼半形英數混合",
+          "ConfirmLoginPwd": "再次確認登入密碼"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0038 記錄略過修改登入密碼",
+        "url": "/app/MemberInfo/SetLoginPwdIgnorDate",
+        "json": {
+
+        },
+        "specs": {
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0039 記錄略過修改安全密碼",
+        "url": "/app/MemberInfo/SetSecPwdIgnorDate",
+        "json": {
+
+        },
+        "specs": {
+
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0040 記錄略過修改圖形密碼",
+        "url": "/app/MemberInfo/SetGraphicLockIgnorDate",
+        "json": {
+
+        },
+        "specs": {
+
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0041 取得JSON Web Token",
+        "url": "/app/MemberInfo/GetJWTInfo",
+        "json": {},
+        "specs": {}
+      },
+
+      {
+        "host": "member",
+        "name": "M0041 Socket Server使用者驗證",
+        "url": "/api/Member/MemberInfo/PrivateUserAuth",
+        "json": {},
+        "specs": {}
+      },
+      {
+        "host": "websocket",
+        "name": "M0041 server-notification",
+        "url": "/api/notification",
+        "json": {
+          "to": "10524084",
+          "actionID": "301",
+          "data": ""
+        },
+        "specs": {}
+      },
+      {
+        "host": "member",
+        "name": "M0042 取得載具資訊",
+        "url": "/app/MemberInfo/GetEInvoiceCarrierInfo",
+        "json": {},
+        "specs": {}
+      },
+      {
+        "host": "member",
+        "name": "M0043 驗證手機條碼",
+        "url": "/app/MemberInfo/AuthCellPhoneCarrier",
+        "json": {
+          "CarrierNumber": "/AAAA",
+          "VerificationCode": "Test1234"
+        },
+        "specs": {}
+      },
+      {
+        "host": "member",
+        "name": "M0044 取得發票清單",
+        "url": "/app/MemberInfo/QueryEinvoiceList",
+        "json": {
+          "EinvoicePeriod": "10806"
+        },
+        "specs": {
+          "EinvoicePeriod": "發票期別 格式：YYYMM(民國年+當期別的偶數月份)※e.g. 108年01-02月，帶入10802"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0045 取得發票明細",
+        "url": "/app/MemberInfo/QueryEinvoiceDetail",
+        "json": {
+          "EinvoicePeriod": "10806",
+          "EinvoiceNum": "QQ-123456"
+        },
+        "specs": {
+          "EinvoicePeriod": "發票期別 格式：YYYMM(民國年+當期別的偶數月份)※e.g. 108年01-02月，帶入10802",
+          "EinvoiceNum": "發票號碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0046 取得帳戶狀態資訊",
+        "url": "/api/Member/MemberInfo/GetAccountStatusInfo",
+        "json": {},
+        "specs": {}
+      },
+
+      {
+        "host": "member",
+        "name": "M0047 帳戶結清",
+        "url": "/app/MemberInfo/CloseMemberAccount",
+        "json": {},
+        "specs": {}
+      },
+
+      {
+        "host": "member",
+        "name": "M0048 取得選單XML",
+        "url": "/app/MemberInfo/getAppXmlSetting",
+        "json": {
+          "XmlVersion": "1"
+        },
+        "specs": {
+          "XmlVersion": "XML 版號"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0049 取得交友邀請數",
+        "url": "/app/ChatMember/GetFriendInviteCounts",
+        "json": {},
+        "specs": {}
+      },
+      {
+        "host": "member",
+        "name": "M0050 取得已接收好友邀請清單",
+        "url": "/app/ChatMember/ListFriendInviteReceive",
+        "json": {
+          "PageNo": 1,
+          "PageSize": 10
+        },
+        "specs": {}
+      },
+      {
+        "host": "member",
+        "name": "M0051 取得已發送好友邀請清單",
+        "url": "/app/ChatMember/ListFriendInviteSend",
+        "json": {
+          "PageNo": 1,
+          "PageSize": 10
+        },
+        "specs": {
+          "PageNo": "分頁",
+          "PageSize": "分頁筆數"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0052 新增提領轉入帳戶",
+        "url": "/app/MemberInfo/AddWithdrawAccountBind",
+        "json": {
+
+
+          "BankAccount": "1682311000001441",
+          "BankCode": "392",
+          "BranchCode": ""
+        },
+        "specs": {
+
+          "BranchCode": "分行代碼",
+          "BankAccount": "銀行帳號",
+          "BankCode": "銀行代碼"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0053 餘額提領",
+        "url": "/app/MemberInfo/AddWithdrawBalance",
+        "json": {
+          "BankCode": "050",
+          "BankAccount": "13064600006",
+          "AccountID": "21917",
+          "Amount": "20",
+          "AgreeLevelUp": false
+
+
+
+        },
+        "specs": {
+          "BankCode": "銀行代碼",
+          "BankAccount": "銀行帳號",
+          "AccountID": "銀行帳戶編號(系統定義流水號)",
+          "Amount": "提領金額",
+          "AgreeLevelUp": "是否同意升級為二類會員 False：不同意 True：同意"
+
+
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0054 同意好友邀請",
+        "url": "/app/ChatMember/AcceptFriendInvite",
+        "json": {
+          "FriendChatMID": ""
+
+
+
+        },
+        "specs": {
+          "FriendChatMID": "好友聊天會員編號"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0057 手機號碼搜尋會員資料",
+        "url": "/app/ChatMember/QueryChatMemberByCellPhone",
+        "json": {
+          "ChatMemberID": "14136",
+          "ArrayCellPhone": [
+            "0908009004"
+          ]
+
+        },
+        "specs": {
+          "ChatMemberID": "聊天會員編號",
+          "ArrayCellPhone": "用來查詢的手機號碼，限制100筆"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0058 取得系統維護開關",
+        "url": "/app/MemberInfo/GetMaintainStatus",
+        "json": {
+
+
+        },
+        "specs": {
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0062 設定我的最愛",
+        "url": "/app/ChatMember/SetFavorite",
+        "json": {
+          "FriendChatMID": "14136",
+          "IsFavorite": "1"
+
+
+        },
+        "specs": {
+          "FriendChatMID": "好友聊天編號",
+          "IsFavorite": "設定最愛"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0063 取得好友列表",
+        "url": "/app/ChatMember/ListFriends",
+        "json": {
+          "PageNo": "1",
+          "PageSize": "10"
+
+
+        },
+        "specs": {
+          "PageNo": "分頁",
+          "PageSize": "分頁筆數"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0064 更新好友列表",
+        "url": "/app/ChatMember/ListFriendsUpdate",
+        "json": {
+          "LastUpdateTime": "2019/01/01 00:00:00"
+
+
+        },
+        "specs": {
+          "LastUpdateTime": "最後更新時間 (取得該時間之後的更新) 格式：2019/01/01 00:00:00"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0065 取得聊天列表",
+        "url": "/app/ChatMember/ListDialog",
+        "json": {
+          "ArrayDialogID": null,
+          "PageNo": "1",
+          "PageSize": "10"
+
+        },
+        "specs": {
+          "ArrayDialogID": "指定查詢聊天室※ 若沒有帶入指定聊天室，則回傳有對話紀錄的所有聊天室清單",
+          "PageNo": "分頁",
+          "PageSize": "分頁筆數"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0067 刪除好友",
+        "url": "/app/ChatMember/RemoveFriends",
+        "json": {
+          "ArrayFriendMemberID": [ -291 ]
+
+
+        },
+        "specs": {
+          "ArrayFriendMemberID": "要刪除的聊天會員編號"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0075 取得分行代碼清單",
+        "url": "app/MemberInfo/ListBankBranch",
+        "json": {
+          "BankCode": "004"
+        },
+        "specs": {
+          "BankCode": "銀行代碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0076 訊息中心同步",
+        "url": "/app/MemberInfo/ListSynNotifyMessage",
+        "json": {
+          "MaxNID": null,
+          "MinNID": null,
+          "ModifyDate": 1559723427
+        },
+        "specs": {
+          "MaxNID": "ID區間 (最大)",
+          "MinNID": "ID區間 (最小)",
+          "ModifyDate": "最後一次更新的TimeStemp"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0077 取得訊息內容",
+        "url": "/app/MemberInfo/GetNotifyMessage",
+        "json": {
+          "MsgID": 0
+        },
+        "specs": {
+          "MsgID": "訊息ID"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0078 取得轉入者資料",
+        "url": "/app/ChatMember/CheckTransferReceiver",
+        "json": {
+          "ReceivedICPMID": "",
+          "ReceivedCName": ""
+        },
+        "specs": {
+          "ReceivedICPMID": "轉入者icash Pay電支帳號",
+          "ReceivedCName": "轉入者戶名"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0084 取得線上開戶銀行清單",
+        "url": "/app/MemberInfo/GetListOnlineBankInfo",
+        "json": {
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0085 取得首頁banner廣告",
+        "url": "/app/MemberInfo/GetAD",
+        "json": {
+          "ADType": "1",
+          "ADStartTime": "2021/06/08 09:44:33",
+          "ADEndTime": "2023/06/20 09:44:33"
+
+        },
+        "specs": {
+          "ICash2List": "icash 2.0 卡片列表"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0086 信用卡解綁",
+        "url": "/app/MemberInfo/UnBindMemberCreditCard",
+        "json": {
+          "PanID": ""
+        },
+        "specs": {
+          "PanID": "信用卡ID"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0087 信用卡暱稱設定",
+        "url": "/app/MemberInfo/SetCreditCardAbbr",
+        "json": {
+          "PanID": "",
+          "CreditCardAbbr": ""
+        },
+        "specs": {
+          "PanID": "信用卡ID",
+          "CreditCardAbbr": "信用卡別名"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0088 信用卡綁定",
+        "url": "/app/MemberInfo/BindMemberCreditCard",
+        "json": {
+          "CustID": "C106302033",
+          "Pan": "4182302222222222",
+          "ExpDate": "202508",
+          "CVV2": "012",
+          "CheckMacValue": "1234567890"
+
+        },
+        "specs": {
+          "CustID": "身分證字號",
+          "Pan": "信用卡號",
+          "ExpDate": "信用卡號",
+          "CVV2": "卡片到期日",
+          "CheckMacValue": "檢核碼"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0089 取得icash2.0綁icashpay列表",
+        "url": "/app/ICash2Bind/ICash2BindList",
+        "json": {
+
+        },
+        "specs": {
+          "ICash2List": "icash 2.0 卡片列表"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0090 檢核icash2.0卡綁定狀態",
+        "url": "/app/ICash2Bind/ICash2Verify",
+        "json": {
+          "CardNo": "7311220448001327",
+          "Silver": "26251935"
+
+        },
+        "specs": {
+          "CardNo": "icash 2.0 卡號",
+          "Silver": "icash 2.0 銀漆碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0091 綁定icash2.0至icashpay",
+        "url": "/app/ICash2Bind/ICash2Binding",
+        "json": {
+          "CardNo": "",
+          "CardName": "",
+          "IsRegisted": "",
+          "BankCode": "",
+          "BankAccount": "",
+          "Name": "",
+          "TwId": "",
+          "Mobile": "",
+          "Email": "",
+          "Birthday": "",
+          "IssueDate": "",
+          "IssueType": "",
+          "IssueLoc": "",
+          "Country": "",
+          "ZipCode": "",
+          "Address": ""
+
+        },
+        "specs": {
+          "CardNo": "icash 2.0 卡號",
+          "CardName": "卡片自訂名稱",
+          "IsRegisted": "是否已記名 icash2.0",
+          "BankCode": "銀行別",
+          "BankAccount": "銀行帳戶",
+          "Name": "姓名",
+          "TwId": "身分證號",
+          "Mobile": "手機號碼",
+          "Email": "電子郵件信箱",
+          "Birthday": "生日",
+          "IssueDate": "發證日期",
+          "IssueType": "領補換代號",
+          "IssueLoc": "發證地點編號",
+          "Country": "國別",
+          "ZipCode": "郵遞區號",
+          "Address": "住址"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0092 解除icash2.0綁定icashpay",
+        "url": "/app/ICash2Bind/ICash2UnBinding",
+        "json": {
+          "CardNo": "7311220448001327"
+
+        },
+        "specs": {
+          "CardNo": "icash 2.0 卡號"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0093 取得行銷活動清單",
+        "url": "/app/MemberInfo/GetMainCampaignList",
+        "json": {
+          "isGetAll": "true"
+
+        },
+        "specs": {
+          "isGetAll": "是否取得全部行銷活動"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0094 指定行銷活動發動",
+        "url": "/app/MemberInfo/CampaignAction",
+        "json": {
+          "ActivityID": "",
+          "Action": ""
+
+        },
+        "specs": {
+          "ActivityID": "活動代號",
+          "Action": "活動動作"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0095 取得信用卡功能公告提示文字",
+        "url": "/app/MemberInfo/GetCreditCardBindHint",
+        "json": {
+
+
+        },
+        "specs": {
+          "": "取得信用卡功能公告提示文字"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0096 取得綁定資訊",
+        "url": "/app/ICash2Bind/ICash2BindInfo",
+        "json": {
+
+        },
+        "specs": {
+          "": ""
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0097 金融廣告資料查詢",
+        "url": "/app/MemberInfo/GetFinanceAD",
+        "json": {
+          "ADType": "0",
+          "ADStartTime": "2021/06/08 09:44:33",
+          "ADEndTime": "2023/06/08 09:44:33"
+        },
+        "specs": {
+          "ADType": "廣告位置 0: (預設)全撈 1: 快速貸款 2: 不綁約，隨時還清 3: 低利率 4: 優惠信用貸款",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0098 檢查是否需要更新APP",
+        "url": "/app/MemberInfo/CheckIsUpdate",
+        "json": {
+          "VersionCode": "2.0.56"
+
+        },
+        "specs": {
+          "VersionCode": "APP版本號 格式：2.0.6"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0099 綁定認同卡",
+        "url": "/app/MemberInfo/BindBrandCreditCard",
+        "json": {
+          "CustID": "",
+          "PanID": ""
+
+
+        },
+        "specs": {
+          "CustID": "身分證字號",
+          "PanID": "信用卡ID"
+
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0100 會員資料重新驗證",
+        "url": "/app/MemberInfo/ReAuthID",
+        "json": {
+          "IssueDate": "2023-06-23",
+          "IssueLoc": "10017",
+          "IssueType": "1"
+        },
+        "specs": {
+          "IssueDate": "發證日期，格式：yyyy-MM-dd",
+          "IssueLoc": "發證地點 (ex.10017)",
+          "IssueType": "換證類別1：初發, 2：補發, 3：換發"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0101取得會員OP點數",
+        "url": "/app/MemberInfo/QueryMemberOpPoint",
+        "json": {
+
+
+        },
+        "specs": {
+          "": "取得會員OP點數"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0102 更新推播token",
+        "url": "/app/MemberInfo/UpdatePushToken",
+        "json": {
+          "PushToken": "cV18ClVPB_IAtkrNBheHNc:APA91bFT-nhH-faribP42Fz8o7qsmS9Cc_N3RGJXL3twkjnMUlQxlT7COgBAlBk4Pf3IbG6gIZ6A6LC-6YUpZK5Rk-5js4SayiV_2ohOBCRFAPF4mE51izrkPypgy8eioZVFziU5wFI9"
+
+        },
+        "specs": {
+          "": "更新推播token"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0103 中國信託HomeBank同意確認",
+        "url": "/app/MemberInfo/HomeBankChkAgreedTerms",
+        "json": {
+
+        },
+        "specs": {
+          "": "中國信託HomeBank同意確認"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0104 搜尋icashPay聯絡人",
+        "url": "/app/ChatMember/QueryTransferInfoByCellPhoneOrIcpmid",
+        "json": {
+          "QueryNo": "0908009004"
+
+        },
+        "specs": {
+          "QueryNo": "手機 or ICP MID"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0105_1 富邦產險廣告資料查詢(2022)",
+        "url": "/app/MemberInfo/GetInsuranceAD2022",
+        "json": {
+          "ADType": "0",
+          "ADStartTime": "2021/06/08 09:44:33",
+          "ADEndTime": "2023/06/20 09:44:33"
+
+        },
+        "specs": {
+          "ADType": "廣告種類 0: (預設)全撈 1: 廣告Banner2. 專屬優惠3. 熱門商品4. 險種選擇",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0105 富邦產險廣告資料查詢",
+        "url": "/app/MemberInfo/GetInsuranceAD",
+        "json": {
+          "ADType": "0",
+          "ADStartTime": "2021/06/08 09:44:33",
+          "ADEndTime": "2023/06/08 09:44:33"
+
+        },
+        "specs": {
+          "ADType": "廣告種類 0: (預設)全撈 1: 廣告Banner2. 專屬優惠3. 熱門商品4. 險種選擇",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0107 新增聯絡人_1",
+        "url": "/app/ChatMember/AddEcFriends",
+        "json": {
+
+
+          "AddWay": "30",
+          "EcAccount": "0958007001",
+          "EcBankCode": "392",
+          "FriendNickName": "第一名銀行"
+
+        },
+        "specs": {
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0107 新增聯絡人_2",
+        "url": "/app/ChatMember/AddEcFriends",
+        "json": {
+          "FriendsList": [
+            {
+              "IcpMID": "1682111000009639",
+              "ChatMemberID": "2846",
+              "NickName": "test01042",
+              "ProPic": "",
+              "ProPic_120X120": "",
+              "ProPic_60X60": "",
+              "BankName": "icash Pay",
+              "BankCode": "392",
+              "BankAccount": "1682111000009639",
+              "IsICPMember": "true",
+              "IsFriend": "1",
+              "IsFavorite": "0",
+              "CreateDate": "2023/12/20 16:35:37",
+              "ChatStatus": "1",
+              "InviteStatus": "1",
+              "FriendNickName": ""
+
+            }
+
+          ]
+        },
+        "specs": {
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0108編輯好友(包含編輯其他電子支付業者會員)",
+        "url": "/app/ChatMember/EditEcFriend",
+        "json": {
+          "FriendChatMID": "",
+          "EcBankCode": "",
+          "EcAccount": "",
+          "FriendNickName": ""
+
+        },
+        "specs": {
+          "ADType": "廣告種類 0: (預設)全撈 1: 廣告Banner2. 專屬優惠3. 熱門商品4. 險種選擇",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0111 設定是否可被搜尋",
+        "url": "/app/ChatMember/UpdateMemberSearchEnableStatus",
+        "json": {
+          "SearchEnable": true
+
+        },
+        "specs": {
+          "SearchEnable": "可被搜尋開關"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0122 取得活動訊息",
+        "url": "/app/MemberInfo/GetActivityMessageList",
+        "json": {
+          "QueryTime": "2023/06/08 09:44:33"
+
+        },
+        "specs": {
+          "QueryTime": "查詢時間（此時間以前建立or修改的資料） 格式：2019/01/01 00:00:00"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0123 活動訊息刪除",
+        "url": "/app/MemberInfo/DeleteActivityMessage",
+        "json": {
+          "DeleteAll": false,
+          "Params": [
+            {
+              "MsgID": 0
+            }
+          ]
+
+        },
+        "specs": {
+          "DeleteAll": "是否刪除全部訊息False：否(預設值) True：是",
+          "Params": "額外參數※當DeleteAll=False時，此欄位必填"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0124 活動訊息設定已讀",
+        "url": "/app/MemberInfo/SetReadActivityMessage",
+        "json": {
+          "ReadAll": false,
+          "Params": [
+            {
+              "MsgID": 0
+            }
+          ]
+
+        },
+        "specs": {
+          "ReadAll": "是否已讀全部訊息False：否(預設值) True：是",
+          "Params": "額外參數※當ReadAll=False時，此欄位必填"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0125 取得帳戶紀錄列表",
+        "url": "/app/MemberInfo/GetAccountRecordList",
+        "json": {
+
+          "QueryStartTime": "2021/06/08 09:44:33",
+          "QueryEndTime": "2023/06/26 09:44:33",
+          "SortType": "0"
+        },
+        "specs": {
+          "QueryStartTime": "查詢紀錄起始時間 格式：2019/01/01 00:00:00",
+          "QueryEndTime": "查詢紀錄結束時間 格式：2019/01/01 00:00:00",
+          "SortType": "訊息排序方式 0：新到舊1：舊到新"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0126 取得帳戶詳細紀錄",
+        "url": "/app/MemberInfo/GetAccountDetailRecord",
+        "json": {
+
+          "RecordID": "240994"
+
+        },
+        "specs": {
+          "RecordID": "帳戶紀錄ID"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0127 查詢綁定會員特約機構",
+        "url": "/app/MemberInfo/QueryMMember",
+        "json": {
+
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0131 查詢會員OP開關",
+        "url": "/app/MemberInfo/QueryMemberPointSwitch",
+        "json": {
+
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0132 更新會員OP開關",
+        "url": "/app/MemberInfo/ChangeMemberPointSwitch",
+        "json": {
+          "ChangeOpPointSwitch": true
+
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0133 首頁霸屏廣告資料查詢",
+        "url": "/app/MemberInfo/GetActivityAD",
+        "json": {
+
+          "ADType": "0",
+          "ADStartTime": "2021/06/08 09:44:33",
+          "ADEndTime": "2023/06/08 09:44:33"
+
+        },
+        "specs": {
+          "ADType": "廣告類別"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0137 設定icash2.0綁定連結帳戶儲值",
+        "url": "/app/ICash2Bind/SetICash2TopUpBankAccount",
+        "json": {
+
+          "CardNo": "",
+          "IsOpenBindBank": "",
+          "PayID": ""
+
+        },
+        "specs": {
+          "CardNo": "icash 2.0 卡號",
+          "IsOpenBindBank": "是否開啟綁定銀行儲值功能true：銀行儲值開啟中false：銀行儲值關閉中",
+          "PayID": "付款方式識別碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0138取得轉入者資料",
+        "url": "/app/ChatMember/getTransferReceiverInfo",
+        "json": {
+
+          "ReceivedICPMID": "",
+          "BankCode": "",
+          "BankAccount": ""
+
+        },
+        "specs": {
+          "ReceivedICPMID": "轉入者icash Pay電支帳號 (icashPay會員，必填)",
+          "BankCode": "機構代號 (非icashPay會員，必填)",
+          "BankAccount": "機構帳號 (非icashPay會員，必填)"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0139 支付工具廣告查詢(2022)",
+        "url": "/app/MemberInfo/getPaymentToolAD",
+        "json": {
+
+          "ADType": "0",
+          "ADStartTime": "2021/06/08 09:44:33",
+          "ADEndTime": "2023/06/20 09:44:33"
+
+        },
+        "specs": {
+          "ADType": "廣告種類 0: (預設)全撈1: 銀行帳戶Banner2: 信用卡Banner",
+          "ADStartTime": "廣告時間區間(起)",
+          "ADEndTime": "廣告時間區間(迄)"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0140 取得銀行優惠廣告(2022)",
+        "url": "/app/MemberInfo/GetBankDiscount",
+        "json": {
+
+          "IsAccountLink": true
+
+
+        },
+        "specs": {
+          "IsAccountLink": "是否為銀行帳戶廣告"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0141 補傳會員身分證圖片(2022)",
+        "url": "/app/MemberInfo/AuthIDImage",
+        "json": {
+
+          "UpdateIDImageType": "0",
+          "UpdateUnderage": "",
+
+
+
+          "fileCols": "IDImage1,IDImage2"
+        },
+        "specs": {
+          "UpdateIDImageType": "需要更新身分證圖片資料種類0: 不需要更新1: P55需補身分證(本國成年人)2: 法代需補身分證3: 法代需補戶口名簿或戶籍謄本4: 法代需補身份證及戶口名簿/戶籍謄本5: 外國人需補居留證",
+          "UpdateUnderage": "未成年人MID"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0142 取得線上繳費主功能資訊(2022)",
+        "url": "/app/OnlinePayment/getOnlinePaymentBillList",
+        "json": {
+
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0143 取得項目之細項資訊(2022)",
+        "url": "/app/OnlinePayment/getOnlinePaymentBitsList",
+        "json": {
+          "ItemID": "001"
+
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0144取得常用帳單(2022)",
+        "url": "/app/OnlinePayment/GetCommonBillList",
+        "json": {
+          "ItemID": ""
+        },
+        "specs": {
+          "ItemID": "篩選項目(如未帶入item，返回全部常用設定)"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0145新增常用帳單(2022)",
+        "url": "/app/OnlinePayment/AddCommonBill",
+        "json": {
+          "CommonName": "123123",
+          "ItemID": "002,002",
+          "BillData": {
+            "BillNumber": "C1-15115765-1",
+            "QueryType": "1",
+            "Query1": "C1-15115765-1",
+            "Query2": "",
+            "Query3": "",
+            "Query4": ""
+
+
+          }
+        },
+        "specs": {
+          "CommonName": "常用帳單名稱",
+          "ItemID": "常用帳單項目",
+          "BillData": "常用帳單資料(水號、電號等...)"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0146編輯常用帳單(2022)",
+        "url": "/app/OnlinePayment/EditCommonBill",
+        "json": {
+          "CommonID": "",
+          "CommonName": "",
+          "ItemID": "",
+          "BillData": ""
+        },
+        "specs": {
+          "CommonID": "常用帳單ID",
+          "CommonName": "常用帳單名稱",
+          "ItemID": "常用帳單項目",
+          "BillData": "常用帳單資料(水號、電號等...)"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0147刪除常用帳單(2022)",
+        "url": "/app/OnlinePayment/DelCommonBillList",
+        "json": {
+          "CommonID": ""
+
+        },
+        "specs": {
+          "CommonID": "常用帳單ID"
+
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0148取得本月待繳帳單(2022)",
+        "url": "/app/OnlinePayment/GetWaitPaymentBillList",
+        "json": {
+          "ItemID": ""
+
+        },
+        "specs": {
+          "ItemID": "篩選項目(如未帶入item，返回全部待繳)"
+
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0149 檢查是否為OP會員(2022)",
+        "url": "/app/MemberInfo/CheckIsOP",
+        "json": {
+
+          "CellPhone": "0910000165"
+
+        },
+        "specs": {
+          "CellPhone": "註冊使用的手機號碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0150 註冊OP會員(2022)",
+        "url": "/app/MemberInfo/RegisterOpMember",
+        "json": {
+
+          "CellPhone": "0910000165",
+          "Birthday": "19601203"
+        },
+        "specs": {
+          "CellPhone": "註冊使用的手機號碼",
+          "Birthday": "出生日年月日 格式：YYYYMMDD,共8碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0151取得OP登入連結(2022)",
+        "url": "/app/MemberCallBack/ReturnAuthAPIUrl",
+        "json": {
+
+          "CellPhone": "0919500011"
+        },
+        "specs": {
+          "CellPhone": "註冊使用的手機號碼"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0152確認金鑰是否為主要key(2022)",
+        "url": "/app/MemberInfo/CheckKeyStatus",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0153查詢登入記錄(2022)",
+        "url": "/app/MemberInfo/getLoginRecord",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0154 跑馬燈公告(2022)",
+        "url": "/app/MemberInfo/GetMarquee",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0155 取得Pcode2566銀行清單",
+        "url": "/app/MemberInfo/getPcodeBankList",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0156  發起Pcode2566帳戶驗證",
+        "url": "/app/MemberInfo/identityVerifyRequest",
+        "json": {
+
+          "BankCode": "009",
+          "BankAccount": "50509500179600"
+        },
+        "specs": {
+          "BankCode": "銀行代碼",
+          "BankAccount": "銀行帳號"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0157_1取得icash2.0首頁廣告(2022)",
+        "url": "/app/ICash2Bind/GetCardBannerInfo",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+
+
+      {
+        "host": "member",
+        "name": "M0157取得icash2.0首頁(2022)",
+        "url": "/app/ICash2Bind/GetCardPageInfo",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0158新增icash2.0卡片(2022)",
+        "url": "/app/ICash2Bind/AddCard",
+        "json": {
+          "CardName": "test0627",
+          "CardNumber": "1122334455",
+          "CardVC": "123123"
+        },
+        "specs": {
+          "CardName": "卡片名稱",
+          "CardNumber": "卡片號碼",
+          "CardVC": "卡片驗證碼"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0159編輯icash2.0卡片(2022)",
+        "url": "/app/ICash2Bind/EditCard",
+        "json": {
+          "CardID": "9517171005391803",
+          "CardName": "CUBE",
+          "IsAutoTopUp": "",
+          "IsAutoTopUpBank": ""
+
+
+        },
+        "specs": {
+          "CardID": "卡片編號",
+          "CardName": "卡片名稱",
+          "IsAutoTopUp": "是否開啟自動加值設定 (Table Status)",
+          "IsAutoTopUpBank": "是否開啟銀行自動加值設定",
+          "AutoTopUpPayID": "設定自動加值付款方式"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0160刪除icash2.0卡片(2022)",
+        "url": "/app/ICash2Bind/DeleteCard",
+        "json": {
+
+          "CardID": "33093"
+
+        },
+        "specs": {
+          "CardID": "卡片編號"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0161設定icash2.0卡片順序(2022)",
+        "url": "/app/ICash2Bind/SortCard",
+        "json": {
+
+          "SortCardList": ""
+
+        },
+        "specs": {
+          "SortCardList": "卡片順序List"
+
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0162查詢icash2.0單筆交易紀錄(2022)",
+        "url": "/app/ICash2Bind/GetRecord",
+        "json": {
+
+          "CardID": "33093",
+          "QueryType": "1"
+        },
+        "specs": {
+          "CardID": "卡片編號",
+          "QueryType": "查詢交易紀錄種類"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0163金融身份驗證(2022)",
+        "url": "/app/MemberInfo/ICPMemberConfirm",
+        "json": {
+
+
+          "Token": "1"
+        },
+        "specs": {
+
+          "Token": "金融驗證Token"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0164 取得推播通知(活動通知)",
+        "url": "/app/MemberInfo/GetPushList",
+        "json": {
+
+
+          "Page": 1,
+          "PageSize": 1,
+          "ModifyDate": "2024/01/15 11:19:06"
+        },
+        "specs": {
+
+          "page": "頁數",
+          "rows": "一頁筆數",
+          "ModifyDate": "取得最後更新的時間"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0165 設定推播通知(已讀)",
+        "url": "/app/MemberInfo/SetPushRead",
+        "json": {
+
+
+          "TraceId": 1,
+          "SetAll": 1
+
+        },
+        "specs": {
+
+          "page": "頁數",
+          "rows": "一頁筆數",
+          "ModifyDate": "取得最後更新的時間"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0167APP首頁廣告",
+        "url": "/app/MemberInfo/GetAPPAd",
+        "json": {
+
+
+
+          "ADType": "1"
+
+        },
+        "specs": {
+
+          "ADType": "廣告種類: 0:APP首頁跑馬燈 1:APP霸屏廣告 2:APP浮動廣告 3:首頁-Banner 4:首頁-保險廣告 5:首頁-基金廣告 6:首頁-信貸廣告 7:首頁-點數廣告專區 8:首頁-銀行專區廣告"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0168APP廣告活動內頁",
+        "url": "/app/MemberInfo/GetAPPAdActivity",
+        "json": {
+
+
+
+          "ADID": "1"
+
+        },
+        "specs": {
+
+          "ADID": "廣告ID"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0169廣告最後更新時間",
+        "url": "/app/MemberInfo/GetAPPAdUpdate",
+        "json": {
+
+
+
+          "Type": "0"
+
+        },
+        "specs": {
+
+          "Type": "最後更新類別： 0：APP首頁廣告"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0170取得繳費項目資料",
+        "url": "/app/OnlinePayment/getBitsItemData",
+        "json": {
+
+
+        },
+        "specs": {
+
+          "ItemID": "篩選項目(如未帶入item，返回全部常用設定)"
+
+        }
+      },
+
+
+      {
+        "host": "member",
+        "name": "ML201-發送OTP驗證.",
+        "url": "/MemberInfo/SendOTP",
+        "json": {
+
+
+          "CellPhone": "0910000308",
+          "SMSAuthType": 1,
+          "Token": "",
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023"
+
+        },
+        "specs": {
+
+          "CellPhone": "使用者輸入的手機號碼^09[0-9]{8}$",
+          "SMSAuthType": "驗證類型  1:手機驗證 4:安全密碼OTP",
+          "Token": "識別使用者呼叫API權限。若Token不為空則視為安全密碼修改，否則為初次使用APP"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML202-檢核手機OTP",
+        "url": "/MemberInfo/VerifyOTP",
+        "json": {
+
+
+          "CellPhone": "0910000308",
+          "SMSAuthType": 1,
+          "AuthCode": "",
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023"
+
+
+        },
+        "specs": {
+
+          "CellPhone": "使用者輸入的手機號碼",
+          "SMSAuthType": "驗證類型  1:手機驗證 4:安全密碼OTP",
+          "AuthCode": "長度限制6字元。使用者輸入的一次性密碼",
+          "Token": "識別使用者呼叫API權限。若Token不為空則視為安全密碼修改，否則為初次使用APP"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML203-檢核帳號",
+        "url": "/MemberInfo/VerifyAccount",
+        "json": {
+
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "Account": "icp10655210"
+
+        },
+        "specs": {
+
+
+          "Account": "限制6~12英數混合字元，使用者輸入的帳號",
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD202-查詢會員資料",
+        "url": "/MemberInfo/GetMemberData",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "MemberDataType": 1
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限",
+          "MemberDataType": "回傳會員資料類型"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML204-檢核登入密碼",
+        "url": "/MemberInfo/VerifyPassword",
+        "json": {
+
+
+
+          "Vers": "3.0.1.0",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "Password": "1qaz2wsx"
+
+        },
+        "specs": {
+
+
+          "Account": "限制6~12英數混合字元，使用者輸入的帳號",
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML205-檢核安全密碼",
+        "url": "/MemberInfo/VerifySecurityCode",
+        "json": {
+
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "CodeType": 0,
+          "SecurityCode": "246790"
+
+        },
+        "specs": {
+
+
+          "Account": "限制6~12英數混合字元，使用者輸入的帳號",
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+
+
+      {
+        "host": "member",
+        "name": "ML206-檢核綁定裝置",
+        "url": "/MemberInfo/VerifyDeviceID",
+        "json": {
+
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+
+
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML210-登入",
+        "url": "/MemberInfo/MemberLogin",
+        "json": {
+
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": ""
+
+
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML207-檢核忘記帳號",
+        "url": "/MemberInfo/VerifyForgotAccount",
+        "json": {
+
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7aa",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": "",
+          "IDNumber": "A156775646",
+          "Birthday": "1986-12-29"
+
+        },
+        "specs": {
+
+
+          "Account": "限制6~12英數混合字元，使用者輸入的帳號",
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML208-檢核忘記密碼",
+        "url": "/MemberInfo/VerifyForgotPassword",
+        "json": {
+
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "Account": "icp10655279",
+          "IDNumber": "B185952970",
+          "PhoneNumber": "0910000377"
+
+        },
+        "specs": {
+
+
+          "Account": "限制6~12英數混合字元，使用者輸入的帳號",
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML209-舊版會員轉為新版",
+        "url": "/MemberInfo/MemberTransformNewVersion",
+        "json": {
+
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": ""
+
+
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "ML211-檢核忘記六位安全密碼",
+        "url": "/MemberInfo/VerifyForgotSecurityCode",
+        "json": {
+
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "IDNumber": "B185952970"
+
+
+        },
+        "specs": {
+
+
+          "IDNumber": "限制6~12英數混合字元，使用者輸入的帳號",
+          "Token": "使用者輸入的身分證字號或是統一編號。須符合身分證規則或統一證號規則"
+        }
+      },
+
+
+
+      {
+        "host": "member",
+        "name": "MR201-新建暫存會員",
+        "url": "/MemberInfo/InsertTempMember",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "PhoneNumber": "0910000387"
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限",
+          "PhoneNumber": "長度限制10字元，使用者輸入的手機號碼"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD203-設定登入帳號",
+        "url": "/MemberInfo/SetAccount",
+        "json": {
+
+          "Account": "icp10655289",
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+          "Account": "限制6~12英數混合字元，使用者輸入的帳號",
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD204-設定安全密碼",
+        "url": "/MemberInfo/SetSecurityCode",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "CodeType": 0,
+          "SecurityCode": "246790"
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限",
+          "CodeType": "0: 六位數安全密碼1: 圖形密碼2: 生物辨識密碼",
+          "SecurityCode": "六位數密碼: 僅限數字、不可為連號(123456)或相同數字(111111)"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD205-重新綁定裝置",
+        "url": "/MemberInfo/SetDeviceID",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "IDNumber": "B120291438"
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限",
+          "CodeType": "0: 六位數安全密碼1: 圖形密碼2: 生物辨識密碼",
+          "SecurityCode": "六位數密碼: 僅限數字、不可為連號(123456)或相同數字(111111)"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD206-設定登入密碼",
+        "url": "/MemberInfo/SetPassword",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": "",
+          "Password": "Aa123456"
+
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限",
+          "Password": "限制6~20英數混合字元，使用者輸入的密碼"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR205-設定法定代理人",
+        "url": "/MemberInfo/SetLegalAgent",
+        "json": {
+
+
+
+
+          "LegalAgentData": [
+            {
+              "IDNO": "B186133826",
+              "Name": "林林",
+              "PhoneNumber": "0922000232"
+            },
+            {
+              "INDO": "P12345678",
+              "Name": "旺旺",
+              "PhoneNumber": "0933000232"
+            }
+
+          ],
+          "LegalAgentType": "1",
+          "Token": "",
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023"
+        }
+      },
+
+
+
+      {
+        "host": "member",
+        "name": "MR206-建立正式會員",
+        "url": "/MemberInfo/InsertMember",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限",
+          "CodeType": "0: 六位數安全密碼1: 圖形密碼2: 生物辨識密碼",
+          "SecurityCode": "六位數密碼: 僅限數字、不可為連號(123456)或相同數字(111111)"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD207-取得設定檔資料",
+        "url": "/MemberInfo/GetConfig",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD208-取得法定代理人資料",
+        "url": "/MemberInfo/GetTeenagersLegalData",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+        }
+
+      },
+
+      {
+        "host": "member",
+        "name": "MD211-IgnoreChangeSecurityCode",
+        "url": "/MemberInfo/IgnoreChangeSecurityCode",
+        "json": {
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "CodeType": "0"
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR202-設定本國人身分驗證資料",
+        "url": "/MemberInfo/SetAuthIdentity",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "CName": "測試一",
+          "Birthday": "1990/01/01",
+          "AreaID": "1001",
+          "Address": "台北市內湖區瑞光路200號",
+          "IDNO": "E184337598",
+          "IssueDate": "2024/02/19",
+          "IssueLocation": "10001",
+          "IssueType": "3",
+          "fileCols": "img1,img2"
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR202-設定本國人身分驗證資料_未成年",
+        "url": "/MemberInfo/SetAuthIdentity",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7aa",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": "",
+          "CName": "測試青少年",
+          "Birthday": "2008/01/01",
+          "AreaID": "10",
+          "Address": "123",
+          "IDNO": "B186133826",
+          "IssueDate": "2023/12/11",
+          "IssueLocation": "67000",
+          "IssueType": "1",
+          "fileCols": "img1,img2"
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+
+      {
+        "host": "member",
+        "name": "MR203-設定外國人身份驗證資料",
+        "url": "/MemberInfo/SetAuthIdentityForeign",
+
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": "",
+          "Birthday": "1990/01/01",
+          "CName": "傑夫",
+          "EName": "Jeff",
+          "NationalityID": "1056",
+          "ResidentPermitID": "AB96003021",
+          "ResidentPermitNumber": "F917000160",
+          "ResidentPermitType": 0,
+          "ResidentPermitIssueDate": "2000/01/01",
+          "ResidentPermitExpireDate": "2025/01/01",
+          "fileCols": "img1,img2"
+
+
+        },
+
+
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR204-執行身分驗證流程",
+        "url": "/MemberInfo/ExcuteAuthIdentity",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR208-修改姓名",
+        "url": "/MemberInfo/EditName",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "Name": "測試一"
+
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR209-檢核中信資料共享會員身分",
+        "url": "/MemberInfo/VerifySharedMember",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+
+
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD206-設定登入密碼",
+        "url": "/MemberInfo/SetPassword",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7aa",
+          "DeviceID": "b3f194a32647b4f4",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": "",
+          "Password": "Aa123456"
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限",
+          "Password": "限制6~20英數混合字元，使用者輸入的密碼"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD201-取得跳轉頁面",
+        "url": "/MemberInfo/GetMemberStatus",
+        "json": {
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限Token"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": " ML209-舊版會員轉為新版",
+        "url": "/MemberInfo/MemberTransformNewVersion",
+        "json": {
+
+
+          "Vers": "3.0.1.0",
+          "DeviceInfo": "Pixel 7aa",
+          "DeviceID": "b3f194a32647b4f4",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": ""
+        },
+        "specs": {
+
+          "CellPhone": "使用者輸入的手機號碼^09[0-9]{8}$",
+          "AuthType": "驗證類型  1:手機驗證 4:安全密碼OTP",
+          "Token": "識別使用者呼叫API權限。若Token不為空則視為安全密碼修改，否則為初次使用APP"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MP001取得推播設定",
+        "url": "/app/MemberInfo/GetPushTokenSetting",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MP002設定推播狀態",
+        "url": "/app/MemberInfo/SettingPushTokenStatus",
+        "json": {
+
+          "IsOpenVoice": "false",
+          "IsOpenNotification": "false",
+          "IsOpenPayResult": "false"
+        },
+        "specs": {
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MOP201-綁定OP會員",
+        "url": "/MemberInfo/BindOpenPointMember",
+        "json": {
+
+          "Vers": "3.0.1.0",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限",
+          "Password": "限制6~20英數混合字元，使用者輸入的密碼"
+        }
+      }
+
+
+
+    ]
+  },
+  {
+    "category": "Payment Api",
+    "list": [
+      {
+        "host": "payment",
+        "name": "P0001 產生付款條碼",
+        "url": "/app/Payment/CreateBarcode",
+        "json": {
+          "PaymentType": "1",
+          "PayID": "11682211000002364"
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0002 取得會員全付款方式",
+        "url": "/app/Payment/GetMemberPaymentInfo",
+        "json": {
+          "MerchantID": "10512932"
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0003 取得支付指示頁資料",
+        "url": "/app/Payment/GetOnlineOrderInfo",
+        "json": {
+          "PayID": "",
+          "MerchantID": "",
+          "MerchantTradeNo": ""
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0004 取得帳戶餘額",
+        "url": "/app/Payment/GetTotalCoins",
+        "json": {
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0005 取得轉帳Token",
+        "url": "/app/TransferAccount/GetTransferToken",
+        "json": {
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0006 取得儲值通路清單",
+        "url": "/app/TopUpPayment/GetListChannelInfo",
+        "json": {
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0007 產生通路儲值條碼",
+        "url": "/app/TopUpPayment/GetTopUpBarCode",
+        "json": {
+          "Amount": 10,
+          "TopUpType": 1
+        },
+        "specs": {
+          "Amount": "儲值金額",
+          "TopUpType": "儲值方式 1：現金, 2：中獎發票"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0008 取得連結帳戶儲值頁資料",
+        "url": "/app/TopUpPayment/GetTopUpByAccountLinkInfo",
+        "json": {
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0009 取得虛擬帳號儲值頁資料",
+        "url": "/app/TopUpPayment/GetTopUpByATMInfo",
+        "json": {
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0010 連結帳戶儲值",
+        "url": "/app/AccountLink/TopUpByAccountLink",
+        "json": {
+          "BankCode": "050",
+          "AccountID": "21917",
+          "Amount": 10
+        },
+        "specs": {
+          "BankCode": "銀行代碼",
+          "AccountID": "銀行帳戶編號(系統定義流水號)",
+          "Amount": "交易金額"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0011 虛擬帳號儲值",
+        "url": "/app/TopUpPayment/TopUpByATM",
+        "json": {
+          "BankCode": "007",
+          "Amount": 100
+        },
+        "specs": {
+          "BankCode": "銀行代碼",
+          "Amount": "交易金額"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0012 設定自動儲值開關",
+        "url": "/app/TopUpPayment/SetAutoTopUpSwitch",
+        "json": {
+          "TopUpSwitch": 1
+        },
+        "specs": {
+          "TopUpSwitch": "自動儲值開關 0：關閉 1：開啟"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0013 設定自動儲值條件",
+        "url": "/app/TopUpPayment/SetAutoTopUpCondition",
+        "json": {
+          "TopUpMode": 1,
+          "LimitAmount": 5000,
+          "DailyLimitAmount": 10000,
+          "AccountID": 21917,
+          "TopUpUnit": 100,
+          "TopUpSwitch": 1
+        },
+        "specs": {
+          "TopUpMode": "自動儲值模式 1：差額儲值 2：定額儲值",
+          "LimitAmount": "每次自動儲值限額",
+          "DailyLimitAmount": "每日自動儲值限額",
+          "AccountID (選填)": "銀行帳戶編號(系統定義流水號)",
+          "TopUpUnit (選填)": "定額儲值金額基數",
+          "TopUpSwitch (選填)": "自動儲值開關 0：關閉 1：開啟"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0014 取得自動儲值資料",
+        "url": "/app/TopUpPayment/GetAutoTopUpInfo",
+        "json": {
+
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0015 取得交易限額資料",
+        "url": "/app/Payment/GetAccountLimitInfo",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0016 發送轉帳",
+        "url": "/app/TransferAccount/SentTransferMsg",
+        "json": {
+          "PayChatMID": "3362",
+          "ReceivedChatMID": "14672",
+          "TransferAmount": "100",
+          "TradeToken": 21917,
+          "PaymentType": "1"
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0017查詢QR Code資訊",
+        "url": "/app/Payment/QueryQRInfo",
+        "json": {
+
+          "MerchantQRcode": "iikipS2y%2BkWFlOKhPs4Q%2BauZT1SMxc%2BSVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ%2Bw56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW%2BG8shNS%2B20qKszoGrCTFcy2u7WNdD0qg2lupJI28V%2Bs6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3b0EO%2FVG0jkOK5nVSEfpym85D5oivkxjhsvRQrPUKwoSeULZPo7Ip5RA0xTLspzeFBT44t%2BFuUvc%2BWTtOBICYVHYgOdgTgR5ZDe4rQsUZroYnIhS9uYhK9PiQj4iF1eBN5MHOtfsD3QJHbEpfjuDf8h2ST1Yo68yCRkg9fvzsgnbnoHmJVXD0d%2B93T%2FWAr6Sdehs7Js7NqYo3WITZfHVu8orjK6Jlm8Ow%2BSL4qgK8PwB0%2BjUenmZbO6L0iwQkD6fT9r1baoTMPz50qdrYpyyUXWlKtBhC%2Bd1HDPk8nNu5SBnSCy81aENPJ%2F0UYHvl%2FTHnJJuVXW8lwpfkrOZK05FzLDOZcRt%2B8TlUnqiRRaj4LDqqq2FleBpmig%2BrwseOUpTRX7%2F5Agv%2FNvc%2FTGRqkCJsg5AuyOJ4kRJv%2BiKQdUyxYpez9mz94KHEBwnucbfek5VcjffrGKUopicYJ0alRIW%2BvtniTYRxPXYE3BGPT4Jgn80%3D"
+        },
+        "specs": {
+          "MerchantQRcode": "QRCode URL"
+
+        }
+      },
+    
+      {
+        "host": "payment",
+        "name": "P0018 確認支付QrCode",
+        "url": "/app/Payment/DoQRPayment",
+        "json": {
+          "MerchantID": "10512932",
+          "Amount": "1",
+          "PayID": "11682311000003390",
+          "Mission": "",
+          "Team_number": "",
+          "MerchantTradeNo": "202307051420400000",
+          "StoreID": "Dev2-Test",
+          "StoreName": "Dev2-Test"
+
+        },
+        "specs": {
+          "MerchantID": "廠商編號",
+          "Amount": "交易金額",
+          "PayID": "付款方式識別碼",
+          "Mission": "任務編號",
+          "Team_number": "車隊編號",
+          "MerchantTradeNo": "特店訂單編號",
+          "StoreID": "分店編號",
+          "StoreName": "分店名稱"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0019 線上繳費付款",
+        "url": "/app/Cashier/ChargeOnlineICPO",
+        "json": {
+
+          "MerchantID": "10512932",
+          "PlatformID": "10512932",
+          "MerchantTradeNo": "202401151307190000",
+          "ts": "1705287447",
+          "PayID": "11682211000002364",
+          "UsePoint": "0",
+          "ChargeVersionType": "V2",
+          "UsePointType": "1",
+          "AccumulatedPointsType": "1",
+          "Token": "06KBBF3mj0QchDf/ETbLj5Mcl97LfwtFnBqzwlnmpwU\u003d"
+
+
+
+
+
+
+        },
+        "specs": {
+          "MerchantID": "交易平台ID",
+          "PlatformID": "平台代碼",
+          "MerchantTradeNo": "交易編號",
+          "ts": "時間戳辨識字串",
+          "PayID": "付款方式ID",
+          "UsePoint": "當UsePointType為1、2時此參數必填UsePointType 如 = 1，而使用者開啟點數開關1.當點數數量大於訂單金額時，帶入訂單金額2.當點數數量小於訂單金額時，帶入點數數量(小數點以後捨去)UsePointType 如 = 2, 可自行輸入點數帶入",
+          "ChargeVersionType": "2/17未來不需帶此參數========================線上支付版本類型.新版本APP才會帶入此參數，如無參數預設為v1版本",
+          "UsePointType": "2/17確認不需帶此參數========================使用點數種類(兌點)0: 不可使用點數折抵1: 可使用點數2: 可自行輸入折抵點數額3: 點數功能維護中",
+          "AccumulatedPointsType": "2/17確認不需帶此參數========================累積點數種類(累點)0: 不可累積點數1: 可累積點數"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0020 財經跨行轉帳",
+        "url": "/app/TransferAccount/SentFISCTransferMsg",
+        "json": {
+
+          "PayChatMID": "14672",
+          "ReceivedChatMID": "3098",
+          "TransferAmount": "20",
+          "Remark": "",
+          "TradeToken": "",
+          "PaymentType": "1",
+          "BankCode": "392",
+          "BankAccount": ""
+
+
+        },
+        "specs": {
+          "PayChatMID": "轉出者ChatMemberID",
+          "ReceivedChatMID": "轉入者聊天會員帳號 (icashPay會員，必填)",
+          "TransferAmount": "轉帳金額",
+          "Remark": "轉帳備註",
+          "TradeToken": "轉帳的交易Token",
+          "PaymentType": "付款方式1：帳戶餘額※預留欄位，目前轉帳付款方式只有帳戶餘額",
+          "BankCode": "機構代號 (非icashPay會員，必填)",
+          "BankAccount": "機構帳號 (非icashPay會員，必填)"
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0025 取得乘車碼",
+        "url": "/app/Payment/CreateTrafficQRCode",
+        "json": {
+
+          "PayID": "11682311000002951",
+          "PaymentType": "1",
+          "Token": ""
+
+        },
+        "specs": {
+          "註:": ""
+
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0026 取得餘額",
+        "url": "/app/Payment/GetAvailableBalance",
+        "json": {
+
+
+        
+         
+
+
+        },
+        "specs": {
+          "註:": ""
+
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0028 查詢交易訂單結果",
+        "url": "/app/Cashier/QueryOrderForPushNotify",
+        "json": {
+
+          "MerchantTradeNo": "202312261706228630"
+        },
+        "specs": {
+          "註:": "此處需登入Stage帳號，可用icp09090 / Aa123456"
+
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0029 財經QrCode",
+        "url": "/app/Payment/GenerateFiscQRCode",
+        "json": {
+
+          "PayChatMID": "3098",
+          "ReceivedChatMID": "291",
+          "TransferAmount": "168",
+          "TradeToken": "",
+          "PaymentType": "1",
+          "FiscType": "2"
+        },
+        "specs": {
+          "註:": "此處需登入Stage帳號，可用icp09090 / Aa123456"
+
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0030 查詢轉帳手續費",
+        "url": "/app/TransferAccount/GetFiscHandlingCharge",
+        "json": {
+
+          "TransferAmount": "500"
+        },
+        "specs": {
+          "TransferAmount:": "查詢金額"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0032金融工具複數認證狀態",
+        "url": "/app/TransferAccount/CheckFiscDoubleValidation",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0034 確認線上繳費訂單資訊(2022)",
+        "url": "/app/TransferAccount/CheckFiscDoubleValidation",
+        "json": {
+          "CommonID": "",
+          "ItemID": "",
+          "BillData": ""
+        },
+        "specs": {
+          "CommonID": "常用帳單ID(參數有值下列可不用帶入",
+          "ItemID": "項目ID",
+          "BillData": "帳單主要查詢資料(水號、車號、電話號碼)"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0035 建立線上繳費訂單(2022)",
+        "url": "/app/OlinePayment/CreateOnlinePaymentOrder",
+        "json": {
+
+          "BillNoList": [ "09195413171120671" ],
+          "EInvoice": "",
+          "Remark": ""
+        },
+        "specs": {
+          "BillNoList": "繳費單流水編號列表",
+          "EInvoice": "訂單如需電子發票",
+          "Remark": "備註：(台電)"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0036 同步更新會員平台點數開關",
+        "url": "/app/Payment/RedeemSettingIcp",
+        "json": {
+          "UseOpPointRedeem": "1"
+
+        },
+        "specs": {
+
+          "UseOpPointRedeem": "點數開關狀態"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0037 查詢QrCode資訊(2022)",
+        "url": "/app/Payment/ParserQrCode",
+        "json": {
+          "MerchantQRcode": "iikipS2y%2BkWFlOKhPs4Q%2BauZT1SMxc%2BSVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ%2Bw56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW%2BG8shNS%2B20qKszoGrCTFcy2u7WNdD0qg2lupJI28V%2Bs6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3mz3cUXt%2F6qhG%2F9pw98Kc9aFNTHIpvnfwbzrA0CY%2BPWPkY4RMQEaoPejze2OlOsMtF14v5zMwLxIBvcNKFbNErZmjSxbcsNYYKTc%2F%2BPGZg5t7BXBvVlCw1UTfg24oOSeaYvvXDAXpUCwgxPKmeSMRO7WPS3c0%2FU4cR1jhX5i0UwfaCj2M5yJOs%2ByeI%2FOLNPIAeoaxhtlkgkg2aqd7PjBCw8S5nmKkBGeO2mX2xo24jLw5bKZ318Notrhgx3nM48TBA8WXC%2FIQjDrdUUSGCSu5tFDitqh5qon%2B2QxAzTm1ctb6%2FNxqk5aNo0gUfh3sbm%2BznHPQ2LvkZ2xcjmhVGKBQn%2BIpvez%2F5SBD3oLX6hxK3ITFa74UwwaCx0yDglbXHHxDKBG7tlDJdnAqHsd3pDxpZQ8lc6s6bhq5B%2Bo6U4eCa%2B7uuHZJI9lTUDehMgM9eQri31unTVzuLFxu17N3JZ76cIewd%2FfqvM52EI%2FpfPOADtU%3D"
+
+        },
+        "specs": {
+
+          "MerchantQRcode": "QRCode 字串"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0038 建立財經繳費訂單(2022)",
+        "url": "/app/Fisc/CreateOnlinePaymentOrder",
+        "json": {
+          "BillNo": "TEST000003497192",
+          "acqInfo": "00,0040042630156100030003000102204811",
+          "deadline": "20301231",
+          "Amount": "100",
+          "Charge": "3",
+          "SeqNo": "974"
+
+        },
+        "specs": {
+
+          "BillNo": "銷帳編號",
+          "acqInfo": "收單行資訊",
+          "deadline": "繳費期限格式:yyyyMMdd",
+          "Amount": "繳費金額",
+          "Charge": "手續費",
+          "SeqNo": "QrCode查詢流水號"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0039 財經繳費付款(2022)",
+        "url": "/app/Fisc/ChargeOnlineFISC",
+        "json": {
+          "AccumulatedPointsType": "1",
+          "ChargeVersionType": "v2",
+          "MerchantID": "10523899",
+          "MerchantTradeNo": "202401151626154375",
+          "PayID": "11682311000001441",
+          "PlatformID": "10523899",
+          "SeqNo": "1308",
+          "UsePoint": "0",
+          "UsePointType": "1",
+          "acqInfo": "00,0040042630156100030003000102204811",
+          "deadline": "20301231",
+          "ts": "2024/01/15 16:26:15"
+
+
+        },
+        "specs": {
+
+          "MerchantID": "交易平台ID",
+          "PlatformID": "平台代碼",
+          "MerchantTradeNo": "交易編號",
+          "acqInfo": "收單行資訊",
+          "deadline": "繳費期限格式:yyyyMMdd",
+          "ts": "時間戳辨識字串",
+          "PayID": "付款方式ID",
+          "UsePoint": "UsePointType 如 = 2, 可自行輸入點數帶入",
+          "ChargeVersionType": "線上支付版本類型 新版本APP才會帶入此參數， 如無參數預設為v1版本",
+          "UsePointType": "使用點數種類(兌點) 0: 不可使用點數折抵 1: 可使用點數 2: 可自行輸入折抵點數額 3: 點數功能維護中",
+          "AccumulatedPointsType": "累積點數種類(累點) 0: 不可累積點數1: 可累積點數",
+          "SeqNo": "QrCode查詢流水號"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0040 線上綁定明細查詢作業(v2)(2022)",
+        "url": "/api/V2/Payment/Binding/ICPBindingQueryD",
+        "json": {
+          "MerchantID": "123456789",
+          "BindingTradeID": "ABC12345678910"
+
+
+        },
+        "specs": {
+
+          "MerchantID": "特店業者編號 (APP目前不用帶入)",
+          "BindingTradeID": "線上交易綁定ID"
+
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0044 線上綁定查詢作業",
+        "url": "/api/V2/Payment/Binding/ICPBindingQuery",
+        "json": {
+        },
+        "specs": {
+
+        }
+      }
+    ]
+  },
+  {
+    "category": "Pos Api",
+    "list": [
+      {
+        "host": "payment",
+        "name": "WC006 POS支付",
+        "url": "/api/Payment/Pos/CheckOut",
+        "json": {
+
+          "MerchantID": "10523899",
+          "Barcode": "",
+          "Amount": 300,
+          "StoreID": "001",
+          "StoreName": "測試店",
+          "PosRefNo": "0001",
+          "MerchantTID": "01",
+          "MerchantTradeNo": "",
+          "MerchantTradeDate": "2024/01/15 16:12:00",
+          "CarrierType": "3J0002",
+          "ItemAmt": 300,
+          "UtilityAmt": 0,
+          "CommAmt": 0,
+          "ExceptAmt1": 0,
+          "ExceptAmt2": 0,
+          "RedeemFlag": 1,
+          "BonusAmt": 0,
+          "DebitPoint": 0,
+          "NonRedeemAmt": 0,
+          "NonPointAmt": 0,
+          "ItemList": "",
+          "Remark": ""
+        },
+        "specs": {
+          "註:": "此處需登入Merchant帳號，可用pos123 / Aa1234",
+          "Barcode": "使用 P0001 產生付款條碼",
+          "PlatformID、MerchantID": "帶default時: dev=10020336; beta=10026443; stage=10000001; icashpaystage=10000016",
+          "Amount": "POS API傳入/傳出金額包含2位小數點 e.g. 30000 (NT$300)",
+          "MerchantTradeNo": "帶空值會依時間自動生成",
+          "MerchantTradeDate": "帶空值會依時間自動生成"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "WC008 POS取消交易",
+        "url": "/api/Payment/Pos/Cancel",
+        "json": {
+          "PlatformID": "default",
+          "MerchantID": "default",
+          "TransactionID": "",
+          "StoreID": "123",
+          "StoreName": "阿罵店",
+          "PosRefNo": "12345",
+          "MerchantTID": "01",
+          "MerchantTradeNo": "",
+          "MerchantTradeDate": ""
+        },
+        "specs": {
+          "註:": "此處需登入Merchant帳號，可用pos123 / Aa1234",
+          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000001",
+          "MerchantTradeDate": "帶空值會依時間自動生成"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "WC009 POS退貨交易",
+        "url": "/api/Payment/Pos/Refund",
+        "json": {
+          "PlatformID": "default",
+          "MerchantID": "default",
+          "TransactionID": "",
+          "Amount": 10000,
+          "StoreID": "123",
+          "StoreName": "阿罵店",
+          "PosRefNo": "12345",
+          "MerchantTID": "01",
+          "MerchantTradeNo": "",
+          "MerchantTradeDate": ""
+        },
+        "specs": {
+          "註:": "此處需登入Merchant帳號，可用pos123 / Aa1234",
+          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000001",
+          "Amount": "POS API傳入/傳出金額包含2位小數點 e.g. 30000 (NT$300)",
+          "MerchantTradeDate": "帶空值會依時間自動生成"
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0201 檢查轉帳相同金額",
+        "url": "/app/TransferAccount/TransferRecentlyAmountCheck",
+        "json": {
+          "ReceivedAccount": "1682211000002364",
+          "TransferAmount": "25",
+          "BankCode": "392"
+
+        },
+        "specs": {
+          "ReceivedAccount": "轉入者電支帳號",
+          "TransferAmount": "轉帳金額",
+          "BankCode": "銀行代碼"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "P0202 檢查收款方帳戶狀態",
+        "url": "/app/TransferAccount/TransferReceivedICPAccountCheck",
+        "json": {
+          "ReceivedICPMID": "1682211000002364"
+
+        },
+        "specs": {
+          "ReceivedICPMID": "轉入者電支帳號"
+
+        }
+      },
+      {
+        "host": "payment",
+        "name": "WC013 POS條碼查詢",
+        "url": "/api/Payment/Pos/QueryMemberInfo",
+        "json": {
+          "PlatformID": "10513035",
+          "MerchantID": "10513035",
+          "Barcode": ""
+        },
+        "specs": {
+          "註:": "此處需登入Merchant帳號 pos123 / Aa1234",
+          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000001"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "WC014 POS儲值電文",
+        "url": "/api/Payment/Pos/TopUp",
+        "json": {
+          "PlatformID": "10513035",
+          "MerchantID": "10513035",
+          "WalletID": "Mock",
+          "Barcode": "",
+          "Ccy": "TWD",
+          "TopUpAmt": 100,
+          "StoreID": "123",
+          "StoreName": "阿罵店",
+          "PosRefNo": "12345",
+          "MerchantTID": "01",
+          "MerchantTradeNo": "",
+          "MerchantTradeDate": "",
+          "ItemList": "",
+          "Remark": ""
+        },
+        "specs": {
+          "註:": "此處需登入Merchant帳號 pos123 / Aa1234",
+          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000001",
+          "Barcode": "使用 P0007 產生通路儲值條碼",
+          "TopUpAmt": "此處金額和其他POS api不同，是正常人類數字，不用多兩個零",
+          "MerchantTradeNo": "帶空值會依時間自動生成",
+          "MerchantTradeDate": "帶空值會依時間自動生成"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "WC015 POS取消儲值",
+        "url": "/api/Payment/Pos/TopUpCancel",
+        "json": {
+          "PlatformID": "default",
+          "MerchantID": "default",
+          "TransactionID": "",
+          "Barcode": "",
+          "StoreID": "123",
+          "StoreName": "阿罵店",
+          "MerchantTID": "01",
+          "MerchantTradeNo": "",
+          "MerchantTradeDate": ""
+        },
+        "specs": {
+          "註:": "此處需登入Merchant帳號 pos123 / Aa1234",
+          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000001",
+          "MerchantTradeDate": "帶空值會依時間自動生成"
+        }
+      },
+      {
+        "host": "payment",
+        "name": "WC016 POS儲值退貨",
+        "url": "/api/Payment/Pos/TopUpRefund",
+        "json": {
+          "PlatformID": "default",
+          "MerchantID": "default",
+          "TransactionID": "",
+          "Barcode": "",
+          "StoreID": "123",
+          "StoreName": "阿罵店",
+          "PosRefNo": "12345",
+          "MerchantTID": "01",
+          "MerchantTradeNo": "",
+          "MerchantTradeDate": ""
+        },
+        "specs": {
+          "註:": "此處需登入Merchant帳號 pos123 / Aa1234",
+          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000001",
+          "MerchantTradeDate": "帶空值會依時間自動生成"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Online Api",
+    "list": [
+      {
+        "host": "payment",
+        "name": "WC022 交易授權結果查詢",
+        "url": "/api/Payment/Cashier/QueryOnlineCharge",
+        "json": {
+          "PlatformID": "",
+          "MerchantID": "",
+          "MerchantTradeNo": ""
+        }
+      },
+      {
+        "host": "payment",
+        "name": "WC021 線上退貨交易",
+        "url": "/api/Payment/Cashier/RefundOnline",
+        "json": {
+          "PlatformID": "",
+          "MerchantID": "",
+          "TransactionID": "",
+          "Amount": "",
+          "MerchantTradeNo": "",
+          "MerchantTradeDate": ""
+        }
+      }
+    ]
+  },
+  {
+    "category": "OP Custom Receive Api",
+    "list": [
+
+      {
+        "host": "member",
+        "name": "ICP004 icash會員登入",
+        "url": "/api/Member/OPWebUI/Login",
+        "json": {
+          "LoginID": "icp10655210",
+          "PassWord": "Aa123456"
+        },
+        "specs": {
+          "LoginID": "登入帳號",
+          "PassWord": "登入密碼",
+          "TimeStamp": "呼叫時間 (程式會帶)",
+          "Mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "解戶通知",
+        "url": "/api/Member/OPCustom/NoticeMemberDelete",
+        "json": {
+          "mid": "7dd29742c7749bc9399cd538aae9851"
+        },
+        "specs": {
+          "mid": "OPMID",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      }
+
+    ]
+  }
+]
