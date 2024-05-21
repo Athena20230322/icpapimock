@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0908095183"
+          "CellPhone": "0919541317"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -123,8 +123,8 @@
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "tester1861",
-          "UserPwd": "Aa123456",
+          "UserCode": "adan0109",
+          "UserPwd": "dlink5229",
           "SMSAuthCode": ""
 
         },
@@ -148,8 +148,8 @@
         "url": "/app/MemberInfo/SendAuthSMS",
         "json": {
           "LoginTokenID": "7933292712F6468382D561B24868E118",
-          "UserCode": "tbot01",
-          "CellPhone": "0908095183",
+          "UserCode": "adan0109",
+          "CellPhone": "0919541317",
           "SMSAuthType": 5
         },
         "specs": {
@@ -1290,7 +1290,7 @@
         "name": "M0104 搜尋icashPay聯絡人",
         "url": "/app/ChatMember/QueryTransferInfoByCellPhoneOrIcpmid",
         "json": {
-          "QueryNo": "0908009004"
+          "QueryNo": "0977007001"
 
         },
         "specs": {
@@ -1538,6 +1538,23 @@
           "ADType": "0",
           "ADStartTime": "2021/06/08 09:44:33",
           "ADEndTime": "2023/06/08 09:44:33"
+
+        },
+        "specs": {
+          "ADType": "廣告類別"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0134 個人綜所稅查詢驗證身分",
+        "url": "app/MemberInfo/TaxVerifyID",
+        "json": {
+
+          "IDNO": "P122680069",
+          "SeqNo": "N2ZSF-DR295",
+          "PaymentType": "15001",
+          "Tax": "irx"
 
         },
         "specs": {
@@ -2055,7 +2072,7 @@
         "json": {
 
 
-          "CellPhone": "0911111113",
+          "CellPhone": "0976100009",
           "SMSAuthType": 1,
           "Token": "",
           "Vers": "3.0.1.155",
@@ -2082,7 +2099,7 @@
         "json": {
 
 
-          "CellPhone": "0911111113",
+          "CellPhone": "0976100009",
           "SMSAuthType": 1,
           "AuthCode": "",
           "Vers": "3.0.1.155",
@@ -2119,7 +2136,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "Account": "icppost3"
+          "Account": "tester1901"
 
         },
         "specs": {
@@ -2220,7 +2237,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "IDNumber": "C812576525"
+          "IDNumber": "A156775646"
         },
         "specs": {
 
@@ -2463,7 +2480,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "PhoneNumber": "0910000456"
+          "PhoneNumber": "0910000470"
 
 
         },
@@ -2480,7 +2497,7 @@
         "url": "/MemberInfo/SetAccount",
         "json": {
 
-          "Account": "icp10655356",
+          "Account": "icp10655372",
           "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
@@ -2702,7 +2719,7 @@
           "Birthday": "1990/01/01",
           "AreaID": "1001",
           "Address": "台北市內湖區瑞光路200號",
-          "IDNO": "N162845365",
+          "IDNO": "B115834163",
           "IssueDate": "2024/02/19",
           "IssueLocation": "10001",
           "IssueType": "3",
@@ -3033,7 +3050,7 @@
         "name": "P0002 取得會員全付款方式",
         "url": "/app/Payment/GetMemberPaymentInfo",
         "json": {
-          "MerchantID": "10512932"
+          "MerchantID": ""
 
         },
         "specs": {
@@ -3223,7 +3240,8 @@
         "url": "/app/Payment/QueryQRInfo",
         "json": {
 
-          "MerchantQRcode": "iikipS2y%2BkWFlOKhPs4Q%2BauZT1SMxc%2BSVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ%2Bw56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW%2BG8shNS%2B20qKszoGrCTFcy2u7WNdD0qg2lupJI28V%2Bs6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3b0EO%2FVG0jkOK5nVSEfpym85D5oivkxjhsvRQrPUKwoSeULZPo7Ip5RA0xTLspzeFBT44t%2BFuUvc%2BWTtOBICYVHYgOdgTgR5ZDe4rQsUZroYnIhS9uYhK9PiQj4iF1eBN5MHOtfsD3QJHbEpfjuDf8h2ST1Yo68yCRkg9fvzsgnbnoHmJVXD0d%2B93T%2FWAr6Sdehs7Js7NqYo3WITZfHVu8orjK6Jlm8Ow%2BSL4qgK8PwB0%2BjUenmZbO6L0iwQkD6fT9r1baoTMPz50qdrYpyyUXWlKtBhC%2Bd1HDPk8nNu5SBnSCy81aENPJ%2F0UYHvl%2FTHnJJuVXW8lwpfkrOZK05FzLDOZcRt%2B8TlUnqiRRaj4LDqqq2FleBpmig%2BrwseOUpTRX7%2F5Agv%2FNvc%2FTGRqkCJsg5AuyOJ4kRJv%2BiKQdUyxYpez9mz94KHEBwnucbfek5VcjffrGKUopicYJ0alRIW%2BvtniTYRxPXYE3BGPT4Jgn80%3D"
+          "MerchantQRcode": "https://www.toolskk.com/TWQRP%3A%2F%2F462QRCODE%E6%B8%AC%E8%A9%A6%E5%BA%97%2F158%2F01%2FV1%3FD3%3DAaed1N3iJ9au%26D10%3D901%26D11%3D00%2C46246226301561000210001002%3B01%2C46246226301561000210001002"
+         
         },
         "specs": {
           "MerchantQRcode": "QRCode URL"
@@ -3236,14 +3254,14 @@
         "name": "P0018 確認支付QrCode",
         "url": "/app/Payment/DoQRPayment",
         "json": {
-          "MerchantID": "10512932",
-          "Amount": "1",
-          "PayID": "11682311000003390",
+          "MerchantID": "10512822",
+          "Amount": "50",
+          "PayID": "11682311000003776",
           "Mission": "",
           "Team_number": "",
-          "MerchantTradeNo": "202307051420400000",
-          "StoreID": "Dev2-Test",
-          "StoreName": "Dev2-Test"
+          "MerchantTradeNo": "202405201420400000",
+          "StoreID": "",
+          "StoreName": ""
 
         },
         "specs": {
@@ -3264,11 +3282,11 @@
         "url": "/app/Cashier/ChargeOnlineICPO",
         "json": {
 
-          "MerchantID": "10512932",
-          "PlatformID": "10512932",
-          "MerchantTradeNo": "202401151307190000",
-          "ts": "1705287447",
-          "PayID": "11682211000002364",
+          "MerchantID": "10525367",
+          "PlatformID": "10525367",
+          "MerchantTradeNo": "202405201042190000",
+          "ts": "1716172967",
+          "PayID": "11682311000003776",
           "UsePoint": "0",
           "ChargeVersionType": "V2",
           "UsePointType": "1",
@@ -3807,7 +3825,7 @@
         "name": "ICP004 icash會員登入",
         "url": "/api/Member/OPWebUI/Login",
         "json": {
-          "LoginID": "icp10655210",
+          "LoginID": "tester196",
           "PassWord": "Aa123456"
         },
         "specs": {
