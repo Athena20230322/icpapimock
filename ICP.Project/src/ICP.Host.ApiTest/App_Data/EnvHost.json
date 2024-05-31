@@ -12,6 +12,7 @@
   "stage": {
     "member": "https://icp-member-stage.icashpay.com.tw",
     "payment": "https://icp-payment-stage.icashpay.com.tw",
+    "pluspayment": "https://icp-plus-stage.icashpay.com.tw",
     "websocket": "https://icp-socket-stage.icashpay.com.tw"
   },
   "uat": {

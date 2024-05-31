@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0919541317"
+          "CellPhone": "0910000494"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -41,20 +41,14 @@
       },
 
 
-      {
-        "host": "member",
-        "name": "M0002 檢查會員驗證狀態",
-        "url": "/app/MemberInfo/CheckVerifyStatus",
-        "json": {},
-        "specs": {}
-      },
+
       {
         "host": "member",
         "name": "M0003_1 設定註冊資料(2022)",
         "url": "/app/MemberInfo/SetRegisterInfo2022",
         "json": {
-          "CellPhone": "0910000369",
-          "UserCode": "icp10655271",
+          "CellPhone": "0910000490",
+          "UserCode": "icp10655391",
           "UserPwd": "Aa123456"
         },
         "specs": {
@@ -64,6 +58,40 @@
           "UserPwd": "登入密碼，格式：6-12碼半形英數混合",
           "RCCode": "推薦碼"
 
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0007 發送簡訊驗證_共用",
+        "url": "/app/MemberInfo/SendAuthSMS",
+        "json": {
+          "LoginTokenID": "",
+          "UserCode": "",
+          "CellPhone": "0910000494",
+          "SMSAuthType": 7
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1~5需傳)",
+          "UserCode": "登入帳號，格式：6-12碼半形英數混合※當SMSAuthType=2時必需帶入",
+          "CellPhone": "手機號碼檢查帶入的手機號碼與系統紀錄要發送的手機號碼是否一致",
+          "SMSAuthType": "驗證類別 1：註冊時發送簡訊 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 5：換機驗證發送簡訊 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8：修改手機號碼"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0010 檢查簡訊驗證碼_註冊",
+        "url": "/app/MemberInfo/CheckRegisterAuthSMS",
+        "json": {
+          "LoginTokenID": "",
+          "CellPhone": "0910000489",
+          "AuthCode": ""
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID",
+          "CellPhone": "手機號碼",
+          "AuthCode": "簡訊驗證碼"
         }
       },
       {
@@ -77,8 +105,8 @@
           "AreaID": "1001",
           "Address": "123",
           "Email": "autoicash20230207@gmail.com",
-          "Idno": "B142692546",
-          "IssueDate": "2024-01-01",
+          "Idno": "D198453693",
+          "IssueDate": "2024-05-21",
           "IssueLoc": "12345",
           "IssueType": "3",
           "LegalRepData": [
@@ -119,12 +147,50 @@
       },
       {
         "host": "member",
+        "name": "M0006 取得登入回傳資訊",
+        "url": "/app/MemberInfo/GetLoginInfo",
+        "json": {},
+        "specs": {}
+      },
+
+      {
+        "host": "member",
+        "name": "M0019 取得密碼設定開關狀態",
+        "url": "/app/MemberInfo/GetPasswordStatus",
+        "json": {
+        },
+        "specs": {
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0002 檢查會員驗證狀態",
+        "url": "/app/MemberInfo/CheckVerifyStatus",
+        "json": {},
+        "specs": {}
+      },
+
+      {
+        "host": "member",
+        "name": "M0021 取得會員偏好設定",
+        "url": "/app/MemberInfo/GetMemberPreferences",
+        "json": {
+          "OptionName": "test1"
+        },
+        "specs": {
+          "OptionName": "選項名稱"
+        }
+      },
+
+      {
+        "host": "member",
         "name": "M0005_1會員登入",
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "adan0109",
-          "UserPwd": "dlink5229",
+          "UserCode": "icp10655395",
+          "UserPwd": "Aa123456",
           "SMSAuthCode": ""
 
         },
@@ -135,41 +201,19 @@
           "SMSAuthCode": "簡訊驗證碼 (提供換機驗證)"
         }
       },
-      {
-        "host": "member",
-        "name": "M0006 取得登入回傳資訊",
-        "url": "/app/MemberInfo/GetLoginInfo",
-        "json": {},
-        "specs": {}
-      },
-      {
-        "host": "member",
-        "name": "M0007 發送簡訊驗證_共用",
-        "url": "/app/MemberInfo/SendAuthSMS",
-        "json": {
-          "LoginTokenID": "7933292712F6468382D561B24868E118",
-          "UserCode": "adan0109",
-          "CellPhone": "0919541317",
-          "SMSAuthType": 5
-        },
-        "specs": {
-          "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1~5需傳)",
-          "UserCode": "登入帳號，格式：6-12碼半形英數混合※當SMSAuthType=2時必需帶入",
-          "CellPhone": "手機號碼檢查帶入的手機號碼與系統紀錄要發送的手機號碼是否一致",
-          "SMSAuthType": "驗證類別 1：註冊時發送簡訊 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 5：換機驗證發送簡訊 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8：修改手機號碼"
-        }
-      },
+
+
       {
         "host": "member",
         "name": "M0007_1 發送簡訊驗證_共用",
         "url": "/app/MemberInfo/SendAuthSMS2023",
         "json": {
           "LoginTokenID": "",
-          "UserCode": "icp10655271",
-          "CellPhone": "0910000369",
-          "IDNo": "D173092541",
-          "SMSAuthType": 1,
-          "MID": "10526282"
+          "UserCode": "",
+          "CellPhone": "0910000494",
+          "IDNo": "H101447185",
+          "SMSAuthType": 7,
+          "MID": ""
         },
         "specs": {
           "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1,2,3,5需傳)",
@@ -197,10 +241,10 @@
         "url": "/app/MemberInfo/CheckAuthSMS",
         "json": {
           "LoginTokenID": "",
-          "CellPhone": "0976100041",
-          "SMSAuthType": 2,
+          "CellPhone": "0910000494",
+          "SMSAuthType": 7,
           "AuthCode": "",
-          "Idno": "N165234793"
+          "Idno": "H10144185"
         },
         "specs": {
           "LoginTokenID": "登入/註冊TokenID(SMSAuthType=1,2需傳)",
@@ -212,21 +256,7 @@
 
 
 
-      {
-        "host": "member",
-        "name": "M0010 檢查簡訊驗證碼_註冊",
-        "url": "/app/MemberInfo/CheckRegisterAuthSMS",
-        "json": {
-          "LoginTokenID": "",
-          "CellPhone": "0910000369",
-          "AuthCode": ""
-        },
-        "specs": {
-          "LoginTokenID": "登入/註冊TokenID",
-          "CellPhone": "手機號碼",
-          "AuthCode": "簡訊驗證碼"
-        }
-      },
+
       {
         "host": "member",
         "name": "M0011 變更登入密碼",
@@ -328,15 +358,7 @@
 
         }
       },
-      {
-        "host": "member",
-        "name": "M0019 取得密碼設定開關狀態",
-        "url": "/app/MemberInfo/GetPasswordStatus",
-        "json": {
-        },
-        "specs": {
-        }
-      },
+
       {
         "host": "member",
         "name": "M0020 會員偏好設定",
@@ -363,17 +385,7 @@
           }
         }
       },
-      {
-        "host": "member",
-        "name": "M0021 取得會員偏好設定",
-        "url": "/app/MemberInfo/GetMemberPreferences",
-        "json": {
-          "OptionName": "test1"
-        },
-        "specs": {
-          "OptionName": "選項名稱"
-        }
-      },
+
       {
         "host": "member",
         "name": "M0022 修改暱稱",
@@ -1388,10 +1400,10 @@
         "name": "M0108編輯好友(包含編輯其他電子支付業者會員)",
         "url": "/app/ChatMember/EditEcFriend",
         "json": {
-          "FriendChatMID": "",
+          "FriendChatMID": "3089",
           "EcBankCode": "",
           "EcAccount": "",
-          "FriendNickName": ""
+          "FriendNickName": "測試隔年"
 
         },
         "specs": {
@@ -3116,6 +3128,23 @@
           "TopUpType": "儲值方式 1：現金, 2：中獎發票"
         }
       },
+
+      {
+        "host": "payment",
+        "name": "CK04廠商金鑰綁定",
+        "url": "/app/certificate/bindMerchantCert",
+        "json": {
+          "MerchantID": "10000001",
+          "Token": ""
+
+
+        },
+        "specs": {
+          "MerchantID": "",
+          "Token": ""
+        }
+      },
+
       {
         "host": "payment",
         "name": "P0008 取得連結帳戶儲值頁資料",
@@ -3241,14 +3270,14 @@
         "json": {
 
           "MerchantQRcode": "https://www.toolskk.com/TWQRP%3A%2F%2F462QRCODE%E6%B8%AC%E8%A9%A6%E5%BA%97%2F158%2F01%2FV1%3FD3%3DAaed1N3iJ9au%26D10%3D901%26D11%3D00%2C46246226301561000210001002%3B01%2C46246226301561000210001002"
-         
+
         },
         "specs": {
           "MerchantQRcode": "QRCode URL"
 
         }
       },
-    
+
       {
         "host": "payment",
         "name": "P0018 確認支付QrCode",
@@ -3365,8 +3394,8 @@
         "json": {
 
 
-        
-         
+
+
 
 
         },
@@ -3432,6 +3461,67 @@
 
         }
       },
+
+      {
+        "host": "payment",
+        "name": "P0033 11類稅付款",
+        "url": "/app/Cashier/ChargeOnlineFISC",
+        "json": {
+          "RecID": "13574",
+          "Amount": "381",
+          "PayID": "11682311000003273",
+          "UsePoint": "1",
+          "ChargeVersionType": "v2",
+          "UsePointType": "1",
+          "AccumulatedPointsType": "0",
+          "Token": ""
+
+
+        },
+        "specs": {
+
+          "RecID": "納稅訂單流水編號",
+          "Amount": "交易金額",
+          "PayID": "付款方式識別碼",
+          "UsePoint": "UsePointType 如 = 2, 可自行輸入點數帶入",
+          "ChargeVersionType": "線上支付版本類型 新版本APP才會帶入此參數， 如無參數預設為v1版本",
+          "AccumulatedPointsType": "累積點數種類(累點) 0: 不可累積點數1: 可累積點數"
+
+
+        }
+      },
+
+      {
+        "host": "pluspayment",
+        "name": "P0033 綜所稅",
+        "url": "/app/Cashier/ChargeOnlineFISC",
+        "json": {
+          "RecID": "13576",
+          "Amount": "100",
+          "PayID": "11682311000003273",
+          "UsePoint": "1",
+          "ChargeVersionType": "v2",
+          "UsePointType": "1",
+          "AccumulatedPointsType": "0"
+         
+
+
+        },
+        "specs": {
+
+          "RecID": "納稅訂單流水編號",
+          "Amount": "交易金額",
+          "PayID": "付款方式識別碼",
+          "UsePoint": "UsePointType 如 = 2, 可自行輸入點數帶入",
+          "ChargeVersionType": "線上支付版本類型 新版本APP才會帶入此參數， 如無參數預設為v1版本",
+          "AccumulatedPointsType": "累積點數種類(累點) 0: 不可累積點數1: 可累積點數"
+
+
+        }
+      },
+
+
+
       {
         "host": "payment",
         "name": "P0034 確認線上繳費訂單資訊(2022)",
@@ -3449,7 +3539,7 @@
         }
       },
       {
-        "host": "payment",
+        "host": "pluspayment",
         "name": "P0035 建立線上繳費訂單(2022)",
         "url": "/app/OlinePayment/CreateOnlinePaymentOrder",
         "json": {
@@ -3480,11 +3570,11 @@
         }
       },
       {
-        "host": "payment",
+        "host": "pluspayment",
         "name": "P0037 查詢QrCode資訊(2022)",
         "url": "/app/Payment/ParserQrCode",
         "json": {
-          "MerchantQRcode": "iikipS2y%2BkWFlOKhPs4Q%2BauZT1SMxc%2BSVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ%2Bw56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW%2BG8shNS%2B20qKszoGrCTFcy2u7WNdD0qg2lupJI28V%2Bs6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3gJeO6p4cHIQGw%2BatNOlXaJDpDvYPKr2kqDCK2HB51t%2FRvDomgpeKz2h5aVaJ5KH0SGPQXSSoYKUoQKPsBi%2FD7Vl658i2GgXUrwAVSL8R2yamhCXFWT35f3G3ApW2fftVGYgEah9f%2BAfloWZnlM%2BEB%2FCtyD4ajy7P5JokjmV31fawpo2BGhD2%2BDBO3xQoyOYf1XiMf2QfLW07%2FhjbFMH8jAKGf9xTQ9Vb8Bf5hOo32xUEsokGB66V50YNEQnFx%2ByAP2vFHaoxOq9741ki3f%2FPcRPK44%2FZGVtA9G6LxxoHADs3ZCGkMwUmKTq6ClACv7VPodytN1I52CJ%2BKIIny6cOKhJ2%2F15D4DxLUTEgiZZhWhAMFrdMpwziVHys6ZnozrAcHyUuhyEJG0%2F7Id46UkVFGJrREaWQYbXBCdY%2FJL8O6Zj312IQtcfhXE246b4pwKbMM4rC7g2iUCYZP1DqVKekkKt%2FMlTdxB%2FQmr8t%2F1Gta6I%3D"
+          "MerchantQRcode": "https://paytax.nat.gov.tw/mtax/qrcode.aspx?par=150010000000100"
 
         },
         "specs": {
@@ -3518,7 +3608,7 @@
         }
       },
       {
-        "host": "payment",
+        "host": "pluspayment",
         "name": "P0039 財經繳費付款(2022)",
         "url": "/app/Fisc/ChargeOnlineFISC",
         "json": {
@@ -3697,6 +3787,23 @@
         },
         "specs": {
           "ReceivedICPMID": "轉入者電支帳號"
+
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0203 限定交通乖車碼",
+        "url": "/app/Payment/CreateTrafficQRCodeLimit",
+        "json": {
+          "PaymentType": "1",
+          "PayID": "11682411000009508",
+          "DctType": "8",
+          "IDType": "1",
+          "Value": "f57e2f17-b09f-47fb-8d1b-cf813774a083"
+        },
+        "specs": {
+          "PaymentType": "付款方式識別碼"
 
         }
       },
