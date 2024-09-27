@@ -1,4 +1,7 @@
 {
+
+
+
   "dev": {
     "member": "https://icp-member-stage.icashpay.com.tw",
     "payment": "http://localhost:3312"

@@ -3,6 +3,7 @@
     "category": "OP Client Api",
     "list": [
       {
+        "host": "stage",
         "name": "OP帳號取得AccessToken",
         "url": "/SETMemberAuth_sit/AccessToken.html",
         "json": {
@@ -20,6 +21,7 @@
         }
       },
       {
+        "host": "stage",
         "name": "OP帳號取得mid",
         "url": "/SETMemberAuth_sit/QueryMemberMID.html",
         "json": {
@@ -66,7 +68,8 @@
           "request_id": "識別碼 (程式會帶)",
           "device_id": "裝置號碼, 長度15~17之間, 若有限定單一裝置登入，需輸入，有值會檢查格式",
           "access_token": "access_token",
-          "mid": "會員mid (OPMID)",
+          "mid": "會員mid (
+            )",
           "request_time": "呼叫時間 (程式會帶)",
           "mask": "呼叫驗證碼 (程式會帶)"
         }

@@ -18,7 +18,12 @@
           "request": {
             "name": "api 資料",
             "specs": {
-              "OpMemberID": "OP會員編號",
+              "OpMemberID": "
+                
+                
+                
+                
+             編號",
               "IcashAccount": "愛金卡帳戶",
               "ICPCarrierNum": "愛金卡載具",
               "CarrierType": "載具類型",
