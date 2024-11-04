@@ -1,0 +1,5 @@
+﻿{
+  "dev": "http://localhost:3311",
+  "beta": "https://icp-member-beta.icashpay.com.tw",
+  "stage": "https://icp-member-stage.icashpay.com.tw"
+}

@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0919541317"
+          "CellPhone": "0910000494"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -78,7 +78,7 @@
         "json": {
           "LoginTokenID": "",
           "UserCode": "",
-          "CellPhone": "0919541317",
+          "CellPhone": "0910000494",
           "SMSAuthType": 5
         },
         "specs": {
@@ -199,7 +199,7 @@
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "icp10655469",
+          "UserCode": "icp10655395",
           "UserPwd": "Aa123456",
           "SMSAuthCode": ""
       
@@ -3166,8 +3166,8 @@
         "name": "CK04廠商金鑰綁定",
         "url": "/app/certificate/bindMerchantCert",
         "json": {
-          "MerchantID": "10000001",
-          "Token": "BA91C443118248FBB8EA149EF048837D"
+          "MerchantID": "10536973",
+          "Token": "68158248615C445EB9FD2069794F1C71"
 
 
         },
@@ -3300,8 +3300,8 @@
         "name": "P0017查詢QR Code資訊",
         "url": "/app/Payment/QueryQRInfo",
         "json": {
-          "MerchantQRcode": "TWQRP%3A%2F%2F462QRCODE%E6%B8%AC%E8%A9%A6%E5%BA%97%2F158%2F01%2FV1%3FD3%3DAaed1N3iJ9au%26D10%3D901%26D11%3D00%2C46246226301561000210001002%3B01%2C46246226301561000210001002"
-          
+          "MerchantQRcode": "qXSRL%2FHy8C3UJProsCzSQsbivet4mzOCOU%2F2qX3JASxL6%2FsmJQngcMadCwHT96t%2FQBGglCkH17%2BKrfYf5F6Wamq96ZqVzB%2B7m0ua3OVhipM%3D"
+
 
         },
         "specs": {
@@ -3443,7 +3443,7 @@
         "url": "/app/Cashier/QueryOrderForPushNotify",
         "json": {
 
-          "MerchantTradeNo": "202312261706228630"
+          "MerchantTradeNo": "20240927085514443831"
         },
         "specs": {
           "註:": "此處需登入Stage帳號，可用icp09090 / Aa123456"
@@ -3606,7 +3606,7 @@
         "name": "P0037 查詢QrCode資訊(2022)",
         "url": "/app/Payment/ParserQrCode",
         "json": {
-          "MerchantQRcode": "TWQRP%3A%2F%2F462QRCODE%E6%B8%AC%E8%A9%A6%E5%BA%97%2F158%2F01%2FV1%3FD3%3DAaed1N3iJ9au%26D10%3D901%26D11%3D00%2C46246226301561000210001002%3B01%2C46246226301561000210001002"
+          "MerchantQRcode": "N3iJ9au%26D10%3D901%26D11%3D00%2C46246226301561000210001002%3B01%2C46246226301561000210001002"
 
         },
         "specs": {
@@ -3712,22 +3712,22 @@
       {
         "host": "payment",
         "name": "WC006 POS支付",
-        "url": "/api/Payment/Pos/CheckOut",
+        "url": "/api/Payment/Pos/DeductICPOF",
         "json": {
 
-          "PlatformID": "10000261",
-          "MerchantID": "10000261",
-          "WalletID": "",
+          "PlatformID": "default",
+          "MerchantID": "default",
+          "WalletID": "Mock",
           "Barcode": "",
-          "Amount": 5000,
-          "StoreID": "ICASH-002",
-          "StoreName": "",
-          "PosRefNo": "002150",
+          "Amount": 10000,
+          "StoreID": "123",
+          "StoreName": "阿罵店",
+          "PosRefNo": "12345",
           "MerchantTID": "01",
           "MerchantTradeNo": "",
-          "MerchantTradeDate": "2020/05/05 10:40:17",
-          "CarrierType": "EK0004",
-          "ItemAmt": 1001,
+          "MerchantTradeDate": "",
+          "CarrierType": "3J0002",
+          "ItemAmt": 10000,
           "UtilityAmt": 0,
           "CommAmt": 0,
           "ExceptAmt1": 0,
@@ -3737,7 +3737,8 @@
           "DebitPoint": 0,
           "NonRedeemAmt": 0,
           "NonPointAmt": 0,
-          "ItemList": ""
+          "ItemList": "",
+          "Remark": ""
         },
         "specs": {
           "註:": "此處需登入Merchant帳號，可用pos123 / Aa1234",
@@ -3748,6 +3749,43 @@
           "MerchantTradeDate": "帶空值會依時間自動生成"
         }
       },
+      {
+        "host": "payment",
+        "name": "ICPOF001",
+        "url": "/api/V2/Payment/Pos/DeductICPOF",
+        "json": {
+          "PlatformID": "10536912",
+          "MerchantID": "10536912",
+          "MerchantTradeNo": "MTN10536912100751353",
+          "StoreID": "SID0001",
+          "StoreName": "SN0001",
+          "MerchantTradeDate": "2024/10/11 10:07:51",
+          "TotalAmount": "1000",
+          "ItemAmt": "1000",
+          "UtilityAmt": "0",
+          "ItemNonRedeemAmt": "0",
+          "UtilityNonRedeemAmt": "0",
+          "NonPointAmt": "0",
+          "Item": [
+            {
+              "ItemNo": "INO001",
+              "ItemName": "IN001",
+              "Quantity": "1"
+            }
+          ],
+          "TradeMode": "1",
+          "CallbackURL": "https://prod-21.japaneast.logic.azure.com:443/workflows/896a5a51348c488386c686c8e83293c8/triggers/ICPOB002/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FICPOB002%2Frun&sv=1.0&sig=81SiqqBYwWTplvxc3OSCCU6sk9oNT6nI4w5t9Z8v6j4",
+          "RedirectURL": "",
+          "AuthICPAccount": ""
+        },
+        "specs": {
+          "註:": "此處需登入Merchant帳號，可用pos123 / Aa1234",
+          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000001",
+          "MerchantTradeDate": "帶空值會依時間自動生成"
+        }
+      },
+
+
       {
         "host": "payment",
         "name": "WC008 POS取消交易",
@@ -3846,7 +3884,7 @@
         "name": "P0204 輪循交易訂單結果",
         "url": "/app/Cashier/QueryOrderForSET",
         "json": {
-          "Barcode": [ "881330064I044KJOWX" ]
+          "Barcode": [ "881010064J5ZK1EOWB" ]
 
 
         },
@@ -3865,7 +3903,7 @@
           "BankType": 2,
           "BankAccount": "223344556677",
           "BranchCode": "0495"
-          
+
         },
         "specs": {
           "註:": "此處需登入Merchant帳號 pos123 / Aa1234",

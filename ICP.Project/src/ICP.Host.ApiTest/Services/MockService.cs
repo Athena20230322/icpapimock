@@ -61,7 +61,8 @@ namespace ICP.Host.ApiTest.Services
 
             if (url.IndexOf("/Pos/") > 0)
             {
-                if(jobj["PlatformID"] != null && jobj["MerchantID"] != null)
+                if(jobj["PlatformID"] != null && jobj["
+                    "] != null)
                 {
                     if(Convert.ToString(jobj["PlatformID"]) == "default")
                     {
@@ -69,6 +70,8 @@ namespace ICP.Host.ApiTest.Services
                         {
                             case "dev":
                                 jobj["PlatformID"] = "10020336";
+
+
 
                                 break;
                             case "beta":

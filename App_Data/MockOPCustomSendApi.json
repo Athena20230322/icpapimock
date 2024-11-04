@@ -1,0 +1,57 @@
+﻿[
+  {
+    "category": "OP Custom Send Api",
+    "list": [
+      {
+        "name": "綁定icash會員",
+        "url": "BindicashAccount",
+        "json": {
+          "request": {
+            "OpMemberID": "e78e6bb753ef4d298efb61f86d364a63",
+            "IcashAccount": "1681911000000016",
+            "ICPCarrierNum": "",
+            "CarrierType": ""
+          },
+          "MID": 1000001
+        },
+        "specs": {
+          "request": {
+            "name": "api 資料",
+            "specs": {
+              "OpMemberID": "OP會員編號",
+              "IcashAccount": "愛金卡帳戶",
+              "ICPCarrierNum": "愛金卡載具",
+              "CarrierType": "載具類型",
+              "TimeStamp": "呼叫時間 (程式會帶)",
+              "Mask": "呼叫驗證碼 (程式會帶)"
+            }
+          },
+          "MID": "Log MID"
+        }
+      },
+      {
+        "name": "解綁icash會員",
+        "url": "UnBindicashAccount",
+        "json": {
+          "request": {
+            "OpMemberID": "e78e6bb753ef4d298efb61f86d364a63",
+            "IcashAccount": "1681911000000016"
+          },
+          "MID": 1000001
+        },
+        "specs": {
+          "request": {
+            "name": "api 資料",
+            "specs": {
+              "OpMemberID": "OP會員編號",
+              "IcashAccount": "愛金卡帳戶",
+              "TimeStamp": "呼叫時間 (程式會帶)",
+              "Mask": "呼叫驗證碼 (程式會帶)"
+            }
+          },
+          "MID": "Log MID"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+﻿[
+  {
+    "category": "OP Custom Receive Api",
+    "list": [
+      {
+        "name": "解戶通知",
+        "url": "/api/Member/OPCustom/NoticeMemberDelete",
+        "json": {
+          "mid": "6c6b52ecf5ed450896b1c7094e5286ef"
+        },
+        "specs": {
+          "mid": "OPMID",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+      {
+        "name": "會員手機條碼異動",
+        "url": "/api/Member/OPCustom/NoticeMobileBarcode",
+        "json": {
+          "mid": "6c6b52ecf5ed450896b1c7094e5286ef",
+          "mobile_barcode": "/AA1234"
+        },
+        "specs": {
+          "mid": "OPMID",
+          "mobile_barcode": "手機條碼載具",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      }
+    ]
+  }
+]

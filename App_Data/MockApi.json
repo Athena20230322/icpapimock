@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0976100008"
+          "CellPhone": "0908095183"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -21,10 +21,22 @@
         "name": "M0001_1 刷新AppToken(2023)",
         "url": "/app/MemberInfo/RefreshLoginToken2023",
         "json": {
-          "IDNo": "A220258176"
+          "IDNo": "F126507126"
         },
         "specs": {
           "IDNo": "身分證字號"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0001 取得手機號碼",
+        "url": "/app/MemberInfo/getCellphone",
+        "json": {
+          "AuthV": ""
+        },
+        "specs": {
+          "AuthV": "OPEN WALLET 提供的AuthV"
         }
       },
 
@@ -41,8 +53,8 @@
         "name": "M0003_1 設定註冊資料(2022)",
         "url": "/app/MemberInfo/SetRegisterInfo2022",
         "json": {
-          "CellPhone": "0910000165",
-          "UserCode": "icp10655065",
+          "CellPhone": "0910000369",
+          "UserCode": "icp10655271",
           "UserPwd": "Aa123456"
         },
         "specs": {
@@ -60,13 +72,13 @@
         "url": "/app/MemberInfo/AuthIDNO",
         "json": {
           "CName": "測試一",
-          "BirthDay": "1960-12-03",
+          "BirthDay": "2000-01-01",
           "NationalityID": "1206",
           "AreaID": "1001",
           "Address": "123",
-          "Email": "autoicash2023@gmail.com",
+          "Email": "autoicash20230207@gmail.com",
           "Idno": "B142692546",
-          "IssueDate": "2006-12-08",
+          "IssueDate": "2024-01-01",
           "IssueLoc": "12345",
           "IssueType": "3",
           "LegalRepData": [
@@ -111,7 +123,7 @@
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "chin1234",
+          "UserCode": "tbot01",
           "UserPwd": "1qaz2wsx",
           "SMSAuthCode": ""
 
@@ -136,8 +148,8 @@
         "url": "/app/MemberInfo/SendAuthSMS",
         "json": {
           "LoginTokenID": "7933292712F6468382D561B24868E118",
-          "UserCode": "icp10655065",
-          "CellPhone": "0910000165",
+          "UserCode": "tbot01",
+          "CellPhone": "0908095183",
           "SMSAuthType": 1
         },
         "specs": {
@@ -153,11 +165,11 @@
         "url": "/app/MemberInfo/SendAuthSMS2023",
         "json": {
           "LoginTokenID": "",
-          "UserCode": "icp10655065",
-          "CellPhone": "0910000165",
-          "IDNo": "B142692546",
+          "UserCode": "icp10655271",
+          "CellPhone": "0910000369",
+          "IDNo": "D173092541",
           "SMSAuthType": 1,
-          "MID": ""
+          "MID": "10526282"
         },
         "specs": {
           "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1,2,3,5需傳)",
@@ -206,7 +218,7 @@
         "url": "/app/MemberInfo/CheckRegisterAuthSMS",
         "json": {
           "LoginTokenID": "",
-          "CellPhone": "0910000165",
+          "CellPhone": "0910000369",
           "AuthCode": ""
         },
         "specs": {
@@ -236,8 +248,8 @@
         "name": "M0012 變更安全密碼",
         "url": "/app/MemberInfo/ChangeSecurityPwd",
         "json": {
-          "NewSecPwd": "123456",
-          "ConfirmSecPwd": "123456"
+          "NewSecPwd": "135790",
+          "ConfirmSecPwd": "135790"
         },
         "specs": {
           "NewSecPwd": "新的安全密碼",
@@ -287,7 +299,7 @@
         "name": "M0016 設定指紋辨識及FaceID開關",
         "url": "/app/MemberInfo/UpdateFingerPrintPwdStatus",
         "json": {
-          "Status": "False"
+          "Status": "True"
         },
         "specs": {
           "FingerPrintPwd": "狀態False：停用, True：啟用"
@@ -298,7 +310,7 @@
         "name": "M0017 驗證指紋辨識及FaceID",
         "url": "/app/MemberInfo/CheckFingerPrintPwd",
         "json": {
-          "FingerPrintPwd": "666666"
+          "FingerPrintPwd": "1d81fbe2-8352-43ec-81d8-87f78f4d3be0"
         },
         "specs": {
           "FingerPrintPwd": "指紋/FaceID密碼"
@@ -430,9 +442,8 @@
         "name": "M0027 銀行帳戶驗證",
         "url": "/app/MemberInfo/BankAccountAuth",
         "json": {
-          "BankType": 1,
-          "BankCode": "009"
-
+          "BankCode": "009",
+          "BankType": "1"
         },
         "specs": {
           "BankType": "銀行類別 1：合作銀行 2：非合作銀行",
@@ -621,7 +632,7 @@
       {
         "host": "member",
         "name": "M0039 記錄略過修改安全密碼",
-        "url": "/app/MemberInfo/SetLoginPwdIgnorDate",
+        "url": "/app/MemberInfo/SetSecPwdIgnorDate",
         "json": {
 
         },
@@ -774,8 +785,8 @@
         "json": {
 
 
-          "BankAccount": "00900400290405",
-          "BankCode": "807",
+          "BankAccount": "1682311000001441",
+          "BankCode": "392",
           "BranchCode": ""
         },
         "specs": {
@@ -793,9 +804,9 @@
         "json": {
           "BankCode": "050",
           "BankAccount": "13064600006",
-          "AccountID": 21917,
-          "Amount": 30,
-          "AgreeLevelUp": true
+          "AccountID": "21917",
+          "Amount": "20",
+          "AgreeLevelUp": false
 
 
 
@@ -853,6 +864,22 @@
         "specs": {
         }
       },
+
+      {
+        "host": "member",
+        "name": "M0062 設定我的最愛",
+        "url": "/app/ChatMember/SetFavorite",
+        "json": {
+          "FriendChatMID": "14136",
+          "IsFavorite": "1"
+
+
+        },
+        "specs": {
+          "FriendChatMID": "好友聊天編號",
+          "IsFavorite": "設定最愛"
+        }
+      },
       {
         "host": "member",
         "name": "M0063 取得好友列表",
@@ -896,6 +923,21 @@
           "ArrayDialogID": "指定查詢聊天室※ 若沒有帶入指定聊天室，則回傳有對話紀錄的所有聊天室清單",
           "PageNo": "分頁",
           "PageSize": "分頁筆數"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0067 刪除好友",
+        "url": "/app/ChatMember/RemoveFriends",
+        "json": {
+          "ArrayFriendMemberID": [ -291 ]
+
+
+        },
+        "specs": {
+          "ArrayFriendMemberID": "要刪除的聊天會員編號"
+
         }
       },
       {
@@ -1166,7 +1208,7 @@
         "name": "M0098 檢查是否需要更新APP",
         "url": "/app/MemberInfo/CheckIsUpdate",
         "json": {
-          "VersionCode": "2.0.6"
+          "VersionCode": "2.0.56"
 
         },
         "specs": {
@@ -1213,9 +1255,22 @@
         "url": "/app/MemberInfo/QueryMemberOpPoint",
         "json": {
 
+
         },
         "specs": {
           "": "取得會員OP點數"
+        }
+      },
+      {
+        "host": "member",
+        "name": "M0102 更新推播token",
+        "url": "/app/MemberInfo/UpdatePushToken",
+        "json": {
+          "PushToken": "cV18ClVPB_IAtkrNBheHNc:APA91bFT-nhH-faribP42Fz8o7qsmS9Cc_N3RGJXL3twkjnMUlQxlT7COgBAlBk4Pf3IbG6gIZ6A6LC-6YUpZK5Rk-5js4SayiV_2ohOBCRFAPF4mE51izrkPypgy8eioZVFziU5wFI9"
+
+        },
+        "specs": {
+          "": "更新推播token"
         }
       },
 
@@ -1273,6 +1328,57 @@
           "ADType": "廣告種類 0: (預設)全撈 1: 廣告Banner2. 專屬優惠3. 熱門商品4. 險種選擇",
           "ADStartTime": "廣告時間區間(起)",
           "ADEndTime": "廣告時間區間(迄)"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0107 新增聯絡人_1",
+        "url": "/app/ChatMember/AddEcFriends",
+        "json": {
+
+
+          "AddWay": "30",
+          "EcAccount": "0958007001",
+          "EcBankCode": "392",
+          "FriendNickName": "第一名銀行"
+
+        },
+        "specs": {
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0107 新增聯絡人_2",
+        "url": "/app/ChatMember/AddEcFriends",
+        "json": {
+          "FriendsList": [
+            {
+              "IcpMID": "1682111000009639",
+              "ChatMemberID": "2846",
+              "NickName": "test01042",
+              "ProPic": "",
+              "ProPic_120X120": "",
+              "ProPic_60X60": "",
+              "BankName": "icash Pay",
+              "BankCode": "392",
+              "BankAccount": "1682111000009639",
+              "IsICPMember": "true",
+              "IsFriend": "1",
+              "IsFavorite": "0",
+              "CreateDate": "2023/12/20 16:35:37",
+              "ChatStatus": "1",
+              "InviteStatus": "1",
+              "FriendNickName": ""
+
+            }
+
+          ]
+        },
+        "specs": {
 
         }
       },
@@ -1847,7 +1953,7 @@
 
           "Page": 1,
           "PageSize": 1,
-          "ModifyDate": "2023/07/11 11:19:06"
+          "ModifyDate": "2024/01/15 11:19:06"
         },
         "specs": {
 
@@ -1929,6 +2035,21 @@
         }
       },
 
+      {
+        "host": "member",
+        "name": "M0170取得繳費項目資料",
+        "url": "/app/OnlinePayment/getBitsItemData",
+        "json": {
+
+
+        },
+        "specs": {
+
+          "ItemID": "篩選項目(如未帶入item，返回全部常用設定)"
+
+        }
+      },
+
 
       {
         "host": "member",
@@ -1937,10 +2058,10 @@
         "json": {
 
 
-          "CellPhone": "0976100006",
+          "CellPhone": "0910000308",
           "SMSAuthType": 1,
           "Token": "",
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -1964,11 +2085,10 @@
         "json": {
 
 
-          "CellPhone": "0976100006",
+          "CellPhone": "0910000308",
           "SMSAuthType": 1,
           "AuthCode": "",
-          "Token": "",
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -1995,14 +2115,14 @@
 
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "OS": "2",
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "Account": "tester1871"
+          "Account": "icp10655210"
 
         },
         "specs": {
@@ -2020,15 +2140,13 @@
         "json": {
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
           "OS": "2",
           "OSVersion": "13",
           "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
           "Token": "",
           "MemberDataType": 1
         },
@@ -2074,18 +2192,16 @@
 
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
           "OS": "2",
           "OSVersion": "13",
           "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
           "Token": "",
           "CodeType": 0,
-          "SecurityCode": "135790"
+          "SecurityCode": "246790"
 
         },
         "specs": {
@@ -2106,15 +2222,13 @@
 
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
           "OS": "2",
           "OSVersion": "13",
           "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
           "Token": ""
 
 
@@ -2134,7 +2248,7 @@
 
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2162,7 +2276,7 @@
 
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7aa",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2172,8 +2286,8 @@
           "RealIP": 0,
           "ProxyIP": 0,
           "Token": "",
-          "IDNumber": "K220669196",
-          "Birthday": "1986-12-30"
+          "IDNumber": "A156775646",
+          "Birthday": "1986-12-29"
 
         },
         "specs": {
@@ -2192,19 +2306,17 @@
 
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
           "OS": "2",
           "OSVersion": "13",
           "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
           "Token": "",
-          "Account": "icp220826T9",
-          "IDNumber": "A225054347",
-          "PhoneNumber": "0940332075"
+          "Account": "icp10655279",
+          "IDNumber": "B185952970",
+          "PhoneNumber": "0910000377"
 
         },
         "specs": {
@@ -2223,7 +2335,7 @@
 
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2251,17 +2363,15 @@
 
 
 
-          "Vers": "3.0.1.0",
-          "DeviceInfo": "Pixel 7aa",
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
           "OS": "2",
           "OSVersion": "13",
           "AppName": "icashpay2023",
-          "RealIP": 0,
-          "ProxyIP": 0,
           "Token": "",
-          "IDNumber": "A131503993"
+          "IDNumber": "B185952970"
 
 
         },
@@ -2282,7 +2392,7 @@
         "json": {
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2290,7 +2400,8 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "PhoneNumber": "0910000164"
+          "PhoneNumber": "0910000387"
+
 
         },
         "specs": {
@@ -2306,8 +2417,8 @@
         "url": "/MemberInfo/SetAccount",
         "json": {
 
-          "Account": "icp10655064",
-          "Vers": "3.0.1.0",
+          "Account": "icp10655289",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2330,7 +2441,7 @@
         "json": {
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2357,7 +2468,7 @@
         "json": {
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2365,7 +2476,7 @@
           "OSVersion": "13",
           "AppName": "icashpay2023",
           "Token": "",
-          "IDNumber": "R100001208"
+          "IDNumber": "B120291438"
         },
         "specs": {
 
@@ -2383,7 +2494,7 @@
         "json": {
 
 
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2415,20 +2526,20 @@
 
           "LegalAgentData": [
             {
-              "IDNO": "",
-              "Name": "",
-              "PhoneNumber": ""
+              "IDNO": "B186133826",
+              "Name": "林林",
+              "PhoneNumber": "0922000232"
             },
             {
-              "INDO": "",
-              "Name": "",
-              "PhoneNumber": ""
+              "INDO": "P12345678",
+              "Name": "旺旺",
+              "PhoneNumber": "0933000232"
             }
 
           ],
           "LegalAgentType": "1",
           "Token": "",
-          "Vers": "3.0.1.0",
+          "Vers": "3.0.1.155",
           "DeviceInfo": "Pixel 7bb",
           "DeviceID": "b4f194a32647b4f5",
           "IsSimulator": "0",
@@ -2436,427 +2547,416 @@
           "OSVersion": "13",
           "AppName": "icashpay2023"
         }
+      },
+
+
+
+      {
+        "host": "member",
+        "name": "MR206-建立正式會員",
+        "url": "/MemberInfo/InsertMember",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+
         },
-      
-        
+        "specs": {
 
-        {
-          "host": "member",
-          "name": "MR206-建立正式會員",
-          "url": "/MemberInfo/InsertMember",
-          "json": {
 
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "Token": ""
-
-          },
-          "specs": {
-
-
-            "Token": "識別使用者呼叫API權限",
-            "CodeType": "0: 六位數安全密碼1: 圖形密碼2: 生物辨識密碼",
-            "SecurityCode": "六位數密碼: 僅限數字、不可為連號(123456)或相同數字(111111)"
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MD207-取得設定檔資料",
-          "url": "/MemberInfo/GetConfig",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "Token": ""
-          },
-          "specs": {
-
-            "Token": "識別使用者呼叫API權限"
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MR202-設定本國人身分驗證資料",
-          "url": "/MemberInfo/SetAuthIdentity",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "Token": "",
-            "CName": "陳筱",
-            "Birthday": "1999/11/22",
-            "AreaID": "1001",
-            "Address": "北中內乙橢二路/16",
-            "IDNO": "F102511164",
-            "IssueDate": "2019/11/22",
-            "IssueLocation": "63000",
-            "IssueType": "1",
-            "fileCols": "img1,img2"
-
-          },
-          "specs": {
-
-            "Token": "識別使用者呼叫API權限"
-
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MR202-設定本國人身分驗證資料_未成年",
-          "url": "/MemberInfo/SetAuthIdentity",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7aa",
-            "DeviceID": "b3f194a32647b4f4",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "RealIP": 0,
-            "ProxyIP": 0,
-            "Token": "",
-            "CName": "測試帳號",
-            "Birthday": "2007/01/01",
-            "AreaID": "10",
-            "Address": "123",
-            "IDNO": "A120193963",
-            "IssueDate": "2023/08/22",
-            "IssueLocation": "67000",
-            "IssueType": "1",
-            "fileCols": "img1,img2"
-
-
-          },
-          "specs": {
-
-            "Token": "識別使用者呼叫API權限"
-
-          }
-        },
-
-
-        {
-          "host": "member",
-          "name": "MR203-設定外國人身份驗證資料",
-          "url": "/MemberInfo/SetAuthIdentityForeign",
-
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "RealIP": 0,
-            "ProxyIP": 0,
-            "Token": "",
-            "Birthday": "1990/01/01",
-            "CName": "傑夫",
-            "EName": "Jeff",
-            "NationalityID": "1056",
-            "ResidentPermitID": "AB96003021",
-            "ResidentPermitNumber": "F917000160",
-            "ResidentPermitType": 0,
-            "ResidentPermitIssueDate": "2000/01/01",
-            "ResidentPermitExpireDate": "2025/01/01",
-            "fileCols": "img1,img2"
-
-
-          },
-
-
-          "specs": {
-
-            "Token": "識別使用者呼叫API權限"
-
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MR204-執行身分驗證流程",
-          "url": "/MemberInfo/ExcuteAuthIdentity",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "Token": ""
-
-
-
-          },
-          "specs": {
-
-            "Token": "識別使用者呼叫API權限"
-
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MR208-修改姓名",
-          "url": "/MemberInfo/EditName",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "Token": "",
-            "Name": "測試一"
-
-
-
-          },
-          "specs": {
-
-            "Token": "識別使用者呼叫API權限"
-
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MR209-檢核中信資料共享會員身分",
-          "url": "/MemberInfo/VerifySharedMember",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "Token": ""
-
-
-
-
-          },
-          "specs": {
-
-            "Token": "識別使用者呼叫API權限"
-
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MD206-設定登入密碼",
-          "url": "/MemberInfo/SetPassword",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7aa",
-            "DeviceID": "b3f194a32647b4f4",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "RealIP": 0,
-            "ProxyIP": 0,
-            "Token": "",
-            "Password": "Aa123456"
-          },
-          "specs": {
-
-
-            "Token": "識別使用者呼叫API權限",
-            "Password": "限制6~20英數混合字元，使用者輸入的密碼"
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MD201-取得跳轉頁面",
-          "url": "/MemberInfo/GetMemberStatus",
-          "json": {
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "RealIP": 0,
-            "ProxyIP": 0,
-            "Token": ""
-          },
-          "specs": {
-
-            "Token": "識別使用者呼叫API權限Token"
-          }
-        },
-
-        {
-          "host": "member",
-          "name": " ML209-舊版會員轉為新版",
-          "url": "/MemberInfo/MemberTransformNewVersion",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7aa",
-            "DeviceID": "b3f194a32647b4f4",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "RealIP": 0,
-            "ProxyIP": 0,
-            "Token": ""
-          },
-          "specs": {
-
-            "CellPhone": "使用者輸入的手機號碼^09[0-9]{8}$",
-            "AuthType": "驗證類型  1:手機驗證 4:安全密碼OTP",
-            "Token": "識別使用者呼叫API權限。若Token不為空則視為安全密碼修改，否則為初次使用APP"
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MP001取得推播設定",
-          "url": "/app/MemberInfo/GetPushTokenSetting",
-          "json": {
-          },
-          "specs": {
-
-          }
-        },
-
-        {
-          "host": "member",
-          "name": "MP002設定推播狀態",
-          "url": "/app/MemberInfo/SettingPushTokenStatus",
-          "json": {
-
-            "IsOpenVoice": "false",
-            "IsOpenNotification": "false",
-            "IsOpenPayResult": "false"
-          },
-          "specs": {
-
-          }
-        },
-
-
-
-        {
-          "host": "member",
-          "name": "MOP201-檢查該會員是否為OP會員",
-          "url": "/MemberInfo/IsOpenPointMember",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "RealIP": 0,
-            "ProxyIP": 0,
-            "Token": ""
-          },
-          "specs": {
-
-
-            "Token": "識別使用者呼叫API權限",
-            "Password": "限制6~20英數混合字元，使用者輸入的密碼"
-          }
-        },
-        {
-          "host": "member",
-          "name": "MOP202-取得OP登入連結",
-          "url": "/MemberInfo/GetAuthOpenPointUrl",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "RealIP": 0,
-            "ProxyIP": 0,
-            "Token": ""
-          },
-          "specs": {
-
-
-            "Token": "識別使用者呼叫API權限",
-            "Password": "限制6~20英數混合字元，使用者輸入的密碼"
-          }
-        },
-        {
-          "host": "member",
-          "name": "MOP203-註冊OP會員",
-          "url": "/MemberInfo/RegisterOpenPointMember",
-          "json": {
-
-
-            "Vers": "3.0.1.0",
-            "DeviceInfo": "Pixel 7bb",
-            "DeviceID": "b4f194a32647b4f5",
-            "IsSimulator": "0",
-            "OS": "2",
-            "OSVersion": "13",
-            "AppName": "icashpay2023",
-            "RealIP": 0,
-            "ProxyIP": 0,
-            "Token": ""
-          },
-          "specs": {
-
-
-            "Token": "識別使用者呼叫API權限"
-
-          }
+          "Token": "識別使用者呼叫API權限",
+          "CodeType": "0: 六位數安全密碼1: 圖形密碼2: 生物辨識密碼",
+          "SecurityCode": "六位數密碼: 僅限數字、不可為連號(123456)或相同數字(111111)"
         }
+      },
+
+      {
+        "host": "member",
+        "name": "MD207-取得設定檔資料",
+        "url": "/MemberInfo/GetConfig",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD208-取得法定代理人資料",
+        "url": "/MemberInfo/GetTeenagersLegalData",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+        }
+
+      },
+
+      {
+        "host": "member",
+        "name": "MD211-IgnoreChangeSecurityCode",
+        "url": "/MemberInfo/IgnoreChangeSecurityCode",
+        "json": {
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "CodeType": "0"
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR202-設定本國人身分驗證資料",
+        "url": "/MemberInfo/SetAuthIdentity",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "CName": "測試一",
+          "Birthday": "1990/01/01",
+          "AreaID": "1001",
+          "Address": "台北市內湖區瑞光路200號",
+          "IDNO": "E184337598",
+          "IssueDate": "2024/02/19",
+          "IssueLocation": "10001",
+          "IssueType": "3",
+          "fileCols": "img1,img2"
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR202-設定本國人身分驗證資料_未成年",
+        "url": "/MemberInfo/SetAuthIdentity",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7aa",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": "",
+          "CName": "測試青少年",
+          "Birthday": "2008/01/01",
+          "AreaID": "10",
+          "Address": "123",
+          "IDNO": "B186133826",
+          "IssueDate": "2023/12/11",
+          "IssueLocation": "67000",
+          "IssueType": "1",
+          "fileCols": "img1,img2"
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+
+      {
+        "host": "member",
+        "name": "MR203-設定外國人身份驗證資料",
+        "url": "/MemberInfo/SetAuthIdentityForeign",
+
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": "",
+          "Birthday": "1990/01/01",
+          "CName": "傑夫",
+          "EName": "Jeff",
+          "NationalityID": "1056",
+          "ResidentPermitID": "AB96003021",
+          "ResidentPermitNumber": "F917000160",
+          "ResidentPermitType": 0,
+          "ResidentPermitIssueDate": "2000/01/01",
+          "ResidentPermitExpireDate": "2025/01/01",
+          "fileCols": "img1,img2"
+
+
+        },
+
+
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR204-執行身分驗證流程",
+        "url": "/MemberInfo/ExcuteAuthIdentity",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR208-修改姓名",
+        "url": "/MemberInfo/EditName",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": "",
+          "Name": "測試一"
+
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MR209-檢核中信資料共享會員身分",
+        "url": "/MemberInfo/VerifySharedMember",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+
+
+
+
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD206-設定登入密碼",
+        "url": "/MemberInfo/SetPassword",
+        "json": {
+
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7aa",
+          "DeviceID": "b3f194a32647b4f4",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": "",
+          "Password": "Aa123456"
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限",
+          "Password": "限制6~20英數混合字元，使用者輸入的密碼"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MD201-取得跳轉頁面",
+        "url": "/MemberInfo/GetMemberStatus",
+        "json": {
+
+          "Vers": "3.0.1.155",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+          "Token": "識別使用者呼叫API權限Token"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": " ML209-舊版會員轉為新版",
+        "url": "/MemberInfo/MemberTransformNewVersion",
+        "json": {
+
+
+          "Vers": "3.0.1.0",
+          "DeviceInfo": "Pixel 7aa",
+          "DeviceID": "b3f194a32647b4f4",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "RealIP": 0,
+          "ProxyIP": 0,
+          "Token": ""
+        },
+        "specs": {
+
+          "CellPhone": "使用者輸入的手機號碼^09[0-9]{8}$",
+          "AuthType": "驗證類型  1:手機驗證 4:安全密碼OTP",
+          "Token": "識別使用者呼叫API權限。若Token不為空則視為安全密碼修改，否則為初次使用APP"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MP001取得推播設定",
+        "url": "/app/MemberInfo/GetPushTokenSetting",
+        "json": {
+        },
+        "specs": {
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MP002設定推播狀態",
+        "url": "/app/MemberInfo/SettingPushTokenStatus",
+        "json": {
+
+          "IsOpenVoice": "false",
+          "IsOpenNotification": "false",
+          "IsOpenPayResult": "false"
+        },
+        "specs": {
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "MOP201-綁定OP會員",
+        "url": "/MemberInfo/BindOpenPointMember",
+        "json": {
+
+          "Vers": "3.0.1.0",
+          "DeviceInfo": "Pixel 7bb",
+          "DeviceID": "b4f194a32647b4f5",
+          "IsSimulator": "0",
+          "OS": "2",
+          "OSVersion": "13",
+          "AppName": "icashpay2023",
+          "Token": ""
+        },
+        "specs": {
+
+
+          "Token": "識別使用者呼叫API權限",
+          "Password": "限制6~20英數混合字元，使用者輸入的密碼"
+        }
+      }
+
 
 
     ]
@@ -2870,7 +2970,7 @@
         "url": "/app/Payment/CreateBarcode",
         "json": {
           "PaymentType": "1",
-          "PayID": "11682211000012808"
+          "PayID": "11682211000002364"
         },
         "specs": {
 
@@ -2974,9 +3074,9 @@
         "name": "P0010 連結帳戶儲值",
         "url": "/app/AccountLink/TopUpByAccountLink",
         "json": {
-          "BankCode": "009",
-          "AccountID": "50509500179600",
-          "Amount": 100
+          "BankCode": "050",
+          "AccountID": "21917",
+          "Amount": 10
         },
         "specs": {
           "BankCode": "銀行代碼",
@@ -3016,7 +3116,7 @@
           "TopUpMode": 1,
           "LimitAmount": 5000,
           "DailyLimitAmount": 10000,
-          "AccountID": 0,
+          "AccountID": 21917,
           "TopUpUnit": 100,
           "TopUpSwitch": 1
         },
@@ -3055,6 +3155,11 @@
         "name": "P0016 發送轉帳",
         "url": "/app/TransferAccount/SentTransferMsg",
         "json": {
+          "PayChatMID": "3362",
+          "ReceivedChatMID": "14672",
+          "TransferAmount": "100",
+          "TradeToken": 21917,
+          "PaymentType": "1"
         },
         "specs": {
 
@@ -3066,19 +3171,19 @@
         "url": "/app/Payment/QueryQRInfo",
         "json": {
 
-          "MerchantQRcode": "iikipS2y+kWFlOKhPs4Q+auZT1SMxc+SVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ+w56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW+G8shNS+20qKszoGrCTFcy2u7WNdD0qg2lupJI28V+s6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3uiMya4ukJnFuHHejQlc50pUNBfITS4akbyZ7UxwZXTBUj/Yj1EVyZ/G5kOPL7xMpabK0NqNrO1dQ8/BGhEJAuMnPX1zsJkbSr4d2a55TL5hYI8TNGBI7LgmSTg//Xh/eNXXHs3Ai2n85SPIWbMYDh+3gQBPsscquzDc6djP5CRZnFg0RAd19JuMVOQEf4AJgc+jXGC1D+rCGjxOusIEXmTVa77nKn+OpQ63td7Lre8D69+xRc8ivX27lelzlNcRUlpogGcv17jilzZSj+d6A330/9eKgiVLi2+ybM18CbkPdMS1MCTkj6KQau55ANO8RziNz+/zJZNzkJeVSFindhfLrGldE3UncsQjaUfZPMkp/S88ccDMB90HHyuDV0sKzqdsMD61AGtPE8XS8tcGQChk0uhGg+tp36i0cCAIeUDLugyfOOjgTZTi6IyzbpgI1amSaUUfoZhW4OQvTyyAZmg=="
+          "MerchantQRcode": "iikipS2y%2BkWFlOKhPs4Q%2BauZT1SMxc%2BSVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ%2Bw56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW%2BG8shNS%2B20qKszoGrCTFcy2u7WNdD0qg2lupJI28V%2Bs6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3b0EO%2FVG0jkOK5nVSEfpym85D5oivkxjhsvRQrPUKwoSeULZPo7Ip5RA0xTLspzeFBT44t%2BFuUvc%2BWTtOBICYVHYgOdgTgR5ZDe4rQsUZroYnIhS9uYhK9PiQj4iF1eBN5MHOtfsD3QJHbEpfjuDf8h2ST1Yo68yCRkg9fvzsgnbnoHmJVXD0d%2B93T%2FWAr6Sdehs7Js7NqYo3WITZfHVu8orjK6Jlm8Ow%2BSL4qgK8PwB0%2BjUenmZbO6L0iwQkD6fT9r1baoTMPz50qdrYpyyUXWlKtBhC%2Bd1HDPk8nNu5SBnSCy81aENPJ%2F0UYHvl%2FTHnJJuVXW8lwpfkrOZK05FzLDOZcRt%2B8TlUnqiRRaj4LDqqq2FleBpmig%2BrwseOUpTRX7%2F5Agv%2FNvc%2FTGRqkCJsg5AuyOJ4kRJv%2BiKQdUyxYpez9mz94KHEBwnucbfek5VcjffrGKUopicYJ0alRIW%2BvtniTYRxPXYE3BGPT4Jgn80%3D"
         },
         "specs": {
           "MerchantQRcode": "QRCode URL"
 
         }
       },
+    
       {
         "host": "payment",
         "name": "P0018 確認支付QrCode",
         "url": "/app/Payment/DoQRPayment",
         "json": {
-
           "MerchantID": "10512932",
           "Amount": "1",
           "PayID": "11682311000003390",
@@ -3087,7 +3192,6 @@
           "MerchantTradeNo": "202307051420400000",
           "StoreID": "Dev2-Test",
           "StoreName": "Dev2-Test"
-
 
         },
         "specs": {
@@ -3108,15 +3212,20 @@
         "url": "/app/Cashier/ChargeOnlineICPO",
         "json": {
 
-          "MerchantID": "",
-          "PlatformID": "",
-          "MerchantTradeNo": "",
-          "ts": "",
-          "PayID": "",
-          "UsePoint": "",
-          "ChargeVersionType": "",
-          "UsePointType": "",
-          "AccumulatedPointsType": ""
+          "MerchantID": "10512932",
+          "PlatformID": "10512932",
+          "MerchantTradeNo": "202401151307190000",
+          "ts": "1705287447",
+          "PayID": "11682211000002364",
+          "UsePoint": "0",
+          "ChargeVersionType": "V2",
+          "UsePointType": "1",
+          "AccumulatedPointsType": "1",
+          "Token": "06KBBF3mj0QchDf/ETbLj5Mcl97LfwtFnBqzwlnmpwU\u003d"
+
+
+
+
 
 
         },
@@ -3139,13 +3248,13 @@
         "url": "/app/TransferAccount/SentFISCTransferMsg",
         "json": {
 
-          "PayChatMID": "",
-          "ReceivedChatMID": "",
-          "TransferAmount": "",
+          "PayChatMID": "14672",
+          "ReceivedChatMID": "3098",
+          "TransferAmount": "20",
           "Remark": "",
           "TradeToken": "",
-          "PaymentType": "",
-          "BankCode": "",
+          "PaymentType": "1",
+          "BankCode": "392",
           "BankAccount": ""
 
 
@@ -3164,9 +3273,30 @@
 
       {
         "host": "payment",
+        "name": "P0025 取得乘車碼",
+        "url": "/app/Payment/CreateTrafficQRCode",
+        "json": {
+
+          "PayID": "11682311000002951",
+          "PaymentType": "1",
+          "Token": ""
+
+        },
+        "specs": {
+          "註:": ""
+
+        }
+      },
+
+      {
+        "host": "payment",
         "name": "P0026 取得餘額",
         "url": "/app/Payment/GetAvailableBalance",
         "json": {
+
+
+        
+         
 
 
         },
@@ -3182,10 +3312,29 @@
         "url": "/app/Cashier/QueryOrderForPushNotify",
         "json": {
 
-          "MerchantTradeNo": "202306210922310000"
+          "MerchantTradeNo": "202312261706228630"
         },
         "specs": {
-          "註:": "此處需登入Stage帳號，可用icp00909 / Aa123456"
+          "註:": "此處需登入Stage帳號，可用icp09090 / Aa123456"
+
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0029 財經QrCode",
+        "url": "/app/Payment/GenerateFiscQRCode",
+        "json": {
+
+          "PayChatMID": "3098",
+          "ReceivedChatMID": "291",
+          "TransferAmount": "168",
+          "TradeToken": "",
+          "PaymentType": "1",
+          "FiscType": "2"
+        },
+        "specs": {
+          "註:": "此處需登入Stage帳號，可用icp09090 / Aa123456"
 
         }
       },
@@ -3265,7 +3414,7 @@
         "name": "P0037 查詢QrCode資訊(2022)",
         "url": "/app/Payment/ParserQrCode",
         "json": {
-          "MerchantQRcode": "TWQRP%3a%2f%2f%e6%b8%ac%e8%a9%a6%e7%a7%bb%e6%b0%91%e7%bd%b2%2f158%2f03%2fV1%3fD1%3d100%26D3%3dAX8WSVc5WhDJ%26D4%3d20301231%26D7%3d1234567890111111%26D11%3d00%2c0040042630156100030003000102204811"
+          "MerchantQRcode": "iikipS2y%2BkWFlOKhPs4Q%2BauZT1SMxc%2BSVS3CGqvnpxsoCAMDO880SLnmyXDtZhs94CEyTNZ%2Bw56SvD9plR550fyql6puVYT1Z4TYMQvWghC6HW%2BG8shNS%2B20qKszoGrCTFcy2u7WNdD0qg2lupJI28V%2Bs6GGTSbzVqEChb2YQEecIAuSpNZF9YGPPM6g1It3mz3cUXt%2F6qhG%2F9pw98Kc9aFNTHIpvnfwbzrA0CY%2BPWPkY4RMQEaoPejze2OlOsMtF14v5zMwLxIBvcNKFbNErZmjSxbcsNYYKTc%2F%2BPGZg5t7BXBvVlCw1UTfg24oOSeaYvvXDAXpUCwgxPKmeSMRO7WPS3c0%2FU4cR1jhX5i0UwfaCj2M5yJOs%2ByeI%2FOLNPIAeoaxhtlkgkg2aqd7PjBCw8S5nmKkBGeO2mX2xo24jLw5bKZ318Notrhgx3nM48TBA8WXC%2FIQjDrdUUSGCSu5tFDitqh5qon%2B2QxAzTm1ctb6%2FNxqk5aNo0gUfh3sbm%2BznHPQ2LvkZ2xcjmhVGKBQn%2BIpvez%2F5SBD3oLX6hxK3ITFa74UwwaCx0yDglbXHHxDKBG7tlDJdnAqHsd3pDxpZQ8lc6s6bhq5B%2Bo6U4eCa%2B7uuHZJI9lTUDehMgM9eQri31unTVzuLFxu17N3JZ76cIewd%2FfqvM52EI%2FpfPOADtU%3D"
 
         },
         "specs": {
@@ -3279,12 +3428,12 @@
         "name": "P0038 建立財經繳費訂單(2022)",
         "url": "/app/Fisc/CreateOnlinePaymentOrder",
         "json": {
-          "BillNo": "1122334455",
-          "acqInfo": "testest",
-          "deadline": "20230707",
+          "BillNo": "TEST000003497192",
+          "acqInfo": "00,0040042630156100030003000102204811",
+          "deadline": "20301231",
           "Amount": "100",
-          "Charge": "5",
-          "SeqNo": "1122332233"
+          "Charge": "3",
+          "SeqNo": "974"
 
         },
         "specs": {
@@ -3303,18 +3452,19 @@
         "name": "P0039 財經繳費付款(2022)",
         "url": "/app/Fisc/ChargeOnlineFISC",
         "json": {
-          "MerchantID": "",
-          "PlatformID": "",
-          "MerchantTradeNo": "",
-          "acqInfo": "",
-          "deadline": "",
-          "ts": "",
-          "PayID": "",
-          "UsePoint": "",
-          "ChargeVersionType": "",
-          "UsePointType": "",
-          "AccumulatedPointsType": "",
-          "SeqNo": ""
+          "AccumulatedPointsType": "1",
+          "ChargeVersionType": "v2",
+          "MerchantID": "10523899",
+          "MerchantTradeNo": "202401151626154375",
+          "PayID": "11682311000001441",
+          "PlatformID": "10523899",
+          "SeqNo": "1308",
+          "UsePoint": "0",
+          "UsePointType": "1",
+          "acqInfo": "00,0040042630156100030003000102204811",
+          "deadline": "20301231",
+          "ts": "2024/01/15 16:26:15"
+
 
         },
         "specs": {
@@ -3372,19 +3522,18 @@
         "name": "WC006 POS支付",
         "url": "/api/Payment/Pos/CheckOut",
         "json": {
-          "PlatformID": "10000016",
-          "MerchantID": "10000016",
-          "WalletID": "Mock",
+
+          "MerchantID": "10523899",
           "Barcode": "",
-          "Amount": 10000,
-          "StoreID": "123",
-          "StoreName": "阿罵店",
-          "PosRefNo": "12345",
+          "Amount": 300,
+          "StoreID": "001",
+          "StoreName": "測試店",
+          "PosRefNo": "0001",
           "MerchantTID": "01",
           "MerchantTradeNo": "",
-          "MerchantTradeDate": "",
+          "MerchantTradeDate": "2024/01/15 16:12:00",
           "CarrierType": "3J0002",
-          "ItemAmt": 10000,
+          "ItemAmt": 300,
           "UtilityAmt": 0,
           "CommAmt": 0,
           "ExceptAmt1": 0,
@@ -3486,8 +3635,8 @@
         "name": "WC013 POS條碼查詢",
         "url": "/api/Payment/Pos/QueryMemberInfo",
         "json": {
-          "PlatformID": "10524555",
-          "MerchantID": "10524555",
+          "PlatformID": "10513035",
+          "MerchantID": "10513035",
           "Barcode": ""
         },
         "specs": {
@@ -3500,8 +3649,8 @@
         "name": "WC014 POS儲值電文",
         "url": "/api/Payment/Pos/TopUp",
         "json": {
-          "PlatformID": "10524555",
-          "MerchantID": "10524555",
+          "PlatformID": "10513035",
+          "MerchantID": "10513035",
           "WalletID": "Mock",
           "Barcode": "",
           "Ccy": "TWD",
@@ -3598,8 +3747,38 @@
     ]
   },
   {
-    "category": "Chat Api",
+    "category": "OP Custom Receive Api",
     "list": [
+
+      {
+        "host": "member",
+        "name": "ICP004 icash會員登入",
+        "url": "/api/Member/OPWebUI/Login",
+        "json": {
+          "LoginID": "icp10655210",
+          "PassWord": "Aa123456"
+        },
+        "specs": {
+          "LoginID": "登入帳號",
+          "PassWord": "登入密碼",
+          "TimeStamp": "呼叫時間 (程式會帶)",
+          "Mask": "呼叫驗證碼 (程式會帶)"
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "解戶通知",
+        "url": "/api/Member/OPCustom/NoticeMemberDelete",
+        "json": {
+          "mid": "7dd29742c7749bc9399cd538aae9851"
+        },
+        "specs": {
+          "mid": "OPMID",
+          "request_time": "呼叫時間 (程式會帶)",
+          "mask": "呼叫驗證碼 (程式會帶)"
+        }
+      }
 
     ]
   }
