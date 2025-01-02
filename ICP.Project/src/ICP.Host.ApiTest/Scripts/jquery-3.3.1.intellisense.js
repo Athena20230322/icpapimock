@@ -157,7 +157,7 @@ intellisense.annotate(jQuery, {
   },
   'globalEval': function() {
     /// <signature>
-    ///   <summary>Execute some JavaScript code globally.</summary>
+    ///   <summary>Execute some JavaScript code gloy.</summary>
     ///   <param name="code" type="String">The JavaScript code to execute.</param>
     /// </signature>
   },

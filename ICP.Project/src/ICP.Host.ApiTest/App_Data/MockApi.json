@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0910000494"
+          "CellPhone": "0947513528"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -78,7 +78,7 @@
         "json": {
           "LoginTokenID": "",
           "UserCode": "",
-          "CellPhone": "0910000494",
+          "CellPhone": "0947513528",
           "SMSAuthType": 5
         },
         "specs": {
@@ -199,10 +199,10 @@
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "icp10655395",
+          "UserCode": "icppt003",
           "UserPwd": "Aa123456",
           "SMSAuthCode": ""
-      
+
 
 
         },
@@ -1699,7 +1699,7 @@
         }
       },
       {
-        "host": "member",
+        "host": "pluspayment",
         "name": "M0143 取得項目之細項資訊(2022)",
         "url": "/app/OnlinePayment/getOnlinePaymentBitsList",
         "json": {
@@ -1712,11 +1712,11 @@
         }
       },
       {
-        "host": "member",
+        "host": "pluspayment",
         "name": "M0144取得常用帳單(2022)",
         "url": "/app/OnlinePayment/GetCommonBillList",
         "json": {
-          "ItemID": ""
+          "ItemID": "TPP00035"
         },
         "specs": {
           "ItemID": "篩選項目(如未帶入item，返回全部常用設定)"
@@ -1724,19 +1724,20 @@
         }
       },
       {
-        "host": "member",
+        "host": "pluspayment",
         "name": "M0145新增常用帳單(2022)",
         "url": "/app/OnlinePayment/AddCommonBill",
         "json": {
-          "CommonName": "123123",
-          "ItemID": "002,002",
+          "CommonName": "",
+          "ItemID": "TPP00046",
           "BillData": {
-            "BillNumber": "C1-15115765-1",
+            "BillNumber": "AH-7999",
             "QueryType": "1",
-            "Query1": "C1-15115765-1",
-            "Query2": "",
+            "Query1": "C",
+            "Query2": "AH-7999",
             "Query3": "",
-            "Query4": ""
+            "Query4": "",
+            "Query5": ""
 
 
           }
@@ -1781,7 +1782,7 @@
         }
       },
       {
-        "host": "member",
+        "host": "pluspayment",
         "name": "M0148取得本月待繳帳單(2022)",
         "url": "/app/OnlinePayment/GetWaitPaymentBillList",
         "json": {
@@ -2104,6 +2105,21 @@
         "specs": {
 
           "ItemID": "篩選項目(如未帶入item，返回全部常用設定)"
+
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0174APP廣告",
+        "url": "/app/MemberInfo/GetAllAPPAd",
+        "json": {
+
+
+        },
+        "specs": {
+
+          "ADData": "廣告資訊"
 
         }
       },
@@ -2925,12 +2941,6 @@
           "IDImage1": "img1",
           "IDImage2": "img2"
 
-
-
-
-
-
-
         },
         "specs": {
 
@@ -2938,6 +2948,25 @@
 
         }
       },
+
+
+      {
+        "host": "member",
+        "name": "MD213-會員交易地區",
+        "url": "/MemberInfo/SetTradeRegion",
+        "json": {
+
+
+          "NationalityCode": "KOR"
+
+        },
+        "specs": {
+
+          "NationalityCode": "國家英文簡稱"
+
+        }
+      },
+
 
       {
         "host": "member",
@@ -3082,8 +3111,15 @@
         "name": "P0001 產生付款條碼",
         "url": "/app/Payment/CreateBarcode",
         "json": {
+          "OS": "1",
+          "DeviceInfo": "Galaxy A52 5G",
+          "Vers": "3.0.1",
+          "AppName": "",
+          "DeviceID": "52039a35-7995-490e-9779-dd4cdbdb6f8f",
+          "PayID": "11682211000002364",
+          "OSVersion": "Android 14",
           "PaymentType": "1",
-          "PayID": "11682211000002364"
+          "IsSimulator": "0"
         },
         "specs": {
 
@@ -3094,7 +3130,8 @@
         "name": "P0002 取得會員全付款方式",
         "url": "/app/Payment/GetMemberPaymentInfo",
         "json": {
-          "MerchantID": "10536787"
+          "MerchantID": "10536787",
+          "IsAutoPay": "True"
 
         },
         "specs": {
@@ -3300,7 +3337,8 @@
         "name": "P0017查詢QR Code資訊",
         "url": "/app/Payment/QueryQRInfo",
         "json": {
-          "MerchantQRcode": "qXSRL%2FHy8C3UJProsCzSQsbivet4mzOCOU%2F2qX3JASxL6%2FsmJQngcMadCwHT96t%2FQBGglCkH17%2BKrfYf5F6Wamq96ZqVzB%2B7m0ua3OVhipM%3D"
+          "MerchantQRcode": "e8nvRG%2BGx60Ao5II23oGqO8kzpeICtZ%2F2Q6HfCUnXsXqF257Zl2aJZeiUY3lREka"
+
 
 
         },
@@ -3535,7 +3573,7 @@
           "ChargeVersionType": "v2",
           "UsePointType": "1",
           "AccumulatedPointsType": "0"
-         
+
 
 
         },
@@ -3606,7 +3644,7 @@
         "name": "P0037 查詢QrCode資訊(2022)",
         "url": "/app/Payment/ParserQrCode",
         "json": {
-          "MerchantQRcode": "N3iJ9au%26D10%3D901%26D11%3D00%2C46246226301561000210001002%3B01%2C46246226301561000210001002"
+          "MerchantQRcode": "bd50374f6cc4420ea10a8954d1988acf"
 
         },
         "specs": {
@@ -3681,11 +3719,13 @@
         "name": "P0040 線上綁定明細查詢作業(v2)(2022)",
         "url": "/api/V2/Payment/Binding/ICPBindingQueryD",
         "json": {
-          "MerchantID": "123456789",
+          "MerchantID": "10501099",
           "BindingTradeID": "ABC12345678910"
 
 
         },
+
+
         "specs": {
 
           "MerchantID": "特店業者編號 (APP目前不用帶入)",
@@ -3694,6 +3734,10 @@
 
         }
       },
+
+     
+
+
       {
         "host": "payment",
         "name": "P0044 線上綁定查詢作業",
@@ -3884,7 +3928,7 @@
         "name": "P0204 輪循交易訂單結果",
         "url": "/app/Cashier/QueryOrderForSET",
         "json": {
-          "Barcode": [ "881010064J5ZK1EOWB" ]
+          "Barcode": [ "IC1601HJ396QU4CDS7" ]
 
 
         },
