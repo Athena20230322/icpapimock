@@ -1716,7 +1716,8 @@
         "name": "M0144取得常用帳單(2022)",
         "url": "/app/OnlinePayment/GetCommonBillList",
         "json": {
-          "ItemID": "TPP00035"
+         
+          "NotifyID": "TPP00046"
         },
         "specs": {
           "ItemID": "篩選項目(如未帶入item，返回全部常用設定)"
@@ -1731,10 +1732,11 @@
           "CommonName": "",
           "ItemID": "TPP00046",
           "BillData": {
-            "BillNumber": "AH-7999",
+            "BillNumber": "AH-6999",
+            "EBillSN": "",
             "QueryType": "1",
             "Query1": "C",
-            "Query2": "AH-7999",
+            "Query2": "AH-6999",
             "Query3": "",
             "Query4": "",
             "Query5": ""
