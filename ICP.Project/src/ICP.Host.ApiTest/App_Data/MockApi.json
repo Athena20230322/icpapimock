@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0947513528"
+          "CellPhone": "0910000494"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -71,39 +71,9 @@
         }
       },
 
-      {
-        "host": "member",
-        "name": "M0007 發送簡訊驗證_共用",
-        "url": "/app/MemberInfo/SendAuthSMS",
-        "json": {
-          "LoginTokenID": "",
-          "UserCode": "",
-          "CellPhone": "0947513528",
-          "SMSAuthType": 5
-        },
-        "specs": {
-          "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1~5需傳)",
-          "UserCode": "登入帳號，格式：6-12碼半形英數混合※當SMSAuthType=2時必需帶入",
-          "CellPhone": "手機號碼檢查帶入的手機號碼與系統紀錄要發送的手機號碼是否一致",
-          "SMSAuthType": "驗證類別 1：註冊時發送簡訊 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 5：換機驗證發送簡訊 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8：修改手機號碼"
-        }
-      },
 
-      {
-        "host": "member",
-        "name": "M0010 檢查簡訊驗證碼_註冊",
-        "url": "/app/MemberInfo/CheckRegisterAuthSMS",
-        "json": {
-          "LoginTokenID": "",
-          "CellPhone": "0910000502",
-          "AuthCode": ""
-        },
-        "specs": {
-          "LoginTokenID": "登入/註冊TokenID",
-          "CellPhone": "手機號碼",
-          "AuthCode": "簡訊驗證碼"
-        }
-      },
+
+
       {
         "host": "member",
         "name": "M0004 會員資料填寫及驗證",
@@ -155,43 +125,7 @@
           "fileCols": "身份證正反面圖片"
         }
       },
-      {
-        "host": "member",
-        "name": "M0006 取得登入回傳資訊",
-        "url": "/app/MemberInfo/GetLoginInfo",
-        "json": {},
-        "specs": {}
-      },
 
-      {
-        "host": "member",
-        "name": "M0019 取得密碼設定開關狀態",
-        "url": "/app/MemberInfo/GetPasswordStatus",
-        "json": {
-        },
-        "specs": {
-        }
-      },
-
-      {
-        "host": "member",
-        "name": "M0002 檢查會員驗證狀態",
-        "url": "/app/MemberInfo/CheckVerifyStatus",
-        "json": {},
-        "specs": {}
-      },
-
-      {
-        "host": "member",
-        "name": "M0021 取得會員偏好設定",
-        "url": "/app/MemberInfo/GetMemberPreferences",
-        "json": {
-          "OptionName": "test1"
-        },
-        "specs": {
-          "OptionName": "選項名稱"
-        }
-      },
 
       {
         "host": "member",
@@ -199,8 +133,8 @@
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "icppt003",
-          "UserPwd": "Aa123456",
+          "UserCode": "icp10655395",
+          "UserPwd": "Aa678910",
           "SMSAuthCode": ""
 
 
@@ -234,6 +168,32 @@
         }
       },
 
+      {
+        "host": "member",
+        "name": "M0006 取得登入回傳資訊",
+        "url": "/app/MemberInfo/GetLoginInfo",
+        "json": {},
+        "specs": {}
+      },
+
+      {
+        "host": "member",
+        "name": "M0007 發送簡訊驗證_共用",
+        "url": "/app/MemberInfo/SendAuthSMS",
+        "json": {
+          "LoginTokenID": "",
+          "UserCode": "",
+          "CellPhone": "0910000494",
+          "SMSAuthType": 5
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1~5需傳)",
+          "UserCode": "登入帳號，格式：6-12碼半形英數混合※當SMSAuthType=2時必需帶入",
+          "CellPhone": "手機號碼檢查帶入的手機號碼與系統紀錄要發送的手機號碼是否一致",
+          "SMSAuthType": "驗證類別 1：註冊時發送簡訊 2：忘記登入密碼發送簡訊(未登入) 3：忘記登入帳號發送簡訊 4：忘記圖形密碼發送簡訊(未登入) 5：換機驗證發送簡訊 6：忘記原登入密碼發送簡訊(已登入) 7：忘記原圖形密碼發送簡訊(已登入) 8：修改手機號碼"
+        }
+      },
+
 
       {
         "host": "member",
@@ -242,10 +202,10 @@
         "json": {
           "LoginTokenID": "",
           "UserCode": "",
-          "CellPhone": "0919541317",
-          "IDNo": "P122680069",
+          "CellPhone": "",
+          "IDNo": "H101447185",
           "SMSAuthType": 5,
-          "MID": "11544558"
+          "MID": "10536973"
         },
         "specs": {
           "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1,2,3,5需傳)",
@@ -285,7 +245,22 @@
           "AuthCode": "簡訊驗證碼"
         }
       },
+      {
+        "host": "member",
+        "name": "M0010 檢查簡訊驗證碼_註冊",
+        "url": "/app/MemberInfo/CheckRegisterAuthSMS",
+        "json": {
+          "LoginTokenID": "",
+          "CellPhone": "0910000590",
+          "AuthCode": ""
 
+        },
+        "specs": {
+          "LoginTokenID": "登入/註冊TokenID",
+          "CellPhone": "手機號碼",
+          "AuthCode": "簡訊驗證碼"
+        }
+      },
 
 
 
@@ -295,9 +270,9 @@
         "url": "/app/MemberInfo/ChangeLoginPwd",
         "json": {
           "ChangeType": "1",
-          "OriginalLoginPwd": "Aa123456",
-          "NewLoginPwd": "Aa678910",
-          "ConfirmLoginPwd": "Aa678910"
+          "OriginalLoginPwd": "Aa678910",
+          "NewLoginPwd": "Aa123456",
+          "ConfirmLoginPwd": "Aa123456"
         },
         "specs": {
           "OriginalLoginPwd": "原登入密碼※當ChangeType=1時必填",
@@ -393,6 +368,16 @@
 
       {
         "host": "member",
+        "name": "M0019 取得密碼設定開關狀態",
+        "url": "/app/MemberInfo/GetPasswordStatus",
+        "json": {
+        },
+        "specs": {
+        }
+      },
+
+      {
+        "host": "member",
         "name": "M0020 會員偏好設定",
         "url": "/app/MemberInfo/UpdateMemberPreferences",
         "json": {
@@ -415,6 +400,18 @@
               "OptionValue": "選項設定值"
             }
           }
+        }
+      },
+
+      {
+        "host": "member",
+        "name": "M0021 取得會員偏好設定",
+        "url": "/app/MemberInfo/GetMemberPreferences",
+        "json": {
+          "OptionName": "test1"
+        },
+        "specs": {
+          "OptionName": "選項名稱"
         }
       },
 
@@ -1716,7 +1713,7 @@
         "name": "M0144取得常用帳單(2022)",
         "url": "/app/OnlinePayment/GetCommonBillList",
         "json": {
-         
+
           "NotifyID": "TPP00046"
         },
         "specs": {
