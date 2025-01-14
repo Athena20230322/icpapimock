@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34114.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICP.Host.ApiTest", "ICP.Host.ApiTest.csproj", "{EE19066B-E3DD-4ABE-B14A-D97B96951AEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "signalRpush", "..\..\..\..\Users\p10381190\source\repos\signalRpush\signalRpush\signalRpush.csproj", "{D99F3475-8EB0-4206-9224-ECB1A00C1D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +20,12 @@ Global
 		{EE19066B-E3DD-4ABE-B14A-D97B96951AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE19066B-E3DD-4ABE-B14A-D97B96951AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE19066B-E3DD-4ABE-B14A-D97B96951AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D99F3475-8EB0-4206-9224-ECB1A00C1D69}.Beta|Any CPU.ActiveCfg = Debug|Any CPU
+		{D99F3475-8EB0-4206-9224-ECB1A00C1D69}.Beta|Any CPU.Build.0 = Debug|Any CPU
+		{D99F3475-8EB0-4206-9224-ECB1A00C1D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D99F3475-8EB0-4206-9224-ECB1A00C1D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D99F3475-8EB0-4206-9224-ECB1A00C1D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D99F3475-8EB0-4206-9224-ECB1A00C1D69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
