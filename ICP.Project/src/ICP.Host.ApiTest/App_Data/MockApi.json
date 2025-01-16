@@ -1926,7 +1926,7 @@
         }
       },
       {
-        "host": "pluspayment",
+        "host": "payment",
         "name": "M0142 取得線上繳費主功能資訊(2022)",
         "url": "/app/OnlinePayment/getOnlinePaymentBillList",
         "json": {
@@ -3731,10 +3731,6 @@
         "name": "P0026 取得餘額",
         "url": "/app/Payment/GetAvailableBalance",
         "json": {
-
-
-
-
 
 
         },
