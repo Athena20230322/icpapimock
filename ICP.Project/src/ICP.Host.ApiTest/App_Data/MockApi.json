@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0910000482"
+          "CellPhone": "0928409285"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -33,7 +33,7 @@
         "name": "M0001 取得手機號碼",
         "url": "/app/MemberInfo/getCellphone",
         "json": {
-          "AuthV": "8c4e648802f48abdbcfc49779456f390c64077e3309a68e45068693fdd655cd8ce176306a80e01b8b0cf4c432bd55af746b2931878323c512fa06a90d8d7e899"
+          "AuthV": "E4ED0A1F52EA443AB3262DF548F3F683"
         },
         "specs": {
           "AuthV": "OPEN WALLET 提供的AuthV"
@@ -57,9 +57,9 @@
         "name": "M0003_1 設定註冊資料(2022)",
         "url": "/app/MemberInfo/SetRegisterInfo2022",
         "json": {
-          "CellPhone": "0919541317",
-          "UserCode": "adan0109",
-          "UserPwd": ""
+          "CellPhone": "0900000002",
+          "UserCode": "icp10655493",
+          "UserPwd": "Aa123456"
         },
         "specs": {
 
@@ -85,7 +85,7 @@
           "AreaID": "1001",
           "Address": "123",
           "Email": "",
-          "Idno": "E116779897",
+          "Idno": "C138701524",
           "IssueDate": "2024-05-21",
           "IssueLoc": "12345",
           "IssueType": "3",
@@ -133,7 +133,7 @@
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "icp10655384",
+          "UserCode": "cathyf6",
           "UserPwd": "Aa123456",
           "SMSAuthCode": ""
 
@@ -183,7 +183,7 @@
         "json": {
           "LoginTokenID": "",
           "UserCode": "",
-          "CellPhone": "0977007001",
+          "CellPhone": "0928409285",
           "SMSAuthType": 5
         },
         "specs": {
@@ -203,9 +203,9 @@
           "LoginTokenID": "",
           "UserCode": "",
           "CellPhone": "",
-          "IDNo": "S223925231",
-          "SMSAuthType": 5,
-          "MID": "10512782"
+          "IDNo": "C138701524",
+          "SMSAuthType": 1,
+          "MID": ""
         },
         "specs": {
           "LoginTokenID": "登入/註冊TokenID (SMSAuthType=1,2,3,5需傳)",
@@ -250,8 +250,8 @@
         "name": "M0010 檢查簡訊驗證碼_註冊",
         "url": "/app/MemberInfo/CheckRegisterAuthSMS",
         "json": {
-          "LoginTokenID": "",
-          "CellPhone": "0910000590",
+          "LoginTokenID": "E4ED0A1F52EA443AB3262DF548F3F683",
+          "CellPhone": "090000000",
           "AuthCode": ""
 
         },
@@ -2055,8 +2055,8 @@
         "url": "/app/MemberInfo/RegisterOpMember",
         "json": {
 
-          "CellPhone": "0910000165",
-          "Birthday": "19601203"
+          "CellPhone": "0900000002",
+          "Birthday": "20000101"
         },
         "specs": {
           "CellPhone": "註冊使用的手機號碼",
@@ -2069,7 +2069,7 @@
         "url": "/app/MemberInfo/ReturnAuthAPIUrl",
         "json": {
 
-          "CellPhone": "0919500011"
+          "CellPhone": "0900000002"
         },
         "specs": {
           "CellPhone": "註冊使用的手機號碼"
@@ -3231,7 +3231,7 @@
         "json": {
 
 
-          "NationalityCode": "KOR"
+          "NationalityCode": "TWN"
 
         },
         "specs": {
@@ -3472,7 +3472,7 @@
         "name": "CK04廠商金鑰綁定",
         "url": "/app/certificate/bindMerchantCert",
         "json": {
-          "MerchantID": "10536973",
+          "MerchantID": "10000016",
           "Token": "68158248615C445EB9FD2069794F1C71"
 
 
@@ -3606,8 +3606,7 @@
         "name": "P0017查詢QR Code資訊",
         "url": "/app/Payment/QueryQRInfo",
         "json": {
-          "MerchantQRcode": "e8nvRG%2BGx60Ao5II23oGqO8kzpeICtZ%2F2Q6HfCUnXsXqF257Zl2aJZeiUY3lREka"
-
+          "MerchantQRcode": "DP13Kdd%2FS%2BhiZ2JVQgPC1IK5h8ghbet3uIMcj9820fk6PYOuSVimiTigroOgojW9w7cjBYWn%2Bp0hfhG3Wi097qLAt8ap0blru9sv7p5NGQCddrepgrP59HXrZmfysn6k"
 
 
         },
@@ -3660,11 +3659,6 @@
           "UsePointType": "1",
           "AccumulatedPointsType": "1",
           "Token": "06KBBF3mj0QchDf/ETbLj5Mcl97LfwtFnBqzwlnmpwU\u003d"
-
-
-
-
-
 
         },
         "specs": {
@@ -3909,7 +3903,7 @@
         "name": "P0037 查詢QrCode資訊(2022)",
         "url": "/app/Payment/ParserQrCode",
         "json": {
-          "MerchantQRcode": "iikipS2y%2BkWFlOKhPs4Q%2BauZT1SMxc%2BSVS3CGqvnpxvHS1VIWVmq%2F78NF9ybl6Oy4sBrynk%2FrkLOSQW6NOJYiPGLfeYDcu6v3CS%2Bx7HndMKxIRhFe%2B9TR2xCB5dTKtEqPogCgqwC7wgavXw2uB0v%2BYSgx1Tudr%2Bz6rv4KfJoQjoac0m3%2Fh7JVsMf2kBd7R5ltWbbbQ5yRKNOgz3KBC%2F8J56qu9rrOjOe9n6rjJLu1MkkLX%2BA919u6qKuuMy9noNUdLKiCRfurXXj2JqRDe2eup8OD%2FSmjuFEBOMoG0pcHoZqrRk4p5%2B9pMZfid5nQO7paQALMnrSsDkDOur3%2BH6mKvxVqs8a4Zyh46z28atK8HfFd0No4TFWWujBBuXmWYSSxNH15Qk0v0l96tb2nI6kjIMW6bc%2FW3J%2FVm7XOk%2FJ5IhJoB1Ci4YJ%2BlGHTCMlYkv5lvYU90Qy9GAd6gFwPNn9ahtjEz7dtI%2Fmv4QMu7WILCIhH0trv9vIgfMbkgtuJqA2mPsZtKa9fngvXMjfxuVC9%2Bm7k%2BMLCl2C7ph%2B43GHwweZ%2Bm0SN9TK9%2FzuuCdQPsHP0%2BNj2l%2FUO4rhnZHqC1GgwEeD9ukvjCIuePbpMnI0s1bKo%2Bto8Zs6qxWVqWUgw9%2B3vIe0hK6R1k4RqM%2FWtgFPeSgxW50xkp63kPvJgnpXqx%2FTjaTcni3zng7GJ4k1Vcw9"
+          "MerchantQRcode": "7%2FMbn3Bj%2BMCzGd3FGEdsZXiGHzfHhFKmw5seeStqyO%2FthGPjgNc5JtqbW3mdwiBVPV0IEO6rJOSCy3oeyQ5cOyCOw%2B%2FDY0Wc5aGYPyKiByTKGR1Prm%2BhkjPlZulOKD7l"
 
         },
         "specs": {
@@ -3984,8 +3978,8 @@
         "name": "P0040 線上綁定明細查詢作業(v2)(2022)",
         "url": "/api/V2/Payment/Binding/ICPBindingQueryD",
         "json": {
-          "MerchantID": "10501099",
-          "BindingTradeID": "ABC12345678910"
+          "MerchantID": "10513284",
+          "BindingTradeID": "13113"
 
 
         },
@@ -3993,10 +3987,23 @@
 
         "specs": {
 
-          "MerchantID": "特店業者編號 (APP目前不用帶入)",
-          "BindingTradeID": "線上交易綁定ID"
+          "MerchantID": "特店業者編號 (APP目前不用帶入)_大都會車隊10513284",
+          "BindingTradeID": "線上交易綁定ID_13113"
 
 
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0044 線上綁定查詢作業",
+        "url": "/api/V2/Payment/Binding/ICPBindingQuery",
+        "json": {
+          
+        },
+
+
+        "specs": {
         }
       },
 
@@ -4124,31 +4131,29 @@
       {
         "host": "payment",
         "name": "ICPOF001",
-        "url": "/api/V2/Payment/Pos/DeductICPOF",
+        "url": "/api/V2/Payment/POS/DeductICPOF",
         "json": {
-          "PlatformID": "10536912",
-          "MerchantID": "10536912",
-          "MerchantTradeNo": "MTN10536912100751353",
-          "StoreID": "SID0001",
-          "StoreName": "SN0001",
-          "MerchantTradeDate": "2024/10/11 10:07:51",
-          "TotalAmount": "1000",
-          "ItemAmt": "1000",
+          "PlatformID": "10536635",
+          "MerchantID": "10536635",
+          "MerchantTradeNo": "Sample20250117064635153",
+          "StoreID": "TM01",
+          "StoreName": "測試商戶1",
+          "MerchantTradeDate": "",
+          "TotalAmount": "10000",
+          "ItemAmt": "10000",
           "UtilityAmt": "0",
           "ItemNonRedeemAmt": "0",
           "UtilityNonRedeemAmt": "0",
           "NonPointAmt": "0",
           "Item": [
             {
-              "ItemNo": "INO001",
-              "ItemName": "IN001",
+              "ItemNo": "001",
+              "ItemName": "測試商品1",
               "Quantity": "1"
             }
           ],
-          "TradeMode": "1",
-          "CallbackURL": "https://prod-21.japaneast.logic.azure.com:443/workflows/896a5a51348c488386c686c8e83293c8/triggers/ICPOB002/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FICPOB002%2Frun&sv=1.0&sig=81SiqqBYwWTplvxc3OSCCU6sk9oNT6nI4w5t9Z8v6j4",
-          "RedirectURL": "",
-          "AuthICPAccount": ""
+
+          "BarCode": "IC193L89FYYW6JISCQ"
         },
         "specs": {
           "註:": "此處需登入Merchant帳號，可用pos123 / Aa1234",
@@ -4240,26 +4245,20 @@
       {
         "host": "payment",
         "name": "WC014 POS儲值電文",
-        "url": "/api/Payment/Pos/TopUp",
+        "url": "/api/Payment/POS/SETTopUp",
         "json": {
-          "PlatformID": "default",
-          "MerchantID": "10000261",
-          "WalletID": "",
-          "Barcode": "",
+          "PlatformID": "10000266",
+          "MerchantID": "10000266",
+          "Barcode": "88",
           "Ccy": "TWD",
           "TopUpAmt": 100,
-          "StoreID": "",
-          "StoreName": "",
-          "PosRefNo": "",
-          "MerchantTID": "",
-          "MerchantTradeNo": "202409061549111",
-          "MerchantTradeDate": "2024/09/10 15:49:30",
-          "ItemList": "",
-          "Remark": ""
+          "MerchantTradeNo": "202509061549111",
+          "MerchantTradeDate": "2024/09/10 15:49:30"
+
         },
         "specs": {
           "註:": "此處需登入Merchant帳號 pos123 / Aa1234",
-          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000001",
+          "PlatformID、MerchantID": "default dev=10020336; beta=10026443; stage=10000266",
           "Barcode": "使用 P0007 產生通路儲值條碼",
           "TopUpAmt": "此處金額和其他POS api不同，是正常人類數字，不用多兩個零",
           "MerchantTradeNo": "帶空值會依時間自動生成",
