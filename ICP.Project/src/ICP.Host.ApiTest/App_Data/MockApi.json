@@ -3996,16 +3996,63 @@
 
       {
         "host": "payment",
+        "name": "P0041 線上綁定作業",
+        "url": "/api/V2/Payment/Binding/ApplyICPBinding",
+        "json": {
+          "PayID": "11682011000003539",
+          "MerchantID": "10513284",
+          "AppUserID": "",
+          "MerchantTradeNo": "",
+          "BindingTradeID": "13113",
+          "MaxMonthAmt": "300000"
+
+
+        },
+
+
+        "specs": {
+
+          "MerchantID": "特店業者編號 (APP目前不用帶入)_大都會車隊10513284",
+          "BindingTradeID": "線上交易綁定ID_13113"
+
+
+        }
+      },
+
+      {
+        "host": "payment",
         "name": "P0044 線上綁定查詢作業",
         "url": "/api/V2/Payment/Binding/ICPBindingQuery",
         "json": {
-          
+
         },
 
 
         "specs": {
         }
       },
+
+      {
+        "host": "payment",
+        "name": "P0045 取得已綁定商家明細(v2)(2022)",
+        "url": "/api/V2/Payment/Binding/GetICPBindingQueryD",
+        "json": {
+          "MerchantID": "10513284",
+          "BindingTradeID": "13113"
+
+
+        },
+
+
+        "specs": {
+
+          "MerchantID": "特店業者編號 (APP目前不用帶入)_大都會車隊10513284",
+          "BindingTradeID": "線上交易綁定ID_13113"
+
+
+        }
+      },
+
 
       {
         "host": "payment",
