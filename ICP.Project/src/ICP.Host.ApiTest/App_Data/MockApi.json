@@ -9,7 +9,7 @@
         "name": "M0001_1 刷新AppToken(2022)",
         "url": "/app/MemberInfo/RefreshLoginToken",
         "json": {
-          "CellPhone": "0928409285"
+          "CellPhone": "0976100503"
         },
         "specs": {
           "CellPhone": "手機號碼，格式：09開頭，共10碼"
@@ -57,8 +57,8 @@
         "name": "M0003_1 設定註冊資料(2022)",
         "url": "/app/MemberInfo/SetRegisterInfo2022",
         "json": {
-          "CellPhone": "0900000002",
-          "UserCode": "icp10655493",
+          "CellPhone": "0910000595",
+          "UserCode": "icp10655494",
           "UserPwd": "Aa123456"
         },
         "specs": {
@@ -85,9 +85,9 @@
           "AreaID": "1001",
           "Address": "123",
           "Email": "",
-          "Idno": "C138701524",
-          "IssueDate": "2024-05-21",
-          "IssueLoc": "12345",
+          "Idno": "E102152057",
+          "IssueDate": "2549-05-21",
+          "IssueLoc": "64000",
           "IssueType": "3",
           "LegalRepData": [
             {
@@ -133,8 +133,8 @@
         "url": "/app/MemberInfo/UserCodeLogin2022",
         "json": {
           "LoginType": 1,
-          "UserCode": "cathyf6",
-          "UserPwd": "Aa123456",
+          "UserCode": "tester76",
+          "UserPwd": "Aa567890",
           "SMSAuthCode": ""
 
 
@@ -183,7 +183,7 @@
         "json": {
           "LoginTokenID": "",
           "UserCode": "",
-          "CellPhone": "0928409285",
+          "CellPhone": "0976100503",
           "SMSAuthType": 5
         },
         "specs": {
@@ -203,7 +203,7 @@
           "LoginTokenID": "",
           "UserCode": "",
           "CellPhone": "",
-          "IDNo": "C138701524",
+          "IDNo": "E102152057",
           "SMSAuthType": 1,
           "MID": ""
         },
@@ -251,7 +251,7 @@
         "url": "/app/MemberInfo/CheckRegisterAuthSMS",
         "json": {
           "LoginTokenID": "E4ED0A1F52EA443AB3262DF548F3F683",
-          "CellPhone": "090000000",
+          "CellPhone": "0910000595",
           "AuthCode": ""
 
         },
@@ -1412,7 +1412,7 @@
         "json": {
           "ADType": "0",
           "ADStartTime": "2021/06/08 09:44:33",
-          "ADEndTime": "2023/06/08 09:44:33"
+          "ADEndTime": "2025/01/08 09:44:33"
         },
         "specs": {
           "ADType": "廣告位置 0: (預設)全撈 1: 快速貸款 2: 不綁約，隨時還清 3: 低利率 4: 優惠信用貸款",
@@ -2313,7 +2313,7 @@
         },
         "specs": {
 
-          "ADType": "廣告種類: 0:APP首頁跑馬燈 1:APP霸屏廣告 2:APP浮動廣告 3:首頁-Banner 4:首頁-保險廣告 5:首頁-基金廣告 6:首頁-信貸廣告 7:首頁-點數廣告專區 8:首頁-銀行專區廣告"
+          "ADType": "廣告種類: 0:APP首頁跑馬燈 1:APP霸屏廣告 2:APP浮動廣告 3:首頁-Banner 4:首頁-保險廣告 5:首頁-基金廣告 6:首頁-信貸廣告 7:首頁-點數廣告專區 8:首頁-銀行專區廣告 9:支付工具-銀行優惠"
 
         }
       },
@@ -3825,9 +3825,9 @@
         "name": "P0033 綜所稅",
         "url": "/app/Cashier/ChargeOnlineFISC",
         "json": {
-          "RecID": "13576",
+          "RecID": "13574",
           "Amount": "100",
-          "PayID": "11682311000003273",
+          "PayID": "11682511000000776",
           "UsePoint": "1",
           "ChargeVersionType": "v2",
           "UsePointType": "1",
@@ -3978,8 +3978,33 @@
         "name": "P0040 線上綁定明細查詢作業(v2)(2022)",
         "url": "/api/V2/Payment/Binding/ICPBindingQueryD",
         "json": {
+          "MerchantID": "10544058",
+          "BindingTradeID": "13460"
+
+
+        },
+
+
+        "specs": {
+
+          "MerchantID": "特店業者編號 (APP目前不用帶入)_大都會車隊10513284/UAT統一超商付費會員10544058",
+          "BindingTradeID": "線上交易綁定ID_13113/UAT統一超商付費會員綁定ID_13460"
+
+
+        }
+      },
+
+      {
+        "host": "payment",
+        "name": "P0041 線上綁定作業",
+        "url": "/api/V2/Payment/Binding/ApplyICPBinding",
+        "json": {
+          "PayID": "11682011000003539",
           "MerchantID": "10513284",
-          "BindingTradeID": "13113"
+          "AppUserID": "",
+          "MerchantTradeNo": "",
+          "BindingTradeID": "13209",
+          "MaxMonthAmt": "60000"
 
 
         },
@@ -3996,15 +4021,15 @@
 
       {
         "host": "payment",
-        "name": "P0041 線上綁定作業",
-        "url": "/api/V2/Payment/Binding/ApplyICPBinding",
+        "name": "P0042取商家綁定(V2)",
+        "url": "/api/V2/Payment/Binding/CancelICPBinding,",
         "json": {
-          "PayID": "11682011000003539",
+
           "MerchantID": "10513284",
-          "AppUserID": "",
-          "MerchantTradeNo": "",
           "BindingTradeID": "13113",
-          "MaxMonthAmt": "300000"
+          "Token": "",
+          "UnBindingDate": "",
+          "UnBindingBy": "2"
 
 
         },
@@ -4013,11 +4038,42 @@
         "specs": {
 
           "MerchantID": "特店業者編號 (APP目前不用帶入)_大都會車隊10513284",
-          "BindingTradeID": "線上交易綁定ID_13113"
+          "BindingTradeID": "線上交易綁定ID_13113",
+          "Token": "線上綁定扣款碼",
+          "UnBindingDate": "取消綁定時間_Optional",
+          "UnBindingBy": "發起方，1:特店、2:ICP APP"
 
 
         }
       },
+
+
+      {
+        "host": "payment",
+        "name": "P0043 修改綁定商家資訊(V2)",
+        "url": "/api/V2/Payment/Binding/UpdatdeICPBinding",
+        "json": {
+
+          "MerchantID": "10513284",
+          "BindingTradeID": "13113",
+          "MaxMonthAmt": "250"
+
+
+        },
+
+
+        "specs": {
+
+          "MerchantID": "特店業者編號 (APP目前不用帶入)_大都會車隊10513284",
+          "BindingTradeID": "線上交易綁定ID_13113",
+          "MaxMonthAmt": "每月扣款金額上限ex:100 (NT$100)"
+
+
+
+        }
+      },
+
+
 
       {
         "host": "payment",
@@ -4038,7 +4094,7 @@
         "url": "/api/V2/Payment/Binding/GetICPBindingQueryD",
         "json": {
           "MerchantID": "10513284",
-          "BindingTradeID": "13113"
+          "BindingTradeID": "13209"
 
 
         },
@@ -4052,6 +4108,34 @@
 
         }
       },
+
+      {
+        "host": "payment",
+        "name": "P0046 取得已綁定商家明細(v2)(2022)",
+        "url": "/api/Payment/Binding/GetICPBindingQueryDV1",
+        "json": {
+          "LogoURL": "",
+          "MerchantID": "10513284",
+          "MerchantName": "大都會車隊",
+          "Note": "每月扣款上限300,000",
+          "BindingTradeID": "13113"
+
+
+        },
+
+
+        "specs": {
+
+          "LogoURL": "特店圖片URL",
+          "MerchantID": "特店業者編號 (APP目前不用帶入)_大都會車隊10513284",
+          "MerchantName": "特店業者名稱",
+          "Note": "金額顯示",
+          "BindingTradeID": "線上交易綁定ID_13113"
+
+
+        }
+      },
+
 
 
       {
